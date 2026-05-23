@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>초·중등 과정 | 삼년의 신화 국어논술학원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
+    #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+    .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
+    .nav-logo { flex-shrink: 0; text-decoration: none; display: flex; align-items: center; margin-right: 36px; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-menus { flex: 1; display: flex; align-items: center; justify-content: center; list-style: none; gap: 2px; }
+    .menu-item { position: relative; }
+    .menu-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; font-size: 15px; font-weight: 500; color: var(--gray-dark); text-decoration: none; border-radius: 6px; white-space: nowrap; transition: color 0.2s, background 0.2s; cursor: pointer; background: none; border: none; font-family: var(--font-sans); }
+    .menu-link:hover, .menu-item:hover > .menu-link { color: var(--red); background: var(--red-light); }
+    .menu-link .chevron { width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.22s; fill: none; stroke: currentColor; stroke-width: 2; }
+    .menu-item:hover > .menu-link .chevron { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-8px); background: var(--white); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 14px 44px rgba(0,0,0,0.11); min-width: 190px; padding: 8px 0; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 999; }
+    .menu-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown a { display: flex; align-items: center; gap: 8px; padding: 11px 20px; font-size: 14px; color: var(--gray-dark); text-decoration: none; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+    .dropdown a:hover { color: var(--red); background: var(--red-light); }
+    .dropdown a + a { border-top: 1px solid #f2f2f0; }
+    .dropdown a .dd-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity 0.15s; }
+    .dropdown a:hover .dd-dot { opacity: 1; }
+    .nav-right { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-left: 28px; }
+    .nav-cta { background: var(--red); color: var(--white); padding: 10px 22px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .nav-sns { display: flex; align-items: center; gap: 6px; }
+    .sns-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; font-weight: 700; color: var(--white); transition: transform 0.18s, box-shadow 0.18s; flex-shrink: 0; }
+    .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-left: 12px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); } .nav-hamburger.open span:nth-child(2) { opacity: 0; } .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { background: var(--white); border-top: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .nav-mobile.open { max-height: 1200px; }
+    .mobile-item { border-bottom: 1px solid var(--border); padding-bottom: 8px; } .mobile-item:last-of-type { border-bottom: none; }
+    .mobile-section-label { padding: 16px 24px 8px; font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; display: block; }
+    .mobile-sub a { display: flex; align-items: center; gap: 10px; padding: 11px 28px; font-size: 15px; color: var(--gray-dark); text-decoration: none; transition: color 0.15s, background 0.15s, padding-left 0.15s; }
+    .mobile-sub a::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.15s; }
+    .mobile-sub a:hover { color: var(--red); background: var(--red-light); padding-left: 36px; } .mobile-sub a:hover::before { background: var(--red); }
+    .mobile-sns { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+    @media (max-width: 1100px) { .nav-menus { display: none; } .nav-sns { display: none; } .nav-hamburger { display: flex; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; } }
+    @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+
+    .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; }
+    .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
+    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 14px; }
+    .ph-inner p { font-size: 16px; color: rgba(255,255,255,0.48); max-width: 500px; }
+    @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
+
+    .page-content { padding: 80px 0 120px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
+
+    /* CURRICULUM TABS */
+    .curr-tabs { display: flex; gap: 8px; margin-bottom: 56px; }
+    .curr-tab { padding: 10px 24px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--gray); text-decoration: none; transition: all 0.2s; }
+    .curr-tab.active, .curr-tab:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+
+    /* CURRICULUM */
+    .curr-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 72px; align-items: center; }
+    .curr-intro-text .tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .curr-intro-text h2 { font-family: var(--font-serif); font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; color: var(--black); letter-spacing: -1px; margin-bottom: 16px; }
+    .curr-intro-text p { font-size: 15px; color: var(--gray); line-height: 1.9; }
+    .curr-intro-image { background: var(--gray-light); border-radius: 12px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 64px; border: 1px solid var(--border); }
+    @media (max-width: 768px) { .curr-intro { grid-template-columns: 1fr; } }
+
+    .curr-levels { display: flex; flex-direction: column; gap: 28px; margin-bottom: 72px; }
+    .curr-level-card { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .curr-level-header { display: flex; align-items: center; gap: 20px; padding: 24px 28px; background: var(--gray-light); border-bottom: 1px solid var(--border); }
+    .curr-level-badge { background: var(--red); color: var(--white); font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 100px; white-space: nowrap; flex-shrink: 0; }
+    .curr-level-header h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; }
+    .curr-level-header p { font-size: 13px; color: var(--gray); margin-top: 4px; }
+    .curr-level-body { padding: 24px 28px; }
+    .curr-subjects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .curr-subject { padding: 18px 16px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .curr-subject:hover { border-color: var(--red); transform: translateY(-3px); }
+    .curr-subject-icon { font-size: 28px; margin-bottom: 8px; }
+    .curr-subject strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .curr-subject span { font-size: 12px; color: var(--gray); }
+    @media (max-width: 640px) { .curr-subjects { grid-template-columns: repeat(2, 1fr); } }
+
+    footer { background: #111; padding: 64px 0 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
+    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-container">
+    <a href="samnyun-academy.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <ul class="nav-menus">
+      <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
+      <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
+      <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum-elem-middle.html"><span class="dd-dot"></span>초·중등 과정</a><a href="curriculum-high.html"><span class="dd-dot"></span>고등 과정</a></div></li>
+      <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
+      <li class="menu-item"><a class="menu-link">생생 후기<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-results.html"><span class="dd-dot"></span>명예의 전당</a><a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a></div></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-sns">
+        <a href="#" class="sns-btn sns-kakao">K</a>
+        <a href="#" class="sns-btn sns-insta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg></a>
+        <a href="#" class="sns-btn sns-youtube"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.8C16.6 5 12 5 12 5s-4.6 0-7.1.2c-.4 0-1.2.1-1.9.8-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.7 2.2.8C6.7 19 12 19 12 19s4.6 0 7.1-.2c.4 0 1.2-.1 1.9-.8.6-.6.8-2 .8-2S22 14.4 22 12.7v-1.5C22 9.6 21.8 8 21.8 8zM9.8 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg></a>
+        <a href="#" class="sns-btn sns-blog">N</a>
+      </div>
+      <a href="samnyun-academy.html#consult-cta" class="nav-cta">상담 신청</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <div class="mobile-item"><span class="mobile-section-label">학원 소개</span><div class="mobile-sub"><a href="about-greeting.html" onclick="closeMobileMenu()">인사말</a><a href="about-features.html" onclick="closeMobileMenu()">학원 특징</a><a href="about-history.html" onclick="closeMobileMenu()">연혁</a><a href="about-branches.html" onclick="closeMobileMenu()">지점 안내 및 오시는 길</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">강사 소개</span><div class="mobile-sub"><a href="teachers-gojan.html" onclick="closeMobileMenu()">고잔점</a><a href="teachers-zai.html" onclick="closeMobileMenu()">자이점</a><a href="teachers-hyper.html" onclick="closeMobileMenu()">하이퍼관</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">커리큘럼</span><div class="mobile-sub"><a href="curriculum-elem-middle.html" onclick="closeMobileMenu()">초·중등 과정</a><a href="curriculum-high.html" onclick="closeMobileMenu()">고등 과정</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">학원 소식</span><div class="mobile-sub"><a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a><a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a><a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">생생 후기</span><div class="mobile-sub"><a href="about-results.html" onclick="closeMobileMenu()">명예의 전당</a><a href="reviews-list.html" onclick="closeMobileMenu()">수강 후기</a></div></div>
+    <div class="mobile-sns"><a href="#" class="sns-btn sns-kakao">K</a><a href="#" class="sns-btn sns-blog">N</a></div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="ph-inner">
+    <div class="ph-breadcrumb"><a href="samnyun-academy.html">홈</a><span>›</span><a href="curriculum-elem-middle.html">커리큘럼</a><span>›</span><span class="current">초·중등 과정</span></div>
+    <h1>초·중등 과정</h1>
+    <p>기초부터 탄탄하게, 초등과 중학교 과정을 위한 체계적인 국어 교육 커리큘럼입니다.</p>
+  </div>
+</section>
+
+<main class="page-content">
+  <div class="container">
+
+    <div class="curr-tabs fade-up">
+      <a href="curriculum-elem-middle.html" class="curr-tab active">초·중등 과정</a>
+      <a href="curriculum-high.html" class="curr-tab">고등 과정</a>
+    </div>
+
+    <div class="curr-intro fade-up">
+      <div class="curr-intro-text">
+        <div class="tag">Elementary &amp; Middle School</div>
+        <h2>탄탄한 기초 위에<br>쌓이는 실력</h2>
+        <p>초등·중학 단계에서 올바른 독해 습관과 글쓰기 기초를 다지는 것이 중요합니다. 삼년의 신화의 초·중등 과정은 학년별 수준에 맞는 체계적인 커리큘럼으로 국어 실력의 뿌리를 튼튼하게 만들어드립니다.</p>
+      </div>
+      <div class="curr-intro-image">📚</div>
+    </div>
+
+    <div class="curr-levels stagger">
+
+      <div class="curr-level-card">
+        <div class="curr-level-header">
+          <span class="curr-level-badge">초등 기초반</span>
+          <div>
+            <h3>초등 독해·어휘 과정</h3>
+            <p>초등 3~6학년 | 독해력 기초 완성</p>
+          </div>
+        </div>
+        <div class="curr-level-body">
+          <div class="curr-subjects">
+            <div class="curr-subject"><div class="curr-subject-icon">📖</div><strong>기초 독해</strong><span>지문 구조 이해</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">📝</div><strong>어휘력 강화</strong><span>핵심 어휘 학습</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">✍️</div><strong>일기·감상문</strong><span>글쓰기 기초</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curr-level-card">
+        <div class="curr-level-header">
+          <span class="curr-level-badge">초등 심화반</span>
+          <div>
+            <h3>초등 논술 입문 과정</h3>
+            <p>초등 5~6학년 | 논리적 사고 훈련 시작</p>
+          </div>
+        </div>
+        <div class="curr-level-body">
+          <div class="curr-subjects">
+            <div class="curr-subject"><div class="curr-subject-icon">🔍</div><strong>문학 독해</strong><span>시·소설 분석</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">📊</div><strong>비문학 독해</strong><span>정보글 파악</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">💬</div><strong>논술 입문</strong><span>의견 쓰기</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curr-level-card">
+        <div class="curr-level-header">
+          <span class="curr-level-badge">중등 기초반</span>
+          <div>
+            <h3>중학 국어·내신 과정</h3>
+            <p>중학교 1~3학년 | 내신 대비 + 독해력 향상</p>
+          </div>
+        </div>
+        <div class="curr-level-body">
+          <div class="curr-subjects">
+            <div class="curr-subject"><div class="curr-subject-icon">📚</div><strong>문학 분석</strong><span>시·소설·수필</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">📰</div><strong>비문학 독해</strong><span>설명문·논설문</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">🏫</div><strong>내신 대비</strong><span>학교 시험 준비</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="curr-level-card">
+        <div class="curr-level-header">
+          <span class="curr-level-badge">중등 심화반</span>
+          <div>
+            <h3>중학 논술 심화 과정</h3>
+            <p>중학교 2~3학년 | 고등 선행 + 논술 완성</p>
+          </div>
+        </div>
+        <div class="curr-level-body">
+          <div class="curr-subjects">
+            <div class="curr-subject"><div class="curr-subject-icon">🎯</div><strong>심화 독해</strong><span>고난도 지문</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">✏️</div><strong>논술 실전</strong><span>첨삭 + 재작성</span></div>
+            <div class="curr-subject"><div class="curr-subject-icon">⬆️</div><strong>고등 선행</strong><span>수능 문학 입문</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
+        <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
+        <div class="footer-contact">
+          <span>📍 <strong>[주소 입력]</strong></span>
+          <span>📞 <strong>[전화번호 입력]</strong></span>
+          <span>✉️ <strong>[이메일 입력]</strong></span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="about-results.html">명예의 전당</a></li></ul></div>
+      <div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="samnyun-academy.html#consult-cta">온라인 상담 신청</a></li><li><a href="#">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p>
+      <p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

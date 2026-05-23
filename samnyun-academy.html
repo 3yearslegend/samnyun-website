@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="삼년의 신화 국어논술학원 - 3년이 만드는 국어의 기적">
+  <title>삼년의 신화 국어논술학원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA;
+      --black: #1C1C1C; --gray-dark: #333333; --gray: #666666;
+      --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0;
+      --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif;
+      --nav-h: 80px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+    /* ===================== NAV ===================== */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+      transition: border-bottom 0.3s, box-shadow 0.3s;
+    }
+    #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+
+    .nav-container {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      height: var(--nav-h); display: flex; align-items: center; gap: 0;
+    }
+
+    /* Logo */
+    .nav-logo { flex-shrink: 0; text-decoration: none; display: flex; align-items: center; margin-right: 36px; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+
+    /* Center menus */
+    .nav-menus {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      list-style: none; gap: 2px;
+    }
+    .menu-item { position: relative; }
+    .menu-link {
+      display: flex; align-items: center; gap: 5px; padding: 8px 14px;
+      font-size: 15px; font-weight: 500; color: var(--gray-dark);
+      text-decoration: none; border-radius: 6px; white-space: nowrap;
+      transition: color 0.2s, background 0.2s; cursor: pointer;
+      background: none; border: none; font-family: var(--font-sans);
+    }
+    .menu-link:hover, .menu-item:hover > .menu-link { color: var(--red); background: var(--red-light); }
+    .menu-link .chevron {
+      width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.22s;
+      fill: none; stroke: currentColor; stroke-width: 2;
+    }
+    .menu-item:hover > .menu-link .chevron { transform: rotate(180deg); }
+
+    /* Dropdown */
+    .dropdown {
+      position: absolute; top: calc(100% + 6px); left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; box-shadow: 0 14px 44px rgba(0,0,0,0.11);
+      min-width: 190px; padding: 8px 0;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+      z-index: 999;
+    }
+    .menu-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 20px; font-size: 14px; color: var(--gray-dark);
+      text-decoration: none; white-space: nowrap; transition: color 0.15s, background 0.15s;
+    }
+    .dropdown a:hover { color: var(--red); background: var(--red-light); }
+    .dropdown a + a { border-top: 1px solid #f2f2f0; }
+    .dropdown a .dd-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity 0.15s; }
+    .dropdown a:hover .dd-dot { opacity: 1; }
+
+    /* Right: CTA + SNS */
+    .nav-right { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-left: 28px; }
+    .nav-cta {
+      background: var(--red); color: var(--white); padding: 10px 22px;
+      border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none;
+      white-space: nowrap; transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    .nav-sns { display: flex; align-items: center; gap: 6px; }
+    .sns-btn {
+      width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 13px; font-weight: 700; color: var(--white);
+      transition: transform 0.18s, box-shadow 0.18s; flex-shrink: 0;
+    }
+    .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .sns-kakao { background: #FEE500; color: #3A1D1D; }
+    .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .sns-youtube { background: #FF0000; }
+    .sns-blog { background: #03C75A; }
+
+    /* Mobile hamburger */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      padding: 8px; background: none; border: none; margin-left: 12px;
+    }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .nav-mobile {
+      background: var(--white); border-top: 1px solid var(--border);
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+    }
+    .nav-mobile.open { max-height: 1200px; }
+    .mobile-item { border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .mobile-item:last-of-type { border-bottom: none; }
+    .mobile-section-label {
+      padding: 16px 24px 8px; font-size: 11px; font-weight: 700;
+      color: var(--red); letter-spacing: 2px; text-transform: uppercase;
+      display: block;
+    }
+    .mobile-sub a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 28px; font-size: 15px; color: var(--gray-dark);
+      text-decoration: none; transition: color 0.15s, background 0.15s, padding-left 0.15s;
+    }
+    .mobile-sub a::before {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--border); flex-shrink: 0; transition: background 0.15s;
+    }
+    .mobile-sub a:hover { color: var(--red); background: var(--red-light); padding-left: 36px; }
+    .mobile-sub a:hover::before { background: var(--red); }
+    .mobile-sns { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+
+    @media (max-width: 1100px) {
+      .nav-menus { display: none; }
+      .nav-sns { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-right { margin-left: auto; }
+      .nav-container { padding: 0 20px; }
+    }
+    @media (max-width: 480px) {
+      .nav-logo img { height: 40px; }
+      .nav-cta { padding: 8px 14px; font-size: 13px; }
+    }
+
+    /* ===================== HERO CAROUSEL ===================== */
+    #hero { position: relative; overflow: hidden; }
+    .hero-track { display: flex; transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
+    .hero-slide {
+      min-width: 100%; min-height: 100vh; flex-shrink: 0;
+      position: relative; display: flex; align-items: center;
+      padding-top: var(--nav-h); overflow: hidden;
+    }
+    .hero-slide-bg { position: absolute; inset: 0; z-index: 0; }
+    .slide-1 .hero-slide-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 40%, #0a0a0a 100%); }
+    .slide-2 .hero-slide-bg { background: linear-gradient(135deg, #0f0808 0%, #1e0b0b 40%, #300f0f 100%); }
+    .slide-3 .hero-slide-bg { background: linear-gradient(135deg, #08080f 0%, #0b0b1e 40%, #10102e 100%); }
+
+    /* Arrows */
+    .hero-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+      background: rgba(255,255,255,0.1); border: none; color: var(--white);
+      width: 52px; height: 52px; border-radius: 50%; font-size: 26px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; backdrop-filter: blur(6px); line-height: 1;
+    }
+    .hero-arrow:hover { background: var(--red); }
+    .hero-arrow.prev { left: 28px; }
+    .hero-arrow.next { right: 28px; }
+
+    /* Dots */
+    .hero-dots {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 10px; z-index: 20;
+    }
+    .hero-dot {
+      width: 8px; height: 8px; border-radius: 50%; padding: 0;
+      background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer; transition: background 0.25s, width 0.3s ease;
+    }
+    .hero-dot.active { background: var(--white); width: 28px; border-radius: 4px; }
+
+    @media (max-width: 768px) {
+      .hero-arrow { width: 38px; height: 38px; font-size: 18px; }
+      .hero-arrow.prev { left: 10px; }
+      .hero-arrow.next { right: 10px; }
+      .hero-dots { bottom: 20px; }
+    }
+
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background: url('') center/cover no-repeat;
+      opacity: 0.35;
+    }
+    .hero-bg-text {
+      position: absolute; right: -30px; bottom: -20px;
+      font-family: var(--font-serif); font-size: clamp(160px, 25vw, 320px);
+      font-weight: 700; color: rgba(255,255,255,0.022); line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+    .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--red); z-index: 1; }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1440px; margin: 0 auto; padding: 80px 40px;
+      width: 100%; text-align: center;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: var(--white);
+      font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+      padding: 6px 14px; border-radius: 2px; margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    .hero-h1 {
+      font-family: var(--font-serif); font-size: clamp(42px, 7vw, 88px);
+      font-weight: 700; color: var(--white); line-height: 1.1;
+      letter-spacing: -2.5px; margin-bottom: 10px;
+    }
+    .hero-h2 {
+      font-family: var(--font-serif); font-size: clamp(20px, 3.5vw, 40px);
+      font-weight: 400; color: rgba(255,255,255,0.45);
+      letter-spacing: -1px; margin-bottom: 40px; line-height: 1.4;
+    }
+    .hero-h2 em { color: var(--red); font-style: normal; font-weight: 600; }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; justify-content: center; }
+    .btn-primary {
+      background: var(--red); color: var(--white); padding: 16px 32px;
+      border-radius: 4px; text-decoration: none; font-size: 16px; font-weight: 500;
+      transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.3); color: var(--white);
+      padding: 16px 32px; border-radius: 4px; text-decoration: none;
+      font-size: 16px; font-weight: 300;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+
+    .hero-kpi {
+      display: flex; gap: 56px; flex-wrap: wrap; justify-content: center;
+      padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+    }
+    .hero-kpi-item .num {
+      font-family: var(--font-serif); font-size: 46px; font-weight: 700;
+      color: var(--red); line-height: 1; margin-bottom: 6px;
+    }
+    .hero-kpi-item .num small { font-size: 22px; }
+    .hero-kpi-item .lbl { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+    @media (max-width: 768px) { .hero-inner { padding: 56px 20px; } .hero-kpi { gap: 32px; } }
+
+    /* ===================== QUICK LINKS ===================== */
+    #quicklinks {
+      background: transparent; position: relative; z-index: 10;
+      margin-top: -52px;
+    }
+    .ql-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .ql-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .ql-card {
+      background: var(--white); border-radius: 10px;
+      padding: 28px 24px; display: flex; align-items: center; gap: 16px;
+      text-decoration: none; color: var(--black);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      border: 1px solid rgba(255,255,255,0.6);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .ql-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.16); }
+    .ql-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: var(--red-light); display: flex; align-items: center;
+      justify-content: center; font-size: 20px; flex-shrink: 0;
+    }
+    .ql-text { flex: 1; }
+    .ql-text strong { display: block; font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+    .ql-text span { font-size: 12px; color: var(--gray); }
+    .ql-arrow { color: var(--red); font-size: 18px; flex-shrink: 0; }
+    @media (max-width: 900px) { .ql-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .ql-grid { grid-template-columns: 1fr; } .ql-container { padding: 0 20px; } }
+
+    /* ===================== SHARED SECTION ===================== */
+    .section { padding: 100px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section-tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(26px, 4vw, 42px); font-weight: 700; color: var(--black); letter-spacing: -1px; line-height: 1.2; margin-bottom: 12px; }
+    .section-desc { font-size: 15px; color: var(--gray); max-width: 520px; line-height: 1.9; }
+    .section-header { margin-bottom: 52px; }
+    @media (max-width: 768px) { .section { padding: 64px 0; } .container { padding: 0 20px; } }
+
+    /* ===================== WHY US ===================== */
+    #why { background: var(--gray-light); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .why-card {
+      background: var(--white); border-radius: 12px; padding: 36px 28px;
+      border: 1px solid var(--border); transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .why-card:hover { border-color: var(--red); box-shadow: 0 10px 36px rgba(192,39,26,0.09); transform: translateY(-4px); }
+    .why-icon {
+      width: 54px; height: 54px; border-radius: 12px; background: var(--red-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+    .why-card h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .why-card p { font-size: 14px; color: var(--gray); line-height: 1.9; }
+    .why-card .why-num {
+      font-family: var(--font-serif); font-size: 52px; font-weight: 700;
+      color: var(--red); opacity: 0.1; line-height: 1; margin-bottom: -8px;
+    }
+    @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
+
+    /* ===================== TROPHY BOARD ===================== */
+    #trophy { background: var(--black); overflow: hidden; }
+    #trophy .section-tag { color: #e57373; }
+    #trophy .section-title { color: var(--white); }
+    .trophy-carousel-wrap { position: relative; }
+    .trophy-track-outer { overflow: hidden; }
+    .trophy-track {
+      display: flex; gap: 18px;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .trophy-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px; padding: 28px 24px; min-width: 220px; flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .trophy-card:hover { border-color: var(--red); background: rgba(192,39,26,0.08); }
+    .trophy-badge {
+      display: inline-block; background: var(--red); color: var(--white);
+      font-size: 11px; padding: 3px 10px; border-radius: 3px;
+      font-weight: 500; margin-bottom: 16px;
+    }
+    .trophy-score {
+      font-family: var(--font-serif); font-size: 36px; font-weight: 700;
+      color: var(--white); line-height: 1; margin-bottom: 8px;
+    }
+    .trophy-score .unit { font-size: 16px; color: var(--red); }
+    .trophy-label { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+    .trophy-date { font-size: 11px; color: rgba(255,255,255,0.28); }
+    .carousel-controls { display: flex; gap: 10px; margin-top: 32px; justify-content: center; }
+    .carousel-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
+      background: transparent; color: var(--white); font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .carousel-btn:hover { background: var(--red); border-color: var(--red); }
+
+    /* ===================== REVIEWS ===================== */
+    #reviews { background: var(--white); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .review-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 32px 26px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; position: relative;
+    }
+    .review-card:hover { border-color: var(--red); box-shadow: 0 10px 36px rgba(192,39,26,0.08); transform: translateY(-4px); }
+    .review-quote {
+      font-family: Georgia, serif; font-size: 52px; color: var(--red);
+      line-height: 1; margin-bottom: 4px; opacity: 0.25; user-select: none;
+    }
+    .review-stars { color: var(--red); font-size: 13px; margin-bottom: 16px; letter-spacing: 2px; }
+    .review-text { font-size: 14px; color: var(--gray-dark); line-height: 1.95; margin-bottom: 24px; }
+    .review-footer { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .review-avatar {
+      width: 38px; height: 38px; background: var(--red); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; color: var(--white); flex-shrink: 0;
+    }
+    .review-info .name { font-size: 14px; font-weight: 500; }
+    .review-info .meta { font-size: 12px; color: var(--gray); margin-top: 2px; }
+    @media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+    /* ===================== NOTICES / SCHEDULE ===================== */
+    #notices-section { background: var(--gray-light); }
+    .notices-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+    /* Calendar side */
+    .mini-calendar { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .cal-month { font-family: var(--font-serif); font-size: 18px; font-weight: 700; }
+    .cal-nav { background: none; border: 1px solid var(--border); border-radius: 6px; width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .cal-nav:hover { background: var(--red-light); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+    .cal-day-name { text-align: center; font-size: 11px; color: var(--gray); padding: 6px 0; font-weight: 500; }
+    .cal-day-name:first-child { color: var(--red); }
+    .cal-day-name:last-child { color: #4A90D9; }
+    .cal-day {
+      text-align: center; font-size: 13px; padding: 8px 2px; border-radius: 6px;
+      cursor: pointer; transition: background 0.15s; position: relative;
+    }
+    .cal-day:hover { background: var(--red-light); }
+    .cal-day.today { background: var(--red); color: var(--white); font-weight: 700; }
+    .cal-day.has-event::after {
+      content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 4px; background: var(--red); border-radius: 50%;
+    }
+    .cal-day.today.has-event::after { background: rgba(255,255,255,0.7); }
+    .cal-day.other-month { color: #ccc; }
+    .cal-day.sun { color: var(--red); }
+    .cal-day.sat { color: #4A90D9; }
+    .cal-day.today.sun, .cal-day.today.sat { color: var(--white); }
+
+    .schedule-list { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .schedule-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px; background: var(--gray-light); }
+    .schedule-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+    .schedule-date { font-size: 12px; color: var(--gray); flex-shrink: 0; min-width: 52px; }
+    .schedule-text { font-size: 13px; color: var(--gray-dark); }
+
+    /* Notice list side */
+    .notices-panel { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
+    .notices-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .notices-panel-title { font-family: var(--font-serif); font-size: 18px; font-weight: 700; }
+    .notices-more { font-size: 13px; color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 1px; }
+    .notices-more:hover { color: var(--red); border-color: var(--red); }
+    .notice-row {
+      display: flex; align-items: center; gap: 12px; padding: 14px 0;
+      border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.1s;
+    }
+    .notice-row:last-child { border-bottom: none; }
+    .notice-row:hover .notice-row-title { color: var(--red); }
+    .notice-badge { flex-shrink: 0; font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 3px; }
+    .nb-red { background: var(--red-light); color: var(--red); }
+    .nb-gray { background: #E8E8E6; color: var(--gray); }
+    .nb-black { background: var(--black); color: var(--white); }
+    .notice-row-title { flex: 1; font-size: 14px; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.15s; }
+    .notice-row-date { font-size: 12px; color: var(--gray); flex-shrink: 0; }
+    @media (max-width: 768px) { .notices-split { grid-template-columns: 1fr; } }
+
+    /* ===================== CONSULTATION CTA ===================== */
+    #consult-cta { background: var(--red); padding: 80px 0; }
+    .consult-cta-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .consult-cta-inner h2 { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; color: var(--white); letter-spacing: -1px; line-height: 1.3; }
+    .consult-cta-inner h2 span { opacity: 0.65; display: block; font-size: 0.55em; font-weight: 400; margin-bottom: 6px; }
+    .consult-cta-btn {
+      background: var(--white); color: var(--red); padding: 16px 36px;
+      border-radius: 6px; font-size: 16px; font-weight: 700;
+      text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .consult-cta-btn:hover { background: #f5f5f5; transform: translateY(-2px); }
+    @media (max-width: 640px) { .consult-cta-inner { text-align: center; justify-content: center; } }
+
+    /* ===================== FOOTER ===================== */
+    footer { background: #111; padding: 64px 0 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
+    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); }
+    .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
+
+    /* ===================== ANIMATIONS ===================== */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
+    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
+    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav id="nav">
+  <div class="nav-container">
+    <!-- Logo -->
+    <a href="samnyun-academy.html" class="nav-logo">
+      <img src="삼신로고2.png" alt="삼년의 신화 국어논술학원">
+    </a>
+
+    <!-- Center menus -->
+    <ul class="nav-menus">
+      <li class="menu-item">
+        <a class="menu-link">
+          학원 소개
+          <svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="about-greeting.html"><span class="dd-dot"></span>인사말</a>
+          <a href="about-features.html"><span class="dd-dot"></span>학원 특징</a>
+          <a href="about-history.html"><span class="dd-dot"></span>연혁</a>
+          <a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a>
+        </div>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link">
+          강사 소개
+          <svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a>
+          <a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a>
+          <a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a>
+        </div>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link">
+          커리큘럼
+          <svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="curriculum-elem-middle.html"><span class="dd-dot"></span>초·중등 과정</a>
+          <a href="curriculum-high.html"><span class="dd-dot"></span>고등 과정</a>
+        </div>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link">
+          학원 소식
+          <svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="news-notice.html"><span class="dd-dot"></span>공지사항</a>
+          <a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a>
+          <a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a>
+        </div>
+      </li>
+      <li class="menu-item">
+        <a class="menu-link">
+          생생 후기
+          <svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="about-results.html"><span class="dd-dot"></span>명예의 전당</a>
+          <a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Right: CTA + SNS -->
+    <div class="nav-right">
+      <div class="nav-sns">
+        <a href="#" class="sns-btn sns-kakao" title="카카오톡" aria-label="카카오톡">K</a>
+        <a href="#" class="sns-btn sns-insta" title="인스타그램" aria-label="인스타그램">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+        </a>
+        <a href="#" class="sns-btn sns-youtube" title="유튜브" aria-label="유튜브">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.8C16.6 5 12 5 12 5s-4.6 0-7.1.2c-.4 0-1.2.1-1.9.8-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.7 2.2.8C6.7 19 12 19 12 19s4.6 0 7.1-.2c.4 0 1.2-.1 1.9-.8.6-.6.8-2 .8-2S22 14.4 22 12.7v-1.5C22 9.6 21.8 8 21.8 8zM9.8 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg>
+        </a>
+        <a href="#" class="sns-btn sns-blog" title="블로그" aria-label="네이버 블로그">N</a>
+      </div>
+      <a href="#consult-cta" class="nav-cta">상담 신청</a>
+    </div>
+
+    <!-- Hamburger -->
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu (전체 펼침) -->
+  <div class="nav-mobile" id="mobileMenu">
+
+    <div class="mobile-item">
+      <span class="mobile-section-label">학원 소개</span>
+      <div class="mobile-sub">
+        <a href="about-greeting.html" onclick="closeMobileMenu()">인사말</a>
+        <a href="about-features.html" onclick="closeMobileMenu()">학원 특징</a>
+        <a href="about-history.html" onclick="closeMobileMenu()">연혁</a>
+        <a href="about-branches.html" onclick="closeMobileMenu()">지점 안내 및 오시는 길</a>
+      </div>
+    </div>
+
+    <div class="mobile-item">
+      <span class="mobile-section-label">강사 소개</span>
+      <div class="mobile-sub">
+        <a href="teachers-gojan.html" onclick="closeMobileMenu()">고잔점</a>
+        <a href="teachers-zai.html" onclick="closeMobileMenu()">자이점</a>
+        <a href="teachers-hyper.html" onclick="closeMobileMenu()">하이퍼관</a>
+      </div>
+    </div>
+
+    <div class="mobile-item">
+      <span class="mobile-section-label">커리큘럼</span>
+      <div class="mobile-sub">
+        <a href="curriculum-elem-middle.html" onclick="closeMobileMenu()">초·중등 과정</a>
+        <a href="curriculum-high.html" onclick="closeMobileMenu()">고등 과정</a>
+      </div>
+    </div>
+
+    <div class="mobile-item">
+      <span class="mobile-section-label">학원 소식</span>
+      <div class="mobile-sub">
+        <a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a>
+        <a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a>
+        <a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a>
+      </div>
+    </div>
+
+    <div class="mobile-item">
+      <span class="mobile-section-label">생생 후기</span>
+      <div class="mobile-sub">
+        <a href="about-results.html" onclick="closeMobileMenu()">명예의 전당</a>
+        <a href="#reviews" onclick="closeMobileMenu()">수강 후기</a>
+      </div>
+    </div>
+
+    <div class="mobile-sns">
+      <a href="#" class="sns-btn sns-kakao" title="카카오톡">K</a>
+      <a href="#" class="sns-btn sns-insta" title="인스타그램">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg>
+      </a>
+      <a href="#" class="sns-btn sns-youtube" title="유튜브">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.8C16.6 5 12 5 12 5s-4.6 0-7.1.2c-.4 0-1.2.1-1.9.8-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.7 2.2.8C6.7 19 12 19 12 19s4.6 0 7.1-.2c.4 0 1.2-.1 1.9-.8.6-.6.8-2 .8-2S22 14.4 22 12.7v-1.5C22 9.6 21.8 8 21.8 8zM9.8 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg>
+      </a>
+      <a href="#" class="sns-btn sns-blog" title="블로그">N</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ===================== HERO CAROUSEL ===================== -->
+<section id="hero">
+  <div class="hero-track" id="heroTrack">
+
+    <!-- Slide 1 -->
+    <div class="hero-slide slide-1">
+      <div class="hero-slide-bg"></div>
+      <div class="hero-bg-img"></div>
+      <div class="hero-bg-text">神話</div>
+      <div class="hero-accent"></div>
+      <div class="hero-inner">
+        <div class="hero-tag">Legend of Three Years</div>
+        <h1 class="hero-h1">3년이 만드는<br>국어의 <span style="color:var(--red)">신화</span></h1>
+        <h2 class="hero-h2">체계적인 독해와 논술 교육으로<br><em>스스로 생각하고 쓰는 힘</em>을 키웁니다</h2>
+        <div class="hero-buttons">
+          <a href="#consult-cta" class="btn-primary">상담 신청하기 →</a>
+          <a href="#notices-section" class="btn-outline">시간표 보기</a>
+        </div>
+        <div class="hero-kpi">
+          <div class="hero-kpi-item"><div class="num">[N]<small>년</small></div><div class="lbl">교육 경력</div></div>
+          <div class="hero-kpi-item"><div class="num">[N]<small>+</small></div><div class="lbl">누적 수강생</div></div>
+          <div class="hero-kpi-item"><div class="num">[N]<small>%</small></div><div class="lbl">상위권 배출률</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="hero-slide slide-2">
+      <div class="hero-slide-bg"></div>
+      <div class="hero-bg-text">實力</div>
+      <div class="hero-accent"></div>
+      <div class="hero-inner">
+        <div class="hero-tag">Curriculum</div>
+        <h1 class="hero-h1">[슬라이드 2<br>제목을 입력하세요]</h1>
+        <h2 class="hero-h2">[슬라이드 2 부제목을 <em>입력하세요</em>]</h2>
+        <div class="hero-buttons">
+          <a href="#curriculum" class="btn-primary">커리큘럼 보기 →</a>
+          <a href="#consult-cta" class="btn-outline">상담 신청</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="hero-slide slide-3">
+      <div class="hero-slide-bg"></div>
+      <div class="hero-bg-text">合格</div>
+      <div class="hero-accent"></div>
+      <div class="hero-inner">
+        <div class="hero-tag">Achievement</div>
+        <h1 class="hero-h1">[슬라이드 3<br>제목을 입력하세요]</h1>
+        <h2 class="hero-h2">[슬라이드 3 부제목을 <em>입력하세요</em>]</h2>
+        <div class="hero-buttons">
+          <a href="about-results.html" class="btn-primary">실적 보기 →</a>
+          <a href="#consult-cta" class="btn-outline">상담 신청</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 화살표 -->
+  <button class="hero-arrow prev" id="heroPrev" aria-label="이전 슬라이드">&#8249;</button>
+  <button class="hero-arrow next" id="heroNext" aria-label="다음 슬라이드">&#8250;</button>
+
+  <!-- 점 인디케이터 -->
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- ===================== QUICK LINKS ===================== -->
+<section id="quicklinks">
+  <div class="ql-container">
+    <div class="ql-grid stagger">
+      <a href="#consult-cta" class="ql-card">
+        <div class="ql-icon">📋</div>
+        <div class="ql-text"><strong>입학 상담</strong><span>맞춤 반 배정 안내</span></div>
+        <div class="ql-arrow">→</div>
+      </a>
+      <a href="#curriculum" class="ql-card">
+        <div class="ql-icon">📚</div>
+        <div class="ql-text"><strong>커리큘럼 보기</strong><span>초·중·고 과정 안내</span></div>
+        <div class="ql-arrow">→</div>
+      </a>
+      <a href="#notices-section" class="ql-card">
+        <div class="ql-icon">🗓️</div>
+        <div class="ql-text"><strong>학원 시간표</strong><span>수업 일정 확인</span></div>
+        <div class="ql-arrow">→</div>
+      </a>
+      <a href="about-results.html" class="ql-card">
+        <div class="ql-icon">🏆</div>
+        <div class="ql-text"><strong>명예의 전당</strong><span>합격 실적 보기</span></div>
+        <div class="ql-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Why Us</div>
+      <h2 class="section-title">삼년의 신화가<br>특별한 이유</h2>
+      <p class="section-desc">국어는 단기간에 완성되지 않습니다. 3년을 함께 걷는 동안, 학생 스스로 읽고 분석하고 써내는 진짜 실력을 만들어 갑니다.</p>
+    </div>
+    <div class="why-grid stagger">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-icon">📖</div>
+        <h3>체계적 독해력 완성</h3>
+        <p>문학·비문학의 핵심 원리를 단계별로 익혀 어떤 지문도 흔들리지 않는 독해력을 키웁니다. 매 수업 실전 지문 분석을 통해 빠르게 성장합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-icon">✍️</div>
+        <h3>논리적 글쓰기 훈련</h3>
+        <p>생각을 글로 표현하는 논술 훈련을 통해 내신과 입시 모두를 완벽하게 대비합니다. 매주 첨삭으로 글쓰기 실력을 빠르게 향상시킵니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-icon">🎯</div>
+        <h3>맞춤형 1:1 피드백</h3>
+        <p>학생 개개인의 수준과 목표에 맞는 세밀한 첨삭으로 실력을 빠르게 향상시킵니다. 모든 학생의 성장을 개별적으로 관리합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TROPHY BOARD ===================== -->
+<section id="trophy" class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Achievement</div>
+      <h2 class="section-title" style="color:var(--white)">트로피 보드</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.45)">삼년의 신화에서 이루어낸 빛나는 성과들입니다.</p>
+    </div>
+    <div class="trophy-carousel-wrap fade-up">
+      <div class="trophy-track-outer">
+        <div class="trophy-track" id="trophyTrack">
+          <div class="trophy-card">
+            <div class="trophy-badge">고3 · 수능 국어</div>
+            <div class="trophy-score">1<span class="unit">등급</span></div>
+            <div class="trophy-label">수능 국어 1등급 달성</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">중3 · 내신</div>
+            <div class="trophy-score">1.2<span class="unit">점대</span></div>
+            <div class="trophy-label">내신 국어 전교 최상위</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">고2 · 모의고사</div>
+            <div class="trophy-score">+18<span class="unit">점</span></div>
+            <div class="trophy-label">3개월 만에 18점 상승</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">특목고 입시</div>
+            <div class="trophy-score">합격<span class="unit"> ✓</span></div>
+            <div class="trophy-label">[학교명] 논술 합격</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">고3 · SKY 대입</div>
+            <div class="trophy-score">합격<span class="unit"> ✓</span></div>
+            <div class="trophy-label">[대학명] [학과] 합격</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">초6 · 독해</div>
+            <div class="trophy-score">+35<span class="unit">%</span></div>
+            <div class="trophy-label">독해력 6개월 만에 35% 향상</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+          <div class="trophy-card">
+            <div class="trophy-badge">중1 · 국어 내신</div>
+            <div class="trophy-score">100<span class="unit">점</span></div>
+            <div class="trophy-label">중간고사 국어 만점</div>
+            <div class="trophy-date">[날짜 입력]</div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="trophyPrev" aria-label="이전">‹</button>
+        <button class="carousel-btn" id="trophyNext" aria-label="다음">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVIEWS ===================== -->
+<section id="reviews" class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">Reviews</div>
+      <h2 class="section-title">생생 수강 후기</h2>
+      <p class="section-desc">삼년의 신화를 경험한 학생과 학부모님의 솔직한 이야기입니다.</p>
+    </div>
+    <div class="reviews-grid stagger">
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">처음에는 글 읽는 것도 힘들었는데, 2년 동안 꾸준히 수업을 들으면서 논술도 자신 있게 쓸 수 있게 됐어요. 선생님들이 정말 꼼꼼하게 피드백해 주셔서 너무 좋았습니다.</p>
+        <div class="review-footer">
+          <div class="review-avatar">김</div>
+          <div class="review-info"><div class="name">김○○ 학생</div><div class="meta">중3 · 2년 수강</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">아이가 처음에 글쓰기를 너무 싫어했는데, 수업을 들으면서 점점 자신감이 생겼어요. 내신 성적도 많이 올랐고, 무엇보다 스스로 책을 찾아 읽기 시작했어요.</p>
+        <div class="review-footer">
+          <div class="review-avatar">박</div>
+          <div class="review-info"><div class="name">박○○ 학부모님</div><div class="meta">초6 학부모 · 1년 수강</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-quote">"</div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">수능 국어에서 1등급을 받았습니다! 3년 동안 다닌 것이 정말 큰 도움이 됐어요. 비문학 풀이 전략은 정말 다른 학원과 차별화된다고 느꼈습니다.</p>
+        <div class="review-footer">
+          <div class="review-avatar">이</div>
+          <div class="review-info"><div class="name">이○○ 학생</div><div class="meta">고3 졸업 · 3년 수강</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOTICES + SCHEDULE ===================== -->
+<section id="notices-section" class="section">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-tag">News</div>
+      <h2 class="section-title">학원 소식</h2>
+    </div>
+    <div class="notices-split fade-up">
+      <!-- Left: Calendar -->
+      <div>
+        <div class="mini-calendar">
+          <div class="cal-header">
+            <button class="cal-nav" id="calPrev">‹</button>
+            <div class="cal-month" id="calMonth">2026년 5월</div>
+            <button class="cal-nav" id="calNext">›</button>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-day-name">일</div>
+            <div class="cal-day-name">월</div>
+            <div class="cal-day-name">화</div>
+            <div class="cal-day-name">수</div>
+            <div class="cal-day-name">목</div>
+            <div class="cal-day-name">금</div>
+            <div class="cal-day-name">토</div>
+          </div>
+        </div>
+        <div class="schedule-list" style="margin-top:16px">
+          <div class="schedule-item"><div class="schedule-dot"></div><div class="schedule-date">05.00</div><div class="schedule-text">[학원 일정 입력]</div></div>
+          <div class="schedule-item"><div class="schedule-dot"></div><div class="schedule-date">05.00</div><div class="schedule-text">[학원 일정 입력]</div></div>
+          <div class="schedule-item"><div class="schedule-dot"></div><div class="schedule-date">06.00</div><div class="schedule-text">[학원 일정 입력]</div></div>
+        </div>
+      </div>
+
+      <!-- Right: Notice list -->
+      <div class="notices-panel">
+        <div class="notices-panel-header">
+          <div class="notices-panel-title">공지사항</div>
+          <a href="#" class="notices-more">전체보기</a>
+        </div>
+        <div class="notice-row"><span class="notice-badge nb-red">공지</span><span class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-red">공지</span><span class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><span class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-black">이벤트</span><span class="notice-row-title">[이벤트] 여기에 이벤트 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><span class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONSULTATION CTA ===================== -->
+<section id="consult-cta">
+  <div class="consult-cta-inner">
+    <h2><span>지금 바로 시작하세요</span>입학 상담을 예약하세요</h2>
+    <a href="mailto:" class="consult-cta-btn">상담 신청하기 →</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
+        <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
+        <div class="footer-contact">
+          <span>📍 <strong>[주소 입력]</strong></span>
+          <span>📞 <strong>[전화번호 입력]</strong></span>
+          <span>✉️ <strong>[이메일 입력]</strong></span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>학원소개</h4>
+        <ul>
+          <li><a href="about-greeting.html">인사말</a></li>
+          <li><a href="about-features.html">학원 특징</a></li>
+          <li><a href="about-history.html">연혁</a></li>
+          <li><a href="about-branches.html">지점 안내 및 오시는 길</a></li>
+          <li><a href="about-results.html">명예의 전당</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>채널 · 문의</h4>
+        <ul>
+          <li><a href="#consult-cta">온라인 상담 신청</a></li>
+          <li><a href="#">카카오톡 채널</a></li>
+          <li><a href="#">네이버 블로그</a></li>
+          <li><a href="#">인스타그램</a></li>
+          <li><a href="#">유튜브</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p>
+      <p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---- NAV scroll ---- */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ---- Hamburger ---- */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+
+  /* ---- Close mobile menu on link click ---- */
+  function closeMobileMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  /* ---- Hero carousel ---- */
+  const heroTrack = document.getElementById('heroTrack');
+  const heroDotsEl = document.getElementById('heroDots');
+  const heroSlides = heroTrack.querySelectorAll('.hero-slide');
+  let heroIdx = 0;
+  let heroTimer;
+
+  heroSlides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
+    dot.addEventListener('click', () => goHero(i));
+    heroDotsEl.appendChild(dot);
+  });
+
+  function goHero(idx) {
+    heroIdx = (idx + heroSlides.length) % heroSlides.length;
+    heroTrack.style.transform = `translateX(-${heroIdx * 100}%)`;
+    heroDotsEl.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIdx));
+    resetHeroTimer();
+  }
+
+  function resetHeroTimer() {
+    clearInterval(heroTimer);
+    heroTimer = setInterval(() => goHero(heroIdx + 1), 4000);
+  }
+
+  document.getElementById('heroPrev').addEventListener('click', () => goHero(heroIdx - 1));
+  document.getElementById('heroNext').addEventListener('click', () => goHero(heroIdx + 1));
+
+  heroTrack.addEventListener('mouseenter', () => clearInterval(heroTimer));
+  heroTrack.addEventListener('mouseleave', resetHeroTimer);
+
+  resetHeroTimer();
+
+  /* ---- Trophy carousel ---- */
+  const track = document.getElementById('trophyTrack');
+  let trophyIdx = 0;
+  function getCardW() {
+    const card = track.querySelector('.trophy-card');
+    if (!card) return 238;
+    return card.offsetWidth + 18;
+  }
+  function getVisible() {
+    return Math.floor(track.parentElement.offsetWidth / getCardW());
+  }
+  function updateTrophy() {
+    const maxIdx = track.children.length - getVisible();
+    trophyIdx = Math.max(0, Math.min(trophyIdx, maxIdx));
+    track.style.transform = `translateX(-${trophyIdx * getCardW()}px)`;
+  }
+  document.getElementById('trophyPrev').addEventListener('click', () => { trophyIdx--; updateTrophy(); });
+  document.getElementById('trophyNext').addEventListener('click', () => { trophyIdx++; updateTrophy(); });
+
+  /* ---- Calendar ---- */
+  let calYear = 2026, calMonth = 4; // month is 0-indexed
+  const events = [5, 12, 19]; // placeholder event days
+  function renderCal() {
+    const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    document.getElementById('calMonth').textContent = `${calYear}년 ${monthNames[calMonth]}`;
+    const grid = document.getElementById('calGrid');
+    // Remove old day cells
+    while (grid.children.length > 7) grid.removeChild(grid.lastChild);
+    const first = new Date(calYear, calMonth, 1).getDay();
+    const days = new Date(calYear, calMonth + 1, 0).getDate();
+    const prevDays = new Date(calYear, calMonth, 0).getDate();
+    const today = new Date();
+    for (let i = 0; i < first; i++) {
+      const d = document.createElement('div');
+      d.className = 'cal-day other-month';
+      d.textContent = prevDays - first + 1 + i;
+      grid.appendChild(d);
+    }
+    for (let d = 1; d <= days; d++) {
+      const cell = document.createElement('div');
+      const dow = (first + d - 1) % 7;
+      let cls = 'cal-day';
+      if (dow === 0) cls += ' sun';
+      if (dow === 6) cls += ' sat';
+      if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) cls += ' today';
+      if (events.includes(d)) cls += ' has-event';
+      cell.className = cls;
+      cell.textContent = d;
+      grid.appendChild(cell);
+    }
+    const remaining = 42 - first - days;
+    for (let i = 1; i <= remaining; i++) {
+      const d = document.createElement('div');
+      d.className = 'cal-day other-month';
+      d.textContent = i;
+      grid.appendChild(d);
+    }
+  }
+  document.getElementById('calPrev').addEventListener('click', () => {
+    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal();
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal();
+  });
+  renderCal();
+
+  /* ---- Intersection observer ---- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
