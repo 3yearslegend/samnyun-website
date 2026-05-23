@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상담 신청 | 삼년의 신화 국어논술학원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
+    #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+    .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
+    .nav-logo { flex-shrink: 0; text-decoration: none; display: flex; align-items: center; margin-right: 36px; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-menus { flex: 1; display: flex; align-items: center; justify-content: center; list-style: none; gap: 2px; }
+    .menu-item { position: relative; }
+    .menu-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; font-size: 15px; font-weight: 500; color: var(--gray-dark); text-decoration: none; border-radius: 6px; white-space: nowrap; transition: color 0.2s, background 0.2s; cursor: pointer; background: none; border: none; font-family: var(--font-sans); }
+    .menu-link:hover, .menu-item:hover > .menu-link { color: var(--red); background: var(--red-light); }
+    .menu-link .chevron { width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.22s; fill: none; stroke: currentColor; stroke-width: 2; }
+    .menu-item:hover > .menu-link .chevron { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-8px); background: var(--white); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 14px 44px rgba(0,0,0,0.11); min-width: 190px; padding: 8px 0; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 999; }
+    .menu-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown a { display: flex; align-items: center; gap: 8px; padding: 11px 20px; font-size: 14px; color: var(--gray-dark); text-decoration: none; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+    .dropdown a:hover { color: var(--red); background: var(--red-light); }
+    .dropdown a + a { border-top: 1px solid #f2f2f0; }
+    .dropdown a .dd-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity 0.15s; }
+    .dropdown a:hover .dd-dot { opacity: 1; }
+    .nav-right { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-left: 28px; }
+    .nav-cta { background: var(--red); color: var(--white); padding: 10px 22px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .nav-sns { display: flex; align-items: center; gap: 6px; }
+    .sns-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; font-weight: 700; color: var(--white); transition: transform 0.18s, box-shadow 0.18s; flex-shrink: 0; }
+    .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-left: 12px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); } .nav-hamburger.open span:nth-child(2) { opacity: 0; } .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { background: var(--white); border-top: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .nav-mobile.open { max-height: 1200px; }
+    .mobile-item { border-bottom: 1px solid var(--border); padding-bottom: 8px; } .mobile-item:last-of-type { border-bottom: none; }
+    .mobile-section-label { padding: 16px 24px 8px; font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; display: block; }
+    .mobile-sub a { display: flex; align-items: center; gap: 10px; padding: 11px 28px; font-size: 15px; color: var(--gray-dark); text-decoration: none; transition: color 0.15s, background 0.15s, padding-left 0.15s; }
+    .mobile-sub a::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.15s; }
+    .mobile-sub a:hover { color: var(--red); background: var(--red-light); padding-left: 36px; } .mobile-sub a:hover::before { background: var(--red); }
+    .mobile-sns { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+    @media (max-width: 1100px) { .nav-menus { display: none; } .nav-sns { display: none; } .nav-hamburger { display: flex; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; } }
+    @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+
+    .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; }
+    .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
+    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 14px; }
+    .ph-inner p { font-size: 16px; color: rgba(255,255,255,0.48); max-width: 500px; }
+    @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
+
+    .page-content { padding: 80px 0 120px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
+
+    /* Consulting Layout */
+    .consulting-wrap { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: start; }
+
+    /* Form Panel */
+    .form-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 48px 44px; }
+    .form-panel-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+    .form-panel-desc { font-size: 14px; color: var(--gray); margin-bottom: 36px; }
+
+    .form-section-label { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; margin-top: 28px; display: block; }
+    .form-section-label:first-of-type { margin-top: 0; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label { font-size: 13px; font-weight: 600; color: var(--black); }
+    .form-label .req { color: var(--red); margin-left: 2px; }
+    .form-input, .form-select { width: 100%; height: 50px; padding: 0 16px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-family: var(--font-sans); color: var(--black); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; appearance: none; }
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(192,39,26,0.1); }
+    .form-input.error, .form-select.error { border-color: var(--red) !important; background: #fff8f8; }
+    .form-err { font-size: 11.5px; color: var(--red); display: none; }
+    .form-input.error ~ .form-err, .form-select.error ~ .form-err { display: block; }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: ''; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
+
+    /* Branch Button Group */
+    .branch-group { display: flex; gap: 10px; }
+    .branch-btn { flex: 1; height: 50px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.2s; }
+    .branch-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .branch-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+    .branch-group.error .branch-btn:not(.selected) { border-color: var(--red); }
+
+    /* Date + Time row */
+    .datetime-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    /* Submit Button */
+    .submit-btn { width: 100%; height: 62px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 17px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
+    .submit-btn:hover:not(:disabled) { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,39,26,0.38); }
+    .submit-btn:disabled { background: #bbb; cursor: not-allowed; transform: none; box-shadow: none; }
+    .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; flex-shrink: 0; }
+    .submit-btn.submitting .spinner { display: block; }
+    .submit-btn.submitting .btn-text { opacity: 0.75; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .form-notice { font-size: 12px; color: var(--gray); text-align: center; margin-top: 14px; line-height: 1.8; }
+
+    /* Info Panel */
+    .info-panel { display: flex; flex-direction: column; gap: 20px; }
+    .info-card { background: var(--gray-light); border-radius: 14px; padding: 28px; }
+    .info-card-title { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .info-card-title::before { content: ''; width: 4px; height: 14px; background: var(--red); border-radius: 2px; }
+    .info-step { display: flex; gap: 14px; margin-bottom: 14px; }
+    .info-step:last-child { margin-bottom: 0; }
+    .step-num { width: 26px; height: 26px; background: var(--red); color: white; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-text strong { font-size: 13px; font-weight: 700; color: var(--black); display: block; margin-bottom: 3px; }
+    .step-text span { font-size: 12px; color: var(--gray); }
+    .kakao-card { background: #FEF9C3; border-radius: 14px; padding: 24px 28px; display: flex; gap: 14px; align-items: flex-start; }
+    .kakao-icon { font-size: 28px; flex-shrink: 0; }
+    .kakao-text strong { font-size: 13px; font-weight: 700; color: #3A1D1D; display: block; margin-bottom: 4px; }
+    .kakao-text span { font-size: 12px; color: #6B5B1E; line-height: 1.7; }
+    .branch-contact { display: flex; flex-direction: column; gap: 10px; }
+    .branch-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .branch-row:last-child { border-bottom: none; }
+    .branch-name { font-size: 13px; font-weight: 600; color: var(--black); }
+    .branch-num { font-size: 13px; color: var(--gray-dark); }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1C1C1C; color: white; padding: 16px 28px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 9999; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.25); transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s; opacity: 0; white-space: nowrap; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast-icon { width: 22px; height: 22px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    footer { background: #111; padding: 64px 0 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
+    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) { .consulting-wrap { grid-template-columns: 1fr; } .info-panel { display: grid; grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .datetime-row { grid-template-columns: 1fr; }
+      .branch-group { flex-direction: column; gap: 8px; }
+      .form-panel { padding: 28px 20px; }
+      .info-panel { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <ul class="nav-menus">
+      <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
+      <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
+      <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum-elem-middle.html"><span class="dd-dot"></span>초·중등 과정</a><a href="curriculum-high.html"><span class="dd-dot"></span>고등 과정</a></div></li>
+      <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
+      <li class="menu-item"><a class="menu-link">생생 후기<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-results.html"><span class="dd-dot"></span>명예의 전당</a><a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a></div></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-sns">
+        <a href="#" class="sns-btn sns-kakao">K</a>
+        <a href="#" class="sns-btn sns-insta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg></a>
+        <a href="#" class="sns-btn sns-youtube"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.8C16.6 5 12 5 12 5s-4.6 0-7.1.2c-.4 0-1.2.1-1.9.8-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.7 2.2.8C6.7 19 12 19 12 19s4.6 0 7.1-.2c.4 0 1.2-.1 1.9-.8.6-.6.8-2 .8-2S22 14.4 22 12.7v-1.5C22 9.6 21.8 8 21.8 8zM9.8 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg></a>
+        <a href="#" class="sns-btn sns-blog">N</a>
+      </div>
+      <a href="consulting.html" class="nav-cta">상담 신청</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <div class="mobile-item"><span class="mobile-section-label">학원 소개</span><div class="mobile-sub"><a href="about-greeting.html" onclick="closeMobileMenu()">인사말</a><a href="about-features.html" onclick="closeMobileMenu()">학원 특징</a><a href="about-history.html" onclick="closeMobileMenu()">연혁</a><a href="about-branches.html" onclick="closeMobileMenu()">지점 안내 및 오시는 길</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">강사 소개</span><div class="mobile-sub"><a href="teachers-gojan.html" onclick="closeMobileMenu()">고잔점</a><a href="teachers-zai.html" onclick="closeMobileMenu()">자이점</a><a href="teachers-hyper.html" onclick="closeMobileMenu()">하이퍼관</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">커리큘럼</span><div class="mobile-sub"><a href="curriculum-elem-middle.html" onclick="closeMobileMenu()">초·중등 과정</a><a href="curriculum-high.html" onclick="closeMobileMenu()">고등 과정</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">학원 소식</span><div class="mobile-sub"><a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a><a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a><a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">생생 후기</span><div class="mobile-sub"><a href="about-results.html" onclick="closeMobileMenu()">명예의 전당</a><a href="reviews-list.html" onclick="closeMobileMenu()">수강 후기</a></div></div>
+    <div class="mobile-sns"><a href="#" class="sns-btn sns-kakao">K</a><a href="#" class="sns-btn sns-blog">N</a></div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="ph-inner">
+    <div class="ph-breadcrumb">
+      <a href="index.html">홈</a><span>›</span>
+      <span class="current">상담 신청</span>
+    </div>
+    <h1>입학 상담 신청</h1>
+    <p>맞춤 반 배정과 학습 계획 상담을 신청해 주세요.</p>
+  </div>
+</section>
+
+<main class="page-content">
+  <div class="container">
+    <div class="consulting-wrap">
+
+      <!-- 상담 신청 폼 -->
+      <div class="form-panel fade-up">
+        <h2 class="form-panel-title">온라인 상담 신청서</h2>
+        <p class="form-panel-desc">아래 정보를 입력하시면 담당 선생님이 직접 연락드립니다. 모든 <span style="color:var(--red)">*</span> 항목은 필수 입력입니다.</p>
+
+        <form id="consultingForm" novalidate>
+
+          <span class="form-section-label">학생 정보</span>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="studentName">학생 이름 <span class="req">*</span></label>
+              <input type="text" id="studentName" class="form-input" placeholder="학생 성함">
+              <span class="form-err">이름을 입력해 주세요.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="schoolName">학교명 <span class="req">*</span></label>
+              <input type="text" id="schoolName" class="form-input" placeholder="예) 안산초등학교">
+              <span class="form-err">학교명을 입력해 주세요.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="gradeSelect">학년 <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select id="gradeSelect" class="form-select">
+                  <option value="">학년 선택</option>
+                  <optgroup label="초등">
+                    <option value="초1">초등 1학년</option>
+                    <option value="초2">초등 2학년</option>
+                    <option value="초3">초등 3학년</option>
+                    <option value="초4">초등 4학년</option>
+                    <option value="초5">초등 5학년</option>
+                    <option value="초6">초등 6학년</option>
+                  </optgroup>
+                  <optgroup label="중등">
+                    <option value="중1">중학교 1학년</option>
+                    <option value="중2">중학교 2학년</option>
+                    <option value="중3">중학교 3학년</option>
+                  </optgroup>
+                  <optgroup label="고등">
+                    <option value="고1">고등학교 1학년</option>
+                    <option value="고2">고등학교 2학년</option>
+                    <option value="고3">고등학교 3학년</option>
+                    <option value="재수">재수생</option>
+                  </optgroup>
+                </select>
+              </div>
+              <span class="form-err">학년을 선택해 주세요.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contactPhone">연락처 <span class="req">*</span></label>
+              <input type="tel" id="contactPhone" class="form-input" placeholder="010-0000-0000" maxlength="13">
+              <span class="form-err">올바른 연락처(010-XXXX-XXXX)를 입력해 주세요.</span>
+            </div>
+          </div>
+
+          <span class="form-section-label">상담 희망 정보</span>
+
+          <div class="form-group" style="margin-bottom:18px;">
+            <label class="form-label">희망 지점 <span class="req">*</span></label>
+            <div class="branch-group" id="branchGroup">
+              <button type="button" class="branch-btn" data-branch="고잔점">고잔점</button>
+              <button type="button" class="branch-btn" data-branch="자이점">자이점</button>
+              <button type="button" class="branch-btn" data-branch="하이퍼관">하이퍼관</button>
+            </div>
+            <span class="form-err" id="branchErr" style="display:none;">희망 지점을 선택해 주세요.</span>
+          </div>
+
+          <div class="datetime-row">
+            <div class="form-group">
+              <label class="form-label" for="consultDate">상담 희망 날짜 <span class="req">*</span></label>
+              <input type="date" id="consultDate" class="form-input">
+              <span class="form-err">날짜를 선택해 주세요.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="consultTime">상담 희망 시간 <span class="req">*</span></label>
+              <div class="select-wrap">
+                <select id="consultTime" class="form-select">
+                  <option value="">시간 선택</option>
+                  <option value="10:00">오전 10:00</option>
+                  <option value="11:00">오전 11:00</option>
+                  <option value="14:00">오후 2:00</option>
+                  <option value="15:00">오후 3:00</option>
+                  <option value="16:00">오후 4:00</option>
+                  <option value="17:00">오후 5:00</option>
+                  <option value="18:00">오후 6:00</option>
+                  <option value="19:00">오후 7:00</option>
+                </select>
+              </div>
+              <span class="form-err">시간을 선택해 주세요.</span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label" for="consultMemo">문의 내용 (선택)</label>
+            <textarea id="consultMemo" class="form-input" style="height:100px; padding:14px 16px; resize:vertical; line-height:1.6;" placeholder="궁금한 점이나 상담 내용을 미리 적어주시면 더 빠른 상담이 가능합니다."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <div class="spinner"></div>
+            <span class="btn-text">상담 신청하기</span>
+          </button>
+          <p class="form-notice">신청 즉시 입력하신 연락처로 카카오톡 알림톡이 발송됩니다.<br>상담 확정 후 오시는 길 안내 문자를 추가로 받으실 수 있습니다.</p>
+        </form>
+      </div>
+
+      <!-- 안내 패널 -->
+      <aside class="info-panel fade-up">
+
+        <div class="info-card">
+          <div class="info-card-title">상담 진행 절차</div>
+          <div class="info-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <strong>온라인 신청</strong>
+              <span>폼 제출 즉시 신청 접수 알림톡 발송</span>
+            </div>
+          </div>
+          <div class="info-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <strong>일정 확정</strong>
+              <span>담당 선생님 확인 후 확정 알림톡 발송</span>
+            </div>
+          </div>
+          <div class="info-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>리마인드 알림</strong>
+              <span>상담 전날 자동 안내 문자 발송</span>
+            </div>
+          </div>
+          <div class="info-step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <strong>1:1 맞춤 상담</strong>
+              <span>학습 수준 진단 및 반 배정 안내</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kakao-card">
+          <div class="kakao-icon">💬</div>
+          <div class="kakao-text">
+            <strong>카카오 알림톡 자동 발송</strong>
+            <span>신청 즉시 접수 확인 문자가 발송됩니다. 일정 확정 시 안내 문자와 함께 오시는 길이 함께 전달됩니다.</span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-title">지점별 연락처</div>
+          <div class="branch-contact">
+            <div class="branch-row">
+              <span class="branch-name">고잔점</span>
+              <span class="branch-num">[전화번호 입력]</span>
+            </div>
+            <div class="branch-row">
+              <span class="branch-name">자이점</span>
+              <span class="branch-num">[전화번호 입력]</span>
+            </div>
+            <div class="branch-row">
+              <span class="branch-name">하이퍼관</span>
+              <span class="branch-num">[전화번호 입력]</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- Toast 알림 -->
+<div class="toast" id="toast">
+  <div class="toast-icon">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <span>상담 신청이 완료되었습니다! 카카오톡 안내 문자를 확인해 주세요.</span>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
+        <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
+        <div class="footer-contact">
+          <span>📍 <strong>[주소 입력]</strong></span>
+          <span>📞 <strong>[전화번호 입력]</strong></span>
+          <span>✉️ <strong>[이메일 입력]</strong></span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="about-results.html">명예의 전당</a></li></ul></div>
+      <div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="consulting.html">온라인 상담 신청</a></li><li><a href="#">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p>
+      <p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+  function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // 날짜 min 오늘로 설정
+  document.getElementById('consultDate').min = new Date().toISOString().split('T')[0];
+
+  // 연락처 자동 하이픈 포맷팅 (010-XXXX-XXXX)
+  document.getElementById('contactPhone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length <= 3) this.value = v;
+    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
+    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  });
+
+  // 희망 지점 버튼 그룹
+  let selectedBranch = '';
+  document.querySelectorAll('.branch-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedBranch = btn.dataset.branch;
+      document.getElementById('branchErr').style.display = 'none';
+    });
+  });
+
+  // 유효성 검사 헬퍼
+  function validateField(el) {
+    const ok = el.value.trim() !== '';
+    el.classList.toggle('error', !ok);
+    return ok;
+  }
+  function validatePhone(el) {
+    const ok = /^010-\d{4}-\d{4}$/.test(el.value.trim());
+    el.classList.toggle('error', !ok);
+    return ok;
+  }
+  function validateSelect(el) {
+    const ok = el.value !== '';
+    el.classList.toggle('error', !ok);
+    return ok;
+  }
+
+  // Toast 표시
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4500);
+  }
+
+  // =====================================================================
+  // 카카오 알림톡 연동 아키텍처 (백엔드 API 흐름 — Pseudo Code)
+  //
+  // Stack 예시: Node.js (Express) + Supabase (DB) + Solapi (카카오 알림톡)
+  //
+  // [프론트엔드] → POST /api/consulting → [백엔드 Handler]
+  //
+  // async function handleConsultingRequest(req, res) {
+  //   const { studentName, schoolName, grade, phone, branch, date, time, memo } = req.body;
+  //
+  //   // ── Step 1: DB 저장 (Supabase INSERT) ──────────────────────────────
+  //   const { data, error } = await supabase
+  //     .from('consultations')
+  //     .insert([{ studentName, schoolName, grade, phone, branch, date, time, memo, status: 'pending' }])
+  //     .select()
+  //     .single();
+  //   if (error) return res.status(500).json({ error: '저장 실패' });
+  //
+  //   // ── Trigger 1: 신청 즉시 — 학부모 접수 확인 알림톡 ────────────────
+  //   // 발송 시점: DB 저장 직후, 즉시 발송
+  //   await solapi.sendAlimtalk({
+  //     to: phone,
+  //     templateCode: 'CONSULT_RECEIVED',   // 카카오 비즈니스 채널에 등록된 템플릿 코드
+  //     variables: {
+  //       '#{학생명}': studentName,
+  //       '#{지점}': branch,
+  //       '#{날짜}': date,
+  //       '#{시간}': time,
+  //     },
+  //   });
+  //
+  //   res.json({ success: true, id: data.id });
+  // }
+  //
+  // ── Trigger 2: 관리자가 일정 확정 후 수동 발송 ──────────────────────────
+  // PUT /api/consulting/:id/confirm
+  //
+  // async function confirmConsulting(req, res) {
+  //   const { id } = req.params;
+  //   await supabase.from('consultations').update({ status: 'confirmed' }).eq('id', id);
+  //
+  //   // 확정 알림톡 + 오시는 길 안내 발송
+  //   await solapi.sendAlimtalk({
+  //     to: consultation.phone,
+  //     templateCode: 'CONSULT_CONFIRMED',
+  //     variables: {
+  //       '#{학생명}': consultation.studentName,
+  //       '#{지점}': consultation.branch,
+  //       '#{날짜}': consultation.date,
+  //       '#{시간}': consultation.time,
+  //       '#{주소}': BRANCH_ADDRESS[consultation.branch],
+  //       '#{지도링크}': BRANCH_MAP_URL[consultation.branch],
+  //     },
+  //   });
+  // }
+  //
+  // ── Trigger 3: 상담 전날 자동 리마인드 (크론탭 스케줄러) ────────────────
+  // 실행 주기: 매일 오전 9:00 (cron: '0 9 * * *')
+  //
+  // async function sendReminderAlimtalks() {
+  //   const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
+  //
+  //   // 내일 상담 예정이고 status = 'confirmed' 인 건 조회
+  //   const { data: list } = await supabase
+  //     .from('consultations')
+  //     .select('*')
+  //     .eq('date', tomorrow)
+  //     .eq('status', 'confirmed');
+  //
+  //   for (const item of list) {
+  //     await solapi.sendAlimtalk({
+  //       to: item.phone,
+  //       templateCode: 'CONSULT_REMINDER',
+  //       variables: {
+  //         '#{학생명}': item.studentName,
+  //         '#{지점}': item.branch,
+  //         '#{시간}': item.time,
+  //       },
+  //     });
+  //   }
+  // }
+  // =====================================================================
+
+  // 폼 제출 핸들러
+  document.getElementById('consultingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const studentName = document.getElementById('studentName');
+    const schoolName  = document.getElementById('schoolName');
+    const grade       = document.getElementById('gradeSelect');
+    const phone       = document.getElementById('contactPhone');
+    const consultDate = document.getElementById('consultDate');
+    const consultTime = document.getElementById('consultTime');
+    const btn         = document.getElementById('submitBtn');
+
+    // 유효성 검사
+    const v1 = validateField(studentName);
+    const v2 = validateField(schoolName);
+    const v3 = validateSelect(grade);
+    const v4 = validatePhone(phone);
+    const v5 = selectedBranch !== '' || (() => { document.getElementById('branchErr').style.display = 'block'; return false; })();
+    const v6 = validateField(consultDate);
+    const v7 = validateSelect(consultTime);
+    if (!(v1 && v2 && v3 && v4 && v5 && v6 && v7)) return;
+
+    // isSubmitting 상태 활성화
+    btn.disabled = true;
+    btn.classList.add('submitting');
+    btn.querySelector('.btn-text').textContent = '접수 처리 중...';
+
+    // 폼 데이터 수집
+    const payload = {
+      studentName: studentName.value.trim(),
+      schoolName: schoolName.value.trim(),
+      grade: grade.value,
+      phone: phone.value.trim(),
+      branch: selectedBranch,
+      date: consultDate.value,
+      time: consultTime.value,
+      memo: document.getElementById('consultMemo').value.trim(),
+      submittedAt: new Date().toISOString(),
+    };
+
+    /*
+     * 실제 서비스 연동 시 아래 주석 해제:
+     *
+     * try {
+     *   const res = await fetch('/api/consulting', {
+     *     method: 'POST',
+     *     headers: { 'Content-Type': 'application/json' },
+     *     body: JSON.stringify(payload),
+     *   });
+     *   if (!res.ok) throw new Error('서버 오류');
+     * } catch (err) {
+     *   btn.disabled = false;
+     *   btn.classList.remove('submitting');
+     *   btn.querySelector('.btn-text').textContent = '상담 신청하기';
+     *   alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+     *   return;
+     * }
+     */
+
+    // 정적 사이트 UI 시뮬레이션 (API 연동 전)
+    await new Promise(r => setTimeout(r, 1800));
+
+    btn.disabled = false;
+    btn.classList.remove('submitting');
+    btn.querySelector('.btn-text').textContent = '상담 신청하기';
+
+    this.reset();
+    selectedBranch = '';
+    document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => el.classList.remove('error'));
+
+    showToast();
+  });
+</script>
+</body>
+</html>

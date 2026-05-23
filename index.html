@@ -435,17 +435,24 @@
 
     /* ===================== CONSULTATION CTA ===================== */
     #consult-cta { background: var(--red); padding: 80px 0; }
-    .consult-cta-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-    .consult-cta-inner h2 { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 38px); font-weight: 700; color: var(--white); letter-spacing: -1px; line-height: 1.3; }
-    .consult-cta-inner h2 span { opacity: 0.65; display: block; font-size: 0.55em; font-weight: 400; margin-bottom: 6px; }
-    .consult-cta-btn {
-      background: var(--white); color: var(--red); padding: 16px 36px;
-      border-radius: 6px; font-size: 16px; font-weight: 700;
-      text-decoration: none; white-space: nowrap; flex-shrink: 0;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .consult-cta-btn:hover { background: #f5f5f5; transform: translateY(-2px); }
-    @media (max-width: 640px) { .consult-cta-inner { text-align: center; justify-content: center; } }
+    .consult-cta-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .consult-cta-left h2 { font-family: var(--font-serif); font-size: clamp(24px, 3.2vw, 38px); font-weight: 700; color: var(--white); letter-spacing: -1px; line-height: 1.3; margin-bottom: 12px; }
+    .consult-cta-left h2 span { opacity: 0.65; display: block; font-size: 0.55em; font-weight: 400; margin-bottom: 6px; }
+    .consult-cta-left p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+    .consult-quick-form { background: rgba(255,255,255,0.1); border-radius: 14px; padding: 28px; backdrop-filter: blur(8px); }
+    .cq-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .cq-input, .cq-select { width: 100%; height: 46px; padding: 0 14px; border: 1.5px solid rgba(255,255,255,0.25); border-radius: 8px; font-size: 13px; font-family: var(--font-sans); color: var(--white); background: rgba(255,255,255,0.12); transition: border-color 0.2s, background 0.2s; appearance: none; }
+    .cq-input::placeholder { color: rgba(255,255,255,0.5); }
+    .cq-input:focus, .cq-select:focus { outline: none; border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.18); }
+    .cq-select option { color: var(--black); background: var(--white); }
+    .cq-btn { width: 100%; height: 50px; background: var(--white); color: var(--red); border: none; border-radius: 8px; font-size: 15px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .cq-btn:hover { background: #f5f5f5; transform: translateY(-1px); }
+    .cq-btn .cq-spinner { width: 16px; height: 16px; border: 2px solid rgba(192,39,26,0.25); border-top-color: var(--red); border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+    .cq-btn.submitting .cq-spinner { display: block; }
+    .cq-link { text-align: center; margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.55); }
+    .cq-link a { color: rgba(255,255,255,0.8); text-decoration: underline; }
+    @media (max-width: 960px) { .consult-cta-inner { grid-template-columns: 1fr; gap: 36px; } }
+    @media (max-width: 480px) { .cq-row { grid-template-columns: 1fr; } .consult-cta-inner { padding: 0 20px; } }
 
     /* ===================== FOOTER ===================== */
     footer { background: #111; padding: 64px 0 36px; }
@@ -555,7 +562,7 @@
         </a>
         <a href="#" class="sns-btn sns-blog" title="블로그" aria-label="네이버 블로그">N</a>
       </div>
-      <a href="#consult-cta" class="nav-cta">상담 신청</a>
+      <a href="consulting.html" class="nav-cta">상담 신청</a>
     </div>
 
     <!-- Hamburger -->
@@ -907,8 +914,37 @@
 <!-- ===================== CONSULTATION CTA ===================== -->
 <section id="consult-cta">
   <div class="consult-cta-inner">
-    <h2><span>지금 바로 시작하세요</span>입학 상담을 예약하세요</h2>
-    <a href="mailto:" class="consult-cta-btn">상담 신청하기 →</a>
+    <div class="consult-cta-left">
+      <h2><span>지금 바로 시작하세요</span>입학 상담을 예약하세요</h2>
+      <p>신청 즉시 카카오톡 알림톡이 발송됩니다.<br>맞춤 반 배정과 학습 계획을 무료로 상담해 드립니다.</p>
+    </div>
+    <div class="consult-quick-form">
+      <form id="quickForm" novalidate>
+        <div class="cq-row">
+          <input type="text" id="qName" class="cq-input" placeholder="학생 이름 *">
+          <input type="tel" id="qPhone" class="cq-input" placeholder="연락처 *" maxlength="13">
+        </div>
+        <div class="cq-row">
+          <select id="qGrade" class="cq-select">
+            <option value="">학년 선택 *</option>
+            <optgroup label="초등"><option value="초1">초1</option><option value="초2">초2</option><option value="초3">초3</option><option value="초4">초4</option><option value="초5">초5</option><option value="초6">초6</option></optgroup>
+            <optgroup label="중등"><option value="중1">중1</option><option value="중2">중2</option><option value="중3">중3</option></optgroup>
+            <optgroup label="고등"><option value="고1">고1</option><option value="고2">고2</option><option value="고3">고3</option><option value="재수">재수생</option></optgroup>
+          </select>
+          <select id="qBranch" class="cq-select">
+            <option value="">희망 지점 *</option>
+            <option value="고잔점">고잔점</option>
+            <option value="자이점">자이점</option>
+            <option value="하이퍼관">하이퍼관</option>
+          </select>
+        </div>
+        <button type="submit" class="cq-btn" id="qBtn">
+          <div class="cq-spinner"></div>
+          <span class="qbtn-text">간편 상담 신청하기 →</span>
+        </button>
+      </form>
+      <p class="cq-link">더 자세한 상담은 <a href="consulting.html">상담 신청 페이지</a>에서</p>
+    </div>
   </div>
 </section>
 
@@ -938,7 +974,7 @@
       <div class="footer-col">
         <h4>채널 · 문의</h4>
         <ul>
-          <li><a href="#consult-cta">온라인 상담 신청</a></li>
+          <li><a href="consulting.html">온라인 상담 신청</a></li>
           <li><a href="#">카카오톡 채널</a></li>
           <li><a href="#">네이버 블로그</a></li>
           <li><a href="#">인스타그램</a></li>
@@ -1080,6 +1116,40 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
+
+  /* ---- 간편 상담 퀵폼 ---- */
+  document.getElementById('qPhone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length <= 3) this.value = v;
+    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
+    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  });
+
+  document.getElementById('quickForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name   = document.getElementById('qName').value.trim();
+    const phone  = document.getElementById('qPhone').value.trim();
+    const grade  = document.getElementById('qGrade').value;
+    const branch = document.getElementById('qBranch').value;
+    if (!name || !phone || !grade || !branch) {
+      alert('모든 항목을 입력해 주세요.');
+      return;
+    }
+    if (!/^010-\d{4}-\d{4}$/.test(phone)) {
+      alert('연락처를 010-XXXX-XXXX 형식으로 입력해 주세요.');
+      return;
+    }
+    const btn = document.getElementById('qBtn');
+    btn.disabled = true;
+    btn.classList.add('submitting');
+    btn.querySelector('.qbtn-text').textContent = '접수 중...';
+    await new Promise(r => setTimeout(r, 1500));
+    btn.disabled = false;
+    btn.classList.remove('submitting');
+    btn.querySelector('.qbtn-text').textContent = '간편 상담 신청하기 →';
+    this.reset();
+    alert('상담 신청이 완료되었습니다!\n카카오톡 안내 문자를 확인해 주세요.');
+  });
 </script>
 </body>
 </html>
