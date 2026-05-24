@@ -213,24 +213,25 @@
         <h2 class="form-panel-title">온라인 상담 신청서</h2>
         <p class="form-panel-desc">아래 정보를 입력하시면 담당 선생님이 직접 연락드립니다. 모든 <span style="color:var(--red)">*</span> 항목은 필수 입력입니다.</p>
 
-        <form id="consultingForm" novalidate>
+        <form id="consultingForm" name="consulting" data-netlify="true" novalidate>
+          <input type="hidden" name="form-name" value="consulting">
 
           <span class="form-section-label">학생 정보</span>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label" for="studentName">학생 이름 <span class="req">*</span></label>
-              <input type="text" id="studentName" class="form-input" placeholder="학생 성함">
+              <input type="text" id="studentName" name="학생이름" class="form-input" placeholder="학생 성함">
               <span class="form-err">이름을 입력해 주세요.</span>
             </div>
             <div class="form-group">
               <label class="form-label" for="schoolName">학교명 <span class="req">*</span></label>
-              <input type="text" id="schoolName" class="form-input" placeholder="예) 안산초등학교">
+              <input type="text" id="schoolName" name="학교명" class="form-input" placeholder="예) 안산초등학교">
               <span class="form-err">학교명을 입력해 주세요.</span>
             </div>
             <div class="form-group">
               <label class="form-label" for="gradeSelect">학년 <span class="req">*</span></label>
               <div class="select-wrap">
-                <select id="gradeSelect" class="form-select">
+                <select id="gradeSelect" name="학년" class="form-select">
                   <option value="">학년 선택</option>
                   <optgroup label="초등">
                     <option value="초1">초등 1학년</option>
@@ -257,7 +258,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="contactPhone">연락처 <span class="req">*</span></label>
-              <input type="tel" id="contactPhone" class="form-input" placeholder="010-0000-0000" maxlength="13">
+              <input type="tel" id="contactPhone" name="연락처" class="form-input" placeholder="010-0000-0000" maxlength="13">
               <span class="form-err">올바른 연락처(010-XXXX-XXXX)를 입력해 주세요.</span>
             </div>
           </div>
@@ -266,6 +267,7 @@
 
           <div class="form-group" style="margin-bottom:18px;">
             <label class="form-label">희망 지점 <span class="req">*</span></label>
+            <input type="hidden" id="branchHidden" name="희망지점" value="">
             <div class="branch-group" id="branchGroup">
               <button type="button" class="branch-btn" data-branch="고잔점">고잔점</button>
               <button type="button" class="branch-btn" data-branch="자이점">자이점</button>
@@ -277,13 +279,13 @@
           <div class="datetime-row">
             <div class="form-group">
               <label class="form-label" for="consultDate">상담 희망 날짜 <span class="req">*</span></label>
-              <input type="date" id="consultDate" class="form-input">
+              <input type="date" id="consultDate" name="상담희망날짜" class="form-input">
               <span class="form-err">날짜를 선택해 주세요.</span>
             </div>
             <div class="form-group">
               <label class="form-label" for="consultTime">상담 희망 시간 <span class="req">*</span></label>
               <div class="select-wrap">
-                <select id="consultTime" class="form-select">
+                <select id="consultTime" name="상담희망시간" class="form-select">
                   <option value="">시간 선택</option>
                   <option value="10:00">오전 10:00</option>
                   <option value="11:00">오전 11:00</option>
@@ -301,7 +303,7 @@
 
           <div class="form-group" style="margin-top:18px;">
             <label class="form-label" for="consultMemo">문의 내용 (선택)</label>
-            <textarea id="consultMemo" class="form-input" style="height:100px; padding:14px 16px; resize:vertical; line-height:1.6;" placeholder="궁금한 점이나 상담 내용을 미리 적어주시면 더 빠른 상담이 가능합니다."></textarea>
+            <textarea id="consultMemo" name="문의내용" class="form-input" style="height:100px; padding:14px 16px; resize:vertical; line-height:1.6;" placeholder="궁금한 점이나 상담 내용을 미리 적어주시면 더 빠른 상담이 가능합니다."></textarea>
           </div>
 
           <button type="submit" class="submit-btn" id="submitBtn">
@@ -436,6 +438,7 @@
       document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       selectedBranch = btn.dataset.branch;
+      document.getElementById('branchHidden').value = selectedBranch;
       document.getElementById('branchErr').style.display = 'none';
     });
   });
@@ -464,88 +467,11 @@
     setTimeout(() => toast.classList.remove('show'), 4500);
   }
 
-  // =====================================================================
-  // 카카오 알림톡 연동 아키텍처 (백엔드 API 흐름 — Pseudo Code)
-  //
-  // Stack 예시: Node.js (Express) + Supabase (DB) + Solapi (카카오 알림톡)
-  //
-  // [프론트엔드] → POST /api/consulting → [백엔드 Handler]
-  //
-  // async function handleConsultingRequest(req, res) {
-  //   const { studentName, schoolName, grade, phone, branch, date, time, memo } = req.body;
-  //
-  //   // ── Step 1: DB 저장 (Supabase INSERT) ──────────────────────────────
-  //   const { data, error } = await supabase
-  //     .from('consultations')
-  //     .insert([{ studentName, schoolName, grade, phone, branch, date, time, memo, status: 'pending' }])
-  //     .select()
-  //     .single();
-  //   if (error) return res.status(500).json({ error: '저장 실패' });
-  //
-  //   // ── Trigger 1: 신청 즉시 — 학부모 접수 확인 알림톡 ────────────────
-  //   // 발송 시점: DB 저장 직후, 즉시 발송
-  //   await solapi.sendAlimtalk({
-  //     to: phone,
-  //     templateCode: 'CONSULT_RECEIVED',   // 카카오 비즈니스 채널에 등록된 템플릿 코드
-  //     variables: {
-  //       '#{학생명}': studentName,
-  //       '#{지점}': branch,
-  //       '#{날짜}': date,
-  //       '#{시간}': time,
-  //     },
-  //   });
-  //
-  //   res.json({ success: true, id: data.id });
-  // }
-  //
-  // ── Trigger 2: 관리자가 일정 확정 후 수동 발송 ──────────────────────────
-  // PUT /api/consulting/:id/confirm
-  //
-  // async function confirmConsulting(req, res) {
-  //   const { id } = req.params;
-  //   await supabase.from('consultations').update({ status: 'confirmed' }).eq('id', id);
-  //
-  //   // 확정 알림톡 + 오시는 길 안내 발송
-  //   await solapi.sendAlimtalk({
-  //     to: consultation.phone,
-  //     templateCode: 'CONSULT_CONFIRMED',
-  //     variables: {
-  //       '#{학생명}': consultation.studentName,
-  //       '#{지점}': consultation.branch,
-  //       '#{날짜}': consultation.date,
-  //       '#{시간}': consultation.time,
-  //       '#{주소}': BRANCH_ADDRESS[consultation.branch],
-  //       '#{지도링크}': BRANCH_MAP_URL[consultation.branch],
-  //     },
-  //   });
-  // }
-  //
-  // ── Trigger 3: 상담 전날 자동 리마인드 (크론탭 스케줄러) ────────────────
-  // 실행 주기: 매일 오전 9:00 (cron: '0 9 * * *')
-  //
-  // async function sendReminderAlimtalks() {
-  //   const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
-  //
-  //   // 내일 상담 예정이고 status = 'confirmed' 인 건 조회
-  //   const { data: list } = await supabase
-  //     .from('consultations')
-  //     .select('*')
-  //     .eq('date', tomorrow)
-  //     .eq('status', 'confirmed');
-  //
-  //   for (const item of list) {
-  //     await solapi.sendAlimtalk({
-  //       to: item.phone,
-  //       templateCode: 'CONSULT_REMINDER',
-  //       variables: {
-  //         '#{학생명}': item.studentName,
-  //         '#{지점}': item.branch,
-  //         '#{시간}': item.time,
-  //       },
-  //     });
-  //   }
-  // }
-  // =====================================================================
+  // Netlify Forms 인코딩 헬퍼
+  const encodeForm = data =>
+    Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k] ?? ''))
+      .join('&');
 
   // 폼 제출 핸들러
   document.getElementById('consultingForm').addEventListener('submit', async function(e) {
@@ -569,45 +495,34 @@
     const v7 = validateSelect(consultTime);
     if (!(v1 && v2 && v3 && v4 && v5 && v6 && v7)) return;
 
-    // isSubmitting 상태 활성화
     btn.disabled = true;
     btn.classList.add('submitting');
     btn.querySelector('.btn-text').textContent = '접수 처리 중...';
 
-    // 폼 데이터 수집
-    const payload = {
-      studentName: studentName.value.trim(),
-      schoolName: schoolName.value.trim(),
-      grade: grade.value,
-      phone: phone.value.trim(),
-      branch: selectedBranch,
-      date: consultDate.value,
-      time: consultTime.value,
-      memo: document.getElementById('consultMemo').value.trim(),
-      submittedAt: new Date().toISOString(),
-    };
-
-    /*
-     * 실제 서비스 연동 시 아래 주석 해제:
-     *
-     * try {
-     *   const res = await fetch('/api/consulting', {
-     *     method: 'POST',
-     *     headers: { 'Content-Type': 'application/json' },
-     *     body: JSON.stringify(payload),
-     *   });
-     *   if (!res.ok) throw new Error('서버 오류');
-     * } catch (err) {
-     *   btn.disabled = false;
-     *   btn.classList.remove('submitting');
-     *   btn.querySelector('.btn-text').textContent = '상담 신청하기';
-     *   alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
-     *   return;
-     * }
-     */
-
-    // 정적 사이트 UI 시뮬레이션 (API 연동 전)
-    await new Promise(r => setTimeout(r, 1800));
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm({
+          'form-name':    'consulting',
+          '학생이름':     studentName.value.trim(),
+          '학교명':       schoolName.value.trim(),
+          '학년':         grade.value,
+          '연락처':       phone.value.trim(),
+          '희망지점':     selectedBranch,
+          '상담희망날짜': consultDate.value,
+          '상담희망시간': consultTime.value,
+          '문의내용':     document.getElementById('consultMemo').value.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error('서버 오류');
+    } catch (err) {
+      btn.disabled = false;
+      btn.classList.remove('submitting');
+      btn.querySelector('.btn-text').textContent = '상담 신청하기';
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
 
     btn.disabled = false;
     btn.classList.remove('submitting');
@@ -615,6 +530,7 @@
 
     this.reset();
     selectedBranch = '';
+    document.getElementById('branchHidden').value = '';
     document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
     document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => el.classList.remove('error'));
 

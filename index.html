@@ -919,19 +919,20 @@
       <p>신청 즉시 카카오톡 알림톡이 발송됩니다.<br>맞춤 반 배정과 학습 계획을 무료로 상담해 드립니다.</p>
     </div>
     <div class="consult-quick-form">
-      <form id="quickForm" novalidate>
+      <form id="quickForm" name="quick-consult" data-netlify="true" novalidate>
+        <input type="hidden" name="form-name" value="quick-consult">
         <div class="cq-row">
-          <input type="text" id="qName" class="cq-input" placeholder="학생 이름 *">
-          <input type="tel" id="qPhone" class="cq-input" placeholder="연락처 *" maxlength="13">
+          <input type="text" id="qName" name="학생이름" class="cq-input" placeholder="학생 이름 *">
+          <input type="tel" id="qPhone" name="연락처" class="cq-input" placeholder="연락처 *" maxlength="13">
         </div>
         <div class="cq-row">
-          <select id="qGrade" class="cq-select">
+          <select id="qGrade" name="학년" class="cq-select">
             <option value="">학년 선택 *</option>
             <optgroup label="초등"><option value="초1">초1</option><option value="초2">초2</option><option value="초3">초3</option><option value="초4">초4</option><option value="초5">초5</option><option value="초6">초6</option></optgroup>
             <optgroup label="중등"><option value="중1">중1</option><option value="중2">중2</option><option value="중3">중3</option></optgroup>
             <optgroup label="고등"><option value="고1">고1</option><option value="고2">고2</option><option value="고3">고3</option><option value="재수">재수생</option></optgroup>
           </select>
-          <select id="qBranch" class="cq-select">
+          <select id="qBranch" name="희망지점" class="cq-select">
             <option value="">희망 지점 *</option>
             <option value="고잔점">고잔점</option>
             <option value="자이점">자이점</option>
@@ -1125,6 +1126,11 @@
     else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
   });
 
+  const encodeForm = data =>
+    Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k] ?? ''))
+      .join('&');
+
   document.getElementById('quickForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name   = document.getElementById('qName').value.trim();
@@ -1143,12 +1149,33 @@
     btn.disabled = true;
     btn.classList.add('submitting');
     btn.querySelector('.qbtn-text').textContent = '접수 중...';
-    await new Promise(r => setTimeout(r, 1500));
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm({
+          'form-name': 'quick-consult',
+          '학생이름': name,
+          '연락처':   phone,
+          '학년':     grade,
+          '희망지점': branch,
+        }),
+      });
+      if (!res.ok) throw new Error('서버 오류');
+    } catch (err) {
+      btn.disabled = false;
+      btn.classList.remove('submitting');
+      btn.querySelector('.qbtn-text').textContent = '간편 상담 신청하기 →';
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
+
     btn.disabled = false;
     btn.classList.remove('submitting');
     btn.querySelector('.qbtn-text').textContent = '간편 상담 신청하기 →';
     this.reset();
-    alert('상담 신청이 완료되었습니다!\n카카오톡 안내 문자를 확인해 주세요.');
+    alert('상담 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
   });
 </script>
 </body>
