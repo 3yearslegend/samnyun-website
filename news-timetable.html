@@ -73,12 +73,47 @@
     .branch-btn { padding: 10px 28px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--gray); background: var(--white); cursor: pointer; transition: all 0.2s; }
     .branch-btn.active, .branch-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
 
+    /* ── DEPTH 1 : 지점 탭 ── */
+    .tt-d1 { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tt-d1-btn { padding: 11px 30px; border: 2px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 600; color: var(--gray); background: var(--white); cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .tt-d1-btn:hover { border-color: var(--red); color: var(--red); }
+    .tt-d1-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
+
+    /* ── DEPTH 2 : 성격 서브 버튼 ── */
+    .tt-d2-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .tt-filter-label { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; flex-shrink: 0; }
+    .tt-d2 { display: flex; gap: 6px; }
+    .tt-d2-btn { padding: 6px 20px; border: 1.5px solid var(--border); border-radius: 7px; font-size: 13px; font-weight: 600; color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; font-family: var(--font-sans); }
+    .tt-d2-btn:hover { border-color: var(--red); color: var(--red); }
+    .tt-d2-btn.active { border-color: var(--red); background: var(--red-light); color: var(--red); }
+
+    /* ── DEPTH 3 : 학년 배지 ── */
+    .tt-d3-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 36px; }
+    .tt-d3 { display: flex; gap: 6px; }
+    .tt-d3-badge { padding: 5px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; border: 1.5px solid var(--border); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; font-family: var(--font-sans); }
+    .tt-d3-badge:hover { border-color: var(--black); }
+    .tt-d3-badge.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ── 구분선 ── */
+    .tt-filter-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 28px; }
+
+    /* ── 결과 없음 ── */
+    .tt-empty { text-align: center; padding: 56px 0; color: var(--gray); }
+    .tt-empty p:first-child { font-size: 16px; font-weight: 500; color: var(--black); margin-bottom: 8px; }
+    .tt-empty p { font-size: 14px; }
+
     /* TIMETABLE */
     .timetable-note { font-size: 13px; color: var(--gray); margin-bottom: 24px; padding: 14px 18px; background: var(--gray-light); border-radius: 8px; border-left: 3px solid var(--red); }
     .timetable-wrap { overflow-x: auto; }
     .timetable-img-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
     .timetable-img { display: block; width: 100%; height: auto; }
-    @media (max-width: 640px) { .timetable-img-wrap { border-radius: 6px; } }
+
+    @media (max-width: 640px) {
+      .tt-d1-btn { padding: 9px 20px; font-size: 13px; }
+      .tt-d2-wrap, .tt-d3-wrap { flex-wrap: wrap; gap: 8px; }
+      .tt-filter-label { width: 100%; }
+      .timetable-img-wrap { border-radius: 6px; }
+    }
     .timetable { width: 100%; border-collapse: collapse; min-width: 600px; }
     .timetable th { background: var(--black); color: var(--white); padding: 14px 16px; font-size: 13px; font-weight: 500; text-align: center; }
     .timetable th:first-child { border-radius: 8px 0 0 0; width: 90px; }
@@ -157,15 +192,38 @@
       <a href="news-timetable.html" class="news-tab active">학원 시간표</a>
     </div>
 
-    <div class="branch-select fade-up">
-      <button class="branch-btn active" onclick="showBranch('gojan', this)">고잔점</button>
-      <button class="branch-btn" onclick="showBranch('zai', this)">자이점</button>
-      <button class="branch-btn" onclick="showBranch('hyper', this)">하이퍼관</button>
+    <!-- Depth 1: 지점 탭 -->
+    <div class="tt-d1 fade-up" id="ttD1">
+      <button class="tt-d1-btn active" data-branch="gojan">고잔점</button>
+      <button class="tt-d1-btn" data-branch="zai">자이점</button>
+      <button class="tt-d1-btn" data-branch="hyper">하이퍼관</button>
     </div>
 
-    <div id="tt-gojan" class="fade-up"></div>
-    <div id="tt-zai" class="fade-up" style="display:none"></div>
-    <div id="tt-hyper" class="fade-up" style="display:none"></div>
+    <!-- Depth 2: 정규 / 내신 -->
+    <div class="tt-d2-wrap fade-up" id="ttD2Wrap">
+      <span class="tt-filter-label">과정</span>
+      <div class="tt-d2" id="ttD2">
+        <button class="tt-d2-btn active" data-type="정규">정규</button>
+        <button class="tt-d2-btn" data-type="내신">내신</button>
+      </div>
+    </div>
+
+    <!-- Depth 3: 학년 배지 -->
+    <div class="tt-d3-wrap fade-up" id="ttD3Wrap">
+      <span class="tt-filter-label">학년</span>
+      <div class="tt-d3" id="ttD3">
+        <button class="tt-d3-badge active" data-grade="초등">초등</button>
+        <button class="tt-d3-badge" data-grade="중등">중등</button>
+        <button class="tt-d3-badge" data-grade="고등">고등</button>
+      </div>
+    </div>
+
+    <hr class="tt-filter-divider fade-up">
+
+    <!-- 결과 출력 -->
+    <div id="ttOutput" class="fade-up">
+      <div class="tt-empty"><p>시간표를 불러오는 중입니다…</p></div>
+    </div>
 
   </div>
 </main>
@@ -200,54 +258,100 @@
   hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
   function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
 
-  function showBranch(branch, btn) {
-    ['gojan','zai','hyper'].forEach(b => {
-      document.getElementById('tt-' + b).style.display = b === branch ? '' : 'none';
-    });
-    document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+  /* ── 3단계 필터 상태 ── */
+  let ttData = null;
+  let selBranch = 'gojan';
+  let selType   = '정규';
+  let selGrade  = '초등';
 
-  function renderBranch(branchData, note) {
-    const el = document.getElementById('tt-' + branchData.id);
-    if (!el) return;
+  function renderOutput() {
+    const out = document.getElementById('ttOutput');
+    if (!ttData) return;
 
-    const noteHtml = `<p class="timetable-note">📌 ${note}</p>`;
+    const branch = (ttData.branches || []).find(b => b.id === selBranch);
+    if (!branch) return;
 
-    if (branchData.image) {
-      el.innerHTML = noteHtml + `
+    /* 이미지 모드: 이미지가 있으면 필터 대신 이미지 표시 */
+    if (branch.image) {
+      out.innerHTML = `
+        <p class="timetable-note">📌 ${ttData.note}</p>
         <div class="timetable-img-wrap">
-          <img src="${branchData.image}" alt="${branchData.branch} 시간표" class="timetable-img">
+          <img src="${branch.image}" alt="${branch.branch} 시간표" class="timetable-img">
         </div>`;
       return;
     }
 
-    const rows = (branchData.courses || []).map(c => `
+    /* 텍스트 모드: 3단계 필터 적용 */
+    const filtered = (branch.courses || []).filter(c =>
+      c.type === selType && c.grade === selGrade
+    );
+
+    if (!filtered.length) {
+      out.innerHTML = `
+        <div class="tt-empty">
+          <p>${branch.branch} · ${selType} · ${selGrade} 과정이 없습니다.</p>
+          <p>카카오톡 채널로 문의해 주세요.</p>
+        </div>`;
+      return;
+    }
+
+    const rows = filtered.map(c => `
       <tr>
         <td><strong>${c.name}</strong></td>
         <td>${c.target}</td>
         <td>${c.days}</td>
         <td>${c.time}</td>
       </tr>`).join('');
-    el.innerHTML = noteHtml + `
+
+    out.innerHTML = `
+      <p class="timetable-note">📌 ${ttData.note}</p>
       <div class="timetable-wrap">
         <table class="timetable">
-          <thead><tr><th>과정명</th><th>대상</th><th>요일</th><th>시간</th></tr></thead>
+          <thead><tr><th>과정명</th><th>대상 학년</th><th>요일</th><th>수업 시간</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>`;
   }
 
+  /* ── Depth 1: 지점 ── */
+  document.getElementById('ttD1').addEventListener('click', e => {
+    const btn = e.target.closest('.tt-d1-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tt-d1-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selBranch = btn.dataset.branch;
+    renderOutput();
+  });
+
+  /* ── Depth 2: 과정 ── */
+  document.getElementById('ttD2').addEventListener('click', e => {
+    const btn = e.target.closest('.tt-d2-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tt-d2-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selType = btn.dataset.type;
+    renderOutput();
+  });
+
+  /* ── Depth 3: 학년 ── */
+  document.getElementById('ttD3').addEventListener('click', e => {
+    const btn = e.target.closest('.tt-d3-badge');
+    if (!btn) return;
+    document.querySelectorAll('.tt-d3-badge').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selGrade = btn.dataset.grade;
+    renderOutput();
+  });
+
   fetch('/data/timetable.json')
     .then(r => r.json())
     .then(data => {
-      (data.branches || []).forEach(b => renderBranch(b, data.note || ''));
+      ttData = data;
+      renderOutput();
     })
     .catch(() => {
-      ['gojan','zai','hyper'].forEach(id => {
-        const el = document.getElementById('tt-' + id);
-        if (el) el.innerHTML = '<p class="timetable-note">시간표를 불러올 수 없습니다. 카카오톡으로 문의해 주세요.</p>';
-      });
+      document.getElementById('ttOutput').innerHTML =
+        '<p class="timetable-note">시간표를 불러올 수 없습니다. 카카오톡으로 문의해 주세요.</p>';
     });
 
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });

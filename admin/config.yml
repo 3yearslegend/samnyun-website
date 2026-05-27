@@ -81,6 +81,15 @@ collections:
                 fields:
                   - { label: 과정명, name: name, widget: string }
                   - { label: "대상 (예: 중2~고3)", name: target, widget: string }
+                  - label: 학년
+                    name: grade
+                    widget: select
+                    options: [초등, 중등, 고등]
+                  - label: 과정 유형
+                    name: type
+                    widget: select
+                    options: [정규, 내신]
+                    default: 정규
                   - { label: "요일 (예: 월·수·금)", name: days, widget: string }
                   - { label: "시간 (예: 19:00 ~ 21:00)", name: time, widget: string }
 
