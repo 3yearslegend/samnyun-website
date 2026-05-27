@@ -919,7 +919,7 @@
       <p>신청 즉시 카카오톡 알림톡이 발송됩니다.<br>맞춤 반 배정과 학습 계획을 무료로 상담해 드립니다.</p>
     </div>
     <div class="consult-quick-form">
-      <form id="quickForm" name="quick-consult" data-netlify="true" novalidate>
+      <form id="quickForm" name="quick-consult" data-netlify="true" action="/success.html" novalidate>
         <input type="hidden" name="form-name" value="quick-consult">
         <div class="cq-row">
           <input type="text" id="qName" name="학생이름" class="cq-input" placeholder="학생 이름 *">
@@ -1126,11 +1126,6 @@
     else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
   });
 
-  const encodeForm = data =>
-    Object.keys(data)
-      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k] ?? ''))
-      .join('&');
-
   document.getElementById('quickForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name   = document.getElementById('qName').value.trim();
@@ -1154,20 +1149,14 @@
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeForm({
-          'form-name': 'quick-consult',
-          '학생이름': name,
-          '연락처':   phone,
-          '학년':     grade,
-          '희망지점': branch,
-        }),
+        body: new URLSearchParams(new FormData(this)).toString(),
       });
-      if (!res.ok) throw new Error('서버 오류');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
     } catch (err) {
       btn.disabled = false;
       btn.classList.remove('submitting');
       btn.querySelector('.qbtn-text').textContent = '간편 상담 신청하기 →';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
       return;
     }
 

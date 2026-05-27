@@ -213,7 +213,7 @@
         <h2 class="form-panel-title">온라인 상담 신청서</h2>
         <p class="form-panel-desc">아래 정보를 입력하시면 담당 선생님이 직접 연락드립니다. 모든 <span style="color:var(--red)">*</span> 항목은 필수 입력입니다.</p>
 
-        <form id="consultingForm" name="consulting" data-netlify="true" novalidate>
+        <form id="consultingForm" name="consulting" data-netlify="true" action="/success.html" novalidate>
           <input type="hidden" name="form-name" value="consulting">
 
           <span class="form-section-label">학생 정보</span>
@@ -467,12 +467,6 @@
     setTimeout(() => toast.classList.remove('show'), 4500);
   }
 
-  // Netlify Forms 인코딩 헬퍼
-  const encodeForm = data =>
-    Object.keys(data)
-      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k] ?? ''))
-      .join('&');
-
   // 폼 제출 핸들러
   document.getElementById('consultingForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -503,24 +497,14 @@
       const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeForm({
-          'form-name':    'consulting',
-          '학생이름':     studentName.value.trim(),
-          '학교명':       schoolName.value.trim(),
-          '학년':         grade.value,
-          '연락처':       phone.value.trim(),
-          '희망지점':     selectedBranch,
-          '상담희망날짜': consultDate.value,
-          '상담희망시간': consultTime.value,
-          '문의내용':     document.getElementById('consultMemo').value.trim(),
-        }),
+        body: new URLSearchParams(new FormData(this)).toString(),
       });
-      if (!res.ok) throw new Error('서버 오류');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
     } catch (err) {
       btn.disabled = false;
       btn.classList.remove('submitting');
       btn.querySelector('.btn-text').textContent = '상담 신청하기';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
       return;
     }
 
