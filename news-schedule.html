@@ -64,83 +64,45 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
 
-    .news-tabs { display: flex; gap: 8px; margin-bottom: 48px; }
+    .news-tabs { display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap; }
     .news-tab { padding: 10px 24px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--gray); text-decoration: none; transition: all 0.2s; }
     .news-tab.active, .news-tab:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
 
-    /* CALENDAR + SCHEDULE */
-    .schedule-wrap { display: grid; grid-template-columns: 360px 1fr; gap: 48px; align-items: start; }
+    /* ===== WIDE CALENDAR ===== */
+    .cal-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .cal-month-nav { display: flex; align-items: center; gap: 16px; }
+    .cal-month-label { font-family: var(--font-serif); font-size: 22px; font-weight: 700; min-width: 140px; text-align: center; }
+    .cal-nav-btn { background: none; border: 1px solid var(--border); border-radius: 7px; width: 36px; height: 36px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: background 0.2s, border-color 0.2s; }
+    .cal-nav-btn:hover { background: var(--red-light); border-color: var(--red); }
+    .cal-today-btn { padding: 6px 16px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-weight: 500; color: var(--gray-dark); background: none; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .cal-today-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
 
-    .mini-calendar { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
-    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    .cal-month { font-family: var(--font-serif); font-size: 18px; font-weight: 700; }
-    .cal-nav { background: none; border: 1px solid var(--border); border-radius: 6px; width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    .cal-nav:hover { background: var(--red-light); }
-    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
-    .cal-day-name { text-align: center; font-size: 11px; color: var(--gray); padding: 6px 0; font-weight: 500; }
-    .cal-day-name:first-child { color: var(--red); }
-    .cal-day-name:last-child { color: #4A90D9; }
-    .cal-day { text-align: center; font-size: 13px; padding: 8px 2px; border-radius: 6px; cursor: pointer; transition: background 0.15s; position: relative; }
-    .cal-day:hover { background: var(--red-light); }
-    .cal-day.today { background: var(--red); color: var(--white); font-weight: 700; }
-    .cal-day.has-event::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: var(--red); border-radius: 50%; }
-    .cal-day.today.has-event::after { background: rgba(255,255,255,0.7); }
-    .cal-day.other-month { color: #ccc; }
-    .cal-day.sun { color: var(--red); }
-    .cal-day.sat { color: #4A90D9; }
-    .cal-day.today.sun, .cal-day.today.sat { color: var(--white); }
+    .cal-legend { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-    .schedule-list-panel { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
-    .schedule-panel-header { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 24px; }
-    .schedule-items { display: flex; flex-direction: column; gap: 12px; }
-    .schedule-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-radius: 10px; background: var(--gray-light); }
-    .schedule-item.is-seminar { background: var(--red-light); border: 1px solid rgba(192,39,26,0.18); }
-    .sched-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 5px; }
-    .sched-date { font-size: 13px; color: var(--gray); flex-shrink: 0; min-width: 68px; font-weight: 500; }
-    .sched-content { flex: 1; }
-    .sched-content strong { display: block; font-size: 14px; color: var(--black); margin-bottom: 3px; }
-    .sched-content span { font-size: 12px; color: var(--gray); }
-    .sched-seminar-badge { display: inline-block; font-size: 11px; font-weight: 700; color: var(--red); background: rgba(192,39,26,0.1); border-radius: 3px; padding: 2px 8px; margin-bottom: 6px; letter-spacing: 0.5px; }
-    .sched-reg-btn { display: inline-block; margin-top: 10px; padding: 7px 18px; background: var(--red); color: var(--white); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.18s, transform 0.15s; }
-    .sched-reg-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
-    @media (max-width: 900px) { .schedule-wrap { grid-template-columns: 1fr; } }
+    .wide-cal { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .cal-head-row { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--gray-light); border-bottom: 1px solid var(--border); }
+    .cal-head-cell { text-align: center; padding: 10px 0; font-size: 12px; font-weight: 600; color: var(--gray); }
+    .cal-head-cell:first-child { color: var(--red); }
+    .cal-head-cell:last-child { color: #4A90D9; }
 
-    /* ===== 설명회 신청 폼 ===== */
-    .seminar-section { margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--border); }
-    .seminar-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
-    .seminar-desc { font-size: 14px; color: var(--gray); margin-bottom: 32px; line-height: 1.8; }
-    .seminar-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 40px; max-width: 680px; }
-    .sf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .sf-group { display: flex; flex-direction: column; gap: 7px; }
-    .sf-group.full { grid-column: 1 / -1; }
-    .sf-label { font-size: 13px; font-weight: 600; color: var(--black); }
-    .sf-label .req { color: var(--red); margin-left: 2px; }
-    .sf-input, .sf-select { width: 100%; height: 50px; padding: 0 16px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-family: var(--font-sans); color: var(--black); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; appearance: none; }
-    .sf-input:focus, .sf-select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(192,39,26,0.1); }
-    .sf-input.error, .sf-select.error { border-color: var(--red) !important; background: #fff8f8; }
-    .sf-err { font-size: 11.5px; color: var(--red); display: none; }
-    .sf-err.show { display: block; }
-    .sf-sel-wrap { position: relative; }
-    .sf-sel-wrap::after { content: ''; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
-    .sf-btn-group { display: flex; gap: 10px; }
-    .sf-btn { flex: 1; height: 50px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.2s; }
-    .sf-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
-    .sf-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
-    .sf-submit { width: 100%; height: 58px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 16px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
-    .sf-submit:hover:not(:disabled) { background: #8B1A11; transform: translateY(-2px); }
-    .sf-submit:disabled { background: #bbb; cursor: not-allowed; box-shadow: none; }
-    .sf-spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: sfSpin 0.7s linear infinite; display: none; }
-    .sf-submit.submitting .sf-spinner { display: block; }
-    @keyframes sfSpin { to { transform: rotate(360deg); } }
-    @media (max-width: 640px) {
-      .seminar-panel { padding: 24px 16px; }
-      .sf-grid { grid-template-columns: 1fr; }
-      .sf-btn-group { flex-direction: column; }
-    }
-    @media (max-width: 480px) {
-      .seminar-section { margin-top: 44px; padding-top: 36px; }
-      .page-content { padding: 36px 0 64px; }
-    }
+    .cal-week-row { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border); }
+    .cal-week-row:last-child { border-bottom: none; }
+    .cal-cell { border-right: 1px solid var(--border); padding: 6px 8px 4px; min-height: 80px; }
+    .cal-cell:last-child { border-right: none; }
+    .cal-cell.other-month .cal-num { color: #bbb; }
+    .cal-cell.today-cell .cal-num { background: var(--red); color: var(--white); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .cal-num { font-size: 12px; font-weight: 500; color: var(--black); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+    .cal-cell.sun-col .cal-num { color: var(--red); }
+    .cal-cell.sat-col .cal-num { color: #4A90D9; }
+    .cal-cell.today-cell .cal-num { color: var(--white) !important; }
+
+    .cal-bars-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+    .cal-bar { position: absolute; height: 20px; border-radius: 3px; font-size: 11px; font-weight: 500; padding: 0 6px; line-height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; pointer-events: auto; transition: filter 0.15s; border-left-width: 3px; border-left-style: solid; }
+    .cal-bar:hover { filter: brightness(0.92); }
+
+    .cal-scroll-wrap { overflow-x: auto; }
 
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -159,6 +121,27 @@
 
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== EVENT MODAL ===== */
+    .evt-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.52); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .evt-modal-bg.open { opacity: 1; pointer-events: auto; }
+    .evt-modal { background: var(--white); border-radius: 14px; max-width: 520px; width: 100%; max-height: 82vh; overflow-y: auto; padding: 36px 36px 32px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.18); transform: translateY(12px); transition: transform 0.25s ease; }
+    .evt-modal-bg.open .evt-modal { transform: translateY(0); }
+    .evt-modal-close { position: absolute; top: 16px; right: 18px; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray); line-height: 1; padding: 4px; }
+    .evt-modal-badge { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 12px; border-radius: 3px; margin-bottom: 12px; }
+    .evt-modal-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+    .evt-modal-meta { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 16px 0; margin: 16px 0; display: flex; flex-direction: column; gap: 8px; }
+    .evt-meta-row { display: flex; gap: 10px; font-size: 14px; }
+    .evt-meta-label { color: var(--gray); flex-shrink: 0; min-width: 48px; }
+    .evt-meta-value { color: var(--black); font-weight: 500; }
+    .evt-modal-content { font-size: 14px; line-height: 1.95; color: var(--gray-dark); white-space: pre-wrap; }
+    .evt-modal-reg-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 12px 24px; background: var(--red); color: var(--white); border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .evt-modal-reg-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+    @media (max-width: 640px) {
+      .evt-modal { padding: 28px 20px 24px; }
+      .wide-cal { min-width: 600px; }
+    }
   </style>
 </head>
 <body>
@@ -170,7 +153,7 @@
       <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
       <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
       <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum.html#elem"><span class="dd-dot"></span>초등 과정</a><a href="curriculum.html#middle"><span class="dd-dot"></span>중등 과정</a><a href="curriculum.html#high"><span class="dd-dot"></span>고등 과정</a></div></li>
-      <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
+      <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-seminar.html"><span class="dd-dot"></span>설명회 신청</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
       <li class="menu-item"><a class="menu-link">생생 후기<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-results.html"><span class="dd-dot"></span>명예의 전당</a><a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a></div></li>
     </ul>
     <div class="nav-right">
@@ -188,7 +171,7 @@
     <div class="mobile-item"><span class="mobile-section-label">학원 소개</span><div class="mobile-sub"><a href="about-greeting.html" onclick="closeMobileMenu()">인사말</a><a href="about-features.html" onclick="closeMobileMenu()">학원 특징</a><a href="about-history.html" onclick="closeMobileMenu()">연혁</a><a href="about-branches.html" onclick="closeMobileMenu()">지점 안내 및 오시는 길</a></div></div>
     <div class="mobile-item"><span class="mobile-section-label">강사 소개</span><div class="mobile-sub"><a href="teachers-gojan.html" onclick="closeMobileMenu()">고잔점</a><a href="teachers-zai.html" onclick="closeMobileMenu()">자이점</a><a href="teachers-hyper.html" onclick="closeMobileMenu()">하이퍼관</a></div></div>
     <div class="mobile-item"><span class="mobile-section-label">커리큘럼</span><div class="mobile-sub"><a href="curriculum.html#elem" onclick="closeMobileMenu()">초등 과정</a><a href="curriculum.html#middle" onclick="closeMobileMenu()">중등 과정</a><a href="curriculum.html#high" onclick="closeMobileMenu()">고등 과정</a></div></div>
-    <div class="mobile-item"><span class="mobile-section-label">학원 소식</span><div class="mobile-sub"><a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a><a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a><a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">학원 소식</span><div class="mobile-sub"><a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a><a href="news-seminar.html" onclick="closeMobileMenu()">설명회 신청</a><a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a><a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a></div></div>
     <div class="mobile-item"><span class="mobile-section-label">생생 후기</span><div class="mobile-sub"><a href="about-results.html" onclick="closeMobileMenu()">명예의 전당</a><a href="reviews-list.html" onclick="closeMobileMenu()">수강 후기</a></div></div>
     <div class="mobile-sns"><a href="http://pf.kakao.com/_icyxgn" class="sns-btn sns-kakao" target="_blank" rel="noopener">K</a><a href="#" class="sns-btn sns-blog">N</a></div>
   </div>
@@ -196,9 +179,9 @@
 
 <section class="page-header">
   <div class="ph-inner">
-    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><a href="news-schedule.html">학원 소식</a><span>›</span><span class="current">학원 일정</span></div>
+    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><span>학원 소식</span><span>›</span><span class="current">학원 일정</span></div>
     <h1>학원 일정</h1>
-    <p>삼년의 신화 월간 학원 일정을 확인하세요.</p>
+    <p>삼년의 신화 월간 학원 일정을 한눈에 확인하세요.</p>
   </div>
 </section>
 
@@ -207,95 +190,42 @@
 
     <div class="news-tabs fade-up">
       <a href="news-notice.html" class="news-tab">공지사항</a>
+      <a href="news-seminar.html" class="news-tab">설명회 신청</a>
       <a href="news-schedule.html" class="news-tab active">학원 일정</a>
       <a href="news-timetable.html" class="news-tab">학원 시간표</a>
     </div>
 
-    <div class="schedule-wrap fade-up">
-      <div class="mini-calendar">
-        <div class="cal-header">
-          <button class="cal-nav" id="calPrev">&#8249;</button>
-          <div class="cal-month" id="calMonth">2026년 5월</div>
-          <button class="cal-nav" id="calNext">&#8250;</button>
+    <div class="fade-up">
+      <div class="cal-top">
+        <div class="cal-month-nav">
+          <button class="cal-nav-btn" id="calPrev">&#8249;</button>
+          <div class="cal-month-label" id="calMonthLabel">2026년 6월</div>
+          <button class="cal-nav-btn" id="calNext">&#8250;</button>
+          <button class="cal-today-btn" id="calTodayBtn">오늘</button>
         </div>
-        <div class="cal-grid" id="calGrid">
-          <div class="cal-day-name">일</div>
-          <div class="cal-day-name">월</div>
-          <div class="cal-day-name">화</div>
-          <div class="cal-day-name">수</div>
-          <div class="cal-day-name">목</div>
-          <div class="cal-day-name">금</div>
-          <div class="cal-day-name">토</div>
+        <div class="cal-legend" id="calLegend">
+          <div class="legend-item"><div class="legend-dot" style="background:#FDECEA;border:1.5px solid #C0271A;"></div>공지</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#E8F5E9;border:1.5px solid #388E3C;"></div>일정</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#FFF3E0;border:1.5px solid #E64A19;"></div>설명회</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#E3F2FD;border:1.5px solid #1976D2;"></div>특강</div>
         </div>
       </div>
 
-      <div class="schedule-list-panel">
-        <div class="schedule-panel-header">이달의 일정</div>
-        <div class="schedule-items" id="scheduleItems">
-          <div class="sched-loading" style="color:var(--gray);font-size:14px;padding:16px 0;">일정을 불러오는 중…</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 설명회 신청 폼 -->
-    <div class="seminar-section fade-up">
-      <h2 class="seminar-title">설명회 신청</h2>
-      <p class="seminar-desc">삼년의 신화 국어논술학원 설명회에 참가 신청하세요.<br>담당 선생님이 확인 후 일정 안내 연락을 드립니다.</p>
-
-      <div class="seminar-panel">
-        <form id="seminarForm" name="seminar" data-netlify="true" action="/success.html" novalidate>
-          <input type="hidden" name="form-name" value="seminar">
-          <input type="hidden" id="sf-levelHidden" name="학교급" value="">
-          <input type="hidden" id="sf-statusHidden" name="재원여부" value="">
-
-          <div class="sf-grid">
-            <div class="sf-group">
-              <label class="sf-label" for="sf-name">이름 <span class="req">*</span></label>
-              <input type="text" id="sf-name" name="이름" class="sf-input" placeholder="성함을 입력해 주세요">
-              <span class="sf-err" id="sf-nameErr">이름을 입력해 주세요.</span>
-            </div>
-            <div class="sf-group">
-              <label class="sf-label" for="sf-phone">연락처 <span class="req">*</span></label>
-              <input type="tel" id="sf-phone" name="연락처" class="sf-input" placeholder="010-0000-0000" maxlength="13">
-              <span class="sf-err" id="sf-phoneErr">올바른 연락처를 입력해 주세요.</span>
-            </div>
-
-            <div class="sf-group full">
-              <label class="sf-label">학교급 <span class="req">*</span></label>
-              <div class="sf-btn-group" id="sf-levelGroup">
-                <button type="button" class="sf-btn" data-level="초등">초등</button>
-                <button type="button" class="sf-btn" data-level="중등">중등</button>
-                <button type="button" class="sf-btn" data-level="고등">고등</button>
-              </div>
-              <span class="sf-err" id="sf-levelErr">학교급을 선택해 주세요.</span>
-            </div>
-
-            <div class="sf-group" id="sf-gradeGroup" style="display:none;">
-              <label class="sf-label" for="sf-grade">학년 <span class="req">*</span></label>
-              <div class="sf-sel-wrap">
-                <select id="sf-grade" name="학년" class="sf-select">
-                  <option value="">학년 선택</option>
-                </select>
-              </div>
-              <span class="sf-err" id="sf-gradeErr">학년을 선택해 주세요.</span>
-            </div>
-
-            <div class="sf-group full">
-              <label class="sf-label">재원 여부 <span class="req">*</span></label>
-              <div class="sf-btn-group" id="sf-statusGroup">
-                <button type="button" class="sf-btn" data-status="현재 재원 중">현재 재원 중</button>
-                <button type="button" class="sf-btn" data-status="이전 재원">이전에 재원한 적 있음</button>
-                <button type="button" class="sf-btn" data-status="비재원">비재원</button>
-              </div>
-              <span class="sf-err" id="sf-statusErr">재원 여부를 선택해 주세요.</span>
-            </div>
+      <div class="cal-scroll-wrap">
+        <div class="wide-cal" id="wideCal">
+          <div class="cal-head-row">
+            <div class="cal-head-cell">일</div>
+            <div class="cal-head-cell">월</div>
+            <div class="cal-head-cell">화</div>
+            <div class="cal-head-cell">수</div>
+            <div class="cal-head-cell">목</div>
+            <div class="cal-head-cell">금</div>
+            <div class="cal-head-cell">토</div>
           </div>
-
-          <button type="submit" class="sf-submit" id="sf-submitBtn">
-            <div class="sf-spinner"></div>
-            <span class="sf-btn-text">설명회 신청하기</span>
-          </button>
-        </form>
+          <div id="calBody">
+            <div style="padding: 40px; text-align: center; color: var(--gray); font-size: 14px;">일정을 불러오는 중…</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -324,6 +254,18 @@
   </div>
 </footer>
 
+<!-- 이벤트 상세 모달 -->
+<div class="evt-modal-bg" id="evtModalBg">
+  <div class="evt-modal">
+    <button class="evt-modal-close" id="evtModalClose">✕</button>
+    <div class="evt-modal-badge" id="evtModalBadge"></div>
+    <div class="evt-modal-title" id="evtModalTitle"></div>
+    <div class="evt-modal-meta" id="evtModalMeta"></div>
+    <div class="evt-modal-content" id="evtModalContent"></div>
+    <div id="evtModalRegWrap"></div>
+  </div>
+</div>
+
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
@@ -334,173 +276,219 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  let calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
-  let allEvents = [];
-  let eventDaysForMonth = [];
-
-  function getEventDays(year, month) {
-    return allEvents
-      .map(e => new Date(e.date))
-      .filter(d => d.getFullYear() === year && d.getMonth() === month)
-      .map(d => d.getDate());
-  }
-
-  function renderScheduleItems(year, month) {
-    const items = document.getElementById('scheduleItems');
-    const monthEvents = allEvents.filter(e => {
-      const d = new Date(e.date);
-      return d.getFullYear() === year && d.getMonth() === month;
-    }).sort((a, b) => new Date(a.date) - new Date(b.date));
-    if (!monthEvents.length) {
-      items.innerHTML = '<div style="color:var(--gray);font-size:14px;padding:16px 0;">이번 달 등록된 일정이 없습니다.</div>';
-      return;
-    }
-    items.innerHTML = monthEvents.map(e => {
-      const d = new Date(e.date);
-      const dateStr = `${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-      const isSeminar = e.type === '설명회';
-      const regLink = e.registration_link || '#seminarForm';
-      const regBtn = isSeminar
-        ? `<a href="${regLink}" class="sched-reg-btn"${e.registration_link ? '' : ' onclick="this.closest(\'.schedule-wrap\').nextElementSibling.scrollIntoView({behavior:\'smooth\'});return false;"'}>설명회 신청하기 →</a>`
-        : '';
-      const meta = [e.content, e.time, e.location].filter(Boolean).join(' · ');
-      return `<div class="schedule-item${isSeminar ? ' is-seminar' : ''}">
-        <div class="sched-dot"></div>
-        <div class="sched-date">${dateStr}</div>
-        <div class="sched-content">
-          ${isSeminar ? '<span class="sched-seminar-badge">설명회</span>' : ''}
-          <strong>${e.title}</strong>
-          <span>${meta}</span>
-          ${regBtn}
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  function renderCal() {
-    const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-    document.getElementById('calMonth').textContent = `${calYear}년 ${monthNames[calMonth]}`;
-    const grid = document.getElementById('calGrid');
-    while (grid.children.length > 7) grid.removeChild(grid.lastChild);
-    const first = new Date(calYear, calMonth, 1).getDay();
-    const days = new Date(calYear, calMonth + 1, 0).getDate();
-    const prevDays = new Date(calYear, calMonth, 0).getDate();
-    const today = new Date();
-    for (let i = 0; i < first; i++) { const d = document.createElement('div'); d.className = 'cal-day other-month'; d.textContent = prevDays - first + 1 + i; grid.appendChild(d); }
-    for (let d = 1; d <= days; d++) {
-      const cell = document.createElement('div');
-      const dow = (first + d - 1) % 7;
-      let cls = 'cal-day';
-      if (dow === 0) cls += ' sun';
-      if (dow === 6) cls += ' sat';
-      if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) cls += ' today';
-      if (getEventDays(calYear, calMonth).includes(d)) cls += ' has-event';
-      cell.className = cls; cell.textContent = d; grid.appendChild(cell);
-    }
-    const remaining = 42 - first - days;
-    for (let i = 1; i <= remaining; i++) { const d = document.createElement('div'); d.className = 'cal-day other-month'; d.textContent = i; grid.appendChild(d); }
-  }
-  document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal(); renderScheduleItems(calYear, calMonth); });
-  document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal(); renderScheduleItems(calYear, calMonth); });
-  renderCal();
-
-  fetch('/data/schedule.json')
-    .then(r => r.json())
-    .then(data => {
-      allEvents = data.events || [];
-      renderCal();
-      renderScheduleItems(calYear, calMonth);
-    })
-    .catch(() => {
-      document.getElementById('scheduleItems').innerHTML = '<div style="color:var(--gray);font-size:14px;padding:16px 0;">일정을 불러올 수 없습니다.</div>';
-    });
-
-  // ===== 설명회 신청 폼 =====
-  const sfGradeMap = {
-    '초등': [['초1','1학년'],['초2','2학년'],['초3','3학년'],['초4','4학년'],['초5','5학년'],['초6','6학년']],
-    '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
-    '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
+  // ===== TYPE COLORS =====
+  const TYPE_COLORS = {
+    '공지':   { bg: '#FDECEA', fg: '#9A1E14', bd: '#C0271A' },
+    '일정':   { bg: '#E8F5E9', fg: '#1B5E20', bd: '#388E3C' },
+    '설명회': { bg: '#FFF3E0', fg: '#BF360C', bd: '#E64A19' },
+    '특강':   { bg: '#E3F2FD', fg: '#0D47A1', bd: '#1976D2' },
+    '이벤트': { bg: '#F3E5F5', fg: '#4A148C', bd: '#7B1FA2' },
+    '기타':   { bg: '#F5F5F5', fg: '#424242', bd: '#9E9E9E' },
   };
-  let sfLevel = '', sfStatus = '';
+  function typeColor(type) { return TYPE_COLORS[type] || TYPE_COLORS['기타']; }
 
-  document.getElementById('sf-phone').addEventListener('input', function() {
-    let v = this.value.replace(/\D/g, '');
-    if (v.length <= 3) this.value = v;
-    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
-    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
-  });
+  // ===== DATE UTILS =====
+  function parseDate(str) {
+    if (!str) return null;
+    if (str.includes('-')) {
+      const [y, m, d] = str.split('-').map(Number);
+      return new Date(y, m - 1, d);
+    }
+    if (str.includes('.')) {
+      const parts = str.split('.');
+      if (parts.length >= 3) return new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    }
+    return null;
+  }
+  function dateToStr(d) {
+    return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
+  }
+  function sameDay(a, b) {
+    return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  }
 
-  document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      sfLevel = btn.dataset.level;
-      document.getElementById('sf-levelHidden').value = sfLevel;
-      const sel = document.getElementById('sf-grade');
-      sel.innerHTML = '<option value="">학년 선택</option>';
-      sfGradeMap[sfLevel].forEach(([val, lbl]) => {
-        const o = document.createElement('option'); o.value = val; o.textContent = lbl; sel.appendChild(o);
-      });
-      sel.value = ''; sel.classList.remove('error');
-      document.getElementById('sf-gradeGroup').style.display = '';
-      document.getElementById('sf-levelErr').classList.remove('show');
-    });
-  });
+  // ===== ALL EVENTS (filled after fetch) =====
+  let allEvents = [];
+  let calYear = new Date().getFullYear();
+  let calMonth = new Date().getMonth();
 
-  document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      sfStatus = btn.dataset.status;
-      document.getElementById('sf-statusHidden').value = sfStatus;
-      document.getElementById('sf-statusErr').classList.remove('show');
-    });
-  });
+  // ===== RENDER CALENDAR =====
+  function renderCal(year, month) {
+    const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    document.getElementById('calMonthLabel').textContent = `${year}년 ${monthNames[month]}`;
 
-  document.getElementById('seminarForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const nameEl  = document.getElementById('sf-name');
-    const phoneEl = document.getElementById('sf-phone');
-    const gradeEl = document.getElementById('sf-grade');
-    const btn     = document.getElementById('sf-submitBtn');
+    const firstDow = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const weeks = Math.ceil((firstDow + totalDays) / 7);
+    const totalCells = weeks * 7;
+    const today = new Date();
 
-    let ok = true;
-    if (!nameEl.value.trim()) { nameEl.classList.add('error'); document.getElementById('sf-nameErr').classList.add('show'); ok = false; }
-    else { nameEl.classList.remove('error'); document.getElementById('sf-nameErr').classList.remove('show'); }
-    if (!/^010-\d{4}-\d{4}$/.test(phoneEl.value.trim())) { phoneEl.classList.add('error'); document.getElementById('sf-phoneErr').classList.add('show'); ok = false; }
-    else { phoneEl.classList.remove('error'); document.getElementById('sf-phoneErr').classList.remove('show'); }
-    if (!sfLevel) { document.getElementById('sf-levelErr').classList.add('show'); ok = false; }
-    else if (!gradeEl.value) { gradeEl.classList.add('error'); document.getElementById('sf-gradeErr').classList.add('show'); ok = false; }
-    else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
-    if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
-    if (!ok) return;
-
-    btn.disabled = true; btn.classList.add('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '접수 처리 중...';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(this)).toString(),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    } catch (err) {
-      btn.disabled = false; btn.classList.remove('submitting');
-      btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
-      return;
+    // Build dates array
+    const dates = [];
+    for (let i = 0; i < totalCells; i++) {
+      const date = new Date(year, month, 1 - firstDow + i);
+      dates.push({ date, isCur: date.getMonth() === month });
     }
 
-    btn.disabled = false; btn.classList.remove('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
-    this.reset();
-    sfLevel = ''; sfStatus = '';
-    document.getElementById('sf-levelHidden').value = '';
-    document.getElementById('sf-statusHidden').value = '';
-    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('sf-gradeGroup').style.display = 'none';
-    alert('설명회 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
+    // Events visible in this calendar view
+    const viewStart = dates[0].date;
+    const viewEnd = dates[dates.length - 1].date;
+    const visible = allEvents.filter(e => e.end >= viewStart && e.start <= viewEnd);
+
+    let html = '';
+    for (let w = 0; w < weeks; w++) {
+      const weekDates = dates.slice(w * 7, (w + 1) * 7);
+      const weekStart = weekDates[0].date;
+      const weekEnd = weekDates[6].date;
+
+      // Events overlapping this week
+      const weekEvts = visible
+        .filter(e => e.end >= weekStart && e.start <= weekEnd)
+        .sort((a, b) => a.start - b.start || (b.end - b.start) - (a.end - a.start));
+
+      // Greedy track assignment
+      const trackEnds = [];
+      const barInfos = weekEvts.map(evt => {
+        const cs = evt.start < weekStart ? weekStart : evt.start;
+        const ce = evt.end > weekEnd ? weekEnd : evt.end;
+        const sc = Math.round((cs - weekStart) / 86400000);
+        const ec = Math.round((ce - weekStart) / 86400000);
+        let t = 0;
+        while (t < trackEnds.length && trackEnds[t] >= sc) t++;
+        trackEnds[t] = ec;
+        return { evt, sc, ec, t };
+      });
+
+      const numTracks = barInfos.length ? Math.max(...barInfos.map(b => b.t)) + 1 : 0;
+      const weekH = Math.max(80, 28 + numTracks * 22 + 10);
+
+      // Day cells
+      const cellsHtml = weekDates.map((cell, i) => {
+        const dow = i;
+        const isToday = sameDay(cell.date, today);
+        let cls = 'cal-cell';
+        if (!cell.isCur) cls += ' other-month';
+        if (isToday) cls += ' today-cell';
+        if (dow === 0) cls += ' sun-col';
+        if (dow === 6) cls += ' sat-col';
+        return `<div class="${cls}"><div class="cal-num">${cell.date.getDate()}</div></div>`;
+      }).join('');
+
+      // Bars
+      const barsHtml = barInfos.map(({ evt, sc, ec, t }) => {
+        const c = typeColor(evt.type);
+        const leftPct = (sc / 7 * 100).toFixed(3);
+        const widthPct = ((ec - sc + 1) / 7 * 100).toFixed(3);
+        const topPx = 26 + t * 22;
+        const idx = allEvents.indexOf(evt);
+        return `<div class="cal-bar"
+          style="left:calc(${leftPct}% + 2px);width:calc(${widthPct}% - 5px);top:${topPx}px;background:${c.bg};color:${c.fg};border-left-color:${c.bd};"
+          data-idx="${idx}"
+          title="${evt.title}">${evt.title}</div>`;
+      }).join('');
+
+      html += `<div class="cal-week-row" style="min-height:${weekH}px;">
+        ${cellsHtml}
+        <div class="cal-bars-layer">${barsHtml}</div>
+      </div>`;
+    }
+
+    document.getElementById('calBody').innerHTML = html;
+
+    // Attach bar click handlers
+    document.querySelectorAll('.cal-bar').forEach(bar => {
+      bar.addEventListener('click', () => {
+        const evt = allEvents[+bar.dataset.idx];
+        if (evt) openEvtModal(evt);
+      });
+    });
+  }
+
+  // ===== MODAL =====
+  function openEvtModal(evt) {
+    const c = typeColor(evt.type);
+    const badge = document.getElementById('evtModalBadge');
+    badge.textContent = evt.type;
+    badge.style.background = c.bg;
+    badge.style.color = c.fg;
+    badge.style.border = `1px solid ${c.bd}`;
+
+    document.getElementById('evtModalTitle').textContent = evt.title;
+
+    // Meta rows
+    let metaHtml = '';
+    const startStr = dateToStr(evt.start);
+    const endStr = sameDay(evt.start, evt.end) ? '' : dateToStr(evt.end);
+    const dateRange = endStr ? `${startStr} ~ ${endStr}` : startStr;
+    metaHtml += `<div class="evt-meta-row"><span class="evt-meta-label">기간</span><span class="evt-meta-value">${dateRange}</span></div>`;
+    if (evt.data.time) metaHtml += `<div class="evt-meta-row"><span class="evt-meta-label">시간</span><span class="evt-meta-value">${evt.data.time}</span></div>`;
+    if (evt.data.location) metaHtml += `<div class="evt-meta-row"><span class="evt-meta-label">장소</span><span class="evt-meta-value">${evt.data.location}</span></div>`;
+    document.getElementById('evtModalMeta').innerHTML = metaHtml;
+
+    document.getElementById('evtModalContent').textContent = evt.data.content || '';
+
+    const regWrap = document.getElementById('evtModalRegWrap');
+    if (evt.type === '설명회') {
+      const href = evt.data.registration_link || 'news-seminar.html';
+      regWrap.innerHTML = `<a href="${href}" class="evt-modal-reg-btn">설명회 신청하기 →</a>`;
+    } else {
+      regWrap.innerHTML = '';
+    }
+
+    document.getElementById('evtModalBg').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEvtModal() {
+    document.getElementById('evtModalBg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('evtModalClose').addEventListener('click', closeEvtModal);
+  document.getElementById('evtModalBg').addEventListener('click', e => { if (e.target === e.currentTarget) closeEvtModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEvtModal(); });
+
+  // ===== MONTH NAV =====
+  document.getElementById('calPrev').addEventListener('click', () => {
+    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCal(calYear, calMonth);
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCal(calYear, calMonth);
+  });
+  document.getElementById('calTodayBtn').addEventListener('click', () => {
+    calYear = new Date().getFullYear(); calMonth = new Date().getMonth();
+    renderCal(calYear, calMonth);
+  });
+
+  // ===== FETCH & MERGE DATA =====
+  function buildEvents(noticesData, scheduleData) {
+    const evts = [];
+    (noticesData.notices || []).forEach(n => {
+      const start = parseDate(n.start_date) || parseDate(n.date);
+      const end = parseDate(n.end_date) || start;
+      if (!start) return;
+      evts.push({ title: n.title, type: n.category || '공지', start, end, data: n, source: 'notice' });
+    });
+    (scheduleData.events || []).forEach(e => {
+      const start = parseDate(e.date);
+      const end = parseDate(e.end_date) || start;
+      if (!start) return;
+      evts.push({ title: e.title, type: e.type || '기타', start, end, data: e, source: 'schedule' });
+    });
+    return evts;
+  }
+
+  Promise.all([
+    fetch('/data/notices.json').then(r => r.json()),
+    fetch('/data/schedule.json').then(r => r.json()),
+  ]).then(([noticesData, scheduleData]) => {
+    allEvents = buildEvents(noticesData, scheduleData);
+    renderCal(calYear, calMonth);
+  }).catch(() => {
+    document.getElementById('calBody').innerHTML =
+      '<div style="padding:40px;text-align:center;color:var(--gray);font-size:14px;">일정을 불러올 수 없습니다.</div>';
   });
 </script>
 </body>
