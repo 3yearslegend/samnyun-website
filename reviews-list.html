@@ -153,83 +153,17 @@
 <main class="page-content">
   <div class="container">
 
-    <div class="reviews-filter fade-up">
-      <button class="filter-btn active">전체</button>
-      <button class="filter-btn">초등</button>
-      <button class="filter-btn">중등</button>
-      <button class="filter-btn">고등</button>
-      <button class="filter-btn">수능</button>
-      <button class="filter-btn">논술</button>
+    <div class="reviews-filter fade-up" id="reviewsFilter">
+      <button class="filter-btn active" data-cat="전체">전체</button>
+      <button class="filter-btn" data-cat="초등">초등</button>
+      <button class="filter-btn" data-cat="중등">중등</button>
+      <button class="filter-btn" data-cat="고등">고등</button>
+      <button class="filter-btn" data-cat="수능">수능</button>
+      <button class="filter-btn" data-cat="논술">논술</button>
     </div>
 
-    <div class="reviews-grid stagger">
-
-      <div class="review-card">
-        <div class="review-tag">고등 수능반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-tag">중등 국어반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-tag">초등 독해반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-tag">논술 전문반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-tag">고등 수능반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="review-tag">중등 논술반</div>
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">[수강 후기 내용을 입력하세요. 학습 경험, 성과, 강사에 대한 평가 등을 자유롭게 작성합니다. 실제 학생의 후기를 여기에 입력하면 됩니다.]</p>
-        <div class="review-footer">
-          <div class="review-avatar">[이니셜]</div>
-          <div class="review-info"><div class="name">[학생 이름/닉네임]</div><div class="meta">[학년] · [지점명] · [날짜]</div></div>
-        </div>
-      </div>
-
+    <div class="reviews-grid stagger" id="reviewsGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러오는 중입니다…</div>
     </div>
   </div>
 </main>
@@ -265,12 +199,57 @@
   function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+
+  let allReviews = [];
+  let activeReviewFilter = '전체';
+
+  function stars(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+  function renderReviews(reviews) {
+    const grid = document.getElementById('reviewsGrid');
+    if (!reviews.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">등록된 후기가 없습니다.</div>';
+      grid.classList.remove('visible');
+      return;
+    }
+    grid.innerHTML = reviews.map(r => {
+      const initials = r.name.charAt(0);
+      return `<div class="review-card">
+        ${r.tag ? `<div class="review-tag">${r.tag}</div>` : ''}
+        <div class="review-quote">"</div>
+        <div class="review-stars">${stars(r.rating || 5)}</div>
+        <p class="review-text">${r.content}</p>
+        <div class="review-footer">
+          <div class="review-avatar">${initials}</div>
+          <div class="review-info"><div class="name">${r.name}</div><div class="meta">${r.grade}${r.branch ? ' · ' + r.branch : ''}</div></div>
+        </div>
+      </div>`;
+    }).join('');
+    grid.classList.remove('visible');
+    requestAnimationFrame(() => io.observe(grid));
+  }
+
+  document.getElementById('reviewsFilter').querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      activeReviewFilter = btn.dataset.cat;
+      const filtered = activeReviewFilter === '전체'
+        ? allReviews
+        : allReviews.filter(r => (r.tag || '').includes(activeReviewFilter) || (r.grade || '').includes(activeReviewFilter));
+      renderReviews(filtered);
     });
   });
+
+  fetch('/data/reviews.json')
+    .then(r => r.json())
+    .then(data => {
+      allReviews = data.reviews || [];
+      renderReviews(allReviews);
+    })
+    .catch(() => {
+      document.getElementById('reviewsGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러올 수 없습니다.</div>';
+    });
 </script>
 </body>
 </html>

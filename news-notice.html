@@ -104,6 +104,19 @@
 
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* NOTICE MODAL */
+    .notice-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+    .notice-modal-bg.open { display: flex; }
+    .notice-modal { background: var(--white); border-radius: 14px; max-width: 640px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 40px; position: relative; }
+    .notice-modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--gray); }
+    .notice-modal-badge { display: inline-block; font-size: 12px; font-weight: 500; padding: 3px 12px; border-radius: 3px; margin-bottom: 12px; }
+    .notice-modal-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+    .notice-modal-date { font-size: 13px; color: var(--gray); margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .notice-modal-content { font-size: 15px; line-height: 1.9; color: var(--gray-dark); white-space: pre-wrap; }
+
+    .notice-empty { text-align: center; padding: 60px 0; color: var(--gray); font-size: 15px; }
+    .nb-설명회 { background: var(--black); color: var(--white); }
   </style>
 </head>
 <body>
@@ -156,80 +169,16 @@
       <a href="news-timetable.html" class="news-tab">학원 시간표</a>
     </div>
 
-    <div class="notice-filter fade-up">
-      <button class="filter-btn active">전체</button>
-      <button class="filter-btn">공지</button>
-      <button class="filter-btn">일정</button>
-      <button class="filter-btn">이벤트</button>
+    <div class="notice-filter fade-up" id="noticeFilter">
+      <button class="filter-btn active" data-cat="전체">전체</button>
+      <button class="filter-btn" data-cat="공지">공지</button>
+      <button class="filter-btn" data-cat="일정">일정</button>
+      <button class="filter-btn" data-cat="이벤트">이벤트</button>
+      <button class="filter-btn" data-cat="설명회">설명회</button>
     </div>
 
-    <div class="notice-list fade-up">
-      <a href="news-notice-detail.html" class="notice-item" style="text-decoration:none;">
-        <span class="notice-num">11</span>
-        <span class="notice-badge nb-black">설명회</span>
-        <span class="notice-title">[설명회] 2025 여름방학 특강 & 학부모 입시 설명회 개최 안내 (7/5 토, 예약 필수)</span>
-        <span class="notice-date">2025.06.02</span>
-      </a>
-      <div class="notice-item">
-        <span class="notice-num">10</span>
-        <span class="notice-badge nb-red">공지</span>
-        <span class="notice-title">[공지] 여기에 공지 제목을 입력하세요</span>
-        <span class="notice-date">2025.05.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">9</span>
-        <span class="notice-badge nb-red">공지</span>
-        <span class="notice-title">[공지] 여기에 공지 제목을 입력하세요</span>
-        <span class="notice-date">2025.05.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">8</span>
-        <span class="notice-badge nb-black">이벤트</span>
-        <span class="notice-title">[이벤트] 여기에 이벤트 내용을 입력하세요</span>
-        <span class="notice-date">2025.05.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">7</span>
-        <span class="notice-badge nb-gray">일정</span>
-        <span class="notice-title">[일정] 여기에 학원 일정 내용을 입력하세요</span>
-        <span class="notice-date">2025.04.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">6</span>
-        <span class="notice-badge nb-red">공지</span>
-        <span class="notice-title">[공지] 여기에 공지 제목을 입력하세요</span>
-        <span class="notice-date">2025.04.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">5</span>
-        <span class="notice-badge nb-gray">일정</span>
-        <span class="notice-title">[일정] 여기에 학원 일정 내용을 입력하세요</span>
-        <span class="notice-date">2025.04.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">4</span>
-        <span class="notice-badge nb-red">공지</span>
-        <span class="notice-title">[공지] 여기에 공지 제목을 입력하세요</span>
-        <span class="notice-date">2025.03.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">3</span>
-        <span class="notice-badge nb-black">이벤트</span>
-        <span class="notice-title">[이벤트] 여기에 이벤트 내용을 입력하세요</span>
-        <span class="notice-date">2025.03.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">2</span>
-        <span class="notice-badge nb-gray">일정</span>
-        <span class="notice-title">[일정] 여기에 학원 일정 내용을 입력하세요</span>
-        <span class="notice-date">2025.03.00</span>
-      </div>
-      <div class="notice-item">
-        <span class="notice-num">1</span>
-        <span class="notice-badge nb-red">공지</span>
-        <span class="notice-title">[공지] 여기에 공지 제목을 입력하세요</span>
-        <span class="notice-date">2025.03.00</span>
-      </div>
+    <div class="notice-list fade-up" id="noticeList">
+      <div class="notice-empty">공지사항을 불러오는 중입니다…</div>
     </div>
 
   </div>
@@ -257,6 +206,16 @@
   </div>
 </footer>
 
+<div class="notice-modal-bg" id="noticeModal">
+  <div class="notice-modal">
+    <button class="notice-modal-close" id="noticeModalClose">✕</button>
+    <div class="notice-modal-badge" id="modalBadge"></div>
+    <div class="notice-modal-title" id="modalTitle"></div>
+    <div class="notice-modal-date" id="modalDate"></div>
+    <div class="notice-modal-content" id="modalContent"></div>
+  </div>
+</div>
+
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
@@ -266,12 +225,64 @@
   function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-  document.querySelectorAll('.filter-btn').forEach(btn => {
+
+  const badgeClass = { '공지': 'nb-red', '일정': 'nb-gray', '이벤트': 'nb-black', '설명회': 'nb-설명회' };
+  let allNotices = [];
+  let activeFilter = '전체';
+
+  function renderNotices(notices) {
+    const list = document.getElementById('noticeList');
+    if (!notices.length) { list.innerHTML = '<div class="notice-empty">등록된 공지사항이 없습니다.</div>'; return; }
+    const total = allNotices.length;
+    list.innerHTML = notices.map((n, i) => {
+      const num = total - allNotices.indexOf(n);
+      const bc = badgeClass[n.category] || 'nb-gray';
+      return `<div class="notice-item" style="cursor:pointer" data-idx="${allNotices.indexOf(n)}">
+        <span class="notice-num">${num}</span>
+        <span class="notice-badge ${bc}">${n.category}</span>
+        <span class="notice-title">${n.title}</span>
+        <span class="notice-date">${n.date}</span>
+      </div>`;
+    }).join('');
+    list.querySelectorAll('.notice-item').forEach(el => {
+      el.addEventListener('click', () => openModal(allNotices[+el.dataset.idx]));
+    });
+  }
+
+  function openModal(n) {
+    const bc = badgeClass[n.category] || 'nb-gray';
+    document.getElementById('modalBadge').className = 'notice-modal-badge ' + bc;
+    document.getElementById('modalBadge').textContent = n.category;
+    document.getElementById('modalTitle').textContent = n.title;
+    document.getElementById('modalDate').textContent = n.date;
+    document.getElementById('modalContent').textContent = n.content;
+    document.getElementById('noticeModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('noticeModalClose').addEventListener('click', closeModal);
+  document.getElementById('noticeModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  function closeModal() { document.getElementById('noticeModal').classList.remove('open'); document.body.style.overflow = ''; }
+
+  document.getElementById('noticeFilter').querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      activeFilter = btn.dataset.cat;
+      const filtered = activeFilter === '전체' ? allNotices : allNotices.filter(n => n.category === activeFilter);
+      renderNotices(filtered);
     });
   });
+
+  fetch('/data/notices.json')
+    .then(r => r.json())
+    .then(data => {
+      allNotices = (data.notices || []).sort((a, b) => b.pinned - a.pinned);
+      renderNotices(allNotices);
+    })
+    .catch(() => {
+      document.getElementById('noticeList').innerHTML = '<div class="notice-empty">공지사항을 불러올 수 없습니다.</div>';
+    });
 </script>
 </body>
 </html>

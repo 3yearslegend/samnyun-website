@@ -227,32 +227,8 @@
 
       <div class="schedule-list-panel">
         <div class="schedule-panel-header">이달의 일정</div>
-        <div class="schedule-items">
-          <div class="schedule-item">
-            <div class="sched-dot"></div>
-            <div class="sched-date">05.00</div>
-            <div class="sched-content"><strong>[학원 일정 입력]</strong><span>[상세 내용 입력]</span></div>
-          </div>
-          <div class="schedule-item">
-            <div class="sched-dot"></div>
-            <div class="sched-date">05.00</div>
-            <div class="sched-content"><strong>[학원 일정 입력]</strong><span>[상세 내용 입력]</span></div>
-          </div>
-          <div class="schedule-item">
-            <div class="sched-dot"></div>
-            <div class="sched-date">05.00</div>
-            <div class="sched-content"><strong>[학원 일정 입력]</strong><span>[상세 내용 입력]</span></div>
-          </div>
-          <div class="schedule-item">
-            <div class="sched-dot"></div>
-            <div class="sched-date">05.00</div>
-            <div class="sched-content"><strong>[학원 일정 입력]</strong><span>[상세 내용 입력]</span></div>
-          </div>
-          <div class="schedule-item">
-            <div class="sched-dot"></div>
-            <div class="sched-date">06.00</div>
-            <div class="sched-content"><strong>[학원 일정 입력]</strong><span>[상세 내용 입력]</span></div>
-          </div>
+        <div class="schedule-items" id="scheduleItems">
+          <div class="sched-loading" style="color:var(--gray);font-size:14px;padding:16px 0;">일정을 불러오는 중…</div>
         </div>
       </div>
     </div>
@@ -355,7 +331,37 @@
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
   let calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
-  const events = [5, 12, 19];
+  let allEvents = [];
+  let eventDaysForMonth = [];
+
+  function getEventDays(year, month) {
+    return allEvents
+      .map(e => new Date(e.date))
+      .filter(d => d.getFullYear() === year && d.getMonth() === month)
+      .map(d => d.getDate());
+  }
+
+  function renderScheduleItems(year, month) {
+    const items = document.getElementById('scheduleItems');
+    const monthEvents = allEvents.filter(e => {
+      const d = new Date(e.date);
+      return d.getFullYear() === year && d.getMonth() === month;
+    }).sort((a, b) => new Date(a.date) - new Date(b.date));
+    if (!monthEvents.length) {
+      items.innerHTML = '<div style="color:var(--gray);font-size:14px;padding:16px 0;">이번 달 등록된 일정이 없습니다.</div>';
+      return;
+    }
+    items.innerHTML = monthEvents.map(e => {
+      const d = new Date(e.date);
+      const dateStr = `${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+      return `<div class="schedule-item">
+        <div class="sched-dot"></div>
+        <div class="sched-date">${dateStr}</div>
+        <div class="sched-content"><strong>${e.title}</strong><span>${e.content}${e.time ? ' · ' + e.time : ''}${e.location ? ' · ' + e.location : ''}</span></div>
+      </div>`;
+    }).join('');
+  }
+
   function renderCal() {
     const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
     document.getElementById('calMonth').textContent = `${calYear}년 ${monthNames[calMonth]}`;
@@ -373,15 +379,26 @@
       if (dow === 0) cls += ' sun';
       if (dow === 6) cls += ' sat';
       if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) cls += ' today';
-      if (events.includes(d)) cls += ' has-event';
+      if (getEventDays(calYear, calMonth).includes(d)) cls += ' has-event';
       cell.className = cls; cell.textContent = d; grid.appendChild(cell);
     }
     const remaining = 42 - first - days;
     for (let i = 1; i <= remaining; i++) { const d = document.createElement('div'); d.className = 'cal-day other-month'; d.textContent = i; grid.appendChild(d); }
   }
-  document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal(); });
-  document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal(); });
+  document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal(); renderScheduleItems(calYear, calMonth); });
+  document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal(); renderScheduleItems(calYear, calMonth); });
   renderCal();
+
+  fetch('/data/schedule.json')
+    .then(r => r.json())
+    .then(data => {
+      allEvents = data.events || [];
+      renderCal();
+      renderScheduleItems(calYear, calMonth);
+    })
+    .catch(() => {
+      document.getElementById('scheduleItems').innerHTML = '<div style="color:var(--gray);font-size:14px;padding:16px 0;">일정을 불러올 수 없습니다.</div>';
+    });
 
   // ===== 설명회 신청 폼 =====
   const sfGradeMap = {

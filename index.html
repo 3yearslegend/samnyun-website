@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -1034,6 +1035,47 @@
   heroTrack.addEventListener('mouseleave', resetHeroTimer);
 
   resetHeroTimer();
+
+  /* ---- Load carousel data from CMS ---- */
+  fetch('/data/carousel.json')
+    .then(r => r.json())
+    .then(data => {
+      (data.slides || []).forEach((s, i) => {
+        const slide = heroSlides[i];
+        if (!slide) return;
+        const tagEl = slide.querySelector('.hero-tag');
+        const h1El = slide.querySelector('.hero-h1');
+        const h2El = slide.querySelector('.hero-h2');
+        const btns = slide.querySelector('.hero-buttons');
+        if (tagEl) tagEl.textContent = s.tag;
+        if (h1El) {
+          let html = s.title.replace(/\n/g, '<br>');
+          if (s.title_highlight) html = html.replace(s.title_highlight, `<span style="color:var(--red)">${s.title_highlight}</span>`);
+          h1El.innerHTML = html;
+        }
+        if (h2El) {
+          let html = s.subtitle.replace(/\n/g, '<br>');
+          if (s.subtitle_highlight) html = html.replace(s.subtitle_highlight, `<em>${s.subtitle_highlight}</em>`);
+          h2El.innerHTML = html;
+        }
+        if (btns) {
+          const btn1 = btns.querySelector('.btn-primary');
+          const btn2 = btns.querySelector('.btn-outline');
+          if (btn1 && s.btn1_text) { btn1.textContent = s.btn1_text; if (s.btn1_link) btn1.setAttribute('href', s.btn1_link); }
+          if (btn2 && s.btn2_text) { btn2.textContent = s.btn2_text; if (s.btn2_link) btn2.setAttribute('href', s.btn2_link); }
+        }
+      });
+    })
+    .catch(() => {});
+
+  /* ---- Netlify Identity redirect ---- */
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', user => {
+      if (!user) {
+        window.netlifyIdentity.on('login', () => { document.location.href = '/admin/'; });
+      }
+    });
+  }
 
   /* ---- Trophy carousel ---- */
   const track = document.getElementById('trophyTrack');
