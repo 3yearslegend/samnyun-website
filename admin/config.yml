@@ -133,6 +133,7 @@ collections:
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
+              - { label: "뱃지 (예: 대표강사 / 비워두면 표시 안 됨)", name: badge, widget: string, required: false }
               - { label: 경력 (줄바꿈으로 구분), name: career, widget: text }
               - { label: "사진 URL (선택)", name: photo, widget: string, required: false }
       - name: teachers_zai
@@ -146,6 +147,7 @@ collections:
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
+              - { label: "뱃지 (예: 대표강사 / 비워두면 표시 안 됨)", name: badge, widget: string, required: false }
               - { label: 경력 (줄바꿈으로 구분), name: career, widget: text }
               - { label: "사진 URL (선택)", name: photo, widget: string, required: false }
       - name: teachers_hyper
@@ -159,6 +161,7 @@ collections:
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
+              - { label: "뱃지 (예: 대표강사 / 비워두면 표시 안 됨)", name: badge, widget: string, required: false }
               - { label: 경력 (줄바꿈으로 구분), name: career, widget: text }
               - { label: "사진 URL (선택)", name: photo, widget: string, required: false }
 
