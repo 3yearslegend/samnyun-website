@@ -70,7 +70,12 @@ collections:
             fields:
               - { label: 지점명, name: branch, widget: string }
               - { label: "지점 ID (gojan / zai / hyper)", name: id, widget: string }
-              - label: 과정 목록
+              - label: "시간표 이미지 (업로드하면 텍스트 표 대신 이미지 우선 표시)"
+                name: image
+                widget: image
+                required: false
+                allow_multiple: false
+              - label: 과정 목록 (이미지가 없을 때 표시되는 텍스트 시간표)
                 name: courses
                 widget: list
                 fields:

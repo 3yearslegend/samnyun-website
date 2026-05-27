@@ -76,6 +76,9 @@
     /* TIMETABLE */
     .timetable-note { font-size: 13px; color: var(--gray); margin-bottom: 24px; padding: 14px 18px; background: var(--gray-light); border-radius: 8px; border-left: 3px solid var(--red); }
     .timetable-wrap { overflow-x: auto; }
+    .timetable-img-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .timetable-img { display: block; width: 100%; height: auto; }
+    @media (max-width: 640px) { .timetable-img-wrap { border-radius: 6px; } }
     .timetable { width: 100%; border-collapse: collapse; min-width: 600px; }
     .timetable th { background: var(--black); color: var(--white); padding: 14px 16px; font-size: 13px; font-weight: 500; text-align: center; }
     .timetable th:first-child { border-radius: 8px 0 0 0; width: 90px; }
@@ -208,15 +211,25 @@
   function renderBranch(branchData, note) {
     const el = document.getElementById('tt-' + branchData.id);
     if (!el) return;
-    const rows = branchData.courses.map(c => `
+
+    const noteHtml = `<p class="timetable-note">📌 ${note}</p>`;
+
+    if (branchData.image) {
+      el.innerHTML = noteHtml + `
+        <div class="timetable-img-wrap">
+          <img src="${branchData.image}" alt="${branchData.branch} 시간표" class="timetable-img">
+        </div>`;
+      return;
+    }
+
+    const rows = (branchData.courses || []).map(c => `
       <tr>
         <td><strong>${c.name}</strong></td>
         <td>${c.target}</td>
         <td>${c.days}</td>
         <td>${c.time}</td>
       </tr>`).join('');
-    el.innerHTML = `
-      <p class="timetable-note">📌 ${note}</p>
+    el.innerHTML = noteHtml + `
       <div class="timetable-wrap">
         <table class="timetable">
           <thead><tr><th>과정명</th><th>대상</th><th>요일</th><th>시간</th></tr></thead>
