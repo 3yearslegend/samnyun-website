@@ -101,6 +101,43 @@
     .sched-content span { font-size: 12px; color: var(--gray); }
     @media (max-width: 900px) { .schedule-wrap { grid-template-columns: 1fr; } }
 
+    /* ===== 설명회 신청 폼 ===== */
+    .seminar-section { margin-top: 64px; padding-top: 56px; border-top: 1px solid var(--border); }
+    .seminar-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
+    .seminar-desc { font-size: 14px; color: var(--gray); margin-bottom: 32px; line-height: 1.8; }
+    .seminar-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 40px; max-width: 680px; }
+    .sf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .sf-group { display: flex; flex-direction: column; gap: 7px; }
+    .sf-group.full { grid-column: 1 / -1; }
+    .sf-label { font-size: 13px; font-weight: 600; color: var(--black); }
+    .sf-label .req { color: var(--red); margin-left: 2px; }
+    .sf-input, .sf-select { width: 100%; height: 50px; padding: 0 16px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-family: var(--font-sans); color: var(--black); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; appearance: none; }
+    .sf-input:focus, .sf-select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(192,39,26,0.1); }
+    .sf-input.error, .sf-select.error { border-color: var(--red) !important; background: #fff8f8; }
+    .sf-err { font-size: 11.5px; color: var(--red); display: none; }
+    .sf-err.show { display: block; }
+    .sf-sel-wrap { position: relative; }
+    .sf-sel-wrap::after { content: ''; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
+    .sf-btn-group { display: flex; gap: 10px; }
+    .sf-btn { flex: 1; height: 50px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.2s; }
+    .sf-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .sf-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+    .sf-submit { width: 100%; height: 58px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 16px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
+    .sf-submit:hover:not(:disabled) { background: #8B1A11; transform: translateY(-2px); }
+    .sf-submit:disabled { background: #bbb; cursor: not-allowed; box-shadow: none; }
+    .sf-spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: sfSpin 0.7s linear infinite; display: none; }
+    .sf-submit.submitting .sf-spinner { display: block; }
+    @keyframes sfSpin { to { transform: rotate(360deg); } }
+    @media (max-width: 640px) {
+      .seminar-panel { padding: 24px 16px; }
+      .sf-grid { grid-template-columns: 1fr; }
+      .sf-btn-group { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .seminar-section { margin-top: 44px; padding-top: 36px; }
+      .page-content { padding: 36px 0 64px; }
+    }
+
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
@@ -220,6 +257,68 @@
       </div>
     </div>
 
+    <!-- 설명회 신청 폼 -->
+    <div class="seminar-section fade-up">
+      <h2 class="seminar-title">설명회 신청</h2>
+      <p class="seminar-desc">삼년의 신화 국어논술학원 설명회에 참가 신청하세요.<br>담당 선생님이 확인 후 일정 안내 연락을 드립니다.</p>
+
+      <div class="seminar-panel">
+        <form id="seminarForm" name="seminar" data-netlify="true" action="/success.html" novalidate>
+          <input type="hidden" name="form-name" value="seminar">
+          <input type="hidden" id="sf-levelHidden" name="학교급" value="">
+          <input type="hidden" id="sf-statusHidden" name="재원여부" value="">
+
+          <div class="sf-grid">
+            <div class="sf-group">
+              <label class="sf-label" for="sf-name">이름 <span class="req">*</span></label>
+              <input type="text" id="sf-name" name="이름" class="sf-input" placeholder="성함을 입력해 주세요">
+              <span class="sf-err" id="sf-nameErr">이름을 입력해 주세요.</span>
+            </div>
+            <div class="sf-group">
+              <label class="sf-label" for="sf-phone">연락처 <span class="req">*</span></label>
+              <input type="tel" id="sf-phone" name="연락처" class="sf-input" placeholder="010-0000-0000" maxlength="13">
+              <span class="sf-err" id="sf-phoneErr">올바른 연락처를 입력해 주세요.</span>
+            </div>
+
+            <div class="sf-group full">
+              <label class="sf-label">학교급 <span class="req">*</span></label>
+              <div class="sf-btn-group" id="sf-levelGroup">
+                <button type="button" class="sf-btn" data-level="초등">초등</button>
+                <button type="button" class="sf-btn" data-level="중등">중등</button>
+                <button type="button" class="sf-btn" data-level="고등">고등</button>
+              </div>
+              <span class="sf-err" id="sf-levelErr">학교급을 선택해 주세요.</span>
+            </div>
+
+            <div class="sf-group" id="sf-gradeGroup" style="display:none;">
+              <label class="sf-label" for="sf-grade">학년 <span class="req">*</span></label>
+              <div class="sf-sel-wrap">
+                <select id="sf-grade" name="학년" class="sf-select">
+                  <option value="">학년 선택</option>
+                </select>
+              </div>
+              <span class="sf-err" id="sf-gradeErr">학년을 선택해 주세요.</span>
+            </div>
+
+            <div class="sf-group full">
+              <label class="sf-label">재원 여부 <span class="req">*</span></label>
+              <div class="sf-btn-group" id="sf-statusGroup">
+                <button type="button" class="sf-btn" data-status="현재 재원 중">현재 재원 중</button>
+                <button type="button" class="sf-btn" data-status="이전 재원">이전에 재원한 적 있음</button>
+                <button type="button" class="sf-btn" data-status="비재원">비재원</button>
+              </div>
+              <span class="sf-err" id="sf-statusErr">재원 여부를 선택해 주세요.</span>
+            </div>
+          </div>
+
+          <button type="submit" class="sf-submit" id="sf-submitBtn">
+            <div class="sf-spinner"></div>
+            <span class="sf-btn-text">설명회 신청하기</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -283,6 +382,94 @@
   document.getElementById('calPrev').addEventListener('click', () => { calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCal(); });
   document.getElementById('calNext').addEventListener('click', () => { calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal(); });
   renderCal();
+
+  // ===== 설명회 신청 폼 =====
+  const sfGradeMap = {
+    '초등': [['초1','1학년'],['초2','2학년'],['초3','3학년'],['초4','4학년'],['초5','5학년'],['초6','6학년']],
+    '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
+    '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
+  };
+  let sfLevel = '', sfStatus = '';
+
+  document.getElementById('sf-phone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length <= 3) this.value = v;
+    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
+    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+  });
+
+  document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      sfLevel = btn.dataset.level;
+      document.getElementById('sf-levelHidden').value = sfLevel;
+      const sel = document.getElementById('sf-grade');
+      sel.innerHTML = '<option value="">학년 선택</option>';
+      sfGradeMap[sfLevel].forEach(([val, lbl]) => {
+        const o = document.createElement('option'); o.value = val; o.textContent = lbl; sel.appendChild(o);
+      });
+      sel.value = ''; sel.classList.remove('error');
+      document.getElementById('sf-gradeGroup').style.display = '';
+      document.getElementById('sf-levelErr').classList.remove('show');
+    });
+  });
+
+  document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      sfStatus = btn.dataset.status;
+      document.getElementById('sf-statusHidden').value = sfStatus;
+      document.getElementById('sf-statusErr').classList.remove('show');
+    });
+  });
+
+  document.getElementById('seminarForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const nameEl  = document.getElementById('sf-name');
+    const phoneEl = document.getElementById('sf-phone');
+    const gradeEl = document.getElementById('sf-grade');
+    const btn     = document.getElementById('sf-submitBtn');
+
+    let ok = true;
+    if (!nameEl.value.trim()) { nameEl.classList.add('error'); document.getElementById('sf-nameErr').classList.add('show'); ok = false; }
+    else { nameEl.classList.remove('error'); document.getElementById('sf-nameErr').classList.remove('show'); }
+    if (!/^010-\d{4}-\d{4}$/.test(phoneEl.value.trim())) { phoneEl.classList.add('error'); document.getElementById('sf-phoneErr').classList.add('show'); ok = false; }
+    else { phoneEl.classList.remove('error'); document.getElementById('sf-phoneErr').classList.remove('show'); }
+    if (!sfLevel) { document.getElementById('sf-levelErr').classList.add('show'); ok = false; }
+    else if (!gradeEl.value) { gradeEl.classList.add('error'); document.getElementById('sf-gradeErr').classList.add('show'); ok = false; }
+    else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
+    if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
+    if (!ok) return;
+
+    btn.disabled = true; btn.classList.add('submitting');
+    btn.querySelector('.sf-btn-text').textContent = '접수 처리 중...';
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(this)).toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    } catch (err) {
+      btn.disabled = false; btn.classList.remove('submitting');
+      btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
+      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
+      return;
+    }
+
+    btn.disabled = false; btn.classList.remove('submitting');
+    btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
+    this.reset();
+    sfLevel = ''; sfStatus = '';
+    document.getElementById('sf-levelHidden').value = '';
+    document.getElementById('sf-statusHidden').value = '';
+    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('sf-gradeGroup').style.display = 'none';
+    alert('설명회 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
+  });
 </script>
 </body>
 </html>
