@@ -94,11 +94,15 @@
     .schedule-panel-header { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 24px; }
     .schedule-items { display: flex; flex-direction: column; gap: 12px; }
     .schedule-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; border-radius: 10px; background: var(--gray-light); }
+    .schedule-item.is-seminar { background: var(--red-light); border: 1px solid rgba(192,39,26,0.18); }
     .sched-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 5px; }
     .sched-date { font-size: 13px; color: var(--gray); flex-shrink: 0; min-width: 68px; font-weight: 500; }
-    .sched-content { }
+    .sched-content { flex: 1; }
     .sched-content strong { display: block; font-size: 14px; color: var(--black); margin-bottom: 3px; }
     .sched-content span { font-size: 12px; color: var(--gray); }
+    .sched-seminar-badge { display: inline-block; font-size: 11px; font-weight: 700; color: var(--red); background: rgba(192,39,26,0.1); border-radius: 3px; padding: 2px 8px; margin-bottom: 6px; letter-spacing: 0.5px; }
+    .sched-reg-btn { display: inline-block; margin-top: 10px; padding: 7px 18px; background: var(--red); color: var(--white); border-radius: 6px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.18s, transform 0.15s; }
+    .sched-reg-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
     @media (max-width: 900px) { .schedule-wrap { grid-template-columns: 1fr; } }
 
     /* ===== 설명회 신청 폼 ===== */
@@ -354,10 +358,21 @@
     items.innerHTML = monthEvents.map(e => {
       const d = new Date(e.date);
       const dateStr = `${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-      return `<div class="schedule-item">
+      const isSeminar = e.type === '설명회';
+      const regLink = e.registration_link || '#seminarForm';
+      const regBtn = isSeminar
+        ? `<a href="${regLink}" class="sched-reg-btn"${e.registration_link ? '' : ' onclick="this.closest(\'.schedule-wrap\').nextElementSibling.scrollIntoView({behavior:\'smooth\'});return false;"'}>설명회 신청하기 →</a>`
+        : '';
+      const meta = [e.content, e.time, e.location].filter(Boolean).join(' · ');
+      return `<div class="schedule-item${isSeminar ? ' is-seminar' : ''}">
         <div class="sched-dot"></div>
         <div class="sched-date">${dateStr}</div>
-        <div class="sched-content"><strong>${e.title}</strong><span>${e.content}${e.time ? ' · ' + e.time : ''}${e.location ? ' · ' + e.location : ''}</span></div>
+        <div class="sched-content">
+          ${isSeminar ? '<span class="sched-seminar-badge">설명회</span>' : ''}
+          <strong>${e.title}</strong>
+          <span>${meta}</span>
+          ${regBtn}
+        </div>
       </div>`;
     }).join('');
   }

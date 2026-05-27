@@ -50,6 +50,10 @@ collections:
                 widget: select
                 options: [설명회, 특강, 상담, 기타]
                 default: 기타
+              - label: "신청 링크 (설명회일 때만 입력. 비워두면 하단 신청 폼으로 이동)"
+                name: registration_link
+                widget: string
+                required: false
 
   - name: timetable
     label: 학원 시간표
