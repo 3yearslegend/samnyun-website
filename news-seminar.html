@@ -68,49 +68,37 @@
     .news-tab { padding: 10px 24px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--gray); text-decoration: none; transition: all 0.2s; }
     .news-tab.active, .news-tab:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
 
-    /* ===== SEMINAR CARDS ===== */
-    .seminar-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 72px; }
-    .seminar-card { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; transition: box-shadow 0.2s, border-color 0.2s; }
-    .seminar-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); border-color: rgba(192,39,26,0.3); }
-    .seminar-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; background: #FFF3E0; color: #BF360C; border: 1px solid #E64A19; margin-bottom: 10px; letter-spacing: 0.5px; }
-    .seminar-card h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 12px; line-height: 1.4; }
-    .seminar-meta { display: flex; flex-direction: column; gap: 5px; }
-    .seminar-meta-row { display: flex; gap: 8px; font-size: 13px; }
-    .seminar-meta-label { color: var(--gray); min-width: 36px; flex-shrink: 0; }
-    .seminar-meta-value { color: var(--gray-dark); }
-    .seminar-reg-btn { flex-shrink: 0; padding: 12px 22px; background: var(--red); color: var(--white); border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 6px; }
-    .seminar-reg-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
-    .seminar-empty { padding: 60px 0; text-align: center; color: var(--gray); font-size: 15px; }
-    @media (max-width: 640px) { .seminar-card { grid-template-columns: 1fr; } .seminar-reg-btn { width: 100%; justify-content: center; } }
+    /* ===== SEMINAR CARD LIST ===== */
+    .seminar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
 
-    /* ===== 신청 폼 ===== */
-    .seminar-form-section { padding-top: 56px; border-top: 1px solid var(--border); }
-    .section-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
-    .section-desc { font-size: 14px; color: var(--gray); margin-bottom: 32px; line-height: 1.9; }
-    .seminar-panel { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 40px; max-width: 680px; }
-    .sf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .sf-group { display: flex; flex-direction: column; gap: 7px; }
-    .sf-group.full { grid-column: 1 / -1; }
-    .sf-label { font-size: 13px; font-weight: 600; color: var(--black); }
-    .sf-label .req { color: var(--red); margin-left: 2px; }
-    .sf-input, .sf-select { width: 100%; height: 50px; padding: 0 16px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-family: var(--font-sans); color: var(--black); background: var(--white); transition: border-color 0.2s, box-shadow 0.2s; appearance: none; }
-    .sf-input:focus, .sf-select:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(192,39,26,0.1); }
-    .sf-input.error, .sf-select.error { border-color: var(--red) !important; background: #fff8f8; }
-    .sf-err { font-size: 11.5px; color: var(--red); display: none; }
-    .sf-err.show { display: block; }
-    .sf-sel-wrap { position: relative; }
-    .sf-sel-wrap::after { content: ''; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
-    .sf-btn-group { display: flex; gap: 10px; }
-    .sf-btn { flex: 1; height: 50px; border: 1.5px solid var(--border); border-radius: 9px; font-size: 14px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.2s; }
-    .sf-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
-    .sf-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
-    .sf-submit { width: 100%; height: 58px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 16px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
-    .sf-submit:hover:not(:disabled) { background: #8B1A11; transform: translateY(-2px); }
-    .sf-submit:disabled { background: #bbb; cursor: not-allowed; box-shadow: none; }
-    .sf-spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: white; border-radius: 50%; animation: sfSpin 0.7s linear infinite; display: none; }
-    .sf-submit.submitting .sf-spinner { display: block; }
-    @keyframes sfSpin { to { transform: rotate(360deg); } }
-    @media (max-width: 640px) { .seminar-panel { padding: 24px 16px; } .sf-grid { grid-template-columns: 1fr; } .sf-btn-group { flex-direction: column; } }
+    .seminar-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow 0.22s, transform 0.22s, border-color 0.22s; cursor: pointer; }
+    .seminar-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.11); transform: translateY(-4px); border-color: rgba(192,39,26,0.25); }
+
+    .sc-poster { height: 200px; background: linear-gradient(135deg, #1C1C1C 0%, #3a1a18 50%, #C0271A 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; flex-shrink: 0; }
+    .sc-poster img { width: 100%; height: 100%; object-fit: cover; }
+    .sc-poster-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+    .sc-poster-icon { width: 52px; height: 52px; background: rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .sc-poster-placeholder span { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+    .sc-status-badge { position: absolute; top: 14px; right: 14px; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+    .sc-status-open { background: #E8F5E9; color: #1B5E20; }
+    .sc-status-soon { background: #FFF3E0; color: #E65100; }
+    .sc-status-closed { background: #EEEEEE; color: #757575; }
+
+    .sc-body { padding: 24px 24px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .sc-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; background: #FFF3E0; color: #BF360C; border: 1px solid #E64A19; letter-spacing: 0.5px; align-self: flex-start; }
+    .sc-title { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--black); line-height: 1.45; }
+    .sc-meta { display: flex; flex-direction: column; gap: 5px; }
+    .sc-meta-row { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--gray); }
+    .sc-meta-row svg { flex-shrink: 0; opacity: 0.6; }
+    .sc-reg-period { margin-top: 4px; padding: 10px 14px; background: var(--gray-light); border-radius: 8px; font-size: 12px; color: var(--gray); }
+    .sc-reg-period strong { color: var(--black); font-weight: 600; }
+    .sc-cta { margin-top: auto; padding-top: 16px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); }
+    .sc-cta span { font-size: 13px; font-weight: 600; color: var(--red); }
+    .sc-cta svg { transition: transform 0.2s; }
+    .seminar-card:hover .sc-cta svg { transform: translateX(4px); }
+
+    .seminar-empty { padding: 80px 0; text-align: center; color: var(--gray); }
+    .seminar-empty p:first-child { font-size: 18px; font-weight: 500; color: var(--black); margin-bottom: 8px; }
 
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -126,6 +114,7 @@
     .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
     @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
+    @media (max-width: 480px) { .seminar-grid { grid-template-columns: 1fr; } }
 
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -182,73 +171,8 @@
       <a href="news-timetable.html" class="news-tab">학원 시간표</a>
     </div>
 
-    <!-- 설명회 목록 -->
-    <div class="fade-up">
-      <div class="seminar-list" id="seminarList">
-        <div class="seminar-empty">설명회 일정을 불러오는 중…</div>
-      </div>
-    </div>
-
-    <!-- 신청 폼 -->
-    <div class="seminar-form-section fade-up" id="seminarFormSection">
-      <h2 class="section-title">설명회 신청하기</h2>
-      <p class="section-desc">삼년의 신화 국어논술학원 설명회에 참가 신청하세요.<br>담당 선생님이 확인 후 일정 안내 연락을 드립니다.</p>
-
-      <div class="seminar-panel">
-        <form id="seminarForm" name="seminar" data-netlify="true" action="/success.html" novalidate>
-          <input type="hidden" name="form-name" value="seminar">
-          <input type="hidden" id="sf-levelHidden" name="학교급" value="">
-          <input type="hidden" id="sf-statusHidden" name="재원여부" value="">
-
-          <div class="sf-grid">
-            <div class="sf-group">
-              <label class="sf-label" for="sf-name">이름 <span class="req">*</span></label>
-              <input type="text" id="sf-name" name="이름" class="sf-input" placeholder="성함을 입력해 주세요">
-              <span class="sf-err" id="sf-nameErr">이름을 입력해 주세요.</span>
-            </div>
-            <div class="sf-group">
-              <label class="sf-label" for="sf-phone">연락처 <span class="req">*</span></label>
-              <input type="tel" id="sf-phone" name="연락처" class="sf-input" placeholder="010-0000-0000" maxlength="13">
-              <span class="sf-err" id="sf-phoneErr">올바른 연락처를 입력해 주세요.</span>
-            </div>
-
-            <div class="sf-group full">
-              <label class="sf-label">학교급 <span class="req">*</span></label>
-              <div class="sf-btn-group" id="sf-levelGroup">
-                <button type="button" class="sf-btn" data-level="초등">초등</button>
-                <button type="button" class="sf-btn" data-level="중등">중등</button>
-                <button type="button" class="sf-btn" data-level="고등">고등</button>
-              </div>
-              <span class="sf-err" id="sf-levelErr">학교급을 선택해 주세요.</span>
-            </div>
-
-            <div class="sf-group" id="sf-gradeGroup" style="display:none;">
-              <label class="sf-label" for="sf-grade">학년 <span class="req">*</span></label>
-              <div class="sf-sel-wrap">
-                <select id="sf-grade" name="학년" class="sf-select">
-                  <option value="">학년 선택</option>
-                </select>
-              </div>
-              <span class="sf-err" id="sf-gradeErr">학년을 선택해 주세요.</span>
-            </div>
-
-            <div class="sf-group full">
-              <label class="sf-label">재원 여부 <span class="req">*</span></label>
-              <div class="sf-btn-group" id="sf-statusGroup">
-                <button type="button" class="sf-btn" data-status="현재 재원 중">현재 재원 중</button>
-                <button type="button" class="sf-btn" data-status="이전 재원">이전에 재원한 적 있음</button>
-                <button type="button" class="sf-btn" data-status="비재원">비재원</button>
-              </div>
-              <span class="sf-err" id="sf-statusErr">재원 여부를 선택해 주세요.</span>
-            </div>
-          </div>
-
-          <button type="submit" class="sf-submit" id="sf-submitBtn">
-            <div class="sf-spinner"></div>
-            <span class="sf-btn-text">설명회 신청하기</span>
-          </button>
-        </form>
-      </div>
+    <div class="seminar-grid fade-up" id="seminarGrid">
+      <div style="grid-column:1/-1;padding:40px 0;text-align:center;color:var(--gray);font-size:14px;">설명회 정보를 불러오는 중…</div>
     </div>
 
   </div>
@@ -286,131 +210,76 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  // ===== 설명회 목록 =====
+  function parseDate(str) {
+    if (!str) return null;
+    const [y, m, d] = str.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }
   function formatDate(str) {
     if (!str) return '';
-    const [y, m, d] = str.split('-').map(Number);
-    const date = new Date(y, m - 1, d);
-    const dow = ['일','월','화','수','목','금','토'][date.getDay()];
-    return `${y}년 ${m}월 ${d}일 (${dow})`;
+    const d = parseDate(str);
+    const dow = ['일','월','화','수','목','금','토'][d.getDay()];
+    return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${dow})`;
+  }
+  function getStatus(open, close) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    const o = parseDate(open), c = parseDate(close);
+    if (!o || !c) return null;
+    if (today < o) return { label: '신청 예정', cls: 'sc-status-soon' };
+    if (today > c) return { label: '신청 마감', cls: 'sc-status-closed' };
+    return { label: '신청 중', cls: 'sc-status-open' };
   }
 
   fetch('/data/schedule.json')
     .then(r => r.json())
     .then(data => {
       const seminars = (data.events || []).filter(e => e.type === '설명회');
-      const list = document.getElementById('seminarList');
+      const grid = document.getElementById('seminarGrid');
       if (!seminars.length) {
-        list.innerHTML = '<div class="seminar-empty">현재 예정된 설명회가 없습니다.<br>카카오톡 채널을 통해 문의해 주세요.</div>';
+        grid.innerHTML = `<div class="seminar-empty" style="grid-column:1/-1;">
+          <p>현재 예정된 설명회가 없습니다.</p>
+          <p style="font-size:14px;color:var(--gray);margin-top:6px;">카카오톡 채널을 통해 새로운 설명회 일정을 가장 먼저 받아보세요.</p>
+        </div>`;
         return;
       }
-      list.innerHTML = seminars.map(s => {
-        const href = s.registration_link || '#seminarFormSection';
-        return `<div class="seminar-card">
-          <div>
-            <div class="seminar-badge">설명회</div>
-            <h3>${s.title}</h3>
-            <div class="seminar-meta">
-              <div class="seminar-meta-row"><span class="seminar-meta-label">일시</span><span class="seminar-meta-value">${formatDate(s.date)}${s.time ? ' ' + s.time : ''}</span></div>
-              ${s.location ? `<div class="seminar-meta-row"><span class="seminar-meta-label">장소</span><span class="seminar-meta-value">${s.location}</span></div>` : ''}
-              ${s.content ? `<div class="seminar-meta-row" style="margin-top:6px;"><span class="seminar-meta-label" style="min-width:0;color:var(--gray-dark);font-size:13px;">${s.content.split('\n')[0]}</span></div>` : ''}
+      grid.innerHTML = seminars.map((s, i) => {
+        const status = getStatus(s.registration_open, s.registration_close);
+        const statusHtml = status ? `<div class="sc-status-badge ${status.cls}">${status.label}</div>` : '';
+        const posterHtml = s.poster
+          ? `<img src="${s.poster}" alt="${s.title} 포스터">`
+          : `<div class="sc-poster-placeholder">
+              <div class="sc-poster-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
+              <span>설명회</span>
+            </div>`;
+        const regPeriod = s.registration_open && s.registration_close
+          ? `<div class="sc-reg-period">신청 기간 <strong>${s.registration_open.replace(/-/g,'.')} ~ ${s.registration_close.replace(/-/g,'.')}</strong></div>`
+          : '';
+        return `<a href="news-seminar-detail.html?id=${i}" class="seminar-card">
+          <div class="sc-poster">${posterHtml}${statusHtml}</div>
+          <div class="sc-body">
+            <div class="sc-badge">설명회</div>
+            <div class="sc-title">${s.title}</div>
+            <div class="sc-meta">
+              <div class="sc-meta-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                ${formatDate(s.date)}${s.time ? ' ' + s.time : ''}
+              </div>
+              ${s.location ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${s.location}</div>` : ''}
+              ${s.target ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>${s.target}</div>` : ''}
+            </div>
+            ${regPeriod}
+            <div class="sc-cta">
+              <span>자세히 보기 · 신청하기</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
-          <a href="${href}" class="seminar-reg-btn" ${s.registration_link ? 'target="_blank" rel="noopener"' : ''}>신청하기 →</a>
-        </div>`;
+        </a>`;
       }).join('');
     })
     .catch(() => {
-      document.getElementById('seminarList').innerHTML = '<div class="seminar-empty">설명회 정보를 불러올 수 없습니다.</div>';
+      document.getElementById('seminarGrid').innerHTML =
+        '<div style="grid-column:1/-1;padding:40px 0;text-align:center;color:var(--gray);font-size:14px;">설명회 정보를 불러올 수 없습니다.</div>';
     });
-
-  // ===== 신청 폼 =====
-  const sfGradeMap = {
-    '초등': [['초1','1학년'],['초2','2학년'],['초3','3학년'],['초4','4학년'],['초5','5학년'],['초6','6학년']],
-    '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
-    '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
-  };
-  let sfLevel = '', sfStatus = '';
-
-  document.getElementById('sf-phone').addEventListener('input', function() {
-    let v = this.value.replace(/\D/g, '');
-    if (v.length <= 3) this.value = v;
-    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
-    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
-  });
-
-  document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      sfLevel = btn.dataset.level;
-      document.getElementById('sf-levelHidden').value = sfLevel;
-      const sel = document.getElementById('sf-grade');
-      sel.innerHTML = '<option value="">학년 선택</option>';
-      sfGradeMap[sfLevel].forEach(([val, lbl]) => {
-        const o = document.createElement('option'); o.value = val; o.textContent = lbl; sel.appendChild(o);
-      });
-      sel.value = ''; sel.classList.remove('error');
-      document.getElementById('sf-gradeGroup').style.display = '';
-      document.getElementById('sf-levelErr').classList.remove('show');
-    });
-  });
-
-  document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      sfStatus = btn.dataset.status;
-      document.getElementById('sf-statusHidden').value = sfStatus;
-      document.getElementById('sf-statusErr').classList.remove('show');
-    });
-  });
-
-  document.getElementById('seminarForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const nameEl  = document.getElementById('sf-name');
-    const phoneEl = document.getElementById('sf-phone');
-    const gradeEl = document.getElementById('sf-grade');
-    const btn     = document.getElementById('sf-submitBtn');
-
-    let ok = true;
-    if (!nameEl.value.trim()) { nameEl.classList.add('error'); document.getElementById('sf-nameErr').classList.add('show'); ok = false; }
-    else { nameEl.classList.remove('error'); document.getElementById('sf-nameErr').classList.remove('show'); }
-    if (!/^010-\d{4}-\d{4}$/.test(phoneEl.value.trim())) { phoneEl.classList.add('error'); document.getElementById('sf-phoneErr').classList.add('show'); ok = false; }
-    else { phoneEl.classList.remove('error'); document.getElementById('sf-phoneErr').classList.remove('show'); }
-    if (!sfLevel) { document.getElementById('sf-levelErr').classList.add('show'); ok = false; }
-    else if (!gradeEl.value) { gradeEl.classList.add('error'); document.getElementById('sf-gradeErr').classList.add('show'); ok = false; }
-    else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
-    if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
-    if (!ok) return;
-
-    btn.disabled = true; btn.classList.add('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '접수 처리 중...';
-
-    try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(this)).toString(),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    } catch (err) {
-      btn.disabled = false; btn.classList.remove('submitting');
-      btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
-      return;
-    }
-
-    btn.disabled = false; btn.classList.remove('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '설명회 신청하기';
-    this.reset();
-    sfLevel = ''; sfStatus = '';
-    document.getElementById('sf-levelHidden').value = '';
-    document.getElementById('sf-statusHidden').value = '';
-    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('sf-gradeGroup').style.display = 'none';
-    alert('설명회 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
-  });
 </script>
 </body>
 </html>
