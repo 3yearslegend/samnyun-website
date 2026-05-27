@@ -6,6 +6,13 @@
       "category": "설명회",
       "date": "2026.05.27",
       "content": "설명회 진행합니다"
+    },
+    {
+      "pinned": false,
+      "title": "학원 방학",
+      "category": "일정",
+      "date": "2026.07.29~2026.08.04",
+      "content": "여름방학"
     }
   ]
 }
