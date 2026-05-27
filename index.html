@@ -430,7 +430,7 @@
     .nb-red { background: var(--red-light); color: var(--red); }
     .nb-gray { background: #E8E8E6; color: var(--gray); }
     .nb-black { background: var(--black); color: var(--white); }
-    .notice-row-title { flex: 1; font-size: 14px; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.15s; }
+    .notice-row-title { flex: 1; font-size: 14px; color: var(--black); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.15s; text-decoration: none; }
     .notice-row-date { font-size: 12px; color: var(--gray); flex-shrink: 0; }
     @media (max-width: 768px) { .notices-split { grid-template-columns: 1fr; } }
 
@@ -662,7 +662,7 @@
         <h2 class="hero-h2">체계적인 독해와 논술 교육으로<br><em>스스로 생각하고 쓰는 힘</em>을 키웁니다</h2>
         <div class="hero-buttons">
           <a href="#consult-cta" class="btn-primary">상담 신청하기 →</a>
-          <a href="#notices-section" class="btn-outline">시간표 보기</a>
+          <a href="news-timetable.html" class="btn-outline">시간표 보기</a>
         </div>
         <div class="hero-kpi">
           <div class="hero-kpi-item"><div class="num">[N]<small>년</small></div><div class="lbl">교육 경력</div></div>
@@ -682,7 +682,7 @@
         <h1 class="hero-h1">[슬라이드 2<br>제목을 입력하세요]</h1>
         <h2 class="hero-h2">[슬라이드 2 부제목을 <em>입력하세요</em>]</h2>
         <div class="hero-buttons">
-          <a href="#curriculum" class="btn-primary">커리큘럼 보기 →</a>
+          <a href="curriculum.html" class="btn-primary">커리큘럼 보기 →</a>
           <a href="#consult-cta" class="btn-outline">상담 신청</a>
         </div>
       </div>
@@ -723,17 +723,17 @@
         <div class="ql-text"><strong>입학 상담</strong><span>맞춤 반 배정 안내</span></div>
         <div class="ql-arrow">→</div>
       </a>
-      <a href="#curriculum" class="ql-card">
+      <a href="curriculum.html" class="ql-card">
         <div class="ql-icon">📚</div>
         <div class="ql-text"><strong>커리큘럼 보기</strong><span>초·중·고 과정 안내</span></div>
         <div class="ql-arrow">→</div>
       </a>
-      <a href="#notices-section" class="ql-card">
+      <a href="news-timetable.html" class="ql-card">
         <div class="ql-icon">🗓️</div>
         <div class="ql-text"><strong>학원 시간표</strong><span>수업 일정 확인</span></div>
         <div class="ql-arrow">→</div>
       </a>
-      <a href="about-results.html" class="ql-card">
+      <a href="reviews-honor.html" class="ql-card">
         <div class="ql-icon">🏆</div>
         <div class="ql-text"><strong>명예의 전당</strong><span>합격 실적 보기</span></div>
         <div class="ql-arrow">→</div>
@@ -913,13 +913,13 @@
       <div class="notices-panel">
         <div class="notices-panel-header">
           <div class="notices-panel-title">공지사항</div>
-          <a href="#" class="notices-more">전체보기</a>
+          <a href="news-notice.html" class="notices-more">전체보기</a>
         </div>
-        <div class="notice-row"><span class="notice-badge nb-red">공지</span><span class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-red">공지</span><span class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><span class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-black">이벤트</span><span class="notice-row-title">[이벤트] 여기에 이벤트 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><span class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</span><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-red">공지</span><a href="news-notice-detail.html" class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-red">공지</span><a href="news-notice-detail.html" class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><a href="news-notice-detail.html" class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-black">이벤트</span><a href="news-notice-detail.html" class="notice-row-title">[이벤트] 여기에 이벤트 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
+        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><a href="news-notice-detail.html" class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
       </div>
     </div>
   </div>
