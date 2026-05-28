@@ -3,7 +3,7 @@ backend:
   repo: 3yearslegend/samnyun-website
   branch: main
   auth_type: pkce
-  app_id: YOUR_GITHUB_OAUTH_APP_CLIENT_ID   # GitHub OAuth App의 Client ID로 교체하세요
+  app_id: Ov23liTqq5nALCLrN53Z
 
 site_url: https://3yearslegend.github.io/samnyun-website
 display_url: https://3yearslegend.github.io/samnyun-website
