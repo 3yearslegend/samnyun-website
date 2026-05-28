@@ -363,10 +363,10 @@
   const params = new URLSearchParams(location.search);
   const seminardIdx = parseInt(params.get('id') || '0', 10);
 
-  fetch('/data/schedule.json')
+  fetch('data/seminars.json')
     .then(r => r.json())
     .then(data => {
-      const seminars = (data.events || []).filter(e => e.type === '설명회');
+      const seminars = data.seminars || [];
       const s = seminars[seminardIdx];
       if (!s) { showError(); return; }
       renderPage(s);
@@ -418,9 +418,55 @@
     /* ── 신청 폼 숨김 제목 ── */
     document.getElementById('sf-seminarTitle').value = s.title;
 
+    /* ── 신청 기간 체크 → 폼 조건부 표시 ── */
+    const today = new Date(); today.setHours(0,0,0,0);
+    const regOpen  = parseDate(s.registration_open);
+    const regClose = parseDate(s.registration_close);
+    const formWrap = document.querySelector('.form-sticky-wrap');
+
+    if (regClose && today > regClose) {
+      formWrap.innerHTML = `
+        <div class="form-card">
+          <div class="form-card-head" style="background:#555;">
+            <h3>신청이 마감되었습니다</h3>
+            <p>이 설명회의 신청 기간이 종료되었습니다.</p>
+          </div>
+          <div class="form-card-body" style="text-align:center;padding:36px 28px;">
+            <p style="color:var(--gray);font-size:15px;line-height:1.8;margin-bottom:24px;">
+              다음 설명회 일정은 공지사항 또는<br>카카오톡 채널을 통해 확인하세요.
+            </p>
+            <a href="news-seminar.html" style="display:inline-block;padding:12px 28px;background:var(--red);color:white;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">
+              설명회 목록 보기
+            </a>
+          </div>
+        </div>`;
+      document.getElementById('mobileCta').style.display = '';
+      document.getElementById('mobileCtatBtn').textContent = '설명회 목록 보기 →';
+      document.getElementById('mobileCtatBtn').href = 'news-seminar.html';
+    } else if (regOpen && today < regOpen) {
+      const openStr = s.registration_open.replace(/-/g, '.');
+      formWrap.innerHTML = `
+        <div class="form-card">
+          <div class="form-card-head" style="background:#E65100;">
+            <h3>신청 예정</h3>
+            <p>${openStr}부터 신청 가능합니다.</p>
+          </div>
+          <div class="form-card-body" style="text-align:center;padding:36px 28px;">
+            <p style="color:var(--gray);font-size:15px;line-height:1.8;">
+              카카오톡 채널을 구독하시면<br>신청 시작 알림을 받을 수 있습니다.
+            </p>
+            <a href="http://pf.kakao.com/_icyxgn" target="_blank" rel="noopener"
+               style="display:inline-block;margin-top:20px;padding:12px 28px;background:#FEE500;color:#3A1D1D;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700;">
+              카카오톡 채널 바로가기
+            </a>
+          </div>
+        </div>`;
+    } else {
+      document.getElementById('mobileCta').style.display = '';
+    }
+
     /* ── 페이지 표시 ── */
     document.getElementById('pageContent').style.display = '';
-    document.getElementById('mobileCta').style.display = '';
     document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   }
 

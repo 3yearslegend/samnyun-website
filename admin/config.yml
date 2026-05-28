@@ -9,7 +9,7 @@ display_url: https://3yearslegend.github.io/samnyun-website
 
 locale: ko
 media_folder: uploads
-public_folder: /uploads
+public_folder: /samnyun-website/uploads
 
 collections:
   - name: seminars
@@ -28,6 +28,9 @@ collections:
               - { label: "날짜 (예: 2026-06-10)", name: date, widget: string }
               - { label: "마감일 (신청 종료일, 예: 2026-06-09)", name: deadline, widget: string }
               - { label: 장소, name: location, widget: string }
+              - { label: "시간 (예: 오후 7:00 ~ 9:00)", name: time, widget: string, required: false }
+              - { label: "대상 (예: 고등학생 학부모)", name: target, widget: string, required: false }
+              - { label: "정원 (예: 선착순 50명)", name: capacity, widget: string, required: false }
               - label: 포스터 이미지
                 name: poster
                 widget: image

@@ -230,10 +230,10 @@
     return { label: '신청 중', cls: 'sc-status-open' };
   }
 
-  fetch('/data/schedule.json')
+  fetch('data/seminars.json')
     .then(r => r.json())
     .then(data => {
-      const seminars = (data.events || []).filter(e => e.type === '설명회');
+      const seminars = data.seminars || [];
       const grid = document.getElementById('seminarGrid');
       if (!seminars.length) {
         grid.innerHTML = `<div class="seminar-empty" style="grid-column:1/-1;">
