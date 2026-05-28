@@ -97,6 +97,39 @@
     /* Date + Time row */
     .datetime-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
+    /* ===== CONSULT CALENDAR ===== */
+    .consult-cal { border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 6px; }
+    .consult-cal.has-error { border-color: var(--red); }
+    .ccal-top { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--gray-light); border-bottom: 1px solid var(--border); }
+    .ccal-nav-btn { background: none; border: 1px solid var(--border); border-radius: 6px; width: 30px; height: 30px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: background 0.15s, border-color 0.15s; color: var(--black); line-height: 1; padding: 0; font-family: var(--font-sans); }
+    .ccal-nav-btn:hover { background: var(--red-light); border-color: var(--red); color: var(--red); }
+    .ccal-month-label { font-weight: 700; font-size: 14px; color: var(--black); }
+    .ccal-head { display: grid; grid-template-columns: repeat(7, 1fr); background: var(--gray-light); border-bottom: 1px solid var(--border); }
+    .ccal-head span { text-align: center; padding: 7px 0; font-size: 11px; font-weight: 600; color: var(--gray); }
+    .ccal-head span:first-child { color: var(--red); }
+    .ccal-head span:last-child { color: #4A90D9; }
+    .ccal-grid { display: grid; grid-template-columns: repeat(7, 1fr); padding: 8px 6px; gap: 3px; }
+    .ccal-day { aspect-ratio: 1; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; cursor: default; position: relative; transition: transform 0.12s; border: 1.5px solid transparent; }
+    .ccal-day.other-month { color: #ccc; }
+    .ccal-day.past { color: #bbb; }
+    .ccal-day.available { background: #E8F5E9; color: #1B5E20; cursor: pointer; border-color: #81C784; }
+    .ccal-day.available:hover { background: #C8E6C9; transform: scale(1.08); }
+    .ccal-day.available.selected { background: #2E7D32; color: #fff; border-color: #1B5E20; box-shadow: 0 2px 8px rgba(46,125,50,0.35); }
+    .ccal-day.unavailable { background: #FFF5F5; color: #E53935; cursor: not-allowed; border-color: #FFCDD2; }
+    .ccal-today-dot { position: absolute; bottom: 3px; width: 4px; height: 4px; background: var(--red); border-radius: 50%; }
+    .ccal-day.available.selected .ccal-today-dot { background: #fff; }
+    .ccal-legend { display: flex; gap: 16px; padding: 8px 14px 10px; border-top: 1px solid var(--border); background: var(--gray-light); }
+    .ccal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--gray); }
+    .ccal-legend-item::before { content: ''; width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+    .ccal-legend-item.avail::before { background: #E8F5E9; border: 1.5px solid #81C784; }
+    .ccal-legend-item.unavail::before { background: #FFF5F5; border: 1.5px solid #FFCDD2; }
+
+    /* Time Slots */
+    .time-slots { display: flex; flex-wrap: wrap; gap: 8px; }
+    .time-btn { padding: 9px 18px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; }
+    .time-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .time-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+
     /* Submit Button */
     .submit-btn { width: 100%; height: 62px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 17px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
     .submit-btn:hover:not(:disabled) { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,39,26,0.38); }
@@ -275,29 +308,32 @@
             <span class="form-err" id="branchErr" style="display:none;">희망 지점을 선택해 주세요.</span>
           </div>
 
-          <div class="datetime-row">
-            <div class="form-group">
-              <label class="form-label" for="consultDate">상담 희망 날짜 <span class="req">*</span></label>
-              <input type="date" id="consultDate" name="상담희망날짜" class="form-input">
-              <span class="form-err">날짜를 선택해 주세요.</span>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="consultTime">상담 희망 시간 <span class="req">*</span></label>
-              <div class="select-wrap">
-                <select id="consultTime" name="상담희망시간" class="form-select">
-                  <option value="">시간 선택</option>
-                  <option value="10:00">오전 10:00</option>
-                  <option value="11:00">오전 11:00</option>
-                  <option value="14:00">오후 2:00</option>
-                  <option value="15:00">오후 3:00</option>
-                  <option value="16:00">오후 4:00</option>
-                  <option value="17:00">오후 5:00</option>
-                  <option value="18:00">오후 6:00</option>
-                  <option value="19:00">오후 7:00</option>
-                </select>
+          <div class="form-group" style="margin-top:18px;">
+            <label class="form-label">상담 희망 날짜 <span class="req">*</span></label>
+            <input type="hidden" id="consultDate" name="상담희망날짜" value="">
+            <div class="consult-cal" id="consultCal">
+              <div class="ccal-top">
+                <button type="button" class="ccal-nav-btn" id="ccalPrev">&#8249;</button>
+                <span class="ccal-month-label" id="ccalLabel"></span>
+                <button type="button" class="ccal-nav-btn" id="ccalNext">&#8250;</button>
               </div>
-              <span class="form-err">시간을 선택해 주세요.</span>
+              <div class="ccal-head">
+                <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+              </div>
+              <div class="ccal-grid" id="ccalGrid"></div>
+              <div class="ccal-legend">
+                <span class="ccal-legend-item avail">상담 가능</span>
+                <span class="ccal-legend-item unavail">상담 불가</span>
+              </div>
             </div>
+            <span class="form-err" id="consultDateErr" style="display:none;">날짜를 선택해 주세요.</span>
+          </div>
+
+          <div class="form-group" id="timeSlotGroup" style="display:none; margin-top:18px;">
+            <label class="form-label">상담 희망 시간 <span class="req">*</span></label>
+            <input type="hidden" id="consultTime" name="상담희망시간" value="">
+            <div class="time-slots" id="timeSlots"></div>
+            <span class="form-err" id="consultTimeErr" style="display:none;">시간을 선택해 주세요.</span>
           </div>
 
           <div class="form-group" style="margin-top:18px;">
@@ -419,8 +455,117 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  // 날짜 min 오늘로 설정
-  document.getElementById('consultDate').min = new Date().toISOString().split('T')[0];
+  // ===== 상담 캘린더 =====
+  let availableSlots = {};
+  let ccalYear, ccalMonth;
+  let selectedDate = '', selectedTime = '';
+
+  function dateToStr(d) {
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function formatTime(t) {
+    const [h, m] = t.split(':').map(Number);
+    if (h < 12) return '오전 ' + h + ':' + String(m).padStart(2,'0');
+    if (h === 12) return '오후 12:' + String(m).padStart(2,'0');
+    return '오후 ' + (h-12) + ':' + String(m).padStart(2,'0');
+  }
+
+  function renderCCal(year, month) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    document.getElementById('ccalLabel').textContent = year + '년 ' + monthNames[month];
+    const firstDow = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const weeks = Math.ceil((firstDow + totalDays) / 7);
+    let html = '';
+    for (let i = 0; i < weeks * 7; i++) {
+      const date = new Date(year, month, 1 - firstDow + i);
+      const dateStr = dateToStr(date);
+      const isOtherMonth = date.getMonth() !== month;
+      const isPast = date < today;
+      const isToday = !isPast && dateStr === dateToStr(today);
+      const isAvailable = !isOtherMonth && !isPast && !!availableSlots[dateStr];
+      const isUnavailable = !isOtherMonth && !isPast && !availableSlots[dateStr];
+      const isSelected = dateStr === selectedDate;
+      let cls = 'ccal-day';
+      if (isOtherMonth) cls += ' other-month';
+      else if (isPast) cls += ' past';
+      else if (isAvailable) cls += ' available' + (isSelected ? ' selected' : '');
+      else if (isUnavailable) cls += ' unavailable';
+      const dot = isToday ? '<span class="ccal-today-dot"></span>' : '';
+      const attr = isAvailable ? ' data-date="' + dateStr + '"' : '';
+      html += '<div class="' + cls + '"' + attr + '>' + date.getDate() + dot + '</div>';
+    }
+    document.getElementById('ccalGrid').innerHTML = html;
+    document.querySelectorAll('#ccalGrid .ccal-day.available').forEach(el => {
+      el.addEventListener('click', () => {
+        selectedDate = el.dataset.date;
+        document.getElementById('consultDate').value = selectedDate;
+        document.getElementById('consultDateErr').style.display = 'none';
+        document.getElementById('consultCal').classList.remove('has-error');
+        renderCCal(ccalYear, ccalMonth);
+        showTimeSlots(selectedDate);
+      });
+    });
+  }
+
+  function showTimeSlots(dateStr) {
+    const times = availableSlots[dateStr] || [];
+    selectedTime = '';
+    document.getElementById('consultTime').value = '';
+    document.getElementById('consultTimeErr').style.display = 'none';
+    const container = document.getElementById('timeSlots');
+    container.innerHTML = times.map(t =>
+      '<button type="button" class="time-btn" data-time="' + t + '">' + formatTime(t) + '</button>'
+    ).join('');
+    container.querySelectorAll('.time-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        container.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedTime = btn.dataset.time;
+        document.getElementById('consultTime').value = selectedTime;
+        document.getElementById('consultTimeErr').style.display = 'none';
+      });
+    });
+    document.getElementById('timeSlotGroup').style.display = '';
+  }
+
+  document.getElementById('ccalPrev').addEventListener('click', () => {
+    ccalMonth--; if (ccalMonth < 0) { ccalMonth = 11; ccalYear--; }
+    renderCCal(ccalYear, ccalMonth);
+  });
+  document.getElementById('ccalNext').addEventListener('click', () => {
+    ccalMonth++; if (ccalMonth > 11) { ccalMonth = 0; ccalYear++; }
+    renderCCal(ccalYear, ccalMonth);
+  });
+
+  fetch('data/consultation.json')
+    .then(r => r.json())
+    .then(data => {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const weeklyMap = {};
+      (data.weekly || []).forEach(w => { weeklyMap[+w.day] = w.times || []; });
+      const extraMap = {};
+      (data.extra || []).forEach(e => { extraMap[e.date] = e.times || []; });
+      const excludeSet = new Set(data.exclude || []);
+      // 오늘부터 180일간 가능한 날짜 사전 계산
+      for (let i = 0; i <= 180; i++) {
+        const d = new Date(today); d.setDate(today.getDate() + i);
+        const ds = dateToStr(d);
+        if (excludeSet.has(ds)) continue;
+        if (extraMap[ds]) { availableSlots[ds] = extraMap[ds]; continue; }
+        const dow = d.getDay();
+        if (weeklyMap[dow]) availableSlots[ds] = weeklyMap[dow];
+      }
+      const now = new Date();
+      ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
+      renderCCal(ccalYear, ccalMonth);
+    })
+    .catch(() => {
+      const now = new Date();
+      ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
+      renderCCal(ccalYear, ccalMonth);
+    });
 
   // 연락처 자동 하이픈 포맷팅 (010-XXXX-XXXX)
   document.getElementById('contactPhone').addEventListener('input', function() {
@@ -510,8 +655,9 @@
     else { v3b = validateSelect(grade); }
     const v4 = validatePhone(phone);
     const v5 = selectedBranch !== '' || (() => { document.getElementById('branchErr').style.display = 'block'; return false; })();
-    const v6 = validateField(consultDate);
-    const v7 = validateSelect(consultTime);
+    let v6 = true, v7 = true;
+    if (!selectedDate) { v6 = false; document.getElementById('consultDateErr').style.display = 'block'; document.getElementById('consultCal').classList.add('has-error'); }
+    if (!selectedTime) { v7 = false; document.getElementById('consultTimeErr').style.display = 'block'; }
     if (!(v1 && v2 && v3a && v3b && v4 && v5 && v6 && v7)) return;
 
     btn.disabled = true;
@@ -538,11 +684,16 @@
     btn.querySelector('.btn-text').textContent = '상담 신청하기';
 
     this.reset();
-    selectedBranch = ''; selectedLevel = '';
+    selectedBranch = ''; selectedLevel = ''; selectedDate = ''; selectedTime = '';
     document.getElementById('branchHidden').value = '';
     document.getElementById('levelHidden').value = '';
+    document.getElementById('consultDate').value = '';
+    document.getElementById('consultTime').value = '';
     document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
     document.getElementById('gradeGroup').style.display = 'none';
+    document.getElementById('timeSlotGroup').style.display = 'none';
+    document.getElementById('timeSlots').innerHTML = '';
+    renderCCal(ccalYear, ccalMonth);
     document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => el.classList.remove('error'));
 
     showToast();
