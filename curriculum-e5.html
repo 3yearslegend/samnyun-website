@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>커리큘럼 | 삼년의 신화 국어논술학원</title>
+  <title>초5 커리큘럼 | 삼년의 신화 국어논술학원</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,8 +12,6 @@
     :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
     html { scroll-behavior: smooth; }
     body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
-
-    /* NAV */
     #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
     #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
     .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
@@ -56,58 +54,87 @@
     /* PAGE HEADER */
     .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; }
     .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; flex-wrap: wrap; }
     .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
     .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
-    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 14px; }
-    .ph-inner p { font-size: 16px; color: rgba(255,255,255,0.48); max-width: 500px; }
+    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 10px; }
+    .ph-inner p { font-size: 15px; color: rgba(255,255,255,0.48); max-width: 500px; }
     @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
 
     /* LAYOUT */
-    .page-content { padding: 72px 0 120px; }
+    .page-content { padding: 0 0 120px; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
+    @media (max-width: 768px) { .page-content { padding: 0 0 80px; } .container { padding: 0 20px; } }
 
-    /* D1 TABS */
-    .cur-d1 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gray-light); border-radius: 16px; padding: 6px; margin-bottom: 52px; }
-    .cur-d1-btn { padding: 15px 8px; border: none; border-radius: 12px; cursor: pointer; font-family: var(--font-sans); font-size: 17px; font-weight: 700; color: var(--gray); background: transparent; transition: all 0.25s; letter-spacing: -0.3px; }
-    .cur-d1-btn.active { background: var(--white); color: var(--red); box-shadow: 0 2px 16px rgba(0,0,0,0.09); }
-    @media (max-width: 480px) { .cur-d1-btn { font-size: 15px; padding: 12px 4px; } }
+    /* GRADE NAV BAR */
+    .grade-nav-bar { background: var(--gray-light); border-bottom: 1px solid var(--border); padding: 0; position: sticky; top: var(--nav-h); z-index: 100; }
+    .gnb-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; gap: 0; }
+    .gnb-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 1px; margin-right: 20px; white-space: nowrap; padding: 16px 0; border-right: 1px solid var(--border); padding-right: 20px; }
+    .gnb-grades { display: flex; gap: 4px; padding: 10px 0; }
+    .gnb-grade { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--gray); background: var(--white); border: 1.5px solid var(--border); transition: all 0.2s; white-space: nowrap; }
+    .gnb-grade:hover { color: var(--red); border-color: var(--red); }
+    .gnb-grade.active { color: var(--white); background: var(--red); border-color: var(--red); }
+    .gnb-back { margin-left: auto; font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 10px 0; white-space: nowrap; transition: color 0.2s; }
+    .gnb-back:hover { color: var(--red); }
+    @media (max-width: 768px) { .gnb-inner { padding: 0 20px; overflow-x: auto; } .gnb-back { display: none; } .gnb-label { display: none; } }
 
-    /* PANEL */
-    .cur-panel { display: none; }
-    .cur-panel.active { display: block; }
+    /* COURSE TABS */
+    .course-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 52px; margin-top: 52px; }
+    .course-tab { padding: 14px 32px; border: none; background: none; font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--gray); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; }
+    .course-tab.active.regular { color: var(--red); border-bottom-color: var(--red); }
+    .course-tab.active.naesin { color: var(--black); border-bottom-color: var(--black); }
+    @media (max-width: 480px) { .course-tab { padding: 12px 20px; font-size: 15px; } }
 
-    /* SECTION INTRO */
-    .section-intro { margin-bottom: 44px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
-    .section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-    .section-intro h2 { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 10px; }
-    .section-intro p { font-size: 15px; color: var(--gray); line-height: 1.9; max-width: 700px; }
+    /* COURSE PANEL */
+    .course-panel { display: none; }
+    .course-panel.active { display: block; }
 
-    /* GRADE CARDS GRID */
-    .grade-grid { display: grid; gap: 20px; }
-    .grade-grid.col-2 { grid-template-columns: repeat(2, 1fr); }
-    .grade-grid.col-3 { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 900px) { .grade-grid.col-3 { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .grade-grid.col-2, .grade-grid.col-3 { grid-template-columns: 1fr; } }
+    /* COURSE HEADER */
+    .course-header { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; margin-bottom: 48px; }
+    @media (max-width: 860px) { .course-header { grid-template-columns: 1fr; gap: 28px; } }
+    .ch-left {}
+    .ch-badge { display: inline-block; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .ch-badge.regular { background: var(--red-light); color: var(--red); }
+    .ch-badge.naesin { background: #f0f0ee; color: var(--black); }
+    .ch-title { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.35; }
+    .ch-desc { font-size: 15px; color: var(--gray); line-height: 1.9; }
+    .ch-right {}
 
-    /* GRADE CARD */
-    .grade-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s; }
-    .grade-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); border-color: var(--red); }
-    .gc-top { padding: 28px 28px 20px; }
-    .gc-badge { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--red-light); color: var(--red); font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.5px; }
-    .gc-grade-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-    .gc-title { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.35; }
-    .gc-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
-    .gc-chips { display: flex; gap: 6px; padding: 0 28px 20px; flex-wrap: wrap; }
-    .gc-chip { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; }
-    .gc-chip.regular { background: var(--red-light); color: var(--red); }
-    .gc-chip.naesin { background: #f0f0ee; color: var(--black); }
-    .gc-foot { margin-top: auto; padding: 16px 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--gray-light); }
-    .gc-cta { font-size: 13px; font-weight: 600; color: var(--red); }
-    .gc-arrow { width: 20px; height: 20px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-    .grade-card:hover .gc-arrow { transform: translateX(3px); }
-    .gc-arrow svg { fill: none; stroke: white; stroke-width: 2; }
+    /* IMAGE AREA */
+    .course-img-area { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+    .course-img-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .course-img-placeholder { width: 100%; height: 100%; background: var(--gray-light); border: 2px dashed var(--border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--gray); font-size: 13px; min-height: 200px; }
+    .course-img-placeholder svg { opacity: 0.4; }
+
+    /* MODULE GRID */
+    .section-title { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+    .module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+    @media (max-width: 640px) { .module-grid { grid-template-columns: repeat(2, 1fr); } }
+    .module-card { padding: 20px 16px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .module-card:hover { border-color: var(--red); transform: translateY(-2px); }
+    .module-icon { font-size: 28px; margin-bottom: 10px; }
+    .module-name { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+    .module-sub { font-size: 12px; color: var(--gray); }
+
+    /* POINTS */
+    .points-section { background: var(--gray-light); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; }
+    .points-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .points-list li { font-size: 14px; color: var(--gray-dark); display: flex; align-items: flex-start; gap: 10px; line-height: 1.65; }
+    .points-list li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .points-list.regular li::before { color: var(--red); }
+    .points-list.naesin li::before { color: var(--black); }
+
+    /* SECOND IMAGE AREA */
+    .course-img2-area { margin-bottom: 40px; }
+    .course-img2-area .course-img-placeholder { aspect-ratio: 16/6; min-height: 120px; }
+
+    /* CTA BOX */
+    .cta-box { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); border-radius: 20px; padding: 44px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 64px; }
+    .cta-box h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .cta-box p { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .cta-btn { background: var(--white); color: var(--red); padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); }
+    @media (max-width: 640px) { .cta-box { flex-direction: column; padding: 32px 24px; text-align: center; } }
 
     /* FOOTER */
     footer { background: #111; padding: 64px 0 36px; }
@@ -124,10 +151,6 @@
     .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
     @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
-
-    /* ANIMATIONS */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -165,180 +188,148 @@
 
 <section class="page-header">
   <div class="ph-inner">
-    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><span class="current">커리큘럼</span></div>
-    <h1>커리큘럼</h1>
-    <p>초등부터 고등까지, 학년별 맞춤 국어 로드맵으로 실력을 완성합니다.</p>
+    <div class="ph-breadcrumb">
+      <a href="index.html">홈</a><span>›</span>
+      <a href="curriculum.html?tab=elem">커리큘럼</a><span>›</span>
+      <a href="curriculum.html?tab=elem">초등</a><span>›</span>
+      <span class="current">초5</span>
+    </div>
+    <h1>초5 커리큘럼</h1>
+    <p>독해·어휘의 기초를 다지고, 스스로 읽고 쓰는 습관을 완성합니다.</p>
   </div>
 </section>
+
+<div class="grade-nav-bar">
+  <div class="gnb-inner">
+    <span class="gnb-label">초등 과정</span>
+    <div class="gnb-grades">
+      <a href="curriculum-e5.html" class="gnb-grade active">초5</a>
+      <a href="curriculum-e6.html" class="gnb-grade">초6</a>
+    </div>
+    <a href="curriculum.html?tab=elem" class="gnb-back">← 전체 보기</a>
+  </div>
+</div>
 
 <main class="page-content">
   <div class="container">
 
-    <!-- D1: 초등 / 중등 / 고등 탭 -->
-    <div class="cur-d1 fade-up">
-      <button class="cur-d1-btn" data-tab="elem">초등</button>
-      <button class="cur-d1-btn" data-tab="middle">중등</button>
-      <button class="cur-d1-btn" data-tab="high">고등</button>
+    <div class="course-tabs">
+      <button class="course-tab active regular" data-panel="regular">정규 과정</button>
+      <button class="course-tab naesin" data-panel="naesin">내신 과정</button>
     </div>
 
-    <!-- 초등 패널 -->
-    <div class="cur-panel fade-up" id="panel-elem">
-      <div class="section-intro">
-        <span class="section-tag">Elementary School</span>
-        <h2>기초부터 탄탄하게, 국어 실력의 뿌리를 키웁니다</h2>
-        <p>초등 단계에서 올바른 독해 습관과 글쓰기 기초를 다지는 것이 중요합니다. 삼년의 신화 초등 과정은 학년별 수준에 맞는 체계적인 커리큘럼으로, 아이가 스스로 읽고 생각하고 쓰는 힘을 키울 수 있도록 이끌어드립니다.</p>
+    <!-- 정규 과정 -->
+    <div class="course-panel active" id="panel-regular">
+      <div class="course-header">
+        <div class="ch-left">
+          <span class="ch-badge regular">정규 과정</span>
+          <h2 class="ch-title">초등 독해·어휘 완성반</h2>
+          <p class="ch-desc">5학년 핵심 교과 어휘와 독해 전략을 익히며, 글 읽기의 기초를 탄탄하게 다집니다. 교과 연계 어휘와 독해 전략을 결합하여 이후 모든 학습의 기초가 되는 문해력을 완성합니다.</p>
+        </div>
+        <div class="ch-right">
+          <!-- 이미지 삽입: src 속성에 실제 이미지 경로를 입력하세요 -->
+          <div class="course-img-placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>커리큘럼 이미지를 삽입하세요</span>
+          </div>
+        </div>
       </div>
-      <div class="grade-grid col-2">
-        <a href="curriculum-e5.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">초5</div>
-            <div class="gc-grade-label">Grade 5</div>
-            <div class="gc-title">독해·어휘 완성반</div>
-            <div class="gc-desc">5학년 핵심 교과 어휘와 독해 전략을 익히며, 글 읽기의 기초를 탄탄하게 다집니다. 매주 독서 일기로 글쓰기 습관을 기릅니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 대비</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-e6.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">초6</div>
-            <div class="gc-grade-label">Grade 6</div>
-            <div class="gc-title">독해·논술 입문반</div>
-            <div class="gc-desc">6학년 심화 독해와 논리적 글쓰기 입문으로 중학교 진학을 완벽하게 준비합니다. 문학·비문학 전 장르를 다룹니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 + 중등 선행</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
 
-    <!-- 중등 패널 -->
-    <div class="cur-panel fade-up" id="panel-middle">
-      <div class="section-intro">
-        <span class="section-tag">Middle School</span>
-        <h2>내신과 독해, 두 마리 토끼를 한 번에 잡습니다</h2>
-        <p>중학교 국어는 내신 성적과 독해력을 동시에 키워야 합니다. 삼년의 신화 중등 과정은 학년별 맞춤 학습으로 내신 1등급과 고등 선행을 동시에 완성합니다.</p>
+      <p class="section-title">핵심 학습 영역</p>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-icon">📖</div>
+          <div class="module-name">기초 독해</div>
+          <div class="module-sub">주제·요지 파악</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">📝</div>
+          <div class="module-name">어휘 강화</div>
+          <div class="module-sub">교과 어휘 1,000선</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">✍️</div>
+          <div class="module-name">짧은 글쓰기</div>
+          <div class="module-sub">요약·감상 쓰기</div>
+        </div>
       </div>
-      <div class="grade-grid col-3">
-        <a href="curriculum-m1.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중1</div>
-            <div class="gc-grade-label">Middle 1</div>
-            <div class="gc-title">국어 기본반</div>
-            <div class="gc-desc">문학 기초와 비문학 독해를 탄탄히 다지고, 문법 기초까지 완성합니다. 중학 국어의 첫 단추를 올바르게 채웁니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 집중</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-m2.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중2</div>
-            <div class="gc-grade-label">Middle 2</div>
-            <div class="gc-title">국어 심화반</div>
-            <div class="gc-desc">고전문학과 심화 독해로 실력을 업그레이드하고, 논술 기초를 통해 고등 과정을 미리 준비합니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 완성</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-m3.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중3</div>
-            <div class="gc-grade-label">Middle 3</div>
-            <div class="gc-title">완성·고등 선행반</div>
-            <div class="gc-desc">중학 국어를 완성하고 수능 국어 기초와 고입 준비까지 체계적으로 로드맵을 완성합니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">고등 선행</span>
-            <span class="gc-chip naesin">내신 + 고입</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
+
+      <!-- 추가 이미지 삽입 영역 (선택) -->
+      <!--
+      <div class="course-img2-area">
+        <img src="images/curriculum-e5-regular-detail.jpg" alt="초5 정규 수업 장면" style="width:100%;border-radius:16px;">
+      </div>
+      -->
+
+      <p class="section-title">주요 학습 포인트</p>
+      <div class="points-section">
+        <ul class="points-list regular">
+          <li>문단 구조와 주제 파악 훈련 — 글의 뼈대 읽기부터 시작합니다</li>
+          <li>교과 연계 핵심 어휘 1,000개 단계별 완성 — 모든 과목의 기초를 다집니다</li>
+          <li>매주 독서 일기 작성으로 글쓰기 습관 형성 — 꾸준함이 실력입니다</li>
+        </ul>
+      </div>
+
+      <div class="cta-box">
+        <div>
+          <h3>초5 정규 과정 상담 신청</h3>
+          <p>맞춤 수준 진단 후 최적의 반을 배정해드립니다.</p>
+        </div>
+        <a href="consulting.html" class="cta-btn">상담 신청하기</a>
       </div>
     </div>
 
-    <!-- 고등 패널 -->
-    <div class="cur-panel fade-up" id="panel-high">
-      <div class="section-intro">
-        <span class="section-tag">High School</span>
-        <h2>수능 1등급을 향한 체계적인 3년 로드맵</h2>
-        <p>고등학교 국어는 수능, 내신, 논술까지 전방위 대비가 필요합니다. 삼년의 신화 고등 과정은 고1부터 고3까지 단계별 심화 학습으로 실전 국어 실력을 완성합니다.</p>
+    <!-- 내신 과정 -->
+    <div class="course-panel" id="panel-naesin">
+      <div class="course-header">
+        <div class="ch-left">
+          <span class="ch-badge naesin">내신 과정</span>
+          <h2 class="ch-title">초5 학교 시험 대비반</h2>
+          <p class="ch-desc">학교 국어 교과서를 단원별로 완전 분석하고, 서술형·논술형 문제를 집중 훈련합니다. 담당 선생님의 출제 경향을 사전에 파악하여 맞춤형으로 시험을 대비합니다.</p>
+        </div>
+        <div class="ch-right">
+          <!-- 이미지 삽입: src 속성에 실제 이미지 경로를 입력하세요 -->
+          <div class="course-img-placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>커리큘럼 이미지를 삽입하세요</span>
+          </div>
+        </div>
       </div>
-      <div class="grade-grid col-3">
-        <a href="curriculum-h1.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고1</div>
-            <div class="gc-grade-label">High 1</div>
-            <div class="gc-title">수능 국어 입문반</div>
-            <div class="gc-desc">수능 국어 전체 출제 범위를 파악하고, 문학·독서·언어와 매체의 기초를 탄탄하게 다집니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 입문</span>
-            <span class="gc-chip naesin">내신 집중</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-h2.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고2</div>
-            <div class="gc-grade-label">High 2</div>
-            <div class="gc-title">수능 심화·논술 입문반</div>
-            <div class="gc-desc">EBS 연계 작품을 완전히 소화하고, 수시 논술 기초까지 함께 준비합니다. 수능과 수시를 동시에 잡습니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 심화</span>
-            <span class="gc-chip naesin">수시 논술</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-h3.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고3</div>
-            <div class="gc-grade-label">High 3</div>
-            <div class="gc-title">수능 완성·논술 완성반</div>
-            <div class="gc-desc">실전 모의고사와 대학별 논술 기출로 수능과 수시를 최종 완성합니다. 1등급을 향한 마지막 담금질.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 완성</span>
-            <span class="gc-chip naesin">논술 완성</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
+
+      <p class="section-title">핵심 학습 영역</p>
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-icon">🏫</div>
+          <div class="module-name">교과서 분석</div>
+          <div class="module-sub">단원 핵심 정리</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">📋</div>
+          <div class="module-name">예상 문제</div>
+          <div class="module-sub">서술형 집중 풀기</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🔍</div>
+          <div class="module-name">오답 분석</div>
+          <div class="module-sub">취약점 보완</div>
+        </div>
+      </div>
+
+      <p class="section-title">주요 학습 포인트</p>
+      <div class="points-section">
+        <ul class="points-list naesin">
+          <li>5학년 전 단원 핵심 내용 완전 정리 — 빠짐없이 챙깁니다</li>
+          <li>서술형 답안 작성법 단계별 훈련 — 배점을 놓치지 않는 답안 완성</li>
+          <li>학교 선생님 출제 경향 맞춤 분석 — 학교·반별 맞춤 대비</li>
+        </ul>
+      </div>
+
+      <div class="cta-box">
+        <div>
+          <h3>초5 내신 과정 상담 신청</h3>
+          <p>시험 일정에 맞춘 집중 대비 계획을 안내해드립니다.</p>
+        </div>
+        <a href="consulting.html" class="cta-btn">상담 신청하기</a>
       </div>
     </div>
 
@@ -374,29 +365,15 @@ function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.clas
 hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
 window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
 
-// Tab switching
-const TAB_ORDER = ['elem', 'middle', 'high'];
-function activateTab(tab) {
-  document.querySelectorAll('.cur-d1-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  document.querySelectorAll('.cur-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
-  const url = new URL(location.href);
-  url.searchParams.set('tab', tab);
-  history.replaceState(null, '', url);
-}
-
-document.querySelectorAll('.cur-d1-btn').forEach(btn => {
-  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+document.querySelectorAll('.course-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const panel = tab.dataset.panel;
+    document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.course-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + panel).classList.add('active');
+  });
 });
-
-// Read URL param
-const urlTab = new URLSearchParams(location.search).get('tab');
-activateTab(TAB_ORDER.includes(urlTab) ? urlTab : 'elem');
-
-// Fade-up animation
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
