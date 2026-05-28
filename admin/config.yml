@@ -2,8 +2,6 @@ backend:
   name: github
   repo: 3yearslegend/samnyun-website
   branch: main
-  auth_type: pkce
-  app_id: Ov23liTqq5nALCLrN53Z
 
 site_url: https://3yearslegend.github.io/samnyun-website
 display_url: https://3yearslegend.github.io/samnyun-website
@@ -83,7 +81,7 @@ collections:
                 name: image
                 widget: image
                 required: false
-                allow_multiple: false
+                multiple: false
               - label: 과정 목록 (이미지가 없을 때 표시되는 텍스트 시간표)
                 name: courses
                 widget: list
