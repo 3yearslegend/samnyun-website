@@ -1,6 +1,15 @@
 {
   "notices": [
     {
+      "title": "2027 대입 설명회",
+      "category": "설명회",
+      "date": "2026.05.28",
+      "start_date": "2026.05.28",
+      "end_date": "2026.06.15",
+      "content": "설명회 진행",
+      "pinned": false
+    },
+    {
       "title": "현충일 전후 전 지점 휴원 안내",
       "category": "공지",
       "date": "2026.05.27",
