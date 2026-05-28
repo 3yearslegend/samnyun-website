@@ -269,16 +269,6 @@
               <span class="sf-err" id="sf-statusErr">재원 여부를 선택해 주세요.</span>
             </div>
 
-            <div class="sf-group">
-              <label class="sf-label">희망 지점 <span class="req">*</span></label>
-              <div class="sf-btn-group" id="sf-branchGroup">
-                <button type="button" class="sf-btn" data-branch="고잔점">고잔점</button>
-                <button type="button" class="sf-btn" data-branch="자이점">자이점</button>
-                <button type="button" class="sf-btn" data-branch="하이퍼관">하이퍼관</button>
-              </div>
-              <span class="sf-err" id="sf-branchErr">희망 지점을 선택해 주세요.</span>
-            </div>
-
             <button type="submit" class="sf-submit" id="sf-submitBtn">
               <div class="sf-spinner"></div>
               <span class="sf-btn-text">신청 완료하기</span>
@@ -388,7 +378,7 @@
     }
     document.getElementById('heroBadge').style.display = '';
     document.getElementById('heroTitle').textContent = s.title;
-    const sub = [formatDate(s.date), s.time, s.location].filter(Boolean).join(' · ');
+    const sub = [s.branch, formatDate(s.date), s.time, s.location].filter(Boolean).join(' · ');
     document.getElementById('heroSub').textContent = sub;
     document.title = s.title + ' | 삼년의 신화 국어논술학원';
 
@@ -400,6 +390,7 @@
     const cells = [
       { label: '일시', value: formatDate(s.date) + (s.time ? ' ' + s.time : '') },
       { label: '장소', value: s.location || '추후 공지' },
+      { label: '지점', value: s.branch || '전체 지점' },
       { label: '대상', value: s.target || '관심 있는 누구나' },
       { label: '정원', value: s.capacity || '별도 안내' },
       { label: '신청 기간', value: regPeriod, highlight: regStatus === '신청 접수 중' },
@@ -417,6 +408,8 @@
 
     /* ── 신청 폼 숨김 제목 ── */
     document.getElementById('sf-seminarTitle').value = s.title;
+    currentBranch = s.branch || '';
+    document.getElementById('sf-branchHidden').value = currentBranch;
 
     /* ── 신청 기간 체크 → 폼 조건부 표시 ── */
     const today = new Date(); today.setHours(0,0,0,0);
@@ -482,7 +475,7 @@
     '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
     '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
   };
-  let sfLevel = '', sfStatus = '', sfBranch = '';
+  let sfLevel = '', sfStatus = '', currentBranch = '';
 
   document.getElementById('sf-phone').addEventListener('input', function() {
     let v = this.value.replace(/\D/g, '');
@@ -518,16 +511,6 @@
     });
   });
 
-  document.querySelectorAll('#sf-branchGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-branchGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      sfBranch = btn.dataset.branch;
-      document.getElementById('sf-branchHidden').value = sfBranch;
-      document.getElementById('sf-branchErr').classList.remove('show');
-    });
-  });
-
   document.getElementById('seminarForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const nameEl  = document.getElementById('sf-name');
@@ -545,8 +528,6 @@
     else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
     if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
     else { document.getElementById('sf-statusErr').classList.remove('show'); }
-    if (!sfBranch) { document.getElementById('sf-branchErr').classList.add('show'); ok = false; }
-    else { document.getElementById('sf-branchErr').classList.remove('show'); }
     if (!ok) return;
 
     btn.disabled = true; btn.classList.add('submitting');
@@ -569,11 +550,11 @@
     btn.disabled = false; btn.classList.remove('submitting');
     btn.querySelector('.sf-btn-text').textContent = '신청 완료하기';
     this.reset();
-    sfLevel = ''; sfStatus = ''; sfBranch = '';
+    sfLevel = ''; sfStatus = '';
     document.getElementById('sf-levelHidden').value = '';
     document.getElementById('sf-statusHidden').value = '';
-    document.getElementById('sf-branchHidden').value = '';
-    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn, #sf-branchGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('sf-branchHidden').value = currentBranch;
+    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
     document.getElementById('sf-gradeGroup').style.display = 'none';
     alert('설명회 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
   });

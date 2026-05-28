@@ -39,6 +39,11 @@ collections:
               - { label: "신청 시작일 (예: 2026-05-01)", name: registration_open, widget: string, required: false }
               - { label: "신청 종료일 (예: 2026-06-09)", name: registration_close, widget: string, required: false }
               - { label: 일정 캘린더에 표시, name: show_in_calendar, widget: boolean, default: true }
+              - label: "지점 선택"
+                name: branch
+                widget: select
+                options: [고잔점, 자이점, 하이퍼관, 전체]
+                required: false
 
   - name: notices
     label: 공지사항

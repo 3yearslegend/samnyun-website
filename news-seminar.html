@@ -100,6 +100,12 @@
     .seminar-empty { padding: 80px 0; text-align: center; color: var(--gray); }
     .seminar-empty p:first-child { font-size: 18px; font-weight: 500; color: var(--black); margin-bottom: 8px; }
 
+    .branch-tabs { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+    .branch-tab { padding: 7px 18px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--gray); background: var(--white); cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .branch-tab.active, .branch-tab:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .sc-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .sc-branch-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; background: #E8EAF6; color: #283593; border: 1px solid #7986CB; letter-spacing: 0.5px; }
+
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
@@ -171,6 +177,13 @@
       <a href="news-timetable.html" class="news-tab">학원 시간표</a>
     </div>
 
+    <div class="branch-tabs" id="branchTabs">
+      <button class="branch-tab active" data-branch="전체">전체</button>
+      <button class="branch-tab" data-branch="고잔점">고잔점</button>
+      <button class="branch-tab" data-branch="자이점">자이점</button>
+      <button class="branch-tab" data-branch="하이퍼관">하이퍼관</button>
+    </div>
+
     <div class="seminar-grid fade-up" id="seminarGrid">
       <div style="grid-column:1/-1;padding:40px 0;text-align:center;color:var(--gray);font-size:14px;">설명회 정보를 불러오는 중…</div>
     </div>
@@ -230,51 +243,80 @@
     return { label: '신청 중', cls: 'sc-status-open' };
   }
 
+  let allSeminars = [];
+
+  function renderGrid(filterBranch) {
+    const grid = document.getElementById('seminarGrid');
+    const seminars = filterBranch === '전체'
+      ? allSeminars
+      : allSeminars.filter(s => s.branch === filterBranch || s.branch === '전체');
+    if (!seminars.length) {
+      grid.innerHTML = `<div class="seminar-empty" style="grid-column:1/-1;">
+        <p>해당 지점의 예정된 설명회가 없습니다.</p>
+        <p style="font-size:14px;color:var(--gray);margin-top:6px;">카카오톡 채널을 통해 새로운 설명회 일정을 가장 먼저 받아보세요.</p>
+      </div>`;
+      return;
+    }
+    grid.innerHTML = seminars.map(s => {
+      const realIdx = allSeminars.indexOf(s);
+      const status = getStatus(s.registration_open, s.registration_close);
+      const statusHtml = status ? `<div class="sc-status-badge ${status.cls}">${status.label}</div>` : '';
+      const posterHtml = s.poster
+        ? `<img src="${s.poster}" alt="${s.title} 포스터">`
+        : `<div class="sc-poster-placeholder">
+            <div class="sc-poster-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
+            <span>설명회</span>
+          </div>`;
+      const branchBadge = s.branch ? `<div class="sc-branch-badge">${s.branch}</div>` : '';
+      const regPeriod = s.registration_open && s.registration_close
+        ? `<div class="sc-reg-period">신청 기간 <strong>${s.registration_open.replace(/-/g,'.')} ~ ${s.registration_close.replace(/-/g,'.')}</strong></div>`
+        : '';
+      return `<a href="news-seminar-detail.html?id=${realIdx}" class="seminar-card">
+        <div class="sc-poster">${posterHtml}${statusHtml}</div>
+        <div class="sc-body">
+          <div class="sc-badges">
+            <div class="sc-badge">설명회</div>
+            ${branchBadge}
+          </div>
+          <div class="sc-title">${s.title}</div>
+          <div class="sc-meta">
+            <div class="sc-meta-row">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              ${formatDate(s.date)}${s.time ? ' ' + s.time : ''}
+            </div>
+            ${s.location ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${s.location}</div>` : ''}
+            ${s.target ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>${s.target}</div>` : ''}
+          </div>
+          ${regPeriod}
+          <div class="sc-cta">
+            <span>자세히 보기 · 신청하기</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>`;
+    }).join('');
+  }
+
   fetch('data/seminars.json')
     .then(r => r.json())
     .then(data => {
-      const seminars = data.seminars || [];
+      allSeminars = data.seminars || [];
       const grid = document.getElementById('seminarGrid');
-      if (!seminars.length) {
+      if (!allSeminars.length) {
         grid.innerHTML = `<div class="seminar-empty" style="grid-column:1/-1;">
           <p>현재 예정된 설명회가 없습니다.</p>
           <p style="font-size:14px;color:var(--gray);margin-top:6px;">카카오톡 채널을 통해 새로운 설명회 일정을 가장 먼저 받아보세요.</p>
         </div>`;
         return;
       }
-      grid.innerHTML = seminars.map((s, i) => {
-        const status = getStatus(s.registration_open, s.registration_close);
-        const statusHtml = status ? `<div class="sc-status-badge ${status.cls}">${status.label}</div>` : '';
-        const posterHtml = s.poster
-          ? `<img src="${s.poster}" alt="${s.title} 포스터">`
-          : `<div class="sc-poster-placeholder">
-              <div class="sc-poster-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
-              <span>설명회</span>
-            </div>`;
-        const regPeriod = s.registration_open && s.registration_close
-          ? `<div class="sc-reg-period">신청 기간 <strong>${s.registration_open.replace(/-/g,'.')} ~ ${s.registration_close.replace(/-/g,'.')}</strong></div>`
-          : '';
-        return `<a href="news-seminar-detail.html?id=${i}" class="seminar-card">
-          <div class="sc-poster">${posterHtml}${statusHtml}</div>
-          <div class="sc-body">
-            <div class="sc-badge">설명회</div>
-            <div class="sc-title">${s.title}</div>
-            <div class="sc-meta">
-              <div class="sc-meta-row">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                ${formatDate(s.date)}${s.time ? ' ' + s.time : ''}
-              </div>
-              ${s.location ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>${s.location}</div>` : ''}
-              ${s.target ? `<div class="sc-meta-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>${s.target}</div>` : ''}
-            </div>
-            ${regPeriod}
-            <div class="sc-cta">
-              <span>자세히 보기 · 신청하기</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
-          </div>
-        </a>`;
-      }).join('');
+      document.querySelectorAll('#branchTabs .branch-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('#branchTabs .branch-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderGrid(tab.dataset.branch);
+        });
+      });
+      renderGrid('전체');
     })
     .catch(() => {
       document.getElementById('seminarGrid').innerHTML =
