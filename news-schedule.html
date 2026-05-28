@@ -481,8 +481,7 @@
       if (!s.show_in_calendar) return;
       const start = parseDate(s.date);
       if (!start) return;
-      const end = parseDate(s.deadline) || start;
-      evts.push({ title: s.title, type: '설명회', start, end, data: s, source: 'seminar' });
+      evts.push({ title: s.title, type: '설명회', start, end: start, data: s, source: 'seminar' });
     });
     return evts;
   }
