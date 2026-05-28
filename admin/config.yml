@@ -144,47 +144,54 @@ collections:
     label: 상담 가능 시간
     files:
       - name: consultation_data
-        label: 상담 가능 시간 설정
+        label: 상담 가능 시간 설정 (지점별)
         file: data/consultation.json
         format: json
         fields:
-          - label: "요일별 기본 상담 시간 (매주 반복)"
-            name: weekly
+          - label: 지점별 상담 가능 시간
+            name: branches
             widget: list
             collapsed: true
             fields:
-              - label: 요일
-                name: day
-                widget: select
-                options:
-                  - { label: 일요일, value: 0 }
-                  - { label: 월요일, value: 1 }
-                  - { label: 화요일, value: 2 }
-                  - { label: 수요일, value: 3 }
-                  - { label: 목요일, value: 4 }
-                  - { label: 금요일, value: 5 }
-                  - { label: 토요일, value: 6 }
-              - label: "상담 가능 시간 (여러 개 추가 가능)"
-                name: times
+              - { label: 지점명, name: name, widget: string }
+              - { label: "지점 ID (gojan / zai / hyper)", name: id, widget: string }
+              - label: "요일별 기본 상담 시간 (매주 반복)"
+                name: weekly
                 widget: list
                 collapsed: true
-                field: { label: "시간 (예: 14:00)", name: time, widget: string }
-          - label: "특정 날짜 추가 (특별 상담일 — 요일 기본값과 무관하게 지정)"
-            name: extra
-            widget: list
-            collapsed: true
-            fields:
-              - { label: "날짜 (예: 2026-06-15)", name: date, widget: string }
-              - label: "상담 가능 시간 (여러 개 추가 가능)"
-                name: times
+                fields:
+                  - label: 요일
+                    name: day
+                    widget: select
+                    options:
+                      - { label: 일요일, value: 0 }
+                      - { label: 월요일, value: 1 }
+                      - { label: 화요일, value: 2 }
+                      - { label: 수요일, value: 3 }
+                      - { label: 목요일, value: 4 }
+                      - { label: 금요일, value: 5 }
+                      - { label: 토요일, value: 6 }
+                  - label: "상담 가능 시간 (여러 개 추가 가능)"
+                    name: times
+                    widget: list
+                    collapsed: true
+                    field: { label: "시간 (예: 14:00)", name: time, widget: string }
+              - label: "특정 날짜 추가 (특별 상담일 — 요일 기본값과 무관하게 지정)"
+                name: extra
                 widget: list
                 collapsed: true
-                field: { label: "시간 (예: 14:00)", name: time, widget: string }
-          - label: "특정 날짜 제외 (상담 불가일 — 요일 기본값이 있어도 제외)"
-            name: exclude
-            widget: list
-            collapsed: true
-            field: { label: "제외 날짜 (예: 2026-06-10)", name: date, widget: string }
+                fields:
+                  - { label: "날짜 (예: 2026-06-15)", name: date, widget: string }
+                  - label: "상담 가능 시간 (여러 개 추가 가능)"
+                    name: times
+                    widget: list
+                    collapsed: true
+                    field: { label: "시간 (예: 14:00)", name: time, widget: string }
+              - label: "특정 날짜 제외 (상담 불가일 — 요일 기본값이 있어도 제외)"
+                name: exclude
+                widget: list
+                collapsed: true
+                field: { label: "제외 날짜 (예: 2026-06-10)", name: date, widget: string }
 
   - name: carousel
     label: 캐러셀 배너

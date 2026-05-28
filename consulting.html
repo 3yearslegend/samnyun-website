@@ -308,7 +308,7 @@
             <span class="form-err" id="branchErr" style="display:none;">희망 지점을 선택해 주세요.</span>
           </div>
 
-          <div class="form-group" style="margin-top:18px;">
+          <div class="form-group" id="consultCalGroup" style="display:none; margin-top:18px;">
             <label class="form-label">상담 희망 날짜 <span class="req">*</span></label>
             <input type="hidden" id="consultDate" name="상담희망날짜" value="">
             <div class="consult-cal" id="consultCal">
@@ -539,32 +539,45 @@
     renderCCal(ccalYear, ccalMonth);
   });
 
+  let branchesData = {};
+
+  function loadBranchCalendar(branchName) {
+    const bData = branchesData[branchName];
+    availableSlots = {};
+    selectedDate = ''; selectedTime = '';
+    document.getElementById('consultDate').value = '';
+    document.getElementById('consultTime').value = '';
+    document.getElementById('timeSlotGroup').style.display = 'none';
+    document.getElementById('timeSlots').innerHTML = '';
+    if (!bData) return;
+    const today = new Date(); today.setHours(0,0,0,0);
+    const weeklyMap = {};
+    (bData.weekly || []).forEach(w => { weeklyMap[+w.day] = w.times || []; });
+    const extraMap = {};
+    (bData.extra || []).forEach(e => { extraMap[e.date] = e.times || []; });
+    const excludeSet = new Set(bData.exclude || []);
+    for (let i = 0; i <= 180; i++) {
+      const d = new Date(today); d.setDate(today.getDate() + i);
+      const ds = dateToStr(d);
+      if (excludeSet.has(ds)) continue;
+      if (extraMap[ds]) { availableSlots[ds] = extraMap[ds]; continue; }
+      const dow = d.getDay();
+      if (weeklyMap[dow]) availableSlots[ds] = weeklyMap[dow];
+    }
+    document.getElementById('consultCalGroup').style.display = '';
+    renderCCal(ccalYear, ccalMonth);
+  }
+
   fetch('data/consultation.json')
     .then(r => r.json())
     .then(data => {
-      const today = new Date(); today.setHours(0,0,0,0);
-      const weeklyMap = {};
-      (data.weekly || []).forEach(w => { weeklyMap[+w.day] = w.times || []; });
-      const extraMap = {};
-      (data.extra || []).forEach(e => { extraMap[e.date] = e.times || []; });
-      const excludeSet = new Set(data.exclude || []);
-      // 오늘부터 180일간 가능한 날짜 사전 계산
-      for (let i = 0; i <= 180; i++) {
-        const d = new Date(today); d.setDate(today.getDate() + i);
-        const ds = dateToStr(d);
-        if (excludeSet.has(ds)) continue;
-        if (extraMap[ds]) { availableSlots[ds] = extraMap[ds]; continue; }
-        const dow = d.getDay();
-        if (weeklyMap[dow]) availableSlots[ds] = weeklyMap[dow];
-      }
+      (data.branches || []).forEach(b => { branchesData[b.name] = b; });
       const now = new Date();
       ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
-      renderCCal(ccalYear, ccalMonth);
     })
     .catch(() => {
       const now = new Date();
       ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
-      renderCCal(ccalYear, ccalMonth);
     });
 
   // 연락처 자동 하이픈 포맷팅 (010-XXXX-XXXX)
@@ -608,6 +621,7 @@
       selectedBranch = btn.dataset.branch;
       document.getElementById('branchHidden').value = selectedBranch;
       document.getElementById('branchErr').style.display = 'none';
+      loadBranchCalendar(selectedBranch);
     });
   });
 
@@ -691,9 +705,10 @@
     document.getElementById('consultTime').value = '';
     document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
     document.getElementById('gradeGroup').style.display = 'none';
+    document.getElementById('consultCalGroup').style.display = 'none';
     document.getElementById('timeSlotGroup').style.display = 'none';
     document.getElementById('timeSlots').innerHTML = '';
-    renderCCal(ccalYear, ccalMonth);
+    availableSlots = {};
     document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => el.classList.remove('error'));
 
     showToast();
