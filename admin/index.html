@@ -4,8 +4,93 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>관리자 페이지 | 삼년의 신화 국어논술학원</title>
+  <style>
+    /* 미리보기 패널 공통 스타일 */
+    .preview-wrap { font-family: 'Noto Sans KR', sans-serif; padding: 24px; background: #fff; min-height: 100vh; color: #1C1C1C; line-height: 1.7; }
+    .preview-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; background: #FFF3E0; color: #BF360C; border: 1px solid #E64A19; margin-bottom: 10px; }
+    .preview-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .preview-meta { font-size: 13px; color: #666; margin-bottom: 16px; }
+    .preview-content { font-size: 14px; line-height: 2; color: #333; white-space: pre-wrap; border-top: 1px solid #eee; padding-top: 14px; }
+    .preview-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 3px; background: #FDECEA; color: #9A1E14; border: 1px solid #C0271A; margin-bottom: 8px; }
+    .preview-empty { color: #999; font-size: 14px; padding: 40px 0; text-align: center; }
+    .preview-info-row { display: flex; gap: 8px; font-size: 13px; margin-bottom: 6px; }
+    .preview-info-label { color: #999; min-width: 52px; }
+    .preview-info-value { color: #1C1C1C; font-weight: 500; }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
+  <script>
+    // Sveltia CMS가 초기화된 후 미리보기 템플릿 등록
+    window.addEventListener('load', function() {
+      if (!window.CMS) return;
+
+      // 공지사항 미리보기
+      var NoticePreview = window.createClass({
+        render: function() {
+          var entry = this.props.entry;
+          var title   = entry.getIn(['data', 'title'])   || '(제목 없음)';
+          var content = entry.getIn(['data', 'content']) || '';
+          var date    = entry.getIn(['data', 'date'])    || '';
+          var cat     = entry.getIn(['data', 'category'])|| '공지';
+          var pinned  = entry.getIn(['data', 'pinned'])  || false;
+          return window.h('div', { className: 'preview-wrap' },
+            window.h('div', { className: 'preview-tag' }, cat + (pinned ? ' · 📌 상단 고정' : '')),
+            window.h('div', { className: 'preview-title' }, title),
+            window.h('div', { className: 'preview-meta' }, date),
+            window.h('div', { className: 'preview-content' }, content)
+          );
+        }
+      });
+
+      // 설명회 미리보기
+      var SeminarPreview = window.createClass({
+        render: function() {
+          var entry    = this.props.entry;
+          var title    = entry.getIn(['data', 'title'])    || '(제목 없음)';
+          var date     = entry.getIn(['data', 'date'])     || '';
+          var location = entry.getIn(['data', 'location']) || '';
+          var time     = entry.getIn(['data', 'time'])     || '';
+          var target   = entry.getIn(['data', 'target'])   || '';
+          var content  = entry.getIn(['data', 'content'])  || '';
+          var branch   = entry.getIn(['data', 'branch'])   || '';
+          return window.h('div', { className: 'preview-wrap' },
+            window.h('div', { className: 'preview-badge' }, '설명회' + (branch ? ' · ' + branch : '')),
+            window.h('div', { className: 'preview-title' }, title),
+            date     ? window.h('div', { className: 'preview-info-row' }, window.h('span', { className: 'preview-info-label' }, '날짜'), window.h('span', { className: 'preview-info-value' }, date + (time ? ' ' + time : ''))) : null,
+            location ? window.h('div', { className: 'preview-info-row' }, window.h('span', { className: 'preview-info-label' }, '장소'), window.h('span', { className: 'preview-info-value' }, location)) : null,
+            target   ? window.h('div', { className: 'preview-info-row' }, window.h('span', { className: 'preview-info-label' }, '대상'), window.h('span', { className: 'preview-info-value' }, target)) : null,
+            window.h('div', { className: 'preview-content' }, content)
+          );
+        }
+      });
+
+      // 학원 일정 미리보기
+      var SchedulePreview = window.createClass({
+        render: function() {
+          var entry   = this.props.entry;
+          var title   = entry.getIn(['data', 'title'])   || '(제목 없음)';
+          var date    = entry.getIn(['data', 'date'])    || '';
+          var time    = entry.getIn(['data', 'time'])    || '';
+          var loc     = entry.getIn(['data', 'location'])|| '';
+          var type    = entry.getIn(['data', 'type'])    || '기타';
+          var content = entry.getIn(['data', 'content']) || '';
+          return window.h('div', { className: 'preview-wrap' },
+            window.h('div', { className: 'preview-badge' }, type),
+            window.h('div', { className: 'preview-title' }, title),
+            date ? window.h('div', { className: 'preview-info-row' }, window.h('span', { className: 'preview-info-label' }, '날짜'), window.h('span', { className: 'preview-info-value' }, date + (time ? ' ' + time : ''))) : null,
+            loc  ? window.h('div', { className: 'preview-info-row' }, window.h('span', { className: 'preview-info-label' }, '장소'), window.h('span', { className: 'preview-info-value' }, loc)) : null,
+            window.h('div', { className: 'preview-content' }, content)
+          );
+        }
+      });
+
+      try {
+        window.CMS.registerPreviewTemplate('notices_data',  NoticePreview);
+        window.CMS.registerPreviewTemplate('seminars_data', SeminarPreview);
+        window.CMS.registerPreviewTemplate('schedule_data', SchedulePreview);
+      } catch(e) {}
+    });
+  </script>
 </body>
 </html>

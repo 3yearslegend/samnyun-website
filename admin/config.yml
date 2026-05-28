@@ -7,6 +7,8 @@ backend:
 site_url: https://3yearslegend.github.io/samnyun-website
 display_url: https://3yearslegend.github.io/samnyun-website
 
+show_preview_links: true
+
 locale: ko
 media_folder: uploads
 public_folder: /samnyun-website/uploads
@@ -23,6 +25,7 @@ collections:
           - label: 설명회 목록
             name: seminars
             widget: list
+            collapsed: true
             fields:
               - { label: 제목, name: title, widget: string }
               - { label: "날짜 (예: 2026-06-10)", name: date, widget: string }
@@ -54,6 +57,7 @@ collections:
           - label: 공지사항 목록
             name: notices
             widget: list
+            collapsed: true
             fields:
               - { label: 제목, name: title, widget: string }
               - label: 카테고리
@@ -78,6 +82,7 @@ collections:
           - label: 일정 목록
             name: events
             widget: list
+            collapsed: true
             fields:
               - { label: 제목, name: title, widget: string }
               - { label: "시작 날짜 (예: 2026-06-10)", name: date, widget: string }
@@ -107,6 +112,7 @@ collections:
           - label: 지점별 시간표
             name: branches
             widget: list
+            collapsed: true
             fields:
               - { label: 지점명, name: branch, widget: string }
               - { label: "지점 ID (gojan / zai / hyper)", name: id, widget: string }
@@ -118,6 +124,7 @@ collections:
               - label: 과정 목록 (이미지가 없을 때 표시되는 텍스트 시간표)
                 name: courses
                 widget: list
+                collapsed: true
                 fields:
                   - { label: 과정명, name: name, widget: string }
                   - { label: "대상 (예: 중2~고3)", name: target, widget: string }
@@ -144,11 +151,13 @@ collections:
           - label: 상담 가능 날짜
             name: slots
             widget: list
+            collapsed: true
             fields:
               - { label: "날짜 (예: 2025-07-07)", name: date, widget: string }
               - label: 시간 목록
                 name: times
                 widget: list
+                collapsed: true
                 field: { label: "시간 (예: 14:00)", name: time, widget: string }
 
   - name: carousel
@@ -162,6 +171,7 @@ collections:
           - label: 슬라이드 목록
             name: slides
             widget: list
+            collapsed: true
             fields:
               - { label: "태그 (영문)", name: tag, widget: string }
               - { label: 제목 (줄바꿈은 \n), name: title, widget: string }
@@ -184,6 +194,7 @@ collections:
           - label: 강사 목록
             name: teachers
             widget: list
+            collapsed: true
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
@@ -198,6 +209,7 @@ collections:
           - label: 강사 목록
             name: teachers
             widget: list
+            collapsed: true
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
@@ -212,6 +224,7 @@ collections:
           - label: 강사 목록
             name: teachers
             widget: list
+            collapsed: true
             fields:
               - { label: 이름, name: name, widget: string }
               - { label: 직책, name: role, widget: string }
@@ -230,6 +243,7 @@ collections:
           - label: 후기 목록
             name: reviews
             widget: list
+            collapsed: true
             fields:
               - { label: 이름/닉네임, name: name, widget: string }
               - { label: "학년 (예: 고3 졸업)", name: grade, widget: string }
