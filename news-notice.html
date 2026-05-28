@@ -77,31 +77,42 @@
     .board-count { font-size: 13px; color: var(--gray); white-space: nowrap; }
     .board-count strong { color: var(--black); font-weight: 700; }
 
-    .notice-board { border-top: 2px solid var(--black); }
-    .notice-row { display: grid; grid-template-columns: 56px 80px 1fr 110px; align-items: center; gap: 0; padding: 0; border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .board-header { display: grid; grid-template-columns: 52px 76px 1fr 52px 96px; border-top: 2px solid var(--black); border-bottom: 1px solid var(--border); background: var(--gray-light); font-size: 12px; font-weight: 600; color: var(--gray); text-align: center; }
+    .board-header > div { padding: 11px 0; }
+    .bh-title { text-align: left !important; padding-left: 16px !important; }
+    .bh-date { text-align: right !important; padding-right: 6px !important; }
+    .notice-board { }
+    .notice-row { display: grid; grid-template-columns: 52px 76px 1fr 52px 96px; align-items: center; gap: 0; padding: 0; border-bottom: 1px solid var(--border); transition: background 0.15s; }
     .notice-row:hover { background: #fafafa; }
     .notice-row.is-pinned { background: #fffbf8; }
     .notice-row.is-pinned:hover { background: var(--red-light); }
-    .nr-num { font-size: 13px; color: var(--gray); text-align: center; padding: 18px 0; }
-    .nr-pin { display: inline-block; font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: 0.5px; text-align: center; padding: 18px 0; }
-    .nr-badge { padding: 18px 0 18px 4px; }
+    .nr-num { font-size: 13px; color: var(--gray); text-align: center; padding: 17px 0; }
+    .nr-pin { display: inline-block; font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: 0.5px; text-align: center; padding: 17px 0; }
+    .nr-badge { padding: 17px 0 17px 4px; }
     .notice-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 3px; white-space: nowrap; }
     .nb-공지 { background: var(--red-light); color: var(--red); }
     .nb-일정 { background: #E8F5E9; color: #1B5E20; }
     .nb-이벤트 { background: var(--black); color: var(--white); }
     .nb-설명회 { background: #FFF3E0; color: #BF360C; }
-    .nr-title { padding: 18px 20px 18px 16px; min-width: 0; }
+    .nr-title { padding: 17px 12px 17px 16px; min-width: 0; }
     .nr-title a { font-size: 15px; color: var(--black); text-decoration: none; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.15s; }
     .nr-title a:hover { color: var(--red); }
     .notice-row.is-pinned .nr-title a { font-weight: 600; }
-    .nr-date { font-size: 13px; color: var(--gray); text-align: right; padding: 18px 4px 18px 0; white-space: nowrap; }
+    .img-icon { font-size: 11px; margin-left: 5px; opacity: 0.6; }
+    .nr-views { font-size: 13px; color: var(--gray); text-align: center; padding: 17px 0; }
+    .nr-date { font-size: 13px; color: var(--gray); text-align: right; padding: 17px 6px 17px 0; white-space: nowrap; }
     .notice-empty { text-align: center; padding: 60px 0; color: var(--gray); font-size: 15px; border-bottom: 1px solid var(--border); }
 
     @media (max-width: 600px) {
+      .board-header { grid-template-columns: 60px 1fr auto; }
+      .bh-num { display: none; }
+      .bh-views { display: none; }
+      .bh-date { padding-right: 0 !important; }
       .notice-row { grid-template-columns: 60px 1fr auto; }
       .nr-num, .nr-pin { display: none; }
       .nr-badge { padding-left: 0; }
       .nr-title { padding-left: 12px; }
+      .nr-views { display: none; }
       .nr-date { padding-right: 0; font-size: 12px; }
     }
 
@@ -186,6 +197,13 @@
         <div class="board-count" id="boardCount"></div>
       </div>
 
+      <div class="board-header">
+        <div>번호</div>
+        <div>분류</div>
+        <div class="bh-title">제목</div>
+        <div>조회</div>
+        <div class="bh-date">날짜</div>
+      </div>
       <div class="notice-board" id="noticeBoard">
         <div class="notice-empty">공지사항을 불러오는 중…</div>
       </div>
@@ -236,6 +254,10 @@
     });
   }
 
+  function getViews(idx) {
+    return parseInt(localStorage.getItem(`notice_views_${idx}`) || '0');
+  }
+
   function renderBoard(list) {
     const board = document.getElementById('noticeBoard');
     document.getElementById('boardCount').innerHTML = `총 <strong>${list.length}</strong>개`;
@@ -246,13 +268,16 @@
     board.innerHTML = list.map((n, displayIdx) => {
       const rawIdx = sortedNotices.indexOf(n);
       const bc = 'nb-' + (n.category || '공지');
+      const views = getViews(rawIdx);
+      const imgIcon = n.image ? '<span class="img-icon">📷</span>' : '';
       const numCell = n.pinned
         ? `<div class="nr-pin">고정</div>`
         : `<div class="nr-num">${sortedNotices.length - rawIdx}</div>`;
       return `<div class="notice-row${n.pinned ? ' is-pinned' : ''}">
         ${numCell}
         <div class="nr-badge"><span class="notice-badge ${bc}">${n.category}</span></div>
-        <div class="nr-title"><a href="news-notice-detail.html?id=${rawIdx}">${n.title}</a></div>
+        <div class="nr-title"><a href="news-notice-detail.html?id=${rawIdx}">${n.title}${imgIcon}</a></div>
+        <div class="nr-views">${views}</div>
         <div class="nr-date">${n.date}</div>
       </div>`;
     }).join('');

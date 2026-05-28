@@ -12,6 +12,31 @@ media_folder: uploads
 public_folder: /uploads
 
 collections:
+  - name: seminars
+    label: 설명회
+    files:
+      - name: seminars_data
+        label: 설명회 목록
+        file: data/seminars.json
+        format: json
+        fields:
+          - label: 설명회 목록
+            name: seminars
+            widget: list
+            fields:
+              - { label: 제목, name: title, widget: string }
+              - { label: "날짜 (예: 2026-06-10)", name: date, widget: string }
+              - { label: "마감일 (신청 종료일, 예: 2026-06-09)", name: deadline, widget: string }
+              - { label: 장소, name: location, widget: string }
+              - label: 포스터 이미지
+                name: poster
+                widget: image
+                required: false
+              - { label: 상세 내용, name: content, widget: text }
+              - { label: "신청 시작일 (예: 2026-05-01)", name: registration_open, widget: string, required: false }
+              - { label: "신청 종료일 (예: 2026-06-09)", name: registration_close, widget: string, required: false }
+              - { label: 일정 캘린더에 표시, name: show_in_calendar, widget: boolean, default: true }
+
   - name: notices
     label: 공지사항
     files:
@@ -33,6 +58,7 @@ collections:
               - { label: "게시 시작일 (캘린더 표시 시작, 예: 2026-06-01)", name: start_date, widget: string, required: false }
               - { label: "게시 종료일 (캘린더 표시 종료, 예: 2026-06-30)", name: end_date, widget: string, required: false }
               - { label: 내용, name: content, widget: text }
+              - { label: "첨부 이미지 (선택)", name: image, widget: image, required: false }
               - { label: 상단 고정, name: pinned, widget: boolean, default: false }
 
   - name: schedule

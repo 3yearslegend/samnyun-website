@@ -238,7 +238,7 @@
   const params = new URLSearchParams(location.search);
   const noticeIdx = parseInt(params.get('id') || '0', 10);
 
-  fetch('/data/notices.json')
+  fetch('data/notices.json')
     .then(r => r.json())
     .then(data => {
       const sorted = sortNotices(data.notices || []);
@@ -262,7 +262,10 @@
     badge.textContent = n.category; badge.className = 'ph-badge ' + bc; badge.style.display = '';
     document.getElementById('phTitle').textContent = n.title;
     document.getElementById('phCurrent').textContent = n.title.length > 20 ? n.title.slice(0, 20) + '…' : n.title;
-    document.getElementById('phMeta').textContent = n.date + (n.pinned ? '  ·  상단 고정' : '');
+    const viewKey = `notice_views_${idx}`;
+    const views = parseInt(localStorage.getItem(viewKey) || '0') + 1;
+    localStorage.setItem(viewKey, views);
+    document.getElementById('phMeta').textContent = n.date + (n.pinned ? '  ·  상단 고정' : '') + `  ·  조회수 ${views}`;
     document.title = n.title + ' | 삼년의 신화 국어논술학원';
 
     /* ── 이미지 ── */

@@ -463,7 +463,7 @@
   });
 
   // ===== FETCH & MERGE DATA =====
-  function buildEvents(noticesData, scheduleData) {
+  function buildEvents(noticesData, scheduleData, seminarsData) {
     const evts = [];
     (noticesData.notices || []).forEach(n => {
       const start = parseDate(n.start_date) || parseDate(n.date);
@@ -477,14 +477,22 @@
       if (!start) return;
       evts.push({ title: e.title, type: e.type || '기타', start, end, data: e, source: 'schedule' });
     });
+    ((seminarsData || {}).seminars || []).forEach(s => {
+      if (!s.show_in_calendar) return;
+      const start = parseDate(s.date);
+      if (!start) return;
+      const end = parseDate(s.deadline) || start;
+      evts.push({ title: s.title, type: '설명회', start, end, data: s, source: 'seminar' });
+    });
     return evts;
   }
 
   Promise.all([
     fetch('data/notices.json').then(r => r.json()),
     fetch('data/schedule.json').then(r => r.json()),
-  ]).then(([noticesData, scheduleData]) => {
-    allEvents = buildEvents(noticesData, scheduleData);
+    fetch('data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] })),
+  ]).then(([noticesData, scheduleData, seminarsData]) => {
+    allEvents = buildEvents(noticesData, scheduleData, seminarsData);
     renderCal(calYear, calMonth);
   }).catch(() => {
     document.getElementById('calBody').innerHTML =
