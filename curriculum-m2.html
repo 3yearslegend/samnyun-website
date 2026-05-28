@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>중2 커리큘럼 | 삼년의 신화 국어논술학원</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+    #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
+    #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
+    .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
+    .nav-logo { flex-shrink: 0; text-decoration: none; display: flex; align-items: center; margin-right: 36px; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-menus { flex: 1; display: flex; align-items: center; justify-content: center; list-style: none; gap: 2px; }
+    .menu-item { position: relative; }
+    .menu-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; font-size: 15px; font-weight: 500; color: var(--gray-dark); text-decoration: none; border-radius: 6px; white-space: nowrap; transition: color 0.2s, background 0.2s; cursor: pointer; background: none; border: none; font-family: var(--font-sans); }
+    .menu-link:hover, .menu-item:hover > .menu-link { color: var(--red); background: var(--red-light); }
+    .menu-link .chevron { width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.22s; fill: none; stroke: currentColor; stroke-width: 2; }
+    .menu-item:hover > .menu-link .chevron { transform: rotate(180deg); }
+    .dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-8px); background: var(--white); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 14px 44px rgba(0,0,0,0.11); min-width: 190px; padding: 8px 0; opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; z-index: 999; }
+    .menu-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .dropdown a { display: flex; align-items: center; gap: 8px; padding: 11px 20px; font-size: 14px; color: var(--gray-dark); text-decoration: none; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+    .dropdown a:hover { color: var(--red); background: var(--red-light); }
+    .dropdown a + a { border-top: 1px solid #f2f2f0; }
+    .dropdown a .dd-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity 0.15s; }
+    .dropdown a:hover .dd-dot { opacity: 1; }
+    .nav-right { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-left: 28px; }
+    .nav-cta { background: var(--red); color: var(--white); padding: 10px 22px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; }
+    .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .nav-sns { display: flex; align-items: center; gap: 6px; }
+    .sns-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; font-weight: 700; color: var(--white); transition: transform 0.18s, box-shadow 0.18s; flex-shrink: 0; }
+    .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-left: 12px; }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); } .nav-hamburger.open span:nth-child(2) { opacity: 0; } .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { background: var(--white); border-top: 1px solid var(--border); max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .nav-mobile.open { max-height: 1200px; }
+    .mobile-item { border-bottom: 1px solid var(--border); padding-bottom: 8px; } .mobile-item:last-of-type { border-bottom: none; }
+    .mobile-section-label { padding: 16px 24px 8px; font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; display: block; }
+    .mobile-sub a { display: flex; align-items: center; gap: 10px; padding: 11px 28px; font-size: 15px; color: var(--gray-dark); text-decoration: none; transition: color 0.15s, background 0.15s, padding-left 0.15s; }
+    .mobile-sub a::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.15s; }
+    .mobile-sub a:hover { color: var(--red); background: var(--red-light); padding-left: 36px; } .mobile-sub a:hover::before { background: var(--red); }
+    .mobile-sns { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+    @media (max-width: 1100px) { .nav-menus { display: none; } .nav-sns { display: none; } .nav-hamburger { display: flex; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; } }
+    @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+    .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; }
+    .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; flex-wrap: wrap; }
+    .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+    .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
+    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 10px; }
+    .ph-inner p { font-size: 15px; color: rgba(255,255,255,0.48); max-width: 500px; }
+    @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
+    .page-content { padding: 0 0 120px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    @media (max-width: 768px) { .page-content { padding: 0 0 80px; } .container { padding: 0 20px; } }
+    .grade-nav-bar { background: var(--gray-light); border-bottom: 1px solid var(--border); position: sticky; top: var(--nav-h); z-index: 100; }
+    .gnb-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; }
+    .gnb-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 1px; margin-right: 20px; white-space: nowrap; padding: 16px 20px 16px 0; border-right: 1px solid var(--border); }
+    .gnb-grades { display: flex; gap: 4px; padding: 10px 0; }
+    .gnb-grade { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--gray); background: var(--white); border: 1.5px solid var(--border); transition: all 0.2s; white-space: nowrap; }
+    .gnb-grade:hover { color: var(--red); border-color: var(--red); }
+    .gnb-grade.active { color: var(--white); background: var(--red); border-color: var(--red); }
+    .gnb-back { margin-left: auto; font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 10px 0; white-space: nowrap; transition: color 0.2s; }
+    .gnb-back:hover { color: var(--red); }
+    @media (max-width: 768px) { .gnb-inner { padding: 0 20px; overflow-x: auto; } .gnb-back { display: none; } .gnb-label { display: none; } }
+    .course-tabs { display: flex; border-bottom: 2px solid var(--border); margin: 52px 0; }
+    .course-tab { padding: 14px 32px; border: none; background: none; font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--gray); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; }
+    .course-tab.active.regular { color: var(--red); border-bottom-color: var(--red); }
+    .course-tab.active.naesin { color: var(--black); border-bottom-color: var(--black); }
+    @media (max-width: 480px) { .course-tab { padding: 12px 20px; font-size: 15px; } }
+    .course-panel { display: none; }
+    .course-panel.active { display: block; }
+    .course-header { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; margin-bottom: 48px; }
+    @media (max-width: 860px) { .course-header { grid-template-columns: 1fr; gap: 28px; } }
+    .ch-badge { display: inline-block; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+    .ch-badge.regular { background: var(--red-light); color: var(--red); }
+    .ch-badge.naesin { background: #f0f0ee; color: var(--black); }
+    .ch-title { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.35; }
+    .ch-desc { font-size: 15px; color: var(--gray); line-height: 1.9; }
+    .course-img-placeholder { width: 100%; background: var(--gray-light); border: 2px dashed var(--border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--gray); font-size: 13px; min-height: 240px; }
+    .course-img-placeholder svg { opacity: 0.4; }
+    .section-title { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+    .module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+    @media (max-width: 640px) { .module-grid { grid-template-columns: repeat(2, 1fr); } }
+    .module-card { padding: 20px 16px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .module-card:hover { border-color: var(--red); transform: translateY(-2px); }
+    .module-icon { font-size: 28px; margin-bottom: 10px; }
+    .module-name { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+    .module-sub { font-size: 12px; color: var(--gray); }
+    .points-section { background: var(--gray-light); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; }
+    .points-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .points-list li { font-size: 14px; color: var(--gray-dark); display: flex; align-items: flex-start; gap: 10px; line-height: 1.65; }
+    .points-list li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .points-list.regular li::before { color: var(--red); }
+    .points-list.naesin li::before { color: var(--black); }
+    .cta-box { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); border-radius: 20px; padding: 44px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 64px; }
+    .cta-box h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .cta-box p { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .cta-btn { background: var(--white); color: var(--red); padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform 0.2s; }
+    .cta-btn:hover { transform: translateY(-2px); }
+    @media (max-width: 640px) { .cta-box { flex-direction: column; padding: 32px 24px; text-align: center; } }
+    footer { background: #111; padding: 64px 0 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
+    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
+  </style>
+</head>
+<body>
+<nav id="nav">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <ul class="nav-menus">
+      <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
+      <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
+      <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum.html?tab=elem"><span class="dd-dot"></span>초등 과정</a><a href="curriculum.html?tab=middle"><span class="dd-dot"></span>중등 과정</a><a href="curriculum.html?tab=high"><span class="dd-dot"></span>고등 과정</a></div></li>
+      <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-seminar.html"><span class="dd-dot"></span>설명회 신청</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
+      <li class="menu-item"><a class="menu-link">생생 후기<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-results.html"><span class="dd-dot"></span>명예의 전당</a><a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a></div></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-sns">
+        <a href="http://pf.kakao.com/_icyxgn" class="sns-btn sns-kakao" target="_blank" rel="noopener">K</a>
+        <a href="#" class="sns-btn sns-insta"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="white" stroke="none"/></svg></a>
+        <a href="#" class="sns-btn sns-youtube"><svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.7-.8-1.5-.8-1.9-.8C16.6 5 12 5 12 5s-4.6 0-7.1.2c-.4 0-1.2.1-1.9.8-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5C2 14.4 2.2 16 2.2 16s.2 1.4.8 2c.7.8 1.7.7 2.2.8C6.7 19 12 19 12 19s4.6 0 7.1-.2c.4 0 1.2-.1 1.9-.8.6-.6.8-2 .8-2S22 14.4 22 12.7v-1.5C22 9.6 21.8 8 21.8 8zM9.8 14.5V9.5l5.4 2.5-5.4 2.5z"/></svg></a>
+        <a href="#" class="sns-btn sns-blog">N</a>
+      </div>
+      <a href="consulting.html" class="nav-cta">상담 신청</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <div class="mobile-item"><span class="mobile-section-label">학원 소개</span><div class="mobile-sub"><a href="about-greeting.html" onclick="closeMobileMenu()">인사말</a><a href="about-features.html" onclick="closeMobileMenu()">학원 특징</a><a href="about-history.html" onclick="closeMobileMenu()">연혁</a><a href="about-branches.html" onclick="closeMobileMenu()">지점 안내 및 오시는 길</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">강사 소개</span><div class="mobile-sub"><a href="teachers-gojan.html" onclick="closeMobileMenu()">고잔점</a><a href="teachers-zai.html" onclick="closeMobileMenu()">자이점</a><a href="teachers-hyper.html" onclick="closeMobileMenu()">하이퍼관</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">커리큘럼</span><div class="mobile-sub"><a href="curriculum.html?tab=elem" onclick="closeMobileMenu()">초등 과정</a><a href="curriculum.html?tab=middle" onclick="closeMobileMenu()">중등 과정</a><a href="curriculum.html?tab=high" onclick="closeMobileMenu()">고등 과정</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">학원 소식</span><div class="mobile-sub"><a href="news-notice.html" onclick="closeMobileMenu()">공지사항</a><a href="news-seminar.html" onclick="closeMobileMenu()">설명회 신청</a><a href="news-schedule.html" onclick="closeMobileMenu()">학원 일정</a><a href="news-timetable.html" onclick="closeMobileMenu()">학원 시간표</a></div></div>
+    <div class="mobile-item"><span class="mobile-section-label">생생 후기</span><div class="mobile-sub"><a href="about-results.html" onclick="closeMobileMenu()">명예의 전당</a><a href="reviews-list.html" onclick="closeMobileMenu()">수강 후기</a></div></div>
+    <div class="mobile-sns"><a href="http://pf.kakao.com/_icyxgn" class="sns-btn sns-kakao" target="_blank" rel="noopener">K</a><a href="#" class="sns-btn sns-blog">N</a></div>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="ph-inner">
+    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><a href="curriculum.html?tab=middle">커리큘럼</a><span>›</span><a href="curriculum.html?tab=middle">중등</a><span>›</span><span class="current">중2</span></div>
+    <h1>중2 커리큘럼</h1>
+    <p>고전문학과 심화 독해로 실력을 끌어올리고 논술 기초를 완성합니다.</p>
+  </div>
+</section>
+
+<div class="grade-nav-bar">
+  <div class="gnb-inner">
+    <span class="gnb-label">중등 과정</span>
+    <div class="gnb-grades">
+      <a href="curriculum-m1.html" class="gnb-grade">중1</a>
+      <a href="curriculum-m2.html" class="gnb-grade active">중2</a>
+      <a href="curriculum-m3.html" class="gnb-grade">중3</a>
+    </div>
+    <a href="curriculum.html?tab=middle" class="gnb-back">← 전체 보기</a>
+  </div>
+</div>
+
+<main class="page-content">
+  <div class="container">
+    <div class="course-tabs">
+      <button class="course-tab active regular" data-panel="regular">정규 과정</button>
+      <button class="course-tab naesin" data-panel="naesin">내신 과정</button>
+    </div>
+
+    <div class="course-panel active" id="panel-regular">
+      <div class="course-header">
+        <div class="ch-left">
+          <span class="ch-badge regular">정규 과정</span>
+          <h2 class="ch-title">중등 국어 심화반</h2>
+          <p class="ch-desc">고전문학과 심화 독해로 실력을 업그레이드하고, 논술 기초를 통해 고등 과정을 미리 준비합니다. 복합 지문 분석 능력을 키워 고등 국어 입문을 앞당깁니다.</p>
+        </div>
+        <div class="ch-right">
+          <div class="course-img-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div>
+        </div>
+      </div>
+      <p class="section-title">핵심 학습 영역</p>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-icon">🏛️</div><div class="module-name">고전문학 입문</div><div class="module-sub">고전시가·소설</div></div>
+        <div class="module-card"><div class="module-icon">📊</div><div class="module-name">비문학 심화</div><div class="module-sub">복합 지문 분석</div></div>
+        <div class="module-card"><div class="module-icon">✏️</div><div class="module-name">논술 기초</div><div class="module-sub">주장·근거 쓰기</div></div>
+      </div>
+      <p class="section-title">주요 학습 포인트</p>
+      <div class="points-section">
+        <ul class="points-list regular">
+          <li>고전시가·고전소설 기초 작품 30선 분석 — 수능 고전문학의 토대를 미리 쌓습니다</li>
+          <li>복합 지문(2개 이상) 독해 전략 및 연결 훈련 — 고난도 문제에 흔들리지 않는 실력</li>
+          <li>논리적 글쓰기 기초 — 주장·근거·예시 구조 완성으로 논술 실력을 시작합니다</li>
+        </ul>
+      </div>
+      <div class="cta-box"><div><h3>중2 정규 과정 상담 신청</h3><p>맞춤 수준 진단 후 최적의 반을 배정해드립니다.</p></div><a href="consulting.html" class="cta-btn">상담 신청하기</a></div>
+    </div>
+
+    <div class="course-panel" id="panel-naesin">
+      <div class="course-header">
+        <div class="ch-left">
+          <span class="ch-badge naesin">내신 과정</span>
+          <h2 class="ch-title">중2 내신 완성반</h2>
+          <p class="ch-desc">중2 내신의 핵심인 서술형·논술형 대비와 함께 학교별 맞춤 출제 경향을 집중 분석합니다. 시험 2주 전 집중 특강으로 마무리까지 완벽하게 대비합니다.</p>
+        </div>
+        <div class="ch-right">
+          <div class="course-img-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div>
+        </div>
+      </div>
+      <p class="section-title">핵심 학습 영역</p>
+      <div class="module-grid">
+        <div class="module-card"><div class="module-icon">🎯</div><div class="module-name">출제 예측</div><div class="module-sub">학교별 기출 분석</div></div>
+        <div class="module-card"><div class="module-icon">✍️</div><div class="module-name">논술형 대비</div><div class="module-sub">600~800자 글쓰기</div></div>
+        <div class="module-card"><div class="module-icon">🔄</div><div class="module-name">반복 훈련</div><div class="module-sub">오답 재풀이 시스템</div></div>
+      </div>
+      <p class="section-title">주요 학습 포인트</p>
+      <div class="points-section">
+        <ul class="points-list naesin">
+          <li>중2 교과서 지문 전체 심층 분석 — 출제 가능한 모든 포인트를 커버합니다</li>
+          <li>논술형 답안 완성 훈련 — 구조 잡기부터 퇴고까지 전 과정을 연습합니다</li>
+          <li>시험 2주 전 집중 특강 별도 운영 — 마지막까지 놓치지 않습니다</li>
+        </ul>
+      </div>
+      <div class="cta-box"><div><h3>중2 내신 과정 상담 신청</h3><p>시험 일정에 맞춘 집중 대비 계획을 안내해드립니다.</p></div><a href="consulting.html" class="cta-btn">상담 신청하기</a></div>
+    </div>
+  </div>
+</main>
+
+<footer><div class="footer-inner"><div class="footer-top"><div><div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div><p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p><div class="footer-contact"><span>📍 <strong>[주소 입력]</strong></span><span>📞 <strong>[전화번호 입력]</strong></span><span>✉️ <strong>[이메일 입력]</strong></span></div></div><div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="about-results.html">명예의 전당</a></li></ul></div><div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="consulting.html">온라인 상담 신청</a></li><li><a href="http://pf.kakao.com/_icyxgn" target="_blank" rel="noopener">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p><p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p></div></div></footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); }
+hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+document.querySelectorAll('.course-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.course-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
