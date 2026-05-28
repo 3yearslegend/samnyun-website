@@ -481,8 +481,8 @@
   }
 
   Promise.all([
-    fetch('/data/notices.json').then(r => r.json()),
-    fetch('/data/schedule.json').then(r => r.json()),
+    fetch('data/notices.json').then(r => r.json()),
+    fetch('data/schedule.json').then(r => r.json()),
   ]).then(([noticesData, scheduleData]) => {
     allEvents = buildEvents(noticesData, scheduleData);
     renderCal(calYear, calMonth);

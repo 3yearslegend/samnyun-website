@@ -1043,7 +1043,7 @@
   resetHeroTimer();
 
   /* ---- Load carousel data from CMS ---- */
-  fetch('/data/carousel.json')
+  fetch('data/carousel.json')
     .then(r => r.json())
     .then(data => {
       (data.slides || []).forEach((s, i) => {

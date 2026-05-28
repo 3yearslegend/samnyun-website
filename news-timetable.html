@@ -343,7 +343,7 @@
     renderOutput();
   });
 
-  fetch('/data/timetable.json')
+  fetch('data/timetable.json')
     .then(r => r.json())
     .then(data => {
       ttData = data;

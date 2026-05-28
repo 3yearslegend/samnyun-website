@@ -241,7 +241,7 @@
     });
   });
 
-  fetch('/data/reviews.json')
+  fetch('data/reviews.json')
     .then(r => r.json())
     .then(data => {
       allReviews = data.reviews || [];

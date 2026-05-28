@@ -216,7 +216,7 @@
     </div>`;
   }
 
-  fetch('/data/teachers-hyper.json')
+  fetch('data/teachers-hyper.json')
     .then(r => r.json())
     .then(data => {
       const grid = document.getElementById('teacherGrid');

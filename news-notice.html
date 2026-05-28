@@ -268,7 +268,7 @@
     renderBoard(filtered);
   });
 
-  fetch('/data/notices.json')
+  fetch('data/notices.json')
     .then(r => r.json())
     .then(data => {
       sortedNotices = sortNotices(data.notices || []);

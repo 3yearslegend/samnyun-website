@@ -217,7 +217,7 @@
     </div>`;
   }
 
-  fetch('/data/teachers-zai.json')
+  fetch('data/teachers-zai.json')
     .then(r => r.json())
     .then(data => {
       const grid = document.getElementById('teacherGrid');
