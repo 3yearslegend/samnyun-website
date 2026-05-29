@@ -223,6 +223,7 @@
         <div class="form-card-body">
           <form id="seminarForm" name="seminar-apply" data-netlify="true" action="/success.html" novalidate>
             <input type="hidden" name="form-name" value="seminar-apply">
+            <input type="hidden" name="formType" value="seminar">
             <input type="hidden" id="sf-seminarTitle" name="설명회명" value="">
             <input type="hidden" id="sf-levelHidden" name="학교급" value="">
             <input type="hidden" id="sf-statusHidden" name="재원여부" value="">
@@ -319,6 +320,8 @@
 </footer>
 
 <script>
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec';
+
   /* ===== NAV ===== */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
@@ -534,12 +537,11 @@
     btn.querySelector('.sf-btn-text').textContent = '접수 처리 중...';
 
     try {
-      const res = await fetch('/', {
+      await fetch(GAS_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(this)).toString(),
+        mode: 'no-cors',
+        body: new FormData(this),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
     } catch (err) {
       btn.disabled = false; btn.classList.remove('submitting');
       btn.querySelector('.sf-btn-text').textContent = '신청 완료하기';
@@ -547,16 +549,8 @@
       return;
     }
 
-    btn.disabled = false; btn.classList.remove('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '신청 완료하기';
-    this.reset();
-    sfLevel = ''; sfStatus = '';
-    document.getElementById('sf-levelHidden').value = '';
-    document.getElementById('sf-statusHidden').value = '';
-    document.getElementById('sf-branchHidden').value = currentBranch;
-    document.querySelectorAll('#sf-levelGroup .sf-btn, #sf-statusGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('sf-gradeGroup').style.display = 'none';
-    alert('설명회 신청이 완료되었습니다!\n담당 선생님이 곧 연락드리겠습니다.');
+    btn.querySelector('.sf-btn-text').textContent = '신청 완료! 잠시 후 이동합니다...';
+    setTimeout(() => { window.location.href = 'success.html'; }, 2000);
   });
 </script>
 </body>
