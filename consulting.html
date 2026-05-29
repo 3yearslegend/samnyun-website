@@ -475,6 +475,20 @@
     return '오후 ' + (h-12) + ':' + String(m).padStart(2,'0');
   }
 
+  function hasRealAvailableTime(dateStr) {
+    const times = availableSlots[dateStr];
+    if (!times || times.length === 0) return false;
+    const now = new Date();
+    const isToday = dateStr === dateToStr(now);
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const booked = new Set(bookedSlots[dateStr] || []);
+    return times.some(t => {
+      const [h, m] = t.split(':').map(Number);
+      const isTooSoon = isToday && (h * 60 + m) < nowMinutes + 120;
+      return !isTooSoon && !booked.has(t);
+    });
+  }
+
   function renderCCal(year, month) {
     const today = new Date(); today.setHours(0,0,0,0);
     const monthNames = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
@@ -489,8 +503,8 @@
       const isOtherMonth = date.getMonth() !== month;
       const isPast = date < today;
       const isToday = !isPast && dateStr === dateToStr(today);
-      const isAvailable = !isOtherMonth && !isPast && !!availableSlots[dateStr];
-      const isUnavailable = !isOtherMonth && !isPast && !availableSlots[dateStr];
+      const isAvailable = !isOtherMonth && !isPast && hasRealAvailableTime(dateStr);
+      const isUnavailable = !isOtherMonth && !isPast && !hasRealAvailableTime(dateStr);
       const isSelected = dateStr === selectedDate;
       let cls = 'ccal-day';
       if (isOtherMonth) cls += ' other-month';
