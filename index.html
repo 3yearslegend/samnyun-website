@@ -970,10 +970,9 @@
     <h3 class="cal-modal-title" id="calModalTitle"></h3>
     <div class="cal-modal-meta">
       <div class="cal-modal-row"><span class="cal-modal-icon">📅</span><span id="calModalDate"></span></div>
-      <div class="cal-modal-row"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
-      <div class="cal-modal-row"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
+      <div class="cal-modal-row" id="calModalPeriodRow"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
+      <div class="cal-modal-row" id="calModalLocationRow"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
     </div>
-    <p class="cal-modal-desc" id="calModalDesc"></p>
     <a href="news-schedule.html" class="cal-modal-link">전체 일정 보기 →</a>
   </div>
 </div>
@@ -1153,8 +1152,9 @@
     document.getElementById('calModalTitle').textContent = evt.title;
     document.getElementById('calModalDate').textContent = evt.date;
     document.getElementById('calModalPeriod').textContent = evt.period;
+    document.getElementById('calModalPeriodRow').style.display = evt.period ? '' : 'none';
     document.getElementById('calModalLocation').textContent = evt.location;
-    document.getElementById('calModalDesc').textContent = evt.desc;
+    document.getElementById('calModalLocationRow').style.display = evt.location ? '' : 'none';
     document.getElementById('calModalBg').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
