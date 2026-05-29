@@ -717,20 +717,25 @@
     btn.classList.add('submitting');
     btn.querySelector('.btn-text').textContent = '접수 처리 중...';
 
-    const params = new URLSearchParams({
-      formType:     'consulting',
-      학생이름:     studentName.value.trim(),
-      학교명:       schoolName.value.trim(),
-      학교급:       selectedLevel,
-      학년:         grade.value,
-      연락처:       phone.value.trim(),
-      희망지점:     selectedBranch,
-      상담희망날짜: selectedDate,
-      상담희망시간: selectedTime,
-      문의내용:     document.getElementById('consultMemo').value.trim(),
+    const payload = JSON.stringify({
+      formType:    'consulting',
+      studentName: studentName.value.trim(),
+      school:      schoolName.value.trim(),
+      schoolLevel: selectedLevel,
+      grade:       grade.value,
+      phone:       phone.value.trim(),
+      branch:      selectedBranch,
+      date:        selectedDate,
+      time:        selectedTime,
+      message:     document.getElementById('consultMemo').value.trim(),
     });
 
-    fetch(GAS_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
+    fetch(GAS_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      mode:    'no-cors',
+      body:    payload,
+    })
       .finally(() => {
         document.getElementById('consultFormWrap').style.display = 'none';
         document.getElementById('consultSuccess').style.display = '';
