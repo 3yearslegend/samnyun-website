@@ -129,6 +129,7 @@
     .time-btn { padding: 9px 18px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; }
     .time-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
     .time-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+    .time-btn.disabled, .time-btn.disabled:hover { color: #bbb; border-color: #e8e8e8; background: #f8f8f8; cursor: not-allowed; transform: none; }
 
     /* Submit Button */
     .submit-btn { width: 100%; height: 62px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 17px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
@@ -460,6 +461,7 @@
 
   // ===== 상담 캘린더 =====
   let availableSlots = {};
+  let bookedSlots = {};
   let ccalYear, ccalMonth;
   let selectedDate = '', selectedTime = '';
 
@@ -518,10 +520,23 @@
     document.getElementById('consultTime').value = '';
     document.getElementById('consultTimeErr').style.display = 'none';
     const container = document.getElementById('timeSlots');
-    container.innerHTML = times.map(t =>
-      '<button type="button" class="time-btn" data-time="' + t + '">' + formatTime(t) + '</button>'
-    ).join('');
-    container.querySelectorAll('.time-btn').forEach(btn => {
+
+    const now = new Date();
+    const isToday = dateStr === dateToStr(now);
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+    const booked = new Set(bookedSlots[dateStr] || []);
+
+    container.innerHTML = times.map(t => {
+      const [h, m] = t.split(':').map(Number);
+      const slotMinutes = h * 60 + m;
+      const isTooSoon = isToday && slotMinutes < nowMinutes + 120;
+      const isBooked = booked.has(t);
+      const disabled = isTooSoon || isBooked;
+      const label = formatTime(t) + (isBooked ? ' (마감)' : '');
+      return '<button type="button" class="time-btn' + (disabled ? ' disabled' : '') + '" data-time="' + t + '">' + label + '</button>';
+    }).join('');
+
+    container.querySelectorAll('.time-btn:not(.disabled)').forEach(btn => {
       btn.addEventListener('click', () => {
         container.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
@@ -582,6 +597,12 @@
       const now = new Date();
       ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
     });
+
+  // 예약된(마감) 시간 조회 — GAS GET 응답 형식: { "booked": { "2026-06-10": ["14:00"] } }
+  fetch(GAS_URL + '?action=getBooked')
+    .then(r => r.json())
+    .then(data => { bookedSlots = data.booked || {}; })
+    .catch(() => {});
 
   // 연락처 자동 하이픈 포맷팅 (010-XXXX-XXXX)
   document.getElementById('contactPhone').addEventListener('input', function() {
@@ -695,25 +716,8 @@
       return;
     }
 
-    btn.disabled = false;
-    btn.classList.remove('submitting');
-    btn.querySelector('.btn-text').textContent = '상담 신청하기';
-
-    this.reset();
-    selectedBranch = ''; selectedLevel = ''; selectedDate = ''; selectedTime = '';
-    document.getElementById('branchHidden').value = '';
-    document.getElementById('levelHidden').value = '';
-    document.getElementById('consultDate').value = '';
-    document.getElementById('consultTime').value = '';
-    document.querySelectorAll('.branch-btn').forEach(b => b.classList.remove('selected'));
-    document.getElementById('gradeGroup').style.display = 'none';
-    document.getElementById('consultCalGroup').style.display = 'none';
-    document.getElementById('timeSlotGroup').style.display = 'none';
-    document.getElementById('timeSlots').innerHTML = '';
-    availableSlots = {};
-    document.querySelectorAll('.form-input.error, .form-select.error').forEach(el => el.classList.remove('error'));
-
-    showToast();
+    btn.querySelector('.btn-text').textContent = '신청 완료! 잠시 후 이동합니다...';
+    setTimeout(() => { window.location.href = 'success.html'; }, 2000);
   });
 </script>
 </body>
