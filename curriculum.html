@@ -155,6 +155,7 @@
     }
     @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+    @media (max-width: 380px) { .nav-cta { display: none; } }
   </style>
 </head>
 <body>
@@ -464,7 +465,11 @@ window.addEventListener('scroll', () => { document.getElementById('nav').classLi
 const TAB_ORDER = ['elem', 'middle', 'high'];
 function activateTab(tab) {
   document.querySelectorAll('.cur-d1-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  document.querySelectorAll('.cur-panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
+  document.querySelectorAll('.cur-panel').forEach(p => {
+    const isActive = p.id === 'panel-' + tab;
+    p.classList.toggle('active', isActive);
+    if (isActive) p.classList.add('visible');
+  });
   const url = new URL(location.href);
   url.searchParams.set('tab', tab);
   history.replaceState(null, '', url);

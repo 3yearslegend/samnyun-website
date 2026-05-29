@@ -390,6 +390,8 @@
     .cal-modal-desc { font-size: 14px; color: var(--gray); line-height: 1.9; }
     .cal-modal-link { display: block; margin-top: 20px; text-align: center; padding: 12px; background: var(--red); color: var(--white); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
     .cal-modal-link:hover { background: var(--red-dark); }
+    .cal-schedule-link { display: block; margin-top: 14px; text-align: center; padding: 11px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--gray-dark); text-decoration: none; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .cal-schedule-link:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
 
     /* Notice list side */
     .notices-panel { background: var(--white); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
@@ -510,6 +512,7 @@
     }
     @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+    @media (max-width: 380px) { .nav-cta { display: none; } }
   </style>
 </head>
 <body>
@@ -894,6 +897,7 @@
             <div class="cal-day-name">토</div>
           </div>
         </div>
+        <a href="news-schedule.html" class="cal-schedule-link">전체 일정 보기 →</a>
       </div>
 
       <!-- Right: Notice list -->
@@ -1102,8 +1106,11 @@
   const _now = new Date();
   let calYear = _now.getFullYear(), calMonth = _now.getMonth();
 
-  function getMonthEvents(year, month) {
-    return CAL_EVENTS.filter(e => e.year === year && e.month === month);
+  function dateMs(y, m, d) { return new Date(y, m, d).getTime(); }
+
+  function getEventsForDay(year, month, day) {
+    const t = dateMs(year, month, day);
+    return CAL_EVENTS.filter(e => dateMs(e.year, e.month, e.day) <= t && t <= dateMs(e.endYear, e.endMonth, e.endDay));
   }
 
   function renderCal() {
@@ -1115,7 +1122,6 @@
     const days = new Date(calYear, calMonth + 1, 0).getDate();
     const prevDays = new Date(calYear, calMonth, 0).getDate();
     const today = new Date();
-    const monthEvts = getMonthEvents(calYear, calMonth);
 
     for (let i = 0; i < first; i++) {
       const d = document.createElement('div');
@@ -1130,10 +1136,10 @@
       if (dow === 0) cls += ' sun';
       if (dow === 6) cls += ' sat';
       if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) cls += ' today';
-      const evt = monthEvts.find(e => e.day === d);
-      if (evt) {
+      const dayEvts = getEventsForDay(calYear, calMonth, d);
+      if (dayEvts.length) {
         cls += ' has-event';
-        cell.addEventListener('click', () => openCalModal(evt));
+        cell.addEventListener('click', () => openCalModal(dayEvts[0]));
       }
       cell.className = cls;
       cell.textContent = d;
@@ -1224,16 +1230,21 @@
   }).catch(() => {});
 
   /* ---- Data fetch: Schedule ---- */
-  fetch('data/schedule.json').then(r => r.json()).then(data => {
-    const dows = ['일','월','화','수','목','금','토'];
-    CAL_EVENTS = (data.events || []).map(s => {
-      const parts = s.date.split('-');
-      const y = parseInt(parts[0]), m = parseInt(parts[1]) - 1, d = parseInt(parts[2]);
-      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
-      return { year: y, month: m, day: d, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', desc: s.content || '' };
-    });
-    renderCal();
-  }).catch(() => {});
+  fetch('./data/schedule.json')
+    .then(r => { if (!r.ok) throw new Error('schedule.json ' + r.status); return r.json(); })
+    .then(data => {
+      const dows = ['일','월','화','수','목','금','토'];
+      CAL_EVENTS = (data.events || []).map(s => {
+        const p = s.date.split('-');
+        const y = +p[0], m = +p[1] - 1, d = +p[2];
+        const ep = (s.end_date || s.date).split('-');
+        const ey = +ep[0], em = +ep[1] - 1, ed = +ep[2];
+        const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+        return { year: y, month: m, day: d, endYear: ey, endMonth: em, endDay: ed, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '' };
+      });
+      renderCal();
+    })
+    .catch(err => console.warn('[Schedule]', err));
 
   /* ---- Intersection observer ---- */
   const io = new IntersectionObserver((entries) => {

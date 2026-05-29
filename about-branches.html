@@ -52,32 +52,39 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
 
-    /* BRANCHES */
-    .branch-tabs { display: flex; gap: 8px; margin-bottom: 48px; flex-wrap: wrap; }
-    .branch-tab { padding: 10px 24px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 14px; font-weight: 500; color: var(--gray); cursor: pointer; background: var(--white); transition: all 0.2s; }
+    /* BRANCH TABS */
+    .branch-tabs { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+    .branch-tab { padding: 12px 32px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 15px; font-weight: 600; color: var(--gray); cursor: pointer; background: var(--white); transition: all 0.2s; }
     .branch-tab.active, .branch-tab:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
-    .branch-block { margin-bottom: 72px; }
-    .branch-block:last-child { margin-bottom: 0; }
-    .branch-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--red); }
+
+    /* BRANCH SECTION */
+    .branch-section { display: none; }
+    .branch-section.active { display: block; }
+    .branch-section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 2px solid var(--red); }
     .branch-badge { background: var(--red); color: var(--white); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 100px; }
-    .branch-header h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 700; }
-    .branch-body { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .branch-map-link { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; background: var(--gray-light); border-radius: 12px; border: 1.5px solid var(--border); aspect-ratio: 16/10; text-decoration: none; color: var(--gray-dark); transition: border-color 0.2s, background 0.2s, transform 0.18s; cursor: pointer; }
-    .branch-map-link:hover { border-color: var(--red); background: var(--red-light); transform: translateY(-2px); }
-    .branch-map-link .map-pin { font-size: 36px; line-height: 1; }
-    .branch-map-link .map-addr { font-size: 13px; color: var(--gray); text-align: center; padding: 0 16px; line-height: 1.6; }
-    .branch-map-link .map-cta { font-size: 13px; font-weight: 600; color: var(--red); display: flex; align-items: center; gap: 5px; }
-    .branch-map-link .map-cta svg { width: 14px; height: 14px; }
-    .branch-info { }
-    .branch-info h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 20px; }
-    .branch-detail { display: flex; flex-direction: column; gap: 14px; }
+    .branch-section-header h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 700; }
+
+    /* MAP + INFO */
+    .branch-map-wrap { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--gray-light); margin-bottom: 0; }
+    .branch-map-iframe { width: 100%; height: 360px; border: none; display: block; }
+    .branch-map-fallback { display: none; width: 100%; height: 360px; background: var(--gray-light); align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--gray); }
+    .branch-map-fallback span { font-size: 48px; }
+    .branch-body { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-bottom: 40px; }
+    .branch-map-col { }
+    .branch-info-col { }
+    .branch-info-col h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+    .branch-detail { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
     .branch-detail-item { display: flex; gap: 14px; align-items: flex-start; }
     .bdi-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--red-light); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
     .bdi-text strong { display: block; font-size: 13px; color: var(--gray); margin-bottom: 3px; }
     .bdi-text span { font-size: 15px; color: var(--black); font-weight: 500; }
+    .naver-map-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px; background: #03C75A; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 600; transition: opacity 0.2s, transform 0.15s; }
+    .naver-map-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .naver-map-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    @media (max-width: 768px) { .branch-body { grid-template-columns: 1fr; } .branch-map-iframe { height: 280px; } }
 
     /* Photo slider */
-    .branch-photos { margin-top: 32px; }
+    .branch-photos { }
     .branch-photos-title { font-size: 14px; font-weight: 600; color: var(--gray-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
     .branch-photos-title::before { content: ''; display: block; width: 3px; height: 16px; background: var(--red); border-radius: 2px; }
     .slider-wrap { position: relative; border-radius: 12px; overflow: hidden; background: var(--gray-light); border: 1px solid var(--border); aspect-ratio: 16/9; }
@@ -93,7 +100,6 @@
     .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 7px; z-index: 2; }
     .slider-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.45); border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; padding: 0; }
     .slider-dot.active { background: #fff; transform: scale(1.25); }
-    @media (max-width: 768px) { .branch-body { grid-template-columns: 1fr; } }
 
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -151,6 +157,7 @@
     }
     @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
+    @media (max-width: 380px) { .nav-cta { display: none; } }
   </style>
 </head>
 <body>
@@ -248,23 +255,33 @@
 <main class="page-content">
   <div class="container">
 
-    <div class="branch-block fade-up" id="branch-gojan">
-      <div class="branch-header">
+    <!-- 지점 탭 -->
+    <div class="branch-tabs">
+      <button class="branch-tab active" data-branch="gojan">고잔점</button>
+      <button class="branch-tab" data-branch="zai">자이점</button>
+      <button class="branch-tab" data-branch="hyper">하이퍼관</button>
+    </div>
+
+    <!-- 고잔점 -->
+    <div class="branch-section active" id="bs-gojan">
+      <div class="branch-section-header">
         <span class="branch-badge">지점 1</span>
         <h2>고잔점</h2>
       </div>
       <div class="branch-body">
-        <a class="branch-map-link" href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130" target="_blank" rel="noopener">
-          <span class="map-pin">📍</span>
-          <p class="map-addr">경기 안산시 단원구<br>광덕대로 130 폴리타운 B동 6~7층</p>
-          <span class="map-cta"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 1l6 6-6 6M1 7h12"/></svg> 네이버 지도로 보기</span>
-        </a>
-        <div class="branch-info">
+        <div class="branch-map-col">
+          <div class="branch-map-wrap">
+            <iframe class="branch-map-iframe"
+              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130"
+              title="고잔점 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </div>
+        <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
           <div class="branch-detail">
             <div class="branch-detail-item">
               <div class="bdi-icon">📍</div>
-              <div class="bdi-text"><strong>주소</strong><span>경기 안산시 단원구 광덕대로 130 폴리타운 B동 6~7층</span></div>
+              <div class="bdi-text"><strong>주소</strong><span>경기 안산시 단원구 광덕대로 130<br>폴리타운 B동 6~7층</span></div>
             </div>
             <div class="branch-detail-item">
               <div class="bdi-icon">📞</div>
@@ -272,9 +289,13 @@
             </div>
             <div class="branch-detail-item">
               <div class="bdi-icon">🕐</div>
-              <div class="bdi-text"><strong>운영시간</strong><span>월~금 14:00~20:00 / 토 10:00~15:00 / 일 휴무</span></div>
+              <div class="bdi-text"><strong>운영시간</strong><span>월~금 14:00~20:00<br>토 10:00~15:00 / 일 휴무</span></div>
             </div>
           </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130" target="_blank" rel="noopener" class="naver-map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            네이버 지도에서 보기
+          </a>
         </div>
       </div>
       <div class="branch-photos">
@@ -285,23 +306,26 @@
       </div>
     </div>
 
-    <div class="branch-block fade-up" id="branch-zai">
-      <div class="branch-header">
+    <!-- 자이점 -->
+    <div class="branch-section" id="bs-zai">
+      <div class="branch-section-header">
         <span class="branch-badge">지점 2</span>
         <h2>자이점</h2>
       </div>
       <div class="branch-body">
-        <a class="branch-map-link" href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026" target="_blank" rel="noopener">
-          <span class="map-pin">📍</span>
-          <p class="map-addr">경기 안산시 상록구<br>해양4로 26 자이센터프라자 1006~1008호</p>
-          <span class="map-cta"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 1l6 6-6 6M1 7h12"/></svg> 네이버 지도로 보기</span>
-        </a>
-        <div class="branch-info">
+        <div class="branch-map-col">
+          <div class="branch-map-wrap">
+            <iframe class="branch-map-iframe"
+              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026"
+              title="자이점 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </div>
+        <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
           <div class="branch-detail">
             <div class="branch-detail-item">
               <div class="bdi-icon">📍</div>
-              <div class="bdi-text"><strong>주소</strong><span>경기 안산시 상록구 해양4로 26 자이센터프라자 1006~1008호</span></div>
+              <div class="bdi-text"><strong>주소</strong><span>경기 안산시 상록구 해양4로 26<br>자이센터프라자 1006~1008호</span></div>
             </div>
             <div class="branch-detail-item">
               <div class="bdi-icon">📞</div>
@@ -309,9 +333,13 @@
             </div>
             <div class="branch-detail-item">
               <div class="bdi-icon">🕐</div>
-              <div class="bdi-text"><strong>운영시간</strong><span>월~금 14:00~20:00 / 토 10:00~15:00 / 일 휴무</span></div>
+              <div class="bdi-text"><strong>운영시간</strong><span>월~금 14:00~20:00<br>토 10:00~15:00 / 일 휴무</span></div>
             </div>
           </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026" target="_blank" rel="noopener" class="naver-map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            네이버 지도에서 보기
+          </a>
         </div>
       </div>
       <div class="branch-photos">
@@ -322,18 +350,21 @@
       </div>
     </div>
 
-    <div class="branch-block fade-up" id="branch-hyper">
-      <div class="branch-header">
+    <!-- 하이퍼관 -->
+    <div class="branch-section" id="bs-hyper">
+      <div class="branch-section-header">
         <span class="branch-badge">지점 3</span>
         <h2>하이퍼관</h2>
       </div>
       <div class="branch-body">
-        <a class="branch-map-link" href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080" target="_blank" rel="noopener">
-          <span class="map-pin">📍</span>
-          <p class="map-addr">경기 안산시 상록구<br>충장로 80 101호</p>
-          <span class="map-cta"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 1l6 6-6 6M1 7h12"/></svg> 네이버 지도로 보기</span>
-        </a>
-        <div class="branch-info">
+        <div class="branch-map-col">
+          <div class="branch-map-wrap">
+            <iframe class="branch-map-iframe"
+              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080"
+              title="하이퍼관 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          </div>
+        </div>
+        <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
           <div class="branch-detail">
             <div class="branch-detail-item">
@@ -346,9 +377,13 @@
             </div>
             <div class="branch-detail-item">
               <div class="bdi-icon">🕐</div>
-              <div class="bdi-text"><strong>운영시간</strong><span>월~금 15:00~20:00 / 토 10:00~14:00 / 일 휴무</span></div>
+              <div class="bdi-text"><strong>운영시간</strong><span>월~금 15:00~20:00<br>토 10:00~14:00 / 일 휴무</span></div>
             </div>
           </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080" target="_blank" rel="noopener" class="naver-map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+            네이버 지도에서 보기
+          </a>
         </div>
       </div>
       <div class="branch-photos">
@@ -400,6 +435,15 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // Branch tab switching
+  document.querySelectorAll('.branch-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.branch;
+      document.querySelectorAll('.branch-tab').forEach(t => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.branch-section').forEach(s => s.classList.toggle('active', s.id === 'bs-' + id));
+    });
+  });
 
   function buildSlider(wrapperId, photos) {
     const wrap = document.getElementById(wrapperId);
