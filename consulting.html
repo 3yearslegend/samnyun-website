@@ -255,8 +255,7 @@
         <h2 class="form-panel-title">온라인 상담 신청서</h2>
         <p class="form-panel-desc">아래 정보를 입력하시면 담당 선생님이 직접 연락드립니다. 모든 <span style="color:var(--red)">*</span> 항목은 필수 입력입니다.</p>
 
-        <form id="consultingForm" name="consulting" action="https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec" method="POST" target="hidden_iframe" novalidate>
-          <input type="hidden" name="form-name" value="consulting">
+        <form id="consultingForm" name="consulting" novalidate>
           <input type="hidden" name="formType" value="consulting">
 
           <span class="form-section-label">학생 정보</span>
@@ -351,7 +350,6 @@
           <p class="form-notice">신청 즉시 입력하신 연락처로 카카오톡 알림톡이 발송됩니다.<br>상담 확정 후 오시는 길 안내 문자를 추가로 받으실 수 있습니다.</p>
         </form>
         </div><!-- /consultFormWrap -->
-        <iframe name="hidden_iframe" style="display:none;" aria-hidden="true"></iframe>
         <div id="consultSuccess" style="display:none; text-align:center; padding:64px 0;">
           <div style="width:56px;height:56px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -691,6 +689,8 @@
   }
 
   // 폼 제출 핸들러
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec';
+
   document.getElementById('consultingForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -713,16 +713,24 @@
     if (!selectedTime) { v7 = false; document.getElementById('consultTimeErr').style.display = 'block'; }
     if (!(v1 && v2 && v3a && v3b && v4 && v5 && v6 && v7)) return;
 
-    btn.disabled = true;
-    btn.classList.add('submitting');
-    btn.querySelector('.btn-text').textContent = '접수 처리 중...';
+    // URL 파라미터로 데이터 조합
+    const params = new URLSearchParams({
+      formType:   'consulting',
+      학생이름:   studentName.value.trim(),
+      학교명:     schoolName.value.trim(),
+      학교급:     selectedLevel,
+      학년:       grade.value,
+      연락처:     phone.value.trim(),
+      희망지점:   selectedBranch,
+      상담희망날짜: selectedDate,
+      상담희망시간: selectedTime,
+      문의내용:   document.getElementById('consultMemo').value.trim(),
+    });
 
-    this.submit(); // hidden iframe으로 전송
+    window.open(GAS_URL + '?' + params.toString(), '_blank');
 
-    setTimeout(() => {
-      document.getElementById('consultFormWrap').style.display = 'none';
-      document.getElementById('consultSuccess').style.display = '';
-    }, 3000);
+    document.getElementById('consultFormWrap').style.display = 'none';
+    document.getElementById('consultSuccess').style.display = '';
   });
 </script>
 </body>
