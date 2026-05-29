@@ -176,22 +176,78 @@ collections:
                     widget: list
                     collapsed: true
                     field: { label: "시간 (예: 14:00)", name: time, widget: string }
-              - label: "특정 날짜 추가 (특별 상담일 — 요일 기본값과 무관하게 지정)"
-                name: extra
+              - label: "예외 날짜 설정 (특정 날짜 추가/삭제/휴무)"
+                name: exceptions
                 widget: list
                 collapsed: true
                 fields:
                   - { label: "날짜 (예: 2026-06-15)", name: date, widget: string }
-                  - label: "상담 가능 시간 (여러 개 추가 가능)"
+                  - label: 유형
+                    name: type
+                    widget: select
+                    options:
+                      - { label: "전체 휴무", value: closed }
+                      - { label: "시간 추가 (기본 + 추가)", value: add }
+                      - { label: "시간 삭제 (기본에서 제거)", value: remove }
+                      - { label: "시간 교체", value: replace }
+                  - { label: "사유 (선택)", name: reason, widget: string, required: false }
+                  - label: "시간 목록 (add/remove/replace 유형)"
                     name: times
                     widget: list
+                    required: false
                     collapsed: true
                     field: { label: "시간 (예: 14:00)", name: time, widget: string }
-              - label: "특정 날짜 제외 (상담 불가일 — 요일 기본값이 있어도 제외)"
-                name: exclude
+
+  - name: branch_photos
+    label: 지점 사진
+    files:
+      - name: branch_photos_data
+        label: 지점별 사진 관리
+        file: data/branches.json
+        format: json
+        fields:
+          - label: 고잔점
+            name: gojan
+            widget: object
+            fields:
+              - { label: 지점명, name: name, widget: string }
+              - { label: 전화번호, name: phone, widget: string }
+              - { label: 주소, name: address, widget: string }
+              - { label: 운영시간, name: hours, widget: string }
+              - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: 사진 목록
+                name: photos
                 widget: list
-                collapsed: true
-                field: { label: "제외 날짜 (예: 2026-06-10)", name: date, widget: string }
+                collapsed: false
+                field: { label: 사진, name: photo, widget: image }
+          - label: 자이점
+            name: zai
+            widget: object
+            fields:
+              - { label: 지점명, name: name, widget: string }
+              - { label: 전화번호, name: phone, widget: string }
+              - { label: 주소, name: address, widget: string }
+              - { label: 운영시간, name: hours, widget: string }
+              - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: 사진 목록
+                name: photos
+                widget: list
+                collapsed: false
+                field: { label: 사진, name: photo, widget: image }
+          - label: 하이퍼관
+            name: hyper
+            widget: object
+            fields:
+              - { label: 지점명, name: name, widget: string }
+              - { label: 전화번호, name: phone, widget: string }
+              - { label: 주소, name: address, widget: string }
+              - { label: 운영시간, name: hours, widget: string }
+              - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: 사진 목록
+                name: photos
+                widget: list
+                collapsed: false
+                field: { label: 사진, name: photo, widget: image }
 
   - name: carousel
     label: 캐러셀 배너

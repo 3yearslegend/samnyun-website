@@ -104,6 +104,7 @@
     .ccal-day.available:hover { background: #C8E6C9; transform: scale(1.08); }
     .ccal-day.available.selected { background: #2E7D32; color: #fff; border-color: #1B5E20; box-shadow: 0 2px 8px rgba(46,125,50,0.35); }
     .ccal-day.unavailable { background: #FFF5F5; color: #E53935; cursor: not-allowed; border-color: #FFCDD2; }
+    .ccal-day.closed { background: #fce8e8; color: var(--red); border-color: #f5c6c0; cursor: default; font-weight: 500; }
     .ccal-today-dot { position: absolute; bottom: 3px; width: 4px; height: 4px; background: var(--red); border-radius: 50%; }
     .ccal-day.available.selected .ccal-today-dot { background: #fff; }
     .ccal-legend { display: flex; gap: 16px; padding: 8px 14px 10px; border-top: 1px solid var(--border); background: var(--gray-light); }
@@ -188,7 +189,7 @@
       .toast { font-size: 13px; padding: 13px 20px; white-space: normal; text-align: center; border-radius: 14px; }
     }
     /* Hamburger – always visible */
-    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-left: 16px; z-index: 10002; flex-shrink: 0; }
+    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
     .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
 
     /* Fullscreen overlay */
@@ -233,6 +234,7 @@
 <nav id="nav">
   <div class="nav-container">
     <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
     <ul class="nav-menus">
       <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
       <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
@@ -249,7 +251,6 @@
       </div>
       <a href="consulting.html" class="nav-cta">상담 신청</a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="fs-overlay" id="fsOverlay">
@@ -517,9 +518,12 @@
         <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
         <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
         <div class="footer-contact">
-          <span>📍 <strong>[주소 입력]</strong></span>
-          <span>📞 <strong>[전화번호 입력]</strong></span>
-          <span>✉️ <strong>[이메일 입력]</strong></span>
+          <span>📞 <strong>고잔점</strong> 031-480-3500</span>
+          <span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span>
+          <span>📞 <strong>자이점</strong> 031-8042-3543</span>
+          <span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span>
+          <span>📞 <strong>하이퍼관</strong> 031-8042-3565</span>
+          <span>📍 경기 안산시 상록구 충장로 80 101호</span>
         </div>
       </div>
       <div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="about-results.html">명예의 전당</a></li></ul></div>
@@ -590,12 +594,14 @@
       const isOtherMonth = date.getMonth() !== month;
       const isPast = date < today;
       const isToday = !isPast && dateStr === dateToStr(today);
-      const isAvailable = !isOtherMonth && !isPast && hasRealAvailableTime(dateStr);
-      const isUnavailable = !isOtherMonth && !isPast && !hasRealAvailableTime(dateStr);
+      const isClosed = !isOtherMonth && !isPast && closedDates.has(dateStr);
+      const isAvailable = !isOtherMonth && !isPast && !isClosed && hasRealAvailableTime(dateStr);
+      const isUnavailable = !isOtherMonth && !isPast && !isClosed && !hasRealAvailableTime(dateStr);
       const isSelected = dateStr === selectedDate;
       let cls = 'ccal-day';
       if (isOtherMonth) cls += ' other-month';
       else if (isPast) cls += ' past';
+      else if (isClosed) cls += ' closed';
       else if (isAvailable) cls += ' available' + (isSelected ? ' selected' : '');
       else if (isUnavailable) cls += ' unavailable';
       const dot = isToday ? '<span class="ccal-today-dot"></span>' : '';
@@ -659,10 +665,12 @@
   });
 
   let branchesData = {};
+  let closedDates = new Set();
 
   function loadBranchCalendar(branchName) {
     const bData = branchesData[branchName];
     availableSlots = {};
+    closedDates = new Set();
     selectedDate = ''; selectedTime = '';
     document.getElementById('consultDate').value = '';
     document.getElementById('consultTime').value = '';
@@ -672,16 +680,28 @@
     const today = new Date(); today.setHours(0,0,0,0);
     const weeklyMap = {};
     (bData.weekly || []).forEach(w => { weeklyMap[+w.day] = w.times || []; });
-    const extraMap = {};
-    (bData.extra || []).forEach(e => { extraMap[e.date] = e.times || []; });
-    const excludeSet = new Set(bData.exclude || []);
+    const exceptionsMap = {};
+    (bData.exceptions || []).forEach(ex => { exceptionsMap[ex.date] = ex; });
     for (let i = 0; i <= 180; i++) {
       const d = new Date(today); d.setDate(today.getDate() + i);
       const ds = dateToStr(d);
-      if (excludeSet.has(ds)) continue;
-      if (extraMap[ds]) { availableSlots[ds] = extraMap[ds]; continue; }
-      const dow = d.getDay();
-      if (weeklyMap[dow]) availableSlots[ds] = weeklyMap[dow];
+      const exc = exceptionsMap[ds];
+      if (exc) {
+        if (exc.type === 'closed') { closedDates.add(ds); continue; }
+        const base = weeklyMap[d.getDay()] || [];
+        if (exc.type === 'add') {
+          availableSlots[ds] = [...new Set([...base, ...(exc.times || [])])].sort();
+        } else if (exc.type === 'remove') {
+          const rm = new Set(exc.times || []);
+          const filtered = base.filter(t => !rm.has(t));
+          if (filtered.length) availableSlots[ds] = filtered;
+        } else if (exc.type === 'replace') {
+          if ((exc.times || []).length) availableSlots[ds] = exc.times;
+        }
+      } else {
+        const times = weeklyMap[d.getDay()] || [];
+        if (times.length) availableSlots[ds] = times;
+      }
     }
     document.getElementById('consultCalGroup').style.display = '';
     renderCCal(ccalYear, ccalMonth);
