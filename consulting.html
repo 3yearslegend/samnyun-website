@@ -713,24 +713,28 @@
     if (!selectedTime) { v7 = false; document.getElementById('consultTimeErr').style.display = 'block'; }
     if (!(v1 && v2 && v3a && v3b && v4 && v5 && v6 && v7)) return;
 
-    // URL 파라미터로 데이터 조합
+    btn.disabled = true;
+    btn.classList.add('submitting');
+    btn.querySelector('.btn-text').textContent = '접수 처리 중...';
+
     const params = new URLSearchParams({
-      formType:   'consulting',
-      학생이름:   studentName.value.trim(),
-      학교명:     schoolName.value.trim(),
-      학교급:     selectedLevel,
-      학년:       grade.value,
-      연락처:     phone.value.trim(),
-      희망지점:   selectedBranch,
+      formType:     'consulting',
+      학생이름:     studentName.value.trim(),
+      학교명:       schoolName.value.trim(),
+      학교급:       selectedLevel,
+      학년:         grade.value,
+      연락처:       phone.value.trim(),
+      희망지점:     selectedBranch,
       상담희망날짜: selectedDate,
       상담희망시간: selectedTime,
-      문의내용:   document.getElementById('consultMemo').value.trim(),
+      문의내용:     document.getElementById('consultMemo').value.trim(),
     });
 
-    window.open(GAS_URL + '?' + params.toString(), '_blank');
-
-    document.getElementById('consultFormWrap').style.display = 'none';
-    document.getElementById('consultSuccess').style.display = '';
+    fetch(GAS_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
+      .finally(() => {
+        document.getElementById('consultFormWrap').style.display = 'none';
+        document.getElementById('consultSuccess').style.display = '';
+      });
   });
 </script>
 </body>
