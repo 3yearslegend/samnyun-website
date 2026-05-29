@@ -270,6 +270,11 @@
               <span class="sf-err" id="sf-statusErr">재원 여부를 선택해 주세요.</span>
             </div>
 
+            <div class="sf-group">
+              <label class="sf-label" for="sf-message">문의내용</label>
+              <textarea id="sf-message" name="문의내용" class="sf-input" rows="3" placeholder="궁금한 점이나 전달 사항을 입력해 주세요." style="resize:vertical;min-height:72px;"></textarea>
+            </div>
+
             <button type="submit" class="sf-submit" id="sf-submitBtn">
               <div class="sf-spinner"></div>
               <span class="sf-btn-text">신청 완료하기</span>
@@ -514,7 +519,7 @@
     });
   });
 
-  document.getElementById('seminarForm').addEventListener('submit', async function(e) {
+  document.getElementById('seminarForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const nameEl  = document.getElementById('sf-name');
     const phoneEl = document.getElementById('sf-phone');
@@ -534,29 +539,35 @@
     if (!ok) return;
 
     btn.disabled = true; btn.classList.add('submitting');
-    btn.querySelector('.sf-btn-text').textContent = '접수 처리 중...';
+    btn.querySelector('.sf-btn-text').textContent = '제출 중...';
 
-    try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: new FormData(this),
+    const payload = JSON.stringify({
+      formType:     'seminar',
+      seminarTitle: document.getElementById('sf-seminarTitle').value,
+      studentName:  nameEl.value.trim(),
+      grade:        gradeEl.value,
+      phone:        phoneEl.value.trim(),
+      enrollment:   sfStatus,
+      branch:       currentBranch,
+      message:      document.getElementById('sf-message').value.trim(),
+    });
+
+    fetch(GAS_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      mode:    'no-cors',
+      body:    payload,
+    })
+      .finally(() => {
+        document.querySelector('.form-card').innerHTML = `
+          <div style="text-align:center;padding:56px 28px;">
+            <div style="width:56px;height:56px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <p style="font-size:15px;line-height:2;color:#333;">신청이 완료되었습니다.<br>담당 선생님이 연락 드리겠습니다.</p>
+          </div>
+        `;
       });
-    } catch (err) {
-      btn.disabled = false; btn.classList.remove('submitting');
-      btn.querySelector('.sf-btn-text').textContent = '신청 완료하기';
-      alert('오류가 발생했습니다. 잠시 후 다시 시도해 주세요.\n(' + err.message + ')');
-      return;
-    }
-
-    document.querySelector('.form-card').innerHTML = `
-      <div style="text-align:center;padding:56px 28px;">
-        <div style="width:56px;height:56px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <p style="font-size:15px;line-height:2;color:#333;">신청이 완료되었습니다.<br>담당 선생님이 연락 드리겠습니다.</p>
-      </div>
-    `;
   });
 </script>
 </body>

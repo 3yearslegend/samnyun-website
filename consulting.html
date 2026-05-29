@@ -715,13 +715,12 @@
 
     btn.disabled = true;
     btn.classList.add('submitting');
-    btn.querySelector('.btn-text').textContent = '접수 처리 중...';
+    btn.querySelector('.btn-text').textContent = '제출 중...';
 
     const payload = JSON.stringify({
       formType:    'consulting',
       studentName: studentName.value.trim(),
       school:      schoolName.value.trim(),
-      schoolLevel: selectedLevel,
       grade:       grade.value,
       phone:       phone.value.trim(),
       branch:      selectedBranch,
