@@ -555,19 +555,21 @@
     fetch(GAS_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'text/plain' },
-      mode:    'no-cors',
       body:    payload,
     })
-      .finally(() => {
-        document.querySelector('.form-card').innerHTML = `
-          <div style="text-align:center;padding:56px 28px;">
-            <div style="width:56px;height:56px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <p style="font-size:15px;line-height:2;color:#333;">신청이 완료되었습니다.<br>담당 선생님이 연락 드리겠습니다.</p>
+      .then(() => showSeminarSuccess())
+      .catch(() => showSeminarSuccess());
+
+    function showSeminarSuccess() {
+      document.querySelector('.form-card').innerHTML = `
+        <div style="text-align:center;padding:56px 28px;">
+          <div style="width:56px;height:56px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-        `;
-      });
+          <p style="font-size:15px;line-height:2;color:#333;">신청이 완료되었습니다.<br>담당 선생님이 연락 드리겠습니다.</p>
+        </div>
+      `;
+    }
   });
 </script>
 </body>

@@ -732,10 +732,13 @@
     fetch(GAS_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'text/plain' },
-      mode:    'no-cors',
       body:    payload,
     })
-      .finally(() => {
+      .then(() => {
+        document.getElementById('consultFormWrap').style.display = 'none';
+        document.getElementById('consultSuccess').style.display = '';
+      })
+      .catch(() => {
         document.getElementById('consultFormWrap').style.display = 'none';
         document.getElementById('consultSuccess').style.display = '';
       });
