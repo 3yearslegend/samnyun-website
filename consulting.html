@@ -735,13 +735,14 @@
       headers: { 'Content-Type': 'text/plain' },
       body:    payload,
     })
-      .then(() => {
+      .then(r => r.text())
+      .then(text => {
+        alert('[디버그] GAS 응답:\n' + text);
         document.getElementById('consultFormWrap').style.display = 'none';
         document.getElementById('consultSuccess').style.display = '';
       })
-      .catch(() => {
-        document.getElementById('consultFormWrap').style.display = 'none';
-        document.getElementById('consultSuccess').style.display = '';
+      .catch(err => {
+        alert('[디버그] fetch 에러:\n' + err.message);
       });
   });
 </script>
