@@ -790,7 +790,7 @@
   <div class="container">
     <div class="section-header fade-up">
       <div class="section-tag">Achievement</div>
-      <h2 class="section-title" style="color:var(--white)">트로피 보드</h2>
+      <h2 class="section-title" style="color:var(--white)">명예의 전당</h2>
       <p class="section-desc" style="color:rgba(255,255,255,0.45)">삼년의 신화에서 이루어낸 빛나는 성과들입니다.</p>
     </div>
     <div class="trophy-carousel-wrap fade-up">
@@ -856,34 +856,11 @@
       <h2 class="section-title">생생 수강 후기</h2>
       <p class="section-desc">삼년의 신화를 경험한 학생과 학부모님의 솔직한 이야기입니다.</p>
     </div>
-    <div class="reviews-grid stagger">
-      <div class="review-card">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">처음에는 글 읽는 것도 힘들었는데, 2년 동안 꾸준히 수업을 들으면서 논술도 자신 있게 쓸 수 있게 됐어요. 선생님들이 정말 꼼꼼하게 피드백해 주셔서 너무 좋았습니다.</p>
-        <div class="review-footer">
-          <div class="review-avatar">김</div>
-          <div class="review-info"><div class="name">김○○ 학생</div><div class="meta">중3 · 2년 수강</div></div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">아이가 처음에 글쓰기를 너무 싫어했는데, 수업을 들으면서 점점 자신감이 생겼어요. 내신 성적도 많이 올랐고, 무엇보다 스스로 책을 찾아 읽기 시작했어요.</p>
-        <div class="review-footer">
-          <div class="review-avatar">박</div>
-          <div class="review-info"><div class="name">박○○ 학부모님</div><div class="meta">초6 학부모 · 1년 수강</div></div>
-        </div>
-      </div>
-      <div class="review-card">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">수능 국어에서 1등급을 받았습니다! 3년 동안 다닌 것이 정말 큰 도움이 됐어요. 비문학 풀이 전략은 정말 다른 학원과 차별화된다고 느꼈습니다.</p>
-        <div class="review-footer">
-          <div class="review-avatar">이</div>
-          <div class="review-info"><div class="name">이○○ 학생</div><div class="meta">고3 졸업 · 3년 수강</div></div>
-        </div>
-      </div>
+    <div class="reviews-grid stagger" id="indexReviewsGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러오는 중...</div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="fade-up">
+      <a href="reviews-list.html" style="display:inline-block;padding:12px 36px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:500;color:var(--gray-dark);text-decoration:none;transition:border-color 0.2s,color 0.2s;">전체 후기 보기 →</a>
     </div>
   </div>
 </section>
@@ -922,11 +899,9 @@
           <div class="notices-panel-title">공지사항</div>
           <a href="news-notice.html" class="notices-more">전체보기</a>
         </div>
-        <div class="notice-row"><span class="notice-badge nb-red">공지</span><a href="news-notice-detail.html" class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-red">공지</span><a href="news-notice-detail.html" class="notice-row-title">[공지] 여기에 공지 제목을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><a href="news-notice-detail.html" class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-black">이벤트</span><a href="news-notice-detail.html" class="notice-row-title">[이벤트] 여기에 이벤트 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
-        <div class="notice-row"><span class="notice-badge nb-gray">일정</span><a href="news-notice-detail.html" class="notice-row-title">[일정] 여기에 학원 일정 내용을 입력하세요</a><span class="notice-row-date">2025.05.00</span></div>
+        <div id="indexNoticeList">
+          <div style="text-align:center;padding:24px 0;color:var(--gray);font-size:14px;">공지사항을 불러오는 중...</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1120,74 +1095,11 @@
   document.getElementById('trophyNext').addEventListener('click', () => { trophyIdx++; updateTrophy(); });
 
   /* ---- Calendar Events Data ---- */
-  const CAL_EVENTS = [
-    {
-      year: 2026, month: 4, day: 7,
-      badge: '설명회',
-      title: '2026 학부모 대상 입시 설명회',
-      date: '2026년 5월 7일 (목)',
-      period: '오후 7:00 ~ 9:00',
-      location: '고잔점 대강의실',
-      desc: '2026학년도 수능 출제 경향 변화와 국어 고득점 전략을 안내드립니다. 담당 강사와의 개별 상담도 당일 현장에서 진행됩니다. 사전 신청 없이 자유롭게 참석하실 수 있습니다.'
-    },
-    {
-      year: 2026, month: 4, day: 14,
-      badge: '특강',
-      title: '중간고사 내신 집중 특강 (중등 전 학년)',
-      date: '2026년 5월 14일 (목)',
-      period: '오전 10:00 ~ 오후 1:00',
-      location: '전 지점 동시 운영',
-      desc: '중간고사 대비 교과서 핵심 내용 완전 정리 및 서술형·논술형 집중 훈련을 실시합니다. 수강 중인 중등 학생 전원 참석 가능하며, 개인 교재 지참을 권장합니다.'
-    },
-    {
-      year: 2026, month: 4, day: 21,
-      badge: '특강',
-      title: '고등부 5월 모의고사 분석 특강',
-      date: '2026년 5월 21일 (목)',
-      period: '오후 2:00 ~ 5:00',
-      location: '고잔점 · 자이점',
-      desc: '5월 전국연합학력평가 결과를 바탕으로 취약 유형별 심층 분석 특강을 진행합니다. 개인별 오답 분석 자료를 사전에 출력하여 가져오시면 더욱 효과적으로 수업에 참여하실 수 있습니다.'
-    },
-    {
-      year: 2026, month: 4, day: 28,
-      badge: '모집',
-      title: '여름방학 집중반 사전 접수 시작',
-      date: '2026년 5월 28일 (목)',
-      period: '오후 4:00 ~',
-      location: '카카오톡 채널 접수',
-      desc: '7월 여름방학 집중반 신규 수강생 모집을 시작합니다. 초등·중등·고등 전 학년 대상이며, 정원 제한이 있어 조기 마감될 수 있습니다. 카카오톡 채널 또는 전화로 사전 신청해 주세요.'
-    },
-    {
-      year: 2026, month: 5, day: 5,
-      badge: '공지',
-      title: '현충일 전후 휴원 안내',
-      date: '2026년 6월 5일 (금) ~ 6일 (토)',
-      period: '이틀간 전 지점 휴원',
-      location: '전 지점',
-      desc: '현충일(6월 6일) 및 전날인 6월 5일, 이틀간 전 지점이 휴원합니다. 이 기간 중 해당 수업은 추후 보충 수업으로 대체될 예정이며, 일정은 개별 안내드립니다.'
-    },
-    {
-      year: 2026, month: 5, day: 18,
-      badge: '설명회',
-      title: '고등부 수시·논술 입시 설명회',
-      date: '2026년 6월 18일 (목)',
-      period: '오후 7:00 ~ 9:00',
-      location: '고잔점 대강의실',
-      desc: '2026 수시 일정과 논술 전형 합격 전략을 집중 안내합니다. 주요 대학 논술 출제 경향 분석 자료를 현장에서 배포하며, 강사 1:1 상담을 병행 운영합니다. 고2·고3 학부모님 모두 참석 가능합니다.'
-    },
-    {
-      year: 2026, month: 5, day: 25,
-      badge: '특강',
-      title: '기말고사 내신 특강 (중등 · 고등)',
-      date: '2026년 6월 25일 (목)',
-      period: '오전 10:00 ~ 오후 2:00',
-      location: '전 지점 동시 운영',
-      desc: '기말고사 대비 전 학년 통합 내신 특강입니다. 중등(11:00~12:30) / 고등(10:00~12:00)으로 시간대가 구분되어 운영됩니다. 각자 학교 기출 문제지를 지참하면 더욱 알차게 참여할 수 있습니다.'
-    }
-  ];
+  let CAL_EVENTS = [];
 
   /* ---- Calendar State & Render ---- */
-  let calYear = 2026, calMonth = 4; // month is 0-indexed
+  const _now = new Date();
+  let calYear = _now.getFullYear(), calMonth = _now.getMonth();
 
   function getMonthEvents(year, month) {
     return CAL_EVENTS.filter(e => e.year === year && e.month === month);
@@ -1265,6 +1177,61 @@
     calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCal();
   });
   renderCal();
+
+  /* ---- Data fetch: Reviews ---- */
+  function stars(n) {
+    return '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
+  }
+  fetch('data/reviews.json').then(r => r.json()).then(data => {
+    const grid = document.getElementById('indexReviewsGrid');
+    if (!grid) return;
+    const list = (data.reviews || []).slice(0, 3);
+    if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">등록된 후기가 없습니다.</div>'; return; }
+    grid.innerHTML = list.map(rv => `
+      <div class="review-card fade-up">
+        <div class="review-header">
+          <div class="review-avatar">${rv.name ? rv.name[0] : '익'}</div>
+          <div class="review-meta">
+            <div class="review-name">${rv.name || '익명'}</div>
+            <div class="review-info">${rv.grade || ''} · ${rv.branch || ''}</div>
+          </div>
+          <div class="review-stars">${stars(rv.rating || 5)}</div>
+        </div>
+        <p class="review-content">${rv.content || ''}</p>
+        ${rv.tag ? `<span class="review-tag">${rv.tag}</span>` : ''}
+      </div>`).join('');
+    grid.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  }).catch(() => {});
+
+  /* ---- Data fetch: Notices ---- */
+  fetch('data/notices.json').then(r => r.json()).then(data => {
+    const container = document.getElementById('indexNoticeList');
+    if (!container) return;
+    const list = (data.notices || []).slice(0, 3);
+    if (!list.length) { container.innerHTML = '<div style="text-align:center;padding:24px 0;color:var(--gray);font-size:14px;">등록된 공지사항이 없습니다.</div>'; return; }
+    const badgeClass = { '공지': 'nb-red', '일정': 'nb-gray', '이벤트': 'nb-black', '설명회': 'nb-black' };
+    container.innerHTML = list.map(n => {
+      const cls = badgeClass[n.category] || 'nb-gray';
+      return `<div class="notice-row fade-up">
+        <span class="notice-badge ${cls}">${n.category || '공지'}</span>
+        <span class="notice-title">${n.title || ''}</span>
+        <span class="notice-date">${n.date || ''}</span>
+      </div>`;
+    }).join('');
+    container.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  }).catch(() => {});
+
+  /* ---- Data fetch: Schedule ---- */
+  fetch('data/schedule.json').then(r => r.json()).then(data => {
+    const dows = ['일','월','화','수','목','금','토'];
+    CAL_EVENTS = (data.events || []).map(s => {
+      const parts = s.date.split('-');
+      const y = parseInt(parts[0]), m = parseInt(parts[1]) - 1, d = parseInt(parts[2]);
+      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+      return { year: y, month: m, day: d, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', desc: s.content || '' };
+    });
+    renderCal();
+  }).catch(() => {});
 
   /* ---- Intersection observer ---- */
   const io = new IntersectionObserver((entries) => {
