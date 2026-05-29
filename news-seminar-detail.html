@@ -278,7 +278,7 @@
 
             <div class="sf-group">
               <label class="sf-label" for="sf-message">강사에게 질문하고 싶은 내용</label>
-              <textarea id="sf-message" name="강사질문" class="sf-input" rows="3" placeholder="강사에게 미리 질문하고 싶은 내용을 입력해 주세요." style="resize:vertical;min-height:72px;"></textarea>
+              <textarea id="sf-message" name="강사질문" class="sf-input" rows="3" placeholder="작성해 주신 내용은 강사에게 사전 전달하여 Q&A 시간에 활용할 예정입니다." style="resize:vertical;min-height:72px;"></textarea>
               <p style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.6;">작성해 주신 내용은 강사에게 사전 전달하여 Q&amp;A 시간에 활용할 예정입니다.</p>
             </div>
 
@@ -503,11 +503,18 @@
     const btn = document.querySelector('#sf-levelGroup .sf-btn[data-level="' + levelKey + '"]');
     if (btn && sfLevel !== levelKey) btn.click();
   }
-  document.getElementById('sf-school').addEventListener('input', function() {
-    const v = this.value;
-    if (v.includes('초')) sfSelectLevel('초등');
-    else if (v.includes('중')) sfSelectLevel('중등');
-    else if (v.includes('고')) sfSelectLevel('고등');
+  function sfDetectLevel(val) {
+    if (/초등학교$|초$/.test(val)) return '초등';
+    if (/중학교$|중$/.test(val)) return '중등';
+    if (/고등학교$|고$/.test(val)) return '고등';
+    return '';
+  }
+  document.getElementById('sf-school').addEventListener('blur', function() {
+    const detected = sfDetectLevel(this.value.trim());
+    if (detected) {
+      sfSelectLevel(detected);
+      document.getElementById('sf-gradeGroup').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   });
 
   document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(btn => {

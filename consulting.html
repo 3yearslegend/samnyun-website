@@ -633,11 +633,18 @@
     const btn = document.querySelector('#levelGroup .branch-btn[data-level="' + levelKey + '"]');
     if (btn && selectedLevel !== levelKey) btn.click();
   }
-  document.getElementById('schoolName').addEventListener('input', function() {
-    const v = this.value;
-    if (v.includes('초')) consultSelectLevel('초등');
-    else if (v.includes('중')) consultSelectLevel('중등');
-    else if (v.includes('고')) consultSelectLevel('고등');
+  function consultDetectLevel(val) {
+    if (/초등학교$|초$/.test(val)) return '초등';
+    if (/중학교$|중$/.test(val)) return '중등';
+    if (/고등학교$|고$/.test(val)) return '고등';
+    return '';
+  }
+  document.getElementById('schoolName').addEventListener('blur', function() {
+    const detected = consultDetectLevel(this.value.trim());
+    if (detected) {
+      consultSelectLevel(detected);
+      document.getElementById('gradeGroup').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   });
 
   // 학교급 버튼 그룹
