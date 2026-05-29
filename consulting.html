@@ -628,6 +628,18 @@
     else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
   });
 
+  // 학교명 자동 감지 → 학교급 자동 선택
+  function consultSelectLevel(levelKey) {
+    const btn = document.querySelector('#levelGroup .branch-btn[data-level="' + levelKey + '"]');
+    if (btn && selectedLevel !== levelKey) btn.click();
+  }
+  document.getElementById('schoolName').addEventListener('input', function() {
+    const v = this.value;
+    if (v.includes('초')) consultSelectLevel('초등');
+    else if (v.includes('중')) consultSelectLevel('중등');
+    else if (v.includes('고')) consultSelectLevel('고등');
+  });
+
   // 학교급 버튼 그룹
   const gradeOptionMap = {
     '초등': [['초1','1학년'],['초2','2학년'],['초3','3학년'],['초4','4학년'],['초5','5학년'],['초6','6학년']],

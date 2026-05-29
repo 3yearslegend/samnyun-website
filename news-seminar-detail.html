@@ -232,8 +232,8 @@
 
             <div class="sf-row2">
               <div class="sf-group">
-                <label class="sf-label" for="sf-name">이름 <span class="req">*</span></label>
-                <input type="text" id="sf-name" name="이름" class="sf-input" placeholder="성함">
+                <label class="sf-label" for="sf-name">학생 이름 <span class="req">*</span></label>
+                <input type="text" id="sf-name" name="이름" class="sf-input" placeholder="학생 성함">
                 <span class="sf-err" id="sf-nameErr">이름을 입력해 주세요.</span>
               </div>
               <div class="sf-group">
@@ -241,6 +241,11 @@
                 <input type="tel" id="sf-phone" name="연락처" class="sf-input" placeholder="010-0000-0000" maxlength="13">
                 <span class="sf-err" id="sf-phoneErr">연락처를 확인해 주세요.</span>
               </div>
+            </div>
+
+            <div class="sf-group">
+              <label class="sf-label" for="sf-school">학교명</label>
+              <input type="text" id="sf-school" name="학교명" class="sf-input" placeholder="예) 안산중학교 (입력하면 학교급이 자동으로 선택됩니다)">
             </div>
 
             <div class="sf-group">
@@ -272,8 +277,9 @@
             </div>
 
             <div class="sf-group">
-              <label class="sf-label" for="sf-message">문의내용</label>
-              <textarea id="sf-message" name="문의내용" class="sf-input" rows="3" placeholder="궁금한 점이나 전달 사항을 입력해 주세요." style="resize:vertical;min-height:72px;"></textarea>
+              <label class="sf-label" for="sf-message">강사에게 질문하고 싶은 내용</label>
+              <textarea id="sf-message" name="강사질문" class="sf-input" rows="3" placeholder="강사에게 미리 질문하고 싶은 내용을 입력해 주세요." style="resize:vertical;min-height:72px;"></textarea>
+              <p style="font-size:12px;color:var(--gray);margin-top:6px;line-height:1.6;">작성해 주신 내용은 강사에게 사전 전달하여 Q&amp;A 시간에 활용할 예정입니다.</p>
             </div>
 
             <button type="submit" class="sf-submit" id="sf-submitBtn">
@@ -493,6 +499,17 @@
     else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
   });
 
+  function sfSelectLevel(levelKey) {
+    const btn = document.querySelector('#sf-levelGroup .sf-btn[data-level="' + levelKey + '"]');
+    if (btn && sfLevel !== levelKey) btn.click();
+  }
+  document.getElementById('sf-school').addEventListener('input', function() {
+    const v = this.value;
+    if (v.includes('초')) sfSelectLevel('초등');
+    else if (v.includes('중')) sfSelectLevel('중등');
+    else if (v.includes('고')) sfSelectLevel('고등');
+  });
+
   document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#sf-levelGroup .sf-btn').forEach(b => b.classList.remove('selected'));
@@ -546,6 +563,7 @@
       formType:     'seminar',
       seminarTitle: document.getElementById('sf-seminarTitle').value,
       studentName:  nameEl.value.trim(),
+      school:       document.getElementById('sf-school').value.trim(),
       grade:        gradeEl.value,
       phone:        phoneEl.value.trim(),
       enrollment:   sfStatus,
