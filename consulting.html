@@ -257,6 +257,7 @@
 
         <form id="consultingForm" name="consulting" action="https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec" method="POST" target="hidden_iframe" novalidate>
           <input type="hidden" name="form-name" value="consulting">
+          <input type="hidden" name="formType" value="consulting">
 
           <span class="form-section-label">학생 정보</span>
           <div class="form-grid">
@@ -465,9 +466,6 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  // Google Apps Script 웹앱 URL (배포 후 여기에 입력)
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec';
-
   // ===== 상담 캘린더 =====
   let availableSlots = {};
   let bookedSlots = {};
@@ -621,11 +619,7 @@
       ccalYear = now.getFullYear(); ccalMonth = now.getMonth();
     });
 
-  // 예약된(마감) 시간 조회 — GAS GET 응답 형식: { "booked": { "2026-06-10": ["14:00"] } }
-  fetch(GAS_URL + '?action=getBooked')
-    .then(r => r.json())
-    .then(data => { bookedSlots = data.booked || {}; })
-    .catch(() => {});
+  // bookedSlots: GAS doGet 미구현 시 빈 객체 유지 (마감 슬롯 없음으로 처리)
 
   // 연락처 자동 하이픈 포맷팅 (010-XXXX-XXXX)
   document.getElementById('contactPhone').addEventListener('input', function() {
