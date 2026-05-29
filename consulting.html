@@ -455,6 +455,9 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
+  // Google Apps Script 웹앱 URL (배포 후 여기에 입력)
+  const GAS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+
   // ===== 상담 캘린더 =====
   let availableSlots = {};
   let ccalYear, ccalMonth;
@@ -679,12 +682,11 @@
     btn.querySelector('.btn-text').textContent = '접수 처리 중...';
 
     try {
-      const res = await fetch('/', {
+      await fetch(GAS_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(this)).toString(),
+        mode: 'no-cors',
+        body: new FormData(this),
       });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
     } catch (err) {
       btn.disabled = false;
       btn.classList.remove('submitting');
