@@ -1208,16 +1208,16 @@
   fetch('data/notices.json').then(r => r.json()).then(data => {
     const container = document.getElementById('indexNoticeList');
     if (!container) return;
-    const list = (data.notices || []).slice(0, 3);
+    const list = (data.notices || []).slice(0, 5);
     if (!list.length) { container.innerHTML = '<div style="text-align:center;padding:24px 0;color:var(--gray);font-size:14px;">등록된 공지사항이 없습니다.</div>'; return; }
     const badgeClass = { '공지': 'nb-red', '일정': 'nb-gray', '이벤트': 'nb-black', '설명회': 'nb-black' };
-    container.innerHTML = list.map(n => {
+    container.innerHTML = list.map((n, i) => {
       const cls = badgeClass[n.category] || 'nb-gray';
-      return `<div class="notice-row fade-up">
+      return `<a href="news-notice-detail.html?id=${i}" class="notice-row fade-up" style="display:flex;text-decoration:none;">
         <span class="notice-badge ${cls}">${n.category || '공지'}</span>
-        <span class="notice-title">${n.title || ''}</span>
-        <span class="notice-date">${n.date || ''}</span>
-      </div>`;
+        <span class="notice-row-title">${n.title || ''}</span>
+        <span class="notice-row-date">${n.date || ''}</span>
+      </a>`;
     }).join('');
     container.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   }).catch(() => {});
