@@ -986,6 +986,22 @@
   </div>
 </footer>
 
+<!-- ===================== CALENDAR EVENT MODAL ===================== -->
+<div class="cal-modal-bg" id="calModalBg">
+  <div class="cal-modal">
+    <button class="cal-modal-close" id="calModalClose">×</button>
+    <div class="cal-modal-badge" id="calModalBadge">일정</div>
+    <h3 class="cal-modal-title" id="calModalTitle"></h3>
+    <div class="cal-modal-meta">
+      <div class="cal-modal-row"><span class="cal-modal-icon">📅</span><span id="calModalDate"></span></div>
+      <div class="cal-modal-row"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
+      <div class="cal-modal-row"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
+    </div>
+    <p class="cal-modal-desc" id="calModalDesc"></p>
+    <a href="news-schedule.html" class="cal-modal-link">전체 일정 보기 →</a>
+  </div>
+</div>
+
 <script>
   /* ---- NAV scroll ---- */
   const nav = document.getElementById('nav');
@@ -1256,21 +1272,5 @@
   document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
 
 </script>
-
-<!-- ===================== CALENDAR EVENT MODAL ===================== -->
-<div class="cal-modal-bg" id="calModalBg">
-  <div class="cal-modal">
-    <button class="cal-modal-close" id="calModalClose">×</button>
-    <div class="cal-modal-badge" id="calModalBadge">일정</div>
-    <h3 class="cal-modal-title" id="calModalTitle"></h3>
-    <div class="cal-modal-meta">
-      <div class="cal-modal-row"><span class="cal-modal-icon">📅</span><span id="calModalDate"></span></div>
-      <div class="cal-modal-row"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
-      <div class="cal-modal-row"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
-    </div>
-    <p class="cal-modal-desc" id="calModalDesc"></p>
-    <a href="news-schedule.html" class="cal-modal-link">전체 일정 보기 →</a>
-  </div>
-</div>
 </body>
 </html>
