@@ -427,3 +427,32 @@ collections:
               - { label: "향상 후 등급/점수 (예: 1등급)", name: after, widget: string }
               - { label: "수강 기간 (예: 6개월)", name: period, widget: string }
               - { label: 향상 내용 / 코멘트, name: content, widget: text }
+
+  - name: history
+    label: 연혁 타임라인
+    files:
+      - name: history_data
+        label: 연혁 타임라인 관리
+        file: data/history.json
+        format: json
+        fields:
+          - label: "히어로 배경 이미지 (선택 — 학원 전경/내부 사진 권장)"
+            name: heroImage
+            widget: image
+            required: false
+          - label: 연혁 항목 목록
+            name: items
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "연도 (예: 2018.08)", name: year, widget: string }
+              - { label: 제목, name: title, widget: string }
+              - { label: "부가 설명 (선택)", name: desc, widget: string, required: false }
+              - label: "사진 (선택)"
+                name: image
+                widget: image
+                required: false
+              - label: "창립 배지 표시 (개원 항목에만 체크)"
+                name: founding
+                widget: boolean
+                default: false

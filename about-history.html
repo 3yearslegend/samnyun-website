@@ -13,6 +13,8 @@
     :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
     html { scroll-behavior: smooth; }
     body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+    /* ─── NAV ─── */
     #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
     #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
     .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
@@ -39,65 +41,11 @@
     .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
 
-    .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; position: relative; overflow: hidden; }
-    .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 1; }
-    .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
-    .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); }
-    .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
-    .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 14px; }
-    .ph-inner p { font-size: 16px; color: rgba(255,255,255,0.48); max-width: 500px; line-height: 1.8; }
-    @media (max-width: 768px) { .ph-inner { padding: 0 20px; } .ph-inner h1 { font-size: 28px; } }
-
-    .page-content { padding: 80px 0 120px; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
-
-    /* TIMELINE */
-    .timeline { position: relative; padding-left: 0; }
-    .timeline::before { content: ''; position: absolute; left: 120px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-    .timeline-item { display: flex; gap: 48px; margin-bottom: 52px; position: relative; align-items: flex-start; }
-    .timeline-year { width: 120px; flex-shrink: 0; text-align: right; }
-    .timeline-year span { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--red); display: block; padding-top: 4px; }
-    .timeline-dot { position: absolute; left: 112px; top: 8px; width: 18px; height: 18px; border-radius: 50%; background: var(--red); border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--red); flex-shrink: 0; }
-    .timeline-content { flex: 1; background: var(--gray-light); border-radius: 12px; padding: 24px 28px; border: 1px solid var(--border); transition: border-color 0.2s, box-shadow 0.2s; }
-    .timeline-content:hover { border-color: var(--red); box-shadow: 0 6px 24px rgba(192,39,26,0.08); }
-    .timeline-content h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--black); margin-bottom: 10px; }
-    .timeline-content ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .timeline-content ul li { font-size: 14px; color: var(--gray-dark); display: flex; align-items: center; gap: 8px; }
-    .timeline-content ul li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
-    .timeline-item--founding .timeline-dot { width: 24px; height: 24px; left: 109px; top: 6px; box-shadow: 0 0 0 3px var(--red), 0 0 16px rgba(192,39,26,0.35); }
-    .timeline-item--founding .timeline-content { background: #fff9f9; border-color: rgba(192,39,26,0.25); }
-    .timeline-item--current .timeline-dot { background: var(--white); border-color: var(--red); box-shadow: 0 0 0 2px var(--red); animation: pulse-dot 2s infinite; }
-    .timeline-item--current .timeline-content { background: var(--white); border: 2px dashed var(--red); }
-    .timeline-item--current .timeline-content h3 { color: var(--red); }
-    .timeline-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .badge-founding { background: var(--red); color: var(--white); }
-    .badge-current  { background: var(--red-light); color: var(--red); }
-    @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 2px var(--red); } 50% { box-shadow: 0 0 0 5px rgba(192,39,26,0.18); } }
-    @media (max-width: 640px) { .timeline::before { left: 20px; } .timeline-item { gap: 28px; } .timeline-year { width: auto; min-width: 60px; text-align: left; } .timeline-year span { font-size: 16px; } .timeline-dot { left: 12px; } .timeline-item--founding .timeline-dot { left: 9px; } }
-
-    footer { background: #111; padding: 64px 0 36px; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
-    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
-    .footer-logo span { color: var(--red); }
-    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
-    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
-    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
-    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
-    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
-    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
-
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    /* Hamburger – always visible */
+    /* ─── HAMBURGER ─── */
     .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
     .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
 
-    /* Fullscreen overlay */
+    /* ─── FS OVERLAY ─── */
     .fs-overlay { position: fixed; inset: 0; background: #0f0f0f; z-index: 10001; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.28s ease; overflow-y: auto; }
     .fs-overlay.open { opacity: 1; pointer-events: auto; }
     .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
@@ -119,6 +67,334 @@
     .fs-cta { background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
     .fs-cta:hover { background: var(--red-dark); }
 
+    /* ─── HERO ─── */
+    .page-hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0d0d0d 0%, #1c0404 55%, #0d0d0d 100%);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Grid texture overlay */
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+    /* Dark photo overlay (active when hero has bg image) */
+    .hero-photo-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.65);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Glow accent */
+    .hero-glow {
+      position: absolute;
+      bottom: -120px; right: -80px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,39,26,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      top: 20%; left: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,39,26,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-chapter {
+      position: absolute;
+      top: calc(var(--nav-h) + 36px);
+      left: 60px;
+      font-size: 11px; font-weight: 700; letter-spacing: 4px;
+      color: var(--red); text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .hero-menu-dots {
+      position: absolute;
+      top: calc(var(--nav-h) + 36px);
+      right: 60px;
+      display: flex; gap: 7px; align-items: center;
+      z-index: 2;
+    }
+    .hero-menu-dots span {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.2s;
+    }
+    .hero-menu-dots span:last-child { background: var(--red); }
+
+    .hero-body {
+      flex: 1; position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      padding: calc(var(--nav-h) + 100px) 40px 120px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.32); margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(54px, 10vw, 100px);
+      font-weight: 700; color: #fff; line-height: 1.0;
+      letter-spacing: -3px; margin-bottom: 28px;
+    }
+    .hero-title em { color: var(--red); font-style: normal; }
+    .hero-rule { width: 48px; height: 3px; background: var(--red); margin: 0 auto 28px; }
+    .hero-sub {
+      font-size: 14px; color: rgba(255,255,255,0.34);
+      letter-spacing: 1.5px; line-height: 2;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px; z-index: 1;
+    }
+    .hero-scroll-txt { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.2); text-transform: uppercase; }
+    .hero-scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      45%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      55%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0.3; }
+    }
+
+    /* ─── TIMELINE SECTION ─── */
+    .tl-section { background: #fff; }
+
+    .tl-header {
+      padding: 72px 64px 0;
+      max-width: 1600px; margin: 0 auto;
+    }
+    .tl-header-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      color: #ccc; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .tl-header-title {
+      font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--black);
+    }
+    .tl-header-title em { color: var(--red); font-style: normal; }
+    .tl-scroll-hint {
+      font-size: 12px; color: #bbb; margin-top: 8px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .tl-scroll-hint svg { opacity: 0.5; }
+
+    /* Scrollable track container */
+    .tl-scroll-outer {
+      overflow-x: auto; overflow-y: visible;
+      padding: 52px 0 64px;
+      scrollbar-width: thin;
+      scrollbar-color: #ddd transparent;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tl-scroll-outer:active { cursor: grabbing; }
+    .tl-scroll-outer::-webkit-scrollbar { height: 4px; }
+    .tl-scroll-outer::-webkit-scrollbar-track { background: transparent; }
+    .tl-scroll-outer::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 2px; }
+
+    /* The track */
+    .tl-track {
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      min-height: 560px;
+      padding: 0 80px;
+      min-width: max-content;
+    }
+
+    /* Center horizontal line */
+    .tl-track::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(
+        to right,
+        transparent 40px,
+        #2a2a2a 80px,
+        #2a2a2a calc(100% - 80px),
+        transparent calc(100% - 40px)
+      );
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    /* Individual node */
+    .htl-node {
+      width: 250px; flex-shrink: 0;
+      display: grid; grid-template-rows: 1fr 1fr;
+      position: relative; z-index: 1;
+      padding: 0 18px;
+    }
+
+    /* Dot on line */
+    .htl-dot {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--red);
+      border: 3.5px solid #fff;
+      box-shadow: 0 0 0 2.5px var(--red);
+      z-index: 3;
+      transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), box-shadow 0.28s;
+    }
+    .htl-node:hover .htl-dot {
+      transform: translate(-50%, -50%) scale(1.55);
+      box-shadow: 0 0 0 3px var(--red), 0 0 20px rgba(192,39,26,0.38);
+    }
+    .htl-node.founding .htl-dot {
+      width: 22px; height: 22px;
+    }
+
+    /* Top/bottom halves */
+    .htl-top { display: flex; flex-direction: column; align-items: center; padding: 20px 0 28px; }
+    .htl-bot { display: flex; flex-direction: column; align-items: center; padding: 28px 0 20px; }
+
+    .htl-node.above .htl-top { justify-content: flex-end; }
+    .htl-node.above .htl-bot { justify-content: flex-start; }
+    .htl-node.below .htl-top { justify-content: flex-end; }
+    .htl-node.below .htl-bot { justify-content: flex-start; }
+
+    /* Year label */
+    .htl-year {
+      font-family: var(--font-serif);
+      font-size: 15px; font-weight: 700; color: var(--red);
+      white-space: nowrap; line-height: 1;
+      padding: 2px 0;
+    }
+
+    /* Card */
+    .htl-card {
+      background: #fff;
+      border: 1px solid #e8e8e8; border-radius: 12px;
+      overflow: hidden; width: 210px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+      transition: box-shadow 0.28s, transform 0.28s;
+    }
+    .htl-card:hover {
+      box-shadow: 0 10px 36px rgba(192,39,26,0.16);
+      transform: translateY(-5px);
+    }
+
+    .htl-card-img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; }
+    .htl-card-ph {
+      width: 100%; aspect-ratio: 3/2;
+      background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .htl-card-ph svg { opacity: 0.18; }
+    .htl-card-body { padding: 13px 15px 15px; }
+    .htl-founding-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      background: var(--red); color: #fff;
+      padding: 2px 9px; border-radius: 20px; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .htl-card-title { font-size: 13px; font-weight: 700; color: #1c1c1c; line-height: 1.45; }
+    .htl-card-desc { font-size: 11.5px; color: #999; margin-top: 5px; line-height: 1.4; }
+
+    /* END node — spans both grid rows */
+    .htl-node.htl-end { width: 260px; }
+    .htl-end-wrap {
+      grid-row: 1 / 3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 20px 16px;
+      position: relative; z-index: 2;
+    }
+    .htl-end-ring {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 2px dashed var(--red);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      animation: spinSlow 14s linear infinite;
+    }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+    .htl-end-ring-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--red);
+    }
+    .htl-end-title {
+      font-family: var(--font-serif);
+      font-size: 13px; font-weight: 700; color: var(--red);
+      line-height: 1.65;
+    }
+    .htl-end-sub { font-size: 11px; color: #bbb; margin-top: 6px; letter-spacing: 0.5px; }
+
+    /* Mobile card (hidden on desktop) */
+    .htl-inline { display: none; }
+
+    /* ─── BOTTOM BANNER ─── */
+    .hist-banner {
+      background: #111; padding: 64px 60px;
+    }
+    .hb-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 32px;
+    }
+    .hb-quote {
+      font-family: var(--font-serif);
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-weight: 700; color: #fff; line-height: 1.1; letter-spacing: -1px;
+    }
+    .hb-quote em { color: var(--red); font-style: normal; }
+    .hb-sub {
+      font-size: 15px; color: rgba(255,255,255,0.38);
+      margin-top: 12px; letter-spacing: 1.5px;
+    }
+    .hb-right {
+      font-family: var(--font-serif);
+      font-size: 14px; color: rgba(255,255,255,0.4);
+      text-align: right; line-height: 1.8;
+    }
+    .hb-right strong {
+      display: block; font-size: 19px; font-weight: 700;
+      color: rgba(255,255,255,0.85); margin-bottom: 2px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer { background: #111; padding: 64px 0 36px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+    .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+    .footer-logo span { color: var(--red); }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
+    .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+    /* ─── FADE-UP ─── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 1100px) {
       .nav-menus { display: none; }
       .nav-sns { display: none; }
@@ -129,14 +405,67 @@
       .fs-col:last-child { border-bottom: none; }
       .fs-nav-bar { padding: 0 20px; }
       .fs-footer { padding: 20px 24px 32px; }
+      .tl-header { padding: 60px 40px 0; }
     }
-    @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
+
+    @media (max-width: 900px) {
+      .hero-chapter { left: 24px; top: calc(var(--nav-h) + 24px); }
+      .hero-menu-dots { right: 24px; top: calc(var(--nav-h) + 24px); }
+      .hero-body { padding: calc(var(--nav-h) + 80px) 24px 110px; }
+      .hist-banner { padding: 48px 24px; }
+      .hb-right { text-align: left; }
+    }
+
+    @media (max-width: 768px) {
+      /* Vertical timeline on mobile */
+      .tl-header { padding: 48px 20px 0; }
+      .tl-scroll-outer { overflow-x: visible; padding: 36px 20px 48px; cursor: default; }
+      .tl-track {
+        flex-direction: column;
+        min-height: unset; min-width: unset;
+        padding: 0 0 0 52px;
+        align-items: stretch;
+        gap: 0;
+      }
+      .tl-track::before {
+        top: 0; bottom: 0; left: 8px; right: auto;
+        width: 2px; height: 100%;
+        background: #2a2a2a;
+        transform: none;
+      }
+      .htl-node {
+        width: 100%; display: block;
+        grid-template-rows: unset; min-height: unset;
+        padding: 0 0 44px 0;
+      }
+      .htl-dot { left: -44px; top: 4px; transform: none; }
+      .htl-node:hover .htl-dot { transform: scale(1.3); }
+      .htl-node.founding .htl-dot { left: -47px; }
+      .htl-top, .htl-bot { display: none !important; }
+      .htl-inline { display: block; }
+      .htl-inline .htl-year {
+        font-family: var(--font-serif); font-size: 16px; font-weight: 700;
+        color: var(--red); display: block; margin-bottom: 12px;
+      }
+      .htl-inline .htl-card { width: 100%; max-width: 360px; border-radius: 10px; }
+      .htl-node.htl-end { width: 100%; }
+      .htl-end-wrap { align-items: flex-start; text-align: left; padding: 0; }
+      .htl-end-ring { width: 44px; height: 44px; margin-bottom: 12px; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .footer-inner { padding: 0 20px; }
+      .fs-body { grid-template-columns: 1fr; }
+      .fs-links a { font-size: 15px; }
+    }
+
+    @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
     @media (max-width: 380px) { .nav-cta { display: none; } }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav id="nav">
   <div class="nav-container">
     <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
@@ -159,53 +488,19 @@
     </div>
   </div>
 </nav>
+
+<!-- FS OVERLAY -->
 <div class="fs-overlay" id="fsOverlay">
   <div class="fs-nav-bar">
     <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어논술학원"></a>
     <button class="fs-close" id="fsClose" aria-label="메뉴 닫기">&#x2715;</button>
   </div>
   <div class="fs-body">
-    <div class="fs-col">
-      <div class="fs-cat">학원 소개</div>
-      <div class="fs-links">
-        <a href="about-greeting.html">인사말</a>
-        <a href="about-features.html">학원 특징</a>
-        <a href="about-history.html">연혁</a>
-        <a href="about-branches.html">지점 안내 및 오시는 길</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">강사 소개</div>
-      <div class="fs-links">
-        <a href="teachers-gojan.html">고잔점</a>
-        <a href="teachers-zai.html">자이점</a>
-        <a href="teachers-hyper.html">하이퍼관</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">커리큘럼</div>
-      <div class="fs-links">
-        <a href="curriculum.html#elem">초등 과정</a>
-        <a href="curriculum.html#middle">중등 과정</a>
-        <a href="curriculum.html#high">고등 과정</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">학원 소식</div>
-      <div class="fs-links">
-        <a href="news-notice.html">공지사항</a>
-        <a href="news-seminar.html">설명회 신청</a>
-        <a href="news-schedule.html">학원 일정</a>
-        <a href="news-timetable.html">학원 시간표</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">생생 후기</div>
-      <div class="fs-links">
-        <a href="reviews-honor.html">명예의 전당</a>
-        <a href="reviews-list.html">수강 후기</a>
-      </div>
-    </div>
+    <div class="fs-col"><div class="fs-cat">학원 소개</div><div class="fs-links"><a href="about-greeting.html">인사말</a><a href="about-features.html">학원 특징</a><a href="about-history.html">연혁</a><a href="about-branches.html">지점 안내 및 오시는 길</a></div></div>
+    <div class="fs-col"><div class="fs-cat">강사 소개</div><div class="fs-links"><a href="teachers-gojan.html">고잔점</a><a href="teachers-zai.html">자이점</a><a href="teachers-hyper.html">하이퍼관</a></div></div>
+    <div class="fs-col"><div class="fs-cat">커리큘럼</div><div class="fs-links"><a href="curriculum.html#elem">초등 과정</a><a href="curriculum.html#middle">중등 과정</a><a href="curriculum.html#high">고등 과정</a></div></div>
+    <div class="fs-col"><div class="fs-cat">학원 소식</div><div class="fs-links"><a href="news-notice.html">공지사항</a><a href="news-seminar.html">설명회 신청</a><a href="news-schedule.html">학원 일정</a><a href="news-timetable.html">학원 시간표</a></div></div>
+    <div class="fs-col"><div class="fs-cat">생생 후기</div><div class="fs-links"><a href="reviews-honor.html">명예의 전당</a><a href="reviews-list.html">수강 후기</a></div></div>
   </div>
   <div class="fs-footer">
     <div class="fs-footer-sns">
@@ -218,95 +513,68 @@
   </div>
 </div>
 
-
-<section class="page-header">
-  <div class="ph-inner">
-    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><a href="about-greeting.html">학원 소개</a><span>›</span><span class="current">연혁</span></div>
-    <h1>연혁</h1>
-    <p>삼년의 신화가 걸어온 발자취를 소개합니다.</p>
+<!-- ═══ HERO ═══ -->
+<section class="page-hero" id="pageHero">
+  <div class="hero-photo-overlay" id="heroOverlay" style="display:none;"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-chapter">CHAPTER 01</div>
+  <div class="hero-menu-dots"><span></span><span></span><span></span></div>
+  <div class="hero-body">
+    <p class="hero-eyebrow">삼년의 신화 국어논술학원</p>
+    <h1 class="hero-title">삼년의신화<br><em>연혁</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">2018년 개원 이래, 끊임없이 성장해온<br>7년의 발자취</p>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-txt">SCROLL</span>
+    <div class="hero-scroll-line"></div>
   </div>
 </section>
 
-<main class="page-content">
-  <div class="container">
-    <div class="timeline fade-up">
-
-      <div class="timeline-item timeline-item--founding">
-        <div class="timeline-year"><span>2018.08</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-badge badge-founding">창립</div>
-          <h3>삼년의 신화 국어논술학원 개원</h3>
-          <ul>
-            <li>고잔점 1관 개원</li>
-            <li>초·중등 국어논술 전문 과정 개설</li>
-          </ul>
+<!-- ═══ TIMELINE ═══ -->
+<section class="tl-section">
+  <div class="tl-header fade-up">
+    <p class="tl-header-label">History</p>
+    <h2 class="tl-header-title"><em>삼년의신화</em>가 걸어온 길</h2>
+    <p class="tl-scroll-hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      좌우로 스크롤하세요
+    </p>
+  </div>
+  <div class="tl-scroll-outer" id="tlScrollOuter">
+    <div class="tl-track" id="tlTrack">
+      <!-- Rendered by JS -->
+      <!-- End node (static, always last) -->
+      <div class="htl-node htl-end" id="htlEndNode">
+        <div class="htl-dot" style="background:#555; box-shadow: 0 0 0 2.5px #555;"></div>
+        <div class="htl-end-wrap">
+          <div class="htl-end-ring">
+            <div class="htl-end-ring-dot"></div>
+          </div>
+          <p class="htl-end-title">삼년의신화는<br>끝없이 성장하는<br>학원입니다</p>
+          <p class="htl-end-sub">현재 진행 중</p>
         </div>
       </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year"><span>2021.01</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3>확장 이전 및 2관 오픈</h3>
-          <ul>
-            <li>고잔점 확장 이전</li>
-            <li>삼년의 신화 2관 정식 오픈</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year"><span>2024.04</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3>자이점 오픈</h3>
-          <ul>
-            <li>삼년의 신화 자이점 신규 개원</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year"><span>2024.08</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3>고잔점 3관 오픈</h3>
-          <ul>
-            <li>고잔점 3관 신규 오픈</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-year"><span>2025.07</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h3>하이퍼관 &amp; 프리미엄관 오픈</h3>
-          <ul>
-            <li>동산고 전문 하이퍼관 오픈</li>
-            <li>고잔점 4관 오픈 (프리미엄관)</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="timeline-item timeline-item--current">
-        <div class="timeline-year"><span>2025.11~</span></div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="timeline-badge badge-current">현재 진행 중</div>
-          <h3>끝없이 성장하는 삼년의 신화</h3>
-          <ul>
-            <li>고잔점 · 자이점 · 하이퍼관 운영 중</li>
-            <li>삼년의 신화는 끝없이 성장하는 학원입니다</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </div>
-</main>
+</section>
 
+<!-- ═══ BOTTOM BANNER ═══ -->
+<section class="hist-banner fade-up">
+  <div class="hb-inner">
+    <div>
+      <p class="hb-quote"><em>We are Leaders.</em></p>
+      <p class="hb-sub">우리는 모두 리더다.</p>
+    </div>
+    <div class="hb-right">
+      <strong>삼년의신화</strong>
+      국어 논술 전문학원
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -333,8 +601,11 @@
 </footer>
 
 <script>
+  /* ── Nav scroll ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+
+  /* ── Hamburger / FS overlay ── */
   const hamburger = document.getElementById('hamburger');
   const fsOverlay = document.getElementById('fsOverlay');
   const fsClose   = document.getElementById('fsClose');
@@ -343,8 +614,92 @@
   hamburger.addEventListener('click', openFsMenu);
   fsClose.addEventListener('click', closeFsMenu);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
-  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+
+  /* ── IntersectionObserver for fade-up ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  /* ── Drag-to-scroll on timeline ── */
+  const scrollOuter = document.getElementById('tlScrollOuter');
+  let isDragging = false, dragStartX = 0, dragScrollLeft = 0;
+  scrollOuter.addEventListener('mousedown', e => {
+    isDragging = true;
+    dragStartX = e.pageX - scrollOuter.offsetLeft;
+    dragScrollLeft = scrollOuter.scrollLeft;
+    scrollOuter.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mouseup', () => { isDragging = false; scrollOuter.style.cursor = 'grab'; });
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollOuter.offsetLeft;
+    scrollOuter.scrollLeft = dragScrollLeft - (x - dragStartX) * 1.4;
+  });
+
+  /* ── Build card HTML ── */
+  function buildCard(item) {
+    const imgHtml = item.image
+      ? `<img class="htl-card-img" src="${item.image}" alt="${item.title}" loading="lazy">`
+      : `<div class="htl-card-ph"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>`;
+    const badge = item.founding ? `<span class="htl-founding-badge">창립</span>` : '';
+    const desc  = item.desc ? `<p class="htl-card-desc">${item.desc}</p>` : '';
+    return `<div class="htl-card">${imgHtml}<div class="htl-card-body">${badge}<p class="htl-card-title">${item.title}</p>${desc}</div></div>`;
+  }
+
+  /* ── Render timeline from JSON ── */
+  async function renderHistory() {
+    let data;
+    try {
+      const res = await fetch('data/history.json');
+      data = await res.json();
+    } catch (e) {
+      console.warn('history.json 로드 실패:', e);
+      return;
+    }
+
+    /* Set hero background image if provided */
+    if (data.heroImage) {
+      const hero = document.getElementById('pageHero');
+      const overlay = document.getElementById('heroOverlay');
+      hero.style.backgroundImage = `url('${data.heroImage}')`;
+      hero.style.backgroundSize  = 'cover';
+      hero.style.backgroundPosition = 'center';
+      overlay.style.display = 'block';
+    }
+
+    const track   = document.getElementById('tlTrack');
+    const endNode = document.getElementById('htlEndNode');
+
+    (data.items || []).forEach((item, i) => {
+      const pos = i % 2 === 0 ? 'above' : 'below';
+      const foundingClass = item.founding ? ' founding' : '';
+      const cardHtml = buildCard(item);
+      const yearHtml = `<span class="htl-year">${item.year}</span>`;
+
+      const node = document.createElement('div');
+      node.className = `htl-node ${pos}${foundingClass}`;
+
+      if (pos === 'above') {
+        node.innerHTML = `
+          <div class="htl-dot"></div>
+          <div class="htl-top">${cardHtml}</div>
+          <div class="htl-bot">${yearHtml}</div>
+          <div class="htl-inline">${yearHtml}${cardHtml}</div>`;
+      } else {
+        node.innerHTML = `
+          <div class="htl-dot"></div>
+          <div class="htl-top">${yearHtml}</div>
+          <div class="htl-bot">${cardHtml}</div>
+          <div class="htl-inline">${yearHtml}${cardHtml}</div>`;
+      }
+
+      track.insertBefore(node, endNode);
+    });
+  }
+
+  renderHistory();
 </script>
 </body>
 </html>
