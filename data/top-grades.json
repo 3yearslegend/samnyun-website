@@ -1,0 +1,45 @@
+{
+  "semesters": [
+    {
+      "semester": "1학기",
+      "year": "2025",
+      "grades": [
+        { "school": "○○중학교", "name": "김O민" },
+        { "school": "△△고등학교", "name": "이O준" },
+        { "school": "○○중학교", "name": "박O서" },
+        { "school": "□□고등학교", "name": "최O현" },
+        { "school": "○○중학교", "name": "정O아" },
+        { "school": "△△고등학교", "name": "강O호" },
+        { "school": "□□중학교", "name": "윤O진" },
+        { "school": "○○고등학교", "name": "임O연" },
+        { "school": "△△중학교", "name": "오O석" },
+        { "school": "□□고등학교", "name": "신O영" },
+        { "school": "○○중학교", "name": "한O은" },
+        { "school": "△△고등학교", "name": "류O민" },
+        { "school": "□□중학교", "name": "전O준" },
+        { "school": "○○고등학교", "name": "남O서" },
+        { "school": "△△중학교", "name": "황O현" }
+      ]
+    },
+    {
+      "semester": "2학기",
+      "year": "2025",
+      "grades": [
+        { "school": "○○중학교", "name": "김O서" },
+        { "school": "△△고등학교", "name": "이O영" },
+        { "school": "□□중학교", "name": "박O현" },
+        { "school": "○○고등학교", "name": "최O준" },
+        { "school": "△△중학교", "name": "정O민" },
+        { "school": "□□고등학교", "name": "강O아" },
+        { "school": "○○중학교", "name": "윤O석" },
+        { "school": "△△고등학교", "name": "임O호" },
+        { "school": "□□중학교", "name": "오O연" },
+        { "school": "○○고등학교", "name": "신O진" },
+        { "school": "△△중학교", "name": "한O민" },
+        { "school": "□□고등학교", "name": "류O은" },
+        { "school": "○○중학교", "name": "전O서" },
+        { "school": "△△고등학교", "name": "남O현" }
+      ]
+    }
+  ]
+}

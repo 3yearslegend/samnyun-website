@@ -1,0 +1,16 @@
+{
+  "results": [
+    { "name": "김O언", "university": "연세대학교", "department": "국어국문학과", "year": "2025", "reviewId": 0 },
+    { "name": "이O준", "university": "고려대학교", "department": "미디어학과", "year": "2025", "reviewId": 1 },
+    { "name": "박O은", "university": "성균관대학교", "department": "교육학과", "year": "2025", "reviewId": -1 },
+    { "name": "최O진", "university": "한양대학교", "department": "국어교육과", "year": "2025", "reviewId": -1 },
+    { "name": "정O민", "university": "중앙대학교", "department": "문예창작학과", "year": "2024", "reviewId": -1 },
+    { "name": "강O서", "university": "경희대학교", "department": "국어국문학과", "year": "2024", "reviewId": -1 },
+    { "name": "윤O현", "university": "서강대학교", "department": "국어국문학과", "year": "2024", "reviewId": -1 },
+    { "name": "임O아", "university": "이화여자대학교", "department": "한국어문학과", "year": "2024", "reviewId": -1 },
+    { "name": "오O호", "university": "건국대학교", "department": "미디어커뮤니케이션학과", "year": "2024", "reviewId": -1 },
+    { "name": "신O연", "university": "숙명여자대학교", "department": "한국어문학과", "year": "2023", "reviewId": -1 },
+    { "name": "한O석", "university": "경희대학교", "department": "영어학과", "year": "2023", "reviewId": -1 },
+    { "name": "류O영", "university": "동국대학교", "department": "국어국문학과", "year": "2023", "reviewId": -1 }
+  ]
+}

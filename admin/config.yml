@@ -350,3 +350,80 @@ collections:
               - { label: 후기 내용, name: content, widget: text }
               - { label: 별점 (1~5), name: rating, widget: number, min: 1, max: 5, default: 5 }
               - { label: "태그 (예: 고등 수능반)", name: tag, widget: string, required: false }
+
+  - name: honor_stats
+    label: 명예의 전당 통계
+    files:
+      - name: honor_stats_data
+        label: 통계 숫자
+        file: data/honor-stats.json
+        format: json
+        fields:
+          - { label: "내신 1등급 배출 수 (누적)", name: naesin1, widget: number, default: 0 }
+          - { label: "수능 1등급 배출 수 (누적)", name: suneung1, widget: number, default: 0 }
+          - { label: "운영 경력 (년)", name: years, widget: number, default: 0 }
+
+  - name: results
+    label: 대입 실적
+    files:
+      - name: results_data
+        label: 대입 실적 목록
+        file: data/results.json
+        format: json
+        fields:
+          - label: 대입 실적 목록
+            name: results
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "이름 (마스킹 포함, 예: 김O언)", name: name, widget: string }
+              - { label: 합격 대학교, name: university, widget: string }
+              - { label: 학과/전공, name: department, widget: string }
+              - { label: "합격 연도 (예: 2025)", name: year, widget: string }
+              - label: "연결 후기 번호 (수강 후기 목록의 순서, 0부터 시작. 후기 없으면 -1)"
+                name: reviewId
+                widget: number
+                default: -1
+
+  - name: top_grades
+    label: 1등급 / 전교 1등 명단
+    files:
+      - name: top_grades_data
+        label: 학기별 명단
+        file: data/top-grades.json
+        format: json
+        fields:
+          - label: 학기별 명단
+            name: semesters
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "학기 (예: 1학기)", name: semester, widget: string }
+              - { label: "연도 (예: 2025)", name: year, widget: string }
+              - label: 1등급/전교1등 학생 목록
+                name: grades
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: "학교명 (예: 안산고)", name: school, widget: string }
+                  - { label: "학생 이름 (마스킹 포함, 예: 김O언)", name: name, widget: string }
+
+  - name: improvement_cases
+    label: 성적 향상 사례
+    files:
+      - name: improvement_cases_data
+        label: 성적 향상 사례 목록
+        file: data/improvement-cases.json
+        format: json
+        fields:
+          - label: 성적 향상 사례 목록
+            name: cases
+            widget: list
+            collapsed: true
+            fields:
+              - { label: "학생 이름 (마스킹 포함, 예: 김O언)", name: studentName, widget: string }
+              - { label: "학년 (예: 중3)", name: grade, widget: string }
+              - { label: "향상 전 등급/점수 (예: 4등급)", name: before, widget: string }
+              - { label: "향상 후 등급/점수 (예: 1등급)", name: after, widget: string }
+              - { label: "수강 기간 (예: 6개월)", name: period, widget: string }
+              - { label: 향상 내용 / 코멘트, name: content, widget: text }

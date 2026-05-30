@@ -53,9 +53,11 @@
     @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
 
     /* REVIEWS */
-    .reviews-filter { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
-    .filter-btn { padding: 8px 20px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--gray); background: var(--white); cursor: pointer; transition: all 0.2s; }
-    .filter-btn.active, .filter-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .section-label { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; margin-top: 56px; }
+    .section-label:first-of-type { margin-top: 0; }
+    .section-label h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--black); white-space: nowrap; }
+    .section-label .sl-line { flex: 1; height: 1px; background: var(--border); }
+    .section-label .sl-count { font-size: 13px; color: var(--gray); white-space: nowrap; }
 
     .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .review-card { border: 1px solid var(--border); border-radius: 14px; padding: 32px 26px; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; position: relative; }
@@ -68,6 +70,9 @@
     .review-info .name { font-size: 14px; font-weight: 500; }
     .review-info .meta { font-size: 12px; color: var(--gray); margin-top: 2px; }
     .review-tag { position: absolute; top: 20px; right: 20px; background: var(--gray-light); color: var(--gray); font-size: 11px; padding: 3px 10px; border-radius: 3px; }
+    .admission-badge { position: absolute; top: 20px; right: 20px; background: #FFF3E0; color: #D84315; border: 1px solid #FFCC80; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; }
+    .pinned-card { border-color: #FFCC80; background: #FFFDF8; }
+    .pinned-card:hover { border-color: #D84315; box-shadow: 0 10px 36px rgba(216,67,21,0.09); }
     @media (max-width: 900px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 560px) { .reviews-grid { grid-template-columns: 1fr; } }
 
@@ -232,17 +237,24 @@
 <main class="page-content">
   <div class="container">
 
-    <div class="reviews-filter fade-up" id="reviewsFilter">
-      <button class="filter-btn active" data-cat="전체">전체</button>
-      <button class="filter-btn" data-cat="초등">초등</button>
-      <button class="filter-btn" data-cat="중등">중등</button>
-      <button class="filter-btn" data-cat="고등">고등</button>
-      <button class="filter-btn" data-cat="수능">수능</button>
-      <button class="filter-btn" data-cat="논술">논술</button>
+    <div id="pinnedSection" style="display:none">
+      <div class="section-label">
+        <h2>합격 후기</h2>
+        <div class="sl-line"></div>
+        <span class="sl-count" id="pinnedCount"></span>
+      </div>
+      <div class="reviews-grid stagger" id="pinnedGrid"></div>
     </div>
 
-    <div class="reviews-grid stagger" id="reviewsGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러오는 중입니다…</div>
+    <div id="regularSection">
+      <div class="section-label" id="regularLabel" style="display:none">
+        <h2>수강 후기</h2>
+        <div class="sl-line"></div>
+        <span class="sl-count" id="regularCount"></span>
+      </div>
+      <div class="reviews-grid stagger" id="reviewsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러오는 중입니다…</div>
+      </div>
     </div>
   </div>
 </main>
@@ -286,56 +298,79 @@
   const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
 
-  let allReviews = [];
-  let activeReviewFilter = '전체';
-
   function stars(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
-  function renderReviews(reviews) {
-    const grid = document.getElementById('reviewsGrid');
-    if (!reviews.length) {
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">등록된 후기가 없습니다.</div>';
-      grid.classList.remove('visible');
-      return;
-    }
-    grid.innerHTML = reviews.map(r => {
-      const initials = r.name.charAt(0);
-      return `<div class="review-card">
-        ${r.tag ? `<div class="review-tag">${r.tag}</div>` : ''}
-        <div class="review-quote">"</div>
-        <div class="review-stars">${stars(r.rating || 5)}</div>
-        <p class="review-text">${r.content}</p>
-        <div class="review-footer">
-          <div class="review-avatar">${initials}</div>
-          <div class="review-info"><div class="name">${r.name}</div><div class="meta">${r.grade}${r.branch ? ' · ' + r.branch : ''}</div></div>
-        </div>
-      </div>`;
-    }).join('');
-    grid.classList.remove('visible');
-    requestAnimationFrame(() => io.observe(grid));
+  function makeCard(r, idx, admLabel) {
+    const initials = (r.name || '?').charAt(0);
+    const badge = admLabel
+      ? `<div class="admission-badge">${admLabel}</div>`
+      : (r.tag ? `<div class="review-tag">${r.tag}</div>` : '');
+    const pinClass = admLabel ? ' pinned-card' : '';
+    return `<div class="review-card${pinClass}" id="review-${idx}">
+      ${badge}
+      <div class="review-quote">"</div>
+      <div class="review-stars">${stars(r.rating || 5)}</div>
+      <p class="review-text">${r.content}</p>
+      <div class="review-footer">
+        <div class="review-avatar">${initials}</div>
+        <div class="review-info"><div class="name">${r.name}</div><div class="meta">${r.grade}${r.branch ? ' · ' + r.branch : ''}</div></div>
+      </div>
+    </div>`;
   }
 
-  document.getElementById('reviewsFilter').querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeReviewFilter = btn.dataset.cat;
-      const filtered = activeReviewFilter === '전체'
-        ? allReviews
-        : allReviews.filter(r => (r.tag || '').includes(activeReviewFilter) || (r.grade || '').includes(activeReviewFilter));
-      renderReviews(filtered);
-    });
-  });
+  function renderGrid(gridEl, cards, emptyMsg) {
+    if (!cards.length) {
+      gridEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">${emptyMsg || '등록된 후기가 없습니다.'}</div>`;
+    } else {
+      gridEl.innerHTML = cards.join('');
+    }
+    gridEl.classList.remove('visible');
+    requestAnimationFrame(() => io.observe(gridEl));
+  }
 
-  fetch('data/reviews.json')
-    .then(r => r.json())
-    .then(data => {
-      allReviews = data.reviews || [];
-      renderReviews(allReviews);
-    })
-    .catch(() => {
-      document.getElementById('reviewsGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러올 수 없습니다.</div>';
+  Promise.all([
+    fetch('data/reviews.json').then(r => r.json()),
+    fetch('data/results.json').then(r => r.json())
+  ]).then(([reviewsData, resultsData]) => {
+    const reviews = reviewsData.reviews || [];
+    const results = resultsData.results || [];
+
+    const admMap = {};
+    results.forEach(res => {
+      if (res.reviewId >= 0) admMap[res.reviewId] = `${res.university} 합격`;
     });
+
+    const pinnedCards = [];
+    const regularCards = [];
+    reviews.forEach((r, idx) => {
+      if (admMap[idx] !== undefined) {
+        pinnedCards.push(makeCard(r, idx, admMap[idx]));
+      } else {
+        regularCards.push(makeCard(r, idx, null));
+      }
+    });
+
+    if (pinnedCards.length > 0) {
+      document.getElementById('pinnedSection').style.display = '';
+      document.getElementById('pinnedCount').textContent = `총 ${pinnedCards.length}건`;
+      renderGrid(document.getElementById('pinnedGrid'), pinnedCards);
+    }
+
+    if (pinnedCards.length > 0) {
+      document.getElementById('regularLabel').style.display = '';
+    }
+    document.getElementById('regularCount').textContent = `총 ${regularCards.length}건`;
+    renderGrid(document.getElementById('reviewsGrid'), regularCards);
+
+    if (window.location.hash && window.location.hash.startsWith('#review-')) {
+      setTimeout(() => {
+        const target = document.querySelector(window.location.hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
+    }
+  }).catch(() => {
+    document.getElementById('reviewsGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">후기를 불러올 수 없습니다.</div>';
+  });
 </script>
 </body>
 </html>

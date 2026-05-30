@@ -49,37 +49,81 @@
     .ph-inner p { font-size: 16px; color: rgba(255,255,255,0.48); max-width: 500px; }
     @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
 
-    .page-content { padding: 80px 0 120px; background: #f9f8f7; }
+    .page-content { padding: 0 0 120px; background: #f9f8f7; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
+    @media (max-width: 768px) { .page-content { padding: 0 0 80px; } .container { padding: 0 20px; } }
 
-    /* FILTER */
-    .reviews-filter { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
-    .filter-btn { padding: 8px 20px; border: 1.5px solid var(--border); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--gray); background: var(--white); cursor: pointer; transition: all 0.2s; }
-    .filter-btn.active, .filter-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--black); padding: 0; }
+    .stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 48px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); position: relative; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-serif); font-size: clamp(44px, 7vw, 72px); font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -2px; margin-bottom: 10px; }
+    .stat-num span { color: var(--red); }
+    .stat-label { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.5px; }
+    @media (max-width: 640px) { .stats-inner { grid-template-columns: 1fr; } .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 32px 20px; } .stat-item:last-child { border-bottom: none; } .stats-inner { padding: 0 20px; } }
 
-    /* HONOR CARDS */
-    .honor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .honor-card { background: var(--black); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 30px 26px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
-    .honor-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--red), transparent); opacity: 0; transition: opacity 0.2s; }
-    .honor-card:hover { border-color: var(--red); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
-    .honor-card:hover::before { opacity: 1; }
-    .honor-tag { display: inline-block; background: var(--red); color: var(--white); font-size: 11px; padding: 3px 10px; border-radius: 3px; font-weight: 500; margin-bottom: 16px; }
-    .honor-stars { color: #F59E0B; font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
-    .honor-quote { font-family: Georgia, serif; font-size: 40px; color: var(--red); line-height: 1; margin-bottom: 4px; opacity: 0.4; user-select: none; }
-    .honor-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.95; margin-bottom: 24px; }
-    .honor-footer { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .honor-avatar { width: 40px; height: 40px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--white); flex-shrink: 0; }
-    .honor-info .name { font-size: 14px; font-weight: 500; color: var(--white); }
-    .honor-info .meta { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-    @media (max-width: 900px) { .honor-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .honor-grid { grid-template-columns: 1fr; } }
+    /* ── SECTION HEADER ── */
+    .section-wrap { padding-top: 80px; }
+    @media (max-width: 768px) { .section-wrap { padding-top: 56px; } }
+    .section-head { margin-bottom: 36px; }
+    .section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .section-head h2 { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; }
 
-    /* CTA */
-    .honor-cta { text-align: center; margin-top: 60px; }
-    .honor-cta a { display: inline-block; padding: 14px 36px; background: var(--red); color: var(--white); border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s; }
-    .honor-cta a:hover { background: var(--red-dark); transform: translateY(-2px); }
+    /* ── 대입 실적 ── */
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .result-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px 18px; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+    .result-card:hover { border-color: var(--red); box-shadow: 0 8px 28px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .result-year { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 1px; margin-bottom: 8px; }
+    .result-univ { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 4px; letter-spacing: -0.3px; }
+    .result-dept { font-size: 12px; color: var(--gray); margin-bottom: 12px; }
+    .result-name-row { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--border); }
+    .result-name { font-size: 13px; font-weight: 600; color: var(--black); }
+    .result-link { font-size: 11px; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 3px; }
+    .result-link:hover { text-decoration: underline; }
+    @media (max-width: 900px) { .results-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px) { .results-grid { grid-template-columns: 1fr; } }
 
+    /* ── 마퀴 슬라이더 ── */
+    .marquee-section { background: var(--black); padding: 60px 0; margin-top: 80px; overflow: hidden; }
+    .marquee-head { max-width: 1200px; margin: 0 auto; padding: 0 40px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    @media (max-width: 768px) { .marquee-head { padding: 0 20px; } }
+    .marquee-head h2 { font-family: var(--font-serif); font-size: clamp(20px, 3vw, 26px); font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
+    .sem-tabs { display: flex; gap: 6px; }
+    .sem-btn { padding: 7px 18px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .sem-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
+    .marquee-wrap { position: relative; overflow: hidden; }
+    .marquee-track { display: flex; gap: 12px; width: max-content; animation: marqueeScroll 28s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .grade-chip { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 10px 20px; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .grade-chip:hover { background: rgba(192,39,26,0.3); border-color: var(--red); }
+    .grade-chip .chip-school { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .grade-chip .chip-name { font-size: 14px; font-weight: 600; color: var(--white); }
+    .grade-chip .chip-trophy { font-size: 14px; }
+
+    /* ── 성적 향상 사례 ── */
+    .improvement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 768px) { .improvement-grid { grid-template-columns: 1fr; } }
+    .improvement-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .imp-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0; background: var(--gray-light); padding: 24px 28px; }
+    .imp-before, .imp-after { text-align: center; }
+    .imp-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .imp-before .imp-label { color: var(--gray); }
+    .imp-after .imp-label { color: var(--red); }
+    .imp-score { font-family: var(--font-serif); font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+    .imp-before .imp-score { color: var(--gray); }
+    .imp-after .imp-score { color: var(--red); }
+    .imp-arrow { font-size: 24px; color: var(--red); padding: 0 12px; }
+    .imp-body { padding: 20px 28px; }
+    .imp-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .imp-name { font-size: 14px; font-weight: 700; color: var(--black); }
+    .imp-grade-badge { font-size: 11px; background: var(--gray-light); color: var(--gray); padding: 2px 9px; border-radius: 4px; font-weight: 600; }
+    .imp-period-badge { font-size: 11px; background: var(--red-light); color: var(--red); padding: 2px 9px; border-radius: 4px; font-weight: 600; }
+    .imp-content { font-size: 13px; color: var(--gray-dark); line-height: 1.85; }
+
+    /* ── FOOTER ── */
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
@@ -97,18 +141,8 @@
 
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
-    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.1s; }
-    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.2s; }
-    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.3s; }
-    .stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.4s; }
-    .stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:0.5s; }
-    /* Hamburger – always visible */
     .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
     .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
-
-    /* Fullscreen overlay */
     .fs-overlay { position: fixed; inset: 0; background: #0f0f0f; z-index: 10001; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.28s ease; overflow-y: auto; }
     .fs-overlay.open { opacity: 1; pointer-events: auto; }
     .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
@@ -118,29 +152,16 @@
     .fs-close:hover { background: rgba(255,255,255,0.1); }
     .fs-body { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); padding: 56px 40px 40px; max-width: 1200px; margin: 0 auto; width: 100%; }
     .fs-col { padding: 0 28px; border-right: 1px solid rgba(255,255,255,0.06); }
-    .fs-col:first-child { padding-left: 0; }
-    .fs-col:last-child { border-right: none; padding-right: 0; }
+    .fs-col:first-child { padding-left: 0; } .fs-col:last-child { border-right: none; padding-right: 0; }
     .fs-cat { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .fs-links { display: flex; flex-direction: column; gap: 2px; }
     .fs-links a { font-size: 16px; color: rgba(255,255,255,0.65); text-decoration: none; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.18s, padding-left 0.18s; }
-    .fs-links a:last-child { border-bottom: none; }
-    .fs-links a:hover { color: #fff; padding-left: 8px; }
+    .fs-links a:last-child { border-bottom: none; } .fs-links a:hover { color: #fff; padding-left: 8px; }
     .fs-footer { padding: 24px 40px 40px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
     .fs-footer-sns { display: flex; gap: 10px; }
     .fs-cta { background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
     .fs-cta:hover { background: var(--red-dark); }
-
-    @media (max-width: 1100px) {
-      .nav-menus { display: none; }
-      .nav-sns { display: none; }
-      .nav-right { margin-left: auto; }
-      .nav-container { padding: 0 20px; }
-      .fs-body { grid-template-columns: 1fr 1fr; padding: 32px 24px 24px; }
-      .fs-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; }
-      .fs-col:last-child { border-bottom: none; }
-      .fs-nav-bar { padding: 0 20px; }
-      .fs-footer { padding: 20px 24px 32px; }
-    }
+    @media (max-width: 1100px) { .nav-menus { display: none; } .nav-sns { display: none; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; } .fs-body { grid-template-columns: 1fr 1fr; padding: 32px 24px 24px; } .fs-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; } .fs-col:last-child { border-bottom: none; } .fs-nav-bar { padding: 0 20px; } .fs-footer { padding: 20px 24px 32px; } }
     @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
     @media (max-width: 380px) { .nav-cta { display: none; } }
@@ -155,7 +176,7 @@
     <ul class="nav-menus">
       <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
       <li class="menu-item"><a class="menu-link">강사 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="teachers-gojan.html"><span class="dd-dot"></span>고잔점</a><a href="teachers-zai.html"><span class="dd-dot"></span>자이점</a><a href="teachers-hyper.html"><span class="dd-dot"></span>하이퍼관</a></div></li>
-      <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum.html#elem"><span class="dd-dot"></span>초등 과정</a><a href="curriculum.html#middle"><span class="dd-dot"></span>중등 과정</a><a href="curriculum.html#high"><span class="dd-dot"></span>고등 과정</a></div></li>
+      <li class="menu-item"><a class="menu-link">커리큘럼<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="curriculum.html?tab=elem"><span class="dd-dot"></span>초등 과정</a><a href="curriculum.html?tab=middle"><span class="dd-dot"></span>중등 과정</a><a href="curriculum.html?tab=high"><span class="dd-dot"></span>고등 과정</a></div></li>
       <li class="menu-item"><a class="menu-link">학원 소식<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="news-notice.html"><span class="dd-dot"></span>공지사항</a><a href="news-seminar.html"><span class="dd-dot"></span>설명회 신청</a><a href="news-schedule.html"><span class="dd-dot"></span>학원 일정</a><a href="news-timetable.html"><span class="dd-dot"></span>학원 시간표</a></div></li>
       <li class="menu-item"><a class="menu-link">생생 후기<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="reviews-honor.html"><span class="dd-dot"></span>명예의 전당</a><a href="reviews-list.html"><span class="dd-dot"></span>수강 후기</a></div></li>
     </ul>
@@ -170,53 +191,18 @@
     </div>
   </div>
 </nav>
+
 <div class="fs-overlay" id="fsOverlay">
   <div class="fs-nav-bar">
     <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어논술학원"></a>
     <button class="fs-close" id="fsClose" aria-label="메뉴 닫기">&#x2715;</button>
   </div>
   <div class="fs-body">
-    <div class="fs-col">
-      <div class="fs-cat">학원 소개</div>
-      <div class="fs-links">
-        <a href="about-greeting.html">인사말</a>
-        <a href="about-features.html">학원 특징</a>
-        <a href="about-history.html">연혁</a>
-        <a href="about-branches.html">지점 안내 및 오시는 길</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">강사 소개</div>
-      <div class="fs-links">
-        <a href="teachers-gojan.html">고잔점</a>
-        <a href="teachers-zai.html">자이점</a>
-        <a href="teachers-hyper.html">하이퍼관</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">커리큘럼</div>
-      <div class="fs-links">
-        <a href="curriculum.html#elem">초등 과정</a>
-        <a href="curriculum.html#middle">중등 과정</a>
-        <a href="curriculum.html#high">고등 과정</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">학원 소식</div>
-      <div class="fs-links">
-        <a href="news-notice.html">공지사항</a>
-        <a href="news-seminar.html">설명회 신청</a>
-        <a href="news-schedule.html">학원 일정</a>
-        <a href="news-timetable.html">학원 시간표</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">생생 후기</div>
-      <div class="fs-links">
-        <a href="about-results.html">명예의 전당</a>
-        <a href="reviews-list.html">수강 후기</a>
-      </div>
-    </div>
+    <div class="fs-col"><div class="fs-cat">학원 소개</div><div class="fs-links"><a href="about-greeting.html">인사말</a><a href="about-features.html">학원 특징</a><a href="about-history.html">연혁</a><a href="about-branches.html">지점 안내 및 오시는 길</a></div></div>
+    <div class="fs-col"><div class="fs-cat">강사 소개</div><div class="fs-links"><a href="teachers-gojan.html">고잔점</a><a href="teachers-zai.html">자이점</a><a href="teachers-hyper.html">하이퍼관</a></div></div>
+    <div class="fs-col"><div class="fs-cat">커리큘럼</div><div class="fs-links"><a href="curriculum.html?tab=elem">초등 과정</a><a href="curriculum.html?tab=middle">중등 과정</a><a href="curriculum.html?tab=high">고등 과정</a></div></div>
+    <div class="fs-col"><div class="fs-cat">학원 소식</div><div class="fs-links"><a href="news-notice.html">공지사항</a><a href="news-seminar.html">설명회 신청</a><a href="news-schedule.html">학원 일정</a><a href="news-timetable.html">학원 시간표</a></div></div>
+    <div class="fs-col"><div class="fs-cat">생생 후기</div><div class="fs-links"><a href="reviews-honor.html">명예의 전당</a><a href="reviews-list.html">수강 후기</a></div></div>
   </div>
   <div class="fs-footer">
     <div class="fs-footer-sns">
@@ -229,36 +215,81 @@
   </div>
 </div>
 
-
 <section class="page-header">
   <div class="ph-inner">
     <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><span>생생 후기</span><span>›</span><span class="current">명예의 전당</span></div>
     <h1>명예의 전당</h1>
-    <p>삼년의 신화 학생들의 빛나는 성장 후기를 소개합니다.</p>
+    <p>삼년의 신화가 만들어 온 빛나는 성과를 소개합니다.</p>
   </div>
 </section>
 
-<main class="page-content">
-  <div class="container">
-
-    <div class="reviews-filter fade-up" id="honorFilter">
-      <button class="filter-btn active" data-cat="전체">전체</button>
-      <button class="filter-btn" data-cat="초등">초등</button>
-      <button class="filter-btn" data-cat="중등">중등</button>
-      <button class="filter-btn" data-cat="고등">고등</button>
-      <button class="filter-btn" data-cat="수능">수능</button>
-      <button class="filter-btn" data-cat="논술">논술</button>
+<!-- ① 통계 바 -->
+<div class="stats-bar" id="statsBar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num" id="stat-naesin">—</div>
+      <div class="stat-label">내신 1등급 배출</div>
     </div>
-
-    <div class="honor-grid stagger" id="honorGrid">
-      <div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--gray);font-size:15px;">후기를 불러오는 중입니다…</div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-suneung">—</div>
+      <div class="stat-label">수능 1등급 배출</div>
     </div>
-
-    <div class="honor-cta fade-up">
-      <a href="reviews-list.html">전체 수강 후기 보기 →</a>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-years">—</div>
+      <div class="stat-label">국어 교육 경력</div>
     </div>
-
   </div>
+</div>
+
+<main class="page-content">
+
+  <!-- ② 대입 실적 -->
+  <div class="container">
+    <div class="section-wrap">
+      <div class="section-head fade-up">
+        <span class="section-tag">University Admissions</span>
+        <h2>대입 실적</h2>
+      </div>
+      <div class="results-grid fade-up" id="resultsGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--gray);font-size:14px;">불러오는 중…</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 1등급/전교1등 마퀴 -->
+  <div class="marquee-section">
+    <div class="marquee-head">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Top Grades</div>
+        <h2>1등급 · 전교 1등 명단</h2>
+      </div>
+      <div class="sem-tabs">
+        <button class="sem-btn active" data-sem="0">1학기</button>
+        <button class="sem-btn" data-sem="1">2학기</button>
+      </div>
+    </div>
+    <div class="marquee-wrap" id="marqueeWrap">
+      <div class="marquee-track" id="marqueeTrack"></div>
+    </div>
+  </div>
+
+  <!-- ④ 성적 향상 사례 -->
+  <div class="container">
+    <div class="section-wrap" style="padding-bottom:0;">
+      <div class="section-head fade-up">
+        <span class="section-tag">Success Stories</span>
+        <h2>성적 향상 사례</h2>
+      </div>
+      <div class="improvement-grid fade-up" id="improvementGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--gray);font-size:14px;">불러오는 중…</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:60px 0 0;">
+      <a href="reviews-list.html" style="display:inline-block;padding:14px 36px;background:var(--red);color:var(--white);border-radius:8px;font-size:15px;font-weight:500;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='var(--red-dark)'" onmouseout="this.style.background='var(--red)'">수강 후기 전체 보기 →</a>
+    </div>
+  </div>
+
 </main>
 
 <footer>
@@ -287,8 +318,7 @@
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+  window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20); });
   const hamburger = document.getElementById('hamburger');
   const fsOverlay = document.getElementById('fsOverlay');
   const fsClose   = document.getElementById('fsClose');
@@ -298,64 +328,128 @@
   fsClose.addEventListener('click', closeFsMenu);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
 
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up, .stagger').forEach(el => io.observe(el));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  let allReviews = [];
-  let activeFilter = '전체';
-
-  function stars(n) {
-    return '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
+  /* ── 카운터 애니메이션 ── */
+  function animateCount(el, target, suffix) {
+    const dur = 1400, step = 16;
+    let current = 0;
+    const inc = target / (dur / step);
+    const timer = setInterval(() => {
+      current = Math.min(current + inc, target);
+      el.innerHTML = Math.floor(current) + '<span>' + suffix + '</span>';
+      if (current >= target) clearInterval(timer);
+    }, step);
   }
 
-  function renderHonor(reviews) {
-    const grid = document.getElementById('honorGrid');
-    if (!reviews.length) {
-      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:rgba(255,255,255,0.4);font-size:15px;">등록된 후기가 없습니다.</div>';
-      grid.classList.remove('visible');
-      return;
-    }
-    grid.innerHTML = reviews.map(r => `
-      <div class="honor-card">
-        ${r.tag ? `<div class="honor-tag">${r.tag}</div>` : ''}
-        <div class="honor-stars">${stars(r.rating || 5)}</div>
-        <div class="honor-quote">"</div>
-        <p class="honor-text">${r.content || ''}</p>
-        <div class="honor-footer">
-          <div class="honor-avatar">${r.name ? r.name[0] : '익'}</div>
-          <div class="honor-info">
-            <div class="name">${r.name || '익명'}</div>
-            <div class="meta">${r.grade || ''}${r.branch ? ' · ' + r.branch : ''}</div>
-          </div>
+  /* ── ① 통계 ── */
+  fetch('data/honor-stats.json').then(r => r.json()).then(d => {
+    const nEl = document.getElementById('stat-naesin');
+    const sEl = document.getElementById('stat-suneung');
+    const yEl = document.getElementById('stat-years');
+    const obs = new IntersectionObserver(es => {
+      if (es[0].isIntersecting) {
+        animateCount(nEl, d.naesin1 || 0, '명');
+        animateCount(sEl, d.suneung1 || 0, '명');
+        animateCount(yEl, d.years || 0, '년');
+        obs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    obs.observe(document.getElementById('statsBar'));
+  }).catch(() => {
+    document.getElementById('stat-naesin').textContent = '—';
+    document.getElementById('stat-suneung').textContent = '—';
+    document.getElementById('stat-years').textContent = '—';
+  });
+
+  /* ── ② 대입 실적 ── */
+  fetch('data/results.json').then(r => r.json()).then(d => {
+    const grid = document.getElementById('resultsGrid');
+    const list = d.results || [];
+    if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray);font-size:14px;">등록된 대입 실적이 없습니다.</div>'; return; }
+    grid.innerHTML = list.map(r => {
+      const reviewLink = (r.reviewId >= 0)
+        ? `<a href="reviews-list.html#review-${r.reviewId}" class="result-link">후기 보기 →</a>`
+        : '';
+      return `<div class="result-card">
+        <div class="result-year">${r.year || ''}</div>
+        <div class="result-univ">${r.university || ''}</div>
+        <div class="result-dept">${r.department || ''}</div>
+        <div class="result-name-row">
+          <span class="result-name">${r.name || ''}</span>
+          ${reviewLink}
         </div>
-      </div>`).join('');
-    grid.classList.remove('visible');
-    requestAnimationFrame(() => io.observe(grid));
+      </div>`;
+    }).join('');
+    grid.querySelectorAll('.result-card').forEach(el => io.observe(el));
+  }).catch(() => {});
+
+  /* ── ③ 마퀴 슬라이더 ── */
+  let semestersData = [];
+  function buildMarquee(semIdx) {
+    const sem = semestersData[semIdx];
+    if (!sem) return;
+    const grades = sem.grades || [];
+    const track = document.getElementById('marqueeTrack');
+    const chips = grades.map(g =>
+      `<div class="grade-chip"><span class="chip-trophy">🏆</span><span class="chip-school">${g.school}</span><span class="chip-name">${g.name}</span></div>`
+    ).join('');
+    // 두 세트 연결해서 무한 루프
+    track.innerHTML = chips + chips;
+    // 트랙 너비에 맞춰 애니메이션 duration 조정
+    const chipCount = grades.length;
+    track.style.animationDuration = Math.max(20, chipCount * 2) + 's';
   }
 
-  document.getElementById('honorFilter').querySelectorAll('.filter-btn').forEach(btn => {
+  fetch('data/top-grades.json').then(r => r.json()).then(d => {
+    semestersData = d.semesters || [];
+    // 탭 버튼 레이블 업데이트
+    document.querySelectorAll('.sem-btn').forEach((btn, i) => {
+      if (semestersData[i]) {
+        btn.textContent = semestersData[i].semester + ' (' + (semestersData[i].year || '') + ')';
+      }
+    });
+    buildMarquee(0);
+  }).catch(() => {});
+
+  document.querySelectorAll('.sem-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('#honorFilter .filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      activeFilter = btn.dataset.cat;
-      const filtered = activeFilter === '전체'
-        ? allReviews
-        : allReviews.filter(r => (r.tag || '').includes(activeFilter) || (r.grade || '').includes(activeFilter));
-      renderHonor(filtered);
+      buildMarquee(parseInt(btn.dataset.sem));
     });
   });
 
-  fetch('data/reviews.json')
-    .then(r => r.json())
-    .then(data => {
-      allReviews = data.reviews || [];
-      renderHonor(allReviews);
-    })
-    .catch(() => {
-      document.getElementById('honorGrid').innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:rgba(255,255,255,0.4);font-size:15px;">후기를 불러올 수 없습니다.</div>';
-    });
+  /* ── ④ 성적 향상 사례 ── */
+  fetch('data/improvement-cases.json').then(r => r.json()).then(d => {
+    const grid = document.getElementById('improvementGrid');
+    const list = d.cases || [];
+    if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray);font-size:14px;">등록된 사례가 없습니다.</div>'; return; }
+    grid.innerHTML = list.map(c => `
+      <div class="improvement-card fade-up">
+        <div class="imp-top">
+          <div class="imp-before">
+            <div class="imp-label">Before</div>
+            <div class="imp-score">${c.before || ''}</div>
+          </div>
+          <div class="imp-arrow">→</div>
+          <div class="imp-after">
+            <div class="imp-label">After</div>
+            <div class="imp-score">${c.after || ''}</div>
+          </div>
+        </div>
+        <div class="imp-body">
+          <div class="imp-meta">
+            <span class="imp-name">${c.studentName || ''}</span>
+            ${c.grade ? `<span class="imp-grade-badge">${c.grade}</span>` : ''}
+            ${c.period ? `<span class="imp-period-badge">${c.period}</span>` : ''}
+          </div>
+          <p class="imp-content">${c.content || ''}</p>
+        </div>
+      </div>`).join('');
+    grid.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  }).catch(() => {});
 </script>
 </body>
 </html>
