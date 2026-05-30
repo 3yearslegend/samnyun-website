@@ -364,14 +364,18 @@
 
   // ===== TYPE COLORS =====
   const TYPE_COLORS = {
-    '공지':   { bg: '#FDECEA', fg: '#9A1E14', bd: '#C0271A' },
-    '일정':   { bg: '#E8F5E9', fg: '#1B5E20', bd: '#388E3C' },
-    '설명회': { bg: '#FFF3E0', fg: '#BF360C', bd: '#E64A19' },
-    '특강':   { bg: '#E3F2FD', fg: '#0D47A1', bd: '#1976D2' },
-    '이벤트': { bg: '#F3E5F5', fg: '#4A148C', bd: '#7B1FA2' },
+    '설명회': { bg: '#FFF3E0', fg: '#E65100', bd: '#FF8F00' },
+    '특강':   { bg: '#EDE7F6', fg: '#4527A0', bd: '#5E35B1' },
+    '상담':   { bg: '#E8F5E9', fg: '#1B5E20', bd: '#388E3C' },
+    '이벤트': { bg: '#F3E5F5', fg: '#6A1B9A', bd: '#8E24AA' },
     '기타':   { bg: '#F5F5F5', fg: '#424242', bd: '#9E9E9E' },
   };
-  function typeColor(type) { return TYPE_COLORS[type] || TYPE_COLORS['기타']; }
+  // 소스 기반 색상 (source 우선, 없으면 type 기반)
+  function typeColor(type, source) {
+    if (source === 'notice')  return { bg: '#E3F2FD', fg: '#1565C0', bd: '#1976D2' };
+    if (source === 'seminar') return { bg: '#FFF3E0', fg: '#E65100', bd: '#FF8F00' };
+    return TYPE_COLORS[type] || TYPE_COLORS['기타'];
+  }
 
   // ===== DATE UTILS =====
   function parseDate(str) {
@@ -462,7 +466,7 @@
 
       // Bars
       const barsHtml = barInfos.map(({ evt, sc, ec, t }) => {
-        const c = typeColor(evt.type);
+        const c = typeColor(evt.type, evt.source);
         const leftPct = (sc / 7 * 100).toFixed(3);
         const widthPct = ((ec - sc + 1) / 7 * 100).toFixed(3);
         const topPx = 26 + t * 22;
@@ -492,7 +496,7 @@
 
   // ===== MODAL =====
   function openEvtModal(evt) {
-    const c = typeColor(evt.type);
+    const c = typeColor(evt.type, evt.source);
     const badge = document.getElementById('evtModalBadge');
     badge.textContent = evt.type;
     badge.style.background = c.bg;
@@ -514,8 +518,8 @@
     document.getElementById('evtModalContent').textContent = evt.data.content || '';
 
     const regWrap = document.getElementById('evtModalRegWrap');
-    if (evt.type === '설명회') {
-      const href = evt.data.registration_link || 'news-seminar.html';
+    if (evt.source === 'seminar' || evt.type === '설명회') {
+      const href = (evt.data && evt.data.registration_link) || 'news-seminar.html';
       regWrap.innerHTML = `<a href="${href}" class="evt-modal-reg-btn">설명회 신청하기 →</a>`;
     } else {
       regWrap.innerHTML = '';

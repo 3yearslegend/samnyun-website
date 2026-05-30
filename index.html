@@ -369,6 +369,8 @@
       content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
       width: 4px; height: 4px; background: var(--red); border-radius: 50%;
     }
+    .cal-day.has-seminar::after { background: #E65100; }
+    .cal-day.has-notice::after  { background: #1565C0; }
     .cal-day.today.has-event::after { background: rgba(255,255,255,0.7); }
     .cal-day.other-month { color: #ccc; }
     .cal-day.sun { color: var(--red); }
@@ -1138,7 +1140,11 @@
       if (d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear()) cls += ' today';
       const dayEvts = getEventsForDay(calYear, calMonth, d);
       if (dayEvts.length) {
+        const srcPri = { seminar: 0, notice: 1, schedule: 2 };
+        dayEvts.sort((a, b) => (srcPri[a.source] ?? 9) - (srcPri[b.source] ?? 9));
         cls += ' has-event';
+        if (dayEvts[0].source === 'seminar') cls += ' has-seminar';
+        else if (dayEvts[0].source === 'notice') cls += ' has-notice';
         cell.addEventListener('click', () => openCalModal(dayEvts[0]));
       }
       cell.className = cls;
@@ -1156,7 +1162,11 @@
 
   /* ---- Modal ---- */
   function openCalModal(evt) {
-    document.getElementById('calModalBadge').textContent = evt.badge;
+    const badge = document.getElementById('calModalBadge');
+    badge.textContent = evt.badge;
+    if (evt.source === 'seminar')     { badge.style.background = '#FFF3E0'; badge.style.color = '#E65100'; }
+    else if (evt.source === 'notice') { badge.style.background = '#E3F2FD'; badge.style.color = '#1565C0'; }
+    else                              { badge.style.background = ''; badge.style.color = ''; }
     document.getElementById('calModalTitle').textContent = evt.title;
     document.getElementById('calModalDate').textContent = evt.date;
     document.getElementById('calModalPeriod').textContent = evt.period;
@@ -1164,7 +1174,12 @@
     document.getElementById('calModalLocation').textContent = evt.location;
     document.getElementById('calModalLocationRow').style.display = evt.location ? '' : 'none';
     const lnk = document.getElementById('calModalLink');
-    if (evt._link) { lnk.href = evt._link; lnk.textContent = evt.badge === '설명회' ? '신청 / 상세 보기 →' : '전체 일정 보기 →'; }
+    if (evt._link) {
+      lnk.href = evt._link;
+      lnk.textContent = evt.source === 'seminar' ? '신청 / 상세 보기 →'
+                      : evt.source === 'notice'  ? '공지 보기 →'
+                      : '전체 일정 보기 →';
+    }
     document.getElementById('calModalBg').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1245,32 +1260,45 @@
     container.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   }).catch(() => {});
 
-  /* ---- Data fetch: Schedule + Seminars ---- */
+  /* ---- Data fetch: Schedule + Seminars + Notices ---- */
   Promise.all([
     fetch('./data/schedule.json').then(r => { if (!r.ok) throw new Error('schedule.json ' + r.status); return r.json(); }),
-    fetch('./data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
-  ]).then(([schedData, seminarsData]) => {
+    fetch('./data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] })),
+    fetch('./data/notices.json').then(r => r.json()).catch(() => ({ notices: [] }))
+  ]).then(([schedData, seminarsData, noticesData]) => {
     const dows = ['일','월','화','수','목','금','토'];
-    const fromDate = (dateStr) => {
-      const p = dateStr.split('-');
+    const fromDate = (str) => {
+      if (!str) return null;
+      const p = str.split('-');
+      if (p.length < 3) return null;
       return { y: +p[0], m: +p[1] - 1, d: +p[2] };
     };
+    const fmtDate = (p) => `${p.y}년 ${p.m + 1}월 ${p.d}일 (${dows[new Date(p.y, p.m, p.d).getDay()]})`;
     const seenKeys = new Set();
-    // 설명회 먼저 (중복 기준 우선)
+
+    // ① 설명회 (중복 제거 기준, 주황색)
     const seminarEvents = (seminarsData.seminars || []).filter(s => s.show_in_calendar && s.date).map((s, i) => {
-      const { y, m, d } = fromDate(s.date);
-      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+      const p = fromDate(s.date); if (!p) return null;
       seenKeys.add((s.title || '').trim() + '|' + s.date);
-      return { year: y, month: m, day: d, endYear: y, endMonth: m, endDay: d, badge: '설명회', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: `news-seminar-detail.html?id=${i}` };
-    });
-    // 설명회와 제목+날짜가 같은 일정은 스킵
-    const schedEvents = (schedData.events || []).filter(e => !seenKeys.has((e.title || '').trim() + '|' + e.date)).map(s => {
-      const { y, m, d } = fromDate(s.date);
-      const ep = fromDate(s.end_date || s.date);
-      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
-      return { year: y, month: m, day: d, endYear: ep.y, endMonth: ep.m, endDay: ep.d, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: 'news-schedule.html' };
-    });
-    CAL_EVENTS = [...seminarEvents, ...schedEvents];
+      return { year: p.y, month: p.m, day: p.d, endYear: p.y, endMonth: p.m, endDay: p.d, badge: '설명회', title: s.title || '', date: fmtDate(p), period: s.time || '', location: s.location || '', source: 'seminar', _link: `news-seminar-detail.html?id=${i}` };
+    }).filter(Boolean);
+
+    // ② 학원 일정 (설명회 중복 스킵, 기존 색상)
+    const schedEvents = (schedData.events || []).filter(e => !seenKeys.has((e.title || '').trim() + '|' + e.date)).map(e => {
+      const p = fromDate(e.date); if (!p) return null;
+      const ep = fromDate(e.end_date) || p;
+      return { year: p.y, month: p.m, day: p.d, endYear: ep.y, endMonth: ep.m, endDay: ep.d, badge: e.type || '일정', title: e.title || '', date: fmtDate(p), period: e.time || '', location: e.location || '', source: 'schedule', _link: 'news-schedule.html' };
+    }).filter(Boolean);
+
+    // ③ 공지사항 (start_date + end_date 있는 것만, 파란색)
+    const noticeEvents = (noticesData.notices || []).map((n, i) => {
+      if (!n.start_date || !n.end_date) return null;
+      const p = fromDate(n.start_date); const ep = fromDate(n.end_date);
+      if (!p || !ep) return null;
+      return { year: p.y, month: p.m, day: p.d, endYear: ep.y, endMonth: ep.m, endDay: ep.d, badge: n.category || '공지', title: n.title || '', date: fmtDate(p), period: '', location: '', source: 'notice', _link: `news-notice-detail.html?id=${i}` };
+    }).filter(Boolean);
+
+    CAL_EVENTS = [...seminarEvents, ...schedEvents, ...noticeEvents];
     renderCal();
   }).catch(err => console.warn('[Schedule]', err));
 
