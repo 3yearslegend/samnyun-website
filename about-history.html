@@ -65,7 +65,16 @@
     .timeline-content ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
     .timeline-content ul li { font-size: 14px; color: var(--gray-dark); display: flex; align-items: center; gap: 8px; }
     .timeline-content ul li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
-    @media (max-width: 640px) { .timeline::before { left: 20px; } .timeline-item { gap: 28px; } .timeline-year { width: auto; min-width: 60px; text-align: left; } .timeline-year span { font-size: 16px; } .timeline-dot { left: 12px; } }
+    .timeline-item--founding .timeline-dot { width: 24px; height: 24px; left: 109px; top: 6px; box-shadow: 0 0 0 3px var(--red), 0 0 16px rgba(192,39,26,0.35); }
+    .timeline-item--founding .timeline-content { background: #fff9f9; border-color: rgba(192,39,26,0.25); }
+    .timeline-item--current .timeline-dot { background: var(--white); border-color: var(--red); box-shadow: 0 0 0 2px var(--red); animation: pulse-dot 2s infinite; }
+    .timeline-item--current .timeline-content { background: var(--white); border: 2px dashed var(--red); }
+    .timeline-item--current .timeline-content h3 { color: var(--red); }
+    .timeline-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .badge-founding { background: var(--red); color: var(--white); }
+    .badge-current  { background: var(--red-light); color: var(--red); }
+    @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 2px var(--red); } 50% { box-shadow: 0 0 0 5px rgba(192,39,26,0.18); } }
+    @media (max-width: 640px) { .timeline::before { left: 20px; } .timeline-item { gap: 28px; } .timeline-year { width: auto; min-width: 60px; text-align: left; } .timeline-year span { font-size: 16px; } .timeline-dot { left: 12px; } .timeline-item--founding .timeline-dot { left: 9px; } }
 
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -222,66 +231,74 @@
   <div class="container">
     <div class="timeline fade-up">
 
-      <div class="timeline-item">
-        <div class="timeline-year"><span>[연도]</span></div>
+      <div class="timeline-item timeline-item--founding">
+        <div class="timeline-year"><span>2018.08</span></div>
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>삼년의 신화 설립</h3>
+          <div class="timeline-badge badge-founding">창립</div>
+          <h3>삼년의 신화 국어논술학원 개원</h3>
           <ul>
-            <li>삼년의 신화 국어논술학원 개원 (고잔점)</li>
-            <li>초·중등 국어 전문 과정 개설</li>
+            <li>고잔점 1관 개원</li>
+            <li>초·중등 국어논술 전문 과정 개설</li>
           </ul>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-year"><span>[연도]</span></div>
+        <div class="timeline-year"><span>2021.01</span></div>
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>성장과 확장</h3>
+          <h3>확장 이전 및 2관 오픈</h3>
           <ul>
-            <li>고등 국어·논술 과정 신설</li>
-            <li>누적 수강생 [N]명 달성</li>
-            <li>자이점 개원</li>
+            <li>고잔점 확장 이전</li>
+            <li>삼년의 신화 2관 정식 오픈</li>
           </ul>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-year"><span>[연도]</span></div>
+        <div class="timeline-year"><span>2024.04</span></div>
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>교육 품질 고도화</h3>
+          <h3>자이점 오픈</h3>
           <ul>
-            <li>수능 국어 1등급 다수 배출</li>
-            <li>데이터 기반 학습 관리 시스템 도입</li>
-            <li>정기 학부모 상담 제도 정착</li>
+            <li>삼년의 신화 자이점 신규 개원</li>
           </ul>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-year"><span>[연도]</span></div>
+        <div class="timeline-year"><span>2024.08</span></div>
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>하이퍼관 오픈</h3>
+          <h3>고잔점 3관 오픈</h3>
           <ul>
-            <li>하이퍼관 신규 개원</li>
-            <li>SKY 대학 논술 합격생 다수 배출</li>
-            <li>특목고 입시 국어·논술 전문 과정 신설</li>
+            <li>고잔점 3관 신규 오픈</li>
           </ul>
         </div>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-year"><span>현재</span></div>
+        <div class="timeline-year"><span>2025.07</span></div>
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <h3>지속적인 성장</h3>
+          <h3>하이퍼관 &amp; 프리미엄관 오픈</h3>
           <ul>
-            <li>3개 지점 운영 (고잔점 · 자이점 · 하이퍼관)</li>
-            <li>누적 수강생 [N]명 이상</li>
-            <li>안성맞춤 국어 교육의 대표 브랜드로 자리매김</li>
+            <li>동산고 전문 하이퍼관 오픈</li>
+            <li>고잔점 4관 오픈 (프리미엄관)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--current">
+        <div class="timeline-year"><span>2025.11~</span></div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-badge badge-current">현재 진행 중</div>
+          <h3>끝없이 성장하는 삼년의 신화</h3>
+          <ul>
+            <li>고잔점 · 자이점 · 하이퍼관 운영 중</li>
+            <li>삼년의 신화는 끝없이 성장하는 학원입니다</li>
           </ul>
         </div>
       </div>
