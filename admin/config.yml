@@ -48,9 +48,14 @@ collections:
 
   - name: notices
     label: 공지사항
+    sortable_fields: ['date', 'title']
+    view_groups:
+      - label: 연도/월
+        field: date
+        pattern: '\d{4}\.\d{2}'
     files:
       - name: notices_data
-        label: 공지사항 목록
+        label: 공지사항 목록 (최신순으로 추가해 주세요)
         file: data/notices.json
         format: json
         fields:
@@ -73,9 +78,14 @@ collections:
 
   - name: schedule
     label: 학원 일정
+    sortable_fields: ['date', 'title']
+    view_groups:
+      - label: 연도/월
+        field: date
+        pattern: '\d{4}-\d{2}'
     files:
       - name: schedule_data
-        label: 일정 목록
+        label: 일정 목록 (최신순으로 추가해 주세요)
         file: data/schedule.json
         format: json
         fields:

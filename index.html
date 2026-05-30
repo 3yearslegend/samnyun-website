@@ -482,7 +482,7 @@
     .fs-overlay.open { opacity: 1; pointer-events: auto; }
     .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
     .fs-logo { text-decoration: none; display: flex; align-items: center; }
-    .fs-logo img { height: 48px; width: auto; filter: brightness(0) invert(1); }
+    .fs-logo img { height: 48px; width: 48px; object-fit: cover; border-radius: 50%; }
     .fs-close { background: none; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; width: 40px; height: 40px; color: #fff; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
     .fs-close:hover { background: rgba(255,255,255,0.1); }
     .fs-body { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); padding: 56px 40px 40px; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -606,7 +606,7 @@
 </nav>
 <div class="fs-overlay" id="fsOverlay">
   <div class="fs-nav-bar">
-    <a href="index.html" class="fs-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어논술학원"></a>
     <button class="fs-close" id="fsClose" aria-label="메뉴 닫기">&#x2715;</button>
   </div>
   <div class="fs-body">
@@ -983,7 +983,7 @@
       <div class="cal-modal-row" id="calModalPeriodRow"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
       <div class="cal-modal-row" id="calModalLocationRow"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
     </div>
-    <a href="news-schedule.html" class="cal-modal-link">전체 일정 보기 →</a>
+    <a href="news-schedule.html" class="cal-modal-link" id="calModalLink">전체 일정 보기 →</a>
   </div>
 </div>
 
@@ -1163,6 +1163,8 @@
     document.getElementById('calModalPeriodRow').style.display = evt.period ? '' : 'none';
     document.getElementById('calModalLocation').textContent = evt.location;
     document.getElementById('calModalLocationRow').style.display = evt.location ? '' : 'none';
+    const lnk = document.getElementById('calModalLink');
+    if (evt._link) { lnk.href = evt._link; lnk.textContent = evt.badge === '설명회' ? '신청 / 상세 보기 →' : '전체 일정 보기 →'; }
     document.getElementById('calModalBg').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -1211,16 +1213,30 @@
     grid.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   }).catch(() => {});
 
-  /* ---- Data fetch: Notices ---- */
-  fetch('data/notices.json').then(r => r.json()).then(data => {
+  /* ---- Data fetch: Notices + Seminars ---- */
+  Promise.all([
+    fetch('data/notices.json').then(r => r.json()).catch(() => ({ notices: [] })),
+    fetch('data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
+  ]).then(([noticesData, seminarsData]) => {
     const container = document.getElementById('indexNoticeList');
     if (!container) return;
-    const list = (data.notices || []).slice(0, 5);
-    if (!list.length) { container.innerHTML = '<div style="text-align:center;padding:24px 0;color:var(--gray);font-size:14px;">등록된 공지사항이 없습니다.</div>'; return; }
     const badgeClass = { '공지': 'nb-red', '일정': 'nb-gray', '이벤트': 'nb-black', '설명회': 'nb-black' };
-    container.innerHTML = list.map((n, i) => {
+    const notices = (noticesData.notices || []).sort((a, b) => b.date.localeCompare(a.date));
+    notices.forEach((n, i) => { n._noticeOrigIdx = i; });
+    const seminarItems = (seminarsData.seminars || []).map((s, i) => ({
+      title: s.title, category: '설명회',
+      date: (s.date || '').replace(/-/g, '.'),
+      _source: 'seminar', _seminarIdx: i
+    }));
+    const combined = [...notices.map(n => ({ ...n, _source: 'notice' })), ...seminarItems]
+      .sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+    if (!combined.length) { container.innerHTML = '<div style="text-align:center;padding:24px 0;color:var(--gray);font-size:14px;">등록된 공지사항이 없습니다.</div>'; return; }
+    container.innerHTML = combined.map(n => {
       const cls = badgeClass[n.category] || 'nb-gray';
-      return `<a href="news-notice-detail.html?id=${i}" class="notice-row fade-up" style="display:flex;text-decoration:none;">
+      const href = n._source === 'seminar'
+        ? `news-seminar-detail.html?id=${n._seminarIdx}`
+        : `news-notice-detail.html?id=${n._noticeOrigIdx}`;
+      return `<a href="${href}" class="notice-row fade-up" style="display:flex;text-decoration:none;">
         <span class="notice-badge ${cls}">${n.category || '공지'}</span>
         <span class="notice-row-title">${n.title || ''}</span>
         <span class="notice-row-date">${n.date || ''}</span>
@@ -1229,22 +1245,30 @@
     container.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   }).catch(() => {});
 
-  /* ---- Data fetch: Schedule ---- */
-  fetch('./data/schedule.json')
-    .then(r => { if (!r.ok) throw new Error('schedule.json ' + r.status); return r.json(); })
-    .then(data => {
-      const dows = ['일','월','화','수','목','금','토'];
-      CAL_EVENTS = (data.events || []).map(s => {
-        const p = s.date.split('-');
-        const y = +p[0], m = +p[1] - 1, d = +p[2];
-        const ep = (s.end_date || s.date).split('-');
-        const ey = +ep[0], em = +ep[1] - 1, ed = +ep[2];
-        const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
-        return { year: y, month: m, day: d, endYear: ey, endMonth: em, endDay: ed, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '' };
-      });
-      renderCal();
-    })
-    .catch(err => console.warn('[Schedule]', err));
+  /* ---- Data fetch: Schedule + Seminars ---- */
+  Promise.all([
+    fetch('./data/schedule.json').then(r => { if (!r.ok) throw new Error('schedule.json ' + r.status); return r.json(); }),
+    fetch('./data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
+  ]).then(([schedData, seminarsData]) => {
+    const dows = ['일','월','화','수','목','금','토'];
+    const fromDate = (dateStr) => {
+      const p = dateStr.split('-');
+      return { y: +p[0], m: +p[1] - 1, d: +p[2] };
+    };
+    const schedEvents = (schedData.events || []).map(s => {
+      const { y, m, d } = fromDate(s.date);
+      const ep = fromDate(s.end_date || s.date);
+      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+      return { year: y, month: m, day: d, endYear: ep.y, endMonth: ep.m, endDay: ep.d, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: 'news-schedule.html' };
+    });
+    const seminarEvents = (seminarsData.seminars || []).filter(s => s.show_in_calendar && s.date).map((s, i) => {
+      const { y, m, d } = fromDate(s.date);
+      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+      return { year: y, month: m, day: d, endYear: y, endMonth: m, endDay: d, badge: '설명회', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: `news-seminar-detail.html?id=${i}` };
+    });
+    CAL_EVENTS = [...schedEvents, ...seminarEvents];
+    renderCal();
+  }).catch(err => console.warn('[Schedule]', err));
 
   /* ---- Intersection observer ---- */
   const io = new IntersectionObserver((entries) => {
