@@ -551,6 +551,8 @@
   // ===== FETCH & MERGE DATA =====
   function buildEvents(noticesData, scheduleData, seminarsData) {
     const evts = [];
+    const seenKeys = new Set();
+
     (noticesData.notices || []).forEach(n => {
       if (!n.start_date || !n.end_date) return;
       const start = parseDate(n.start_date);
@@ -558,18 +560,25 @@
       if (!start || !end) return;
       evts.push({ title: n.title, type: n.category || '공지', start, end, data: n, source: 'notice' });
     });
-    (scheduleData.events || []).forEach(e => {
-      const start = parseDate(e.date);
-      const end = parseDate(e.end_date) || start;
-      if (!start) return;
-      evts.push({ title: e.title, type: e.type || '기타', start, end, data: e, source: 'schedule' });
-    });
+
+    // 설명회 먼저 추가 (중복 기준 우선)
     ((seminarsData || {}).seminars || []).forEach(s => {
       if (!s.show_in_calendar) return;
       const start = parseDate(s.date);
       if (!start) return;
+      seenKeys.add((s.title || '').trim() + '|' + s.date);
       evts.push({ title: s.title, type: '설명회', start, end: start, data: s, source: 'seminar' });
     });
+
+    // 설명회와 제목+날짜가 같은 일정은 스킵
+    (scheduleData.events || []).forEach(e => {
+      const start = parseDate(e.date);
+      const end = parseDate(e.end_date) || start;
+      if (!start) return;
+      if (seenKeys.has((e.title || '').trim() + '|' + e.date)) return;
+      evts.push({ title: e.title, type: e.type || '기타', start, end, data: e, source: 'schedule' });
+    });
+
     return evts;
   }
 

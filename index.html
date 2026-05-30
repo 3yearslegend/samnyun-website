@@ -1255,18 +1255,22 @@
       const p = dateStr.split('-');
       return { y: +p[0], m: +p[1] - 1, d: +p[2] };
     };
-    const schedEvents = (schedData.events || []).map(s => {
+    const seenKeys = new Set();
+    // 설명회 먼저 (중복 기준 우선)
+    const seminarEvents = (seminarsData.seminars || []).filter(s => s.show_in_calendar && s.date).map((s, i) => {
+      const { y, m, d } = fromDate(s.date);
+      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
+      seenKeys.add((s.title || '').trim() + '|' + s.date);
+      return { year: y, month: m, day: d, endYear: y, endMonth: m, endDay: d, badge: '설명회', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: `news-seminar-detail.html?id=${i}` };
+    });
+    // 설명회와 제목+날짜가 같은 일정은 스킵
+    const schedEvents = (schedData.events || []).filter(e => !seenKeys.has((e.title || '').trim() + '|' + e.date)).map(s => {
       const { y, m, d } = fromDate(s.date);
       const ep = fromDate(s.end_date || s.date);
       const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
       return { year: y, month: m, day: d, endYear: ep.y, endMonth: ep.m, endDay: ep.d, badge: s.type || '일정', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: 'news-schedule.html' };
     });
-    const seminarEvents = (seminarsData.seminars || []).filter(s => s.show_in_calendar && s.date).map((s, i) => {
-      const { y, m, d } = fromDate(s.date);
-      const dateStr = y + '년 ' + (m + 1) + '월 ' + d + '일 (' + dows[new Date(y, m, d).getDay()] + ')';
-      return { year: y, month: m, day: d, endYear: y, endMonth: m, endDay: d, badge: '설명회', title: s.title || '', date: dateStr, period: s.time || '', location: s.location || '', _link: `news-seminar-detail.html?id=${i}` };
-    });
-    CAL_EVENTS = [...schedEvents, ...seminarEvents];
+    CAL_EVENTS = [...seminarEvents, ...schedEvents];
     renderCal();
   }).catch(err => console.warn('[Schedule]', err));
 
