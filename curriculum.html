@@ -52,52 +52,84 @@
     @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
 
     /* LAYOUT */
-    .page-content { padding: 72px 0 120px; }
+    .page-content { padding: 64px 0 120px; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width: 768px) { .page-content { padding: 48px 0 80px; } .container { padding: 0 20px; } }
+    @media (max-width: 768px) { .page-content { padding: 40px 0 80px; } .container { padding: 0 20px; } }
 
-    /* D1 TABS */
-    .cur-d1 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gray-light); border-radius: 16px; padding: 6px; margin-bottom: 52px; }
+    /* ── LEVEL 1 TABS (초등/중등/고등) ── */
+    .cur-d1 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gray-light); border-radius: 16px; padding: 6px; margin-bottom: 40px; }
     .cur-d1-btn { padding: 15px 8px; border: none; border-radius: 12px; cursor: pointer; font-family: var(--font-sans); font-size: 17px; font-weight: 700; color: var(--gray); background: transparent; transition: all 0.25s; letter-spacing: -0.3px; }
     .cur-d1-btn.active { background: var(--white); color: var(--red); box-shadow: 0 2px 16px rgba(0,0,0,0.09); }
     @media (max-width: 480px) { .cur-d1-btn { font-size: 15px; padding: 12px 4px; } }
 
-    /* PANEL */
-    .cur-panel { display: none; }
-    .cur-panel.active { display: block; }
+    /* ── LEVEL 2 TABS (정규/내신 or 초5/초6) ── */
+    .cur-d2 { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .cur-d2-btn { padding: 10px 24px; border: 2px solid var(--border); border-radius: 100px; cursor: pointer; font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--gray); background: var(--white); transition: all 0.2s; }
+    .cur-d2-btn.active { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .cur-d2-btn:hover:not(.active) { border-color: var(--gray); color: var(--black); }
 
-    /* SECTION INTRO */
-    .section-intro { margin-bottom: 44px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    /* ── LEVEL 3 TABS (중1/중2/중3 or 고1/고2/고3) ── */
+    .cur-d3 { display: flex; gap: 6px; margin-bottom: 36px; background: var(--gray-light); border-radius: 10px; padding: 4px; width: fit-content; }
+    .cur-d3-btn { padding: 8px 20px; border: none; border-radius: 7px; cursor: pointer; font-family: var(--font-sans); font-size: 14px; font-weight: 600; color: var(--gray); background: transparent; transition: all 0.2s; white-space: nowrap; }
+    .cur-d3-btn.active { background: var(--white); color: var(--black); box-shadow: 0 1px 8px rgba(0,0,0,0.1); }
+    @media (max-width: 480px) { .cur-d3 { width: 100%; } .cur-d3-btn { flex: 1; text-align: center; } }
+
+    /* ── PANELS ── */
+    .cur-panel-l1 { display: none; }
+    .cur-panel-l1.active { display: block; }
+    .cur-panel-l2 { display: none; }
+    .cur-panel-l2.active { display: block; }
+    .cur-panel-l3 { display: none; }
+    .cur-panel-l3.active { display: block; }
+
+    /* ── SECTION INTRO ── */
+    .section-intro { margin-bottom: 40px; padding-bottom: 36px; border-bottom: 1px solid var(--border); }
     .section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
     .section-intro h2 { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 10px; }
-    .section-intro p { font-size: 15px; color: var(--gray); line-height: 1.9; max-width: 700px; }
+    .section-intro p { font-size: 15px; color: var(--gray); line-height: 1.9; max-width: 680px; }
 
-    /* GRADE CARDS GRID */
-    .grade-grid { display: grid; gap: 20px; }
-    .grade-grid.col-2 { grid-template-columns: repeat(2, 1fr); }
-    .grade-grid.col-3 { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 900px) { .grade-grid.col-3 { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .grade-grid.col-2, .grade-grid.col-3 { grid-template-columns: 1fr; } }
+    /* ── IMAGE AREA ── */
+    .cur-img-area { width: 100%; aspect-ratio: 16/7; background: var(--gray-light); border: 2px dashed #ccc; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; color: #aaa; text-align: center; padding: 40px; }
+    .cur-img-area .img-icon { width: 52px; height: 52px; border-radius: 12px; background: #e8e8e6; display: flex; align-items: center; justify-content: center; }
+    .cur-img-area .img-label { font-size: 15px; font-weight: 600; color: #999; }
+    .cur-img-area .img-hint { font-size: 12px; color: #bbb; }
+    .cur-img-area img.cur-course-img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
+    @media (max-width: 600px) { .cur-img-area { aspect-ratio: 4/3; } }
 
-    /* GRADE CARD */
-    .grade-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s; }
-    .grade-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); border-color: var(--red); }
-    .gc-top { padding: 28px 28px 20px; }
-    .gc-badge { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--red-light); color: var(--red); font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.5px; }
-    .gc-grade-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-    .gc-title { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--black); letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.35; }
-    .gc-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
-    .gc-chips { display: flex; gap: 6px; padding: 0 28px 20px; flex-wrap: wrap; }
-    .gc-chip { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; }
-    .gc-chip.regular { background: var(--red-light); color: var(--red); }
-    .gc-chip.naesin { background: #f0f0ee; color: var(--black); }
-    .gc-foot { margin-top: auto; padding: 16px 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--gray-light); }
-    .gc-cta { font-size: 13px; font-weight: 600; color: var(--red); }
-    .gc-arrow { width: 20px; height: 20px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-    .grade-card:hover .gc-arrow { transform: translateX(3px); }
-    .gc-arrow svg { fill: none; stroke: white; stroke-width: 2; }
+    /* ── FEATURE GRID ── */
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
+    .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 20px 18px; }
+    .feature-num { width: 32px; height: 32px; border-radius: 8px; background: var(--red-light); color: var(--red); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; flex-shrink: 0; }
+    .feature-title { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+    .feature-desc { font-size: 12px; color: var(--gray); line-height: 1.7; }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .feature-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .feature-card { padding: 16px 14px; } }
 
-    /* FOOTER */
+    /* ── DETAIL GRID (topics + schedule) ── */
+    .course-detail-grid { display: grid; grid-template-columns: 1fr 340px; gap: 28px; }
+    @media (max-width: 860px) { .course-detail-grid { grid-template-columns: 1fr; } }
+
+    .course-topics { background: var(--gray-light); border-radius: 16px; padding: 28px 32px; }
+    .course-topics h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--black); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1.5px solid var(--border); }
+    .topic-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .topic-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--gray-dark); line-height: 1.6; }
+    .topic-list li::before { content: ''; width: 6px; height: 6px; background: var(--red); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+    .topic-list .topic-cat { font-size: 11px; font-weight: 700; color: var(--red); background: var(--red-light); padding: 2px 8px; border-radius: 4px; white-space: nowrap; align-self: flex-start; margin-top: 2px; flex-shrink: 0; }
+
+    .course-schedule { display: flex; flex-direction: column; gap: 14px; }
+    .sched-card { background: var(--black); border-radius: 16px; padding: 24px 24px 20px; color: var(--white); }
+    .sched-card h3 { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sched-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; }
+    .sched-row:last-child { border-bottom: none; }
+    .sched-label { color: rgba(255,255,255,0.45); font-size: 12px; }
+    .sched-val { color: rgba(255,255,255,0.88); font-weight: 500; text-align: right; }
+    .sched-note { background: var(--red-light); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--red); line-height: 1.7; }
+    .sched-note strong { display: block; font-weight: 700; margin-bottom: 4px; }
+
+    /* ── NAESIN COMMON BADGE ── */
+    .naesin-badge { display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; color: #BF360C; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; }
+
+    /* ── FOOTER ── */
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
@@ -116,11 +148,12 @@
     /* ANIMATIONS */
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
-    /* Hamburger – always visible */
+
+    /* NAV HAMBURGER */
     .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
     .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
 
-    /* Fullscreen overlay */
+    /* FULLSCREEN OVERLAY */
     .fs-overlay { position: fixed; inset: 0; background: #0f0f0f; z-index: 10001; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.28s ease; overflow-y: auto; }
     .fs-overlay.open { opacity: 1; pointer-events: auto; }
     .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
@@ -143,15 +176,11 @@
     .fs-cta:hover { background: var(--red-dark); }
 
     @media (max-width: 1100px) {
-      .nav-menus { display: none; }
-      .nav-sns { display: none; }
-      .nav-right { margin-left: auto; }
-      .nav-container { padding: 0 20px; }
+      .nav-menus { display: none; } .nav-sns { display: none; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; }
       .fs-body { grid-template-columns: 1fr 1fr; padding: 32px 24px 24px; }
       .fs-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; }
       .fs-col:last-child { border-bottom: none; }
-      .fs-nav-bar { padding: 0 20px; }
-      .fs-footer { padding: 20px 24px 32px; }
+      .fs-nav-bar { padding: 0 20px; } .fs-footer { padding: 20px 24px 32px; }
     }
     @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
@@ -182,53 +211,18 @@
     </div>
   </div>
 </nav>
+
 <div class="fs-overlay" id="fsOverlay">
   <div class="fs-nav-bar">
     <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어논술학원"></a>
     <button class="fs-close" id="fsClose" aria-label="메뉴 닫기">&#x2715;</button>
   </div>
   <div class="fs-body">
-    <div class="fs-col">
-      <div class="fs-cat">학원 소개</div>
-      <div class="fs-links">
-        <a href="about-greeting.html">인사말</a>
-        <a href="about-features.html">학원 특징</a>
-        <a href="about-history.html">연혁</a>
-        <a href="about-branches.html">지점 안내 및 오시는 길</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">강사 소개</div>
-      <div class="fs-links">
-        <a href="teachers-gojan.html">고잔점</a>
-        <a href="teachers-zai.html">자이점</a>
-        <a href="teachers-hyper.html">하이퍼관</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">커리큘럼</div>
-      <div class="fs-links">
-        <a href="curriculum.html#elem">초등 과정</a>
-        <a href="curriculum.html#middle">중등 과정</a>
-        <a href="curriculum.html#high">고등 과정</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">학원 소식</div>
-      <div class="fs-links">
-        <a href="news-notice.html">공지사항</a>
-        <a href="news-seminar.html">설명회 신청</a>
-        <a href="news-schedule.html">학원 일정</a>
-        <a href="news-timetable.html">학원 시간표</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">생생 후기</div>
-      <div class="fs-links">
-        <a href="about-results.html">명예의 전당</a>
-        <a href="reviews-list.html">수강 후기</a>
-      </div>
-    </div>
+    <div class="fs-col"><div class="fs-cat">학원 소개</div><div class="fs-links"><a href="about-greeting.html">인사말</a><a href="about-features.html">학원 특징</a><a href="about-history.html">연혁</a><a href="about-branches.html">지점 안내 및 오시는 길</a></div></div>
+    <div class="fs-col"><div class="fs-cat">강사 소개</div><div class="fs-links"><a href="teachers-gojan.html">고잔점</a><a href="teachers-zai.html">자이점</a><a href="teachers-hyper.html">하이퍼관</a></div></div>
+    <div class="fs-col"><div class="fs-cat">커리큘럼</div><div class="fs-links"><a href="curriculum.html?tab=elem">초등 과정</a><a href="curriculum.html?tab=middle">중등 과정</a><a href="curriculum.html?tab=high">고등 과정</a></div></div>
+    <div class="fs-col"><div class="fs-cat">학원 소식</div><div class="fs-links"><a href="news-notice.html">공지사항</a><a href="news-seminar.html">설명회 신청</a><a href="news-schedule.html">학원 일정</a><a href="news-timetable.html">학원 시간표</a></div></div>
+    <div class="fs-col"><div class="fs-cat">생생 후기</div><div class="fs-links"><a href="about-results.html">명예의 전당</a><a href="reviews-list.html">수강 후기</a></div></div>
   </div>
   <div class="fs-footer">
     <div class="fs-footer-sns">
@@ -241,7 +235,6 @@
   </div>
 </div>
 
-
 <section class="page-header">
   <div class="ph-inner">
     <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><span class="current">커리큘럼</span></div>
@@ -251,177 +244,487 @@
 </section>
 
 <main class="page-content">
-  <div class="container">
+<div class="container">
 
-    <!-- D1: 초등 / 중등 / 고등 탭 -->
-    <div class="cur-d1 fade-up">
-      <button class="cur-d1-btn" data-tab="elem">초등</button>
-      <button class="cur-d1-btn" data-tab="middle">중등</button>
-      <button class="cur-d1-btn" data-tab="high">고등</button>
-    </div>
-
-    <!-- 초등 패널 -->
-    <div class="cur-panel fade-up" id="panel-elem">
-      <div class="section-intro">
-        <span class="section-tag">Elementary School</span>
-        <h2>기초부터 탄탄하게, 국어 실력의 뿌리를 키웁니다</h2>
-        <p>초등 단계에서 올바른 독해 습관과 글쓰기 기초를 다지는 것이 중요합니다. 삼년의 신화 초등 과정은 학년별 수준에 맞는 체계적인 커리큘럼으로, 아이가 스스로 읽고 생각하고 쓰는 힘을 키울 수 있도록 이끌어드립니다.</p>
-      </div>
-      <div class="grade-grid col-2">
-        <a href="curriculum-e5.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">초5</div>
-            <div class="gc-grade-label">Grade 5</div>
-            <div class="gc-title">독해·어휘 완성반</div>
-            <div class="gc-desc">5학년 핵심 교과 어휘와 독해 전략을 익히며, 글 읽기의 기초를 탄탄하게 다집니다. 매주 독서 일기로 글쓰기 습관을 기릅니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 대비</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-e6.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">초6</div>
-            <div class="gc-grade-label">Grade 6</div>
-            <div class="gc-title">독해·논술 입문반</div>
-            <div class="gc-desc">6학년 심화 독해와 논리적 글쓰기 입문으로 중학교 진학을 완벽하게 준비합니다. 문학·비문학 전 장르를 다룹니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 + 중등 선행</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- 중등 패널 -->
-    <div class="cur-panel fade-up" id="panel-middle">
-      <div class="section-intro">
-        <span class="section-tag">Middle School</span>
-        <h2>내신과 독해, 두 마리 토끼를 한 번에 잡습니다</h2>
-        <p>중학교 국어는 내신 성적과 독해력을 동시에 키워야 합니다. 삼년의 신화 중등 과정은 학년별 맞춤 학습으로 내신 1등급과 고등 선행을 동시에 완성합니다.</p>
-      </div>
-      <div class="grade-grid col-3">
-        <a href="curriculum-m1.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중1</div>
-            <div class="gc-grade-label">Middle 1</div>
-            <div class="gc-title">국어 기본반</div>
-            <div class="gc-desc">문학 기초와 비문학 독해를 탄탄히 다지고, 문법 기초까지 완성합니다. 중학 국어의 첫 단추를 올바르게 채웁니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 집중</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-m2.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중2</div>
-            <div class="gc-grade-label">Middle 2</div>
-            <div class="gc-title">국어 심화반</div>
-            <div class="gc-desc">고전문학과 심화 독해로 실력을 업그레이드하고, 논술 기초를 통해 고등 과정을 미리 준비합니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">정규 과정</span>
-            <span class="gc-chip naesin">내신 완성</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-m3.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">중3</div>
-            <div class="gc-grade-label">Middle 3</div>
-            <div class="gc-title">완성·고등 선행반</div>
-            <div class="gc-desc">중학 국어를 완성하고 수능 국어 기초와 고입 준비까지 체계적으로 로드맵을 완성합니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">고등 선행</span>
-            <span class="gc-chip naesin">내신 + 고입</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <!-- 고등 패널 -->
-    <div class="cur-panel fade-up" id="panel-high">
-      <div class="section-intro">
-        <span class="section-tag">High School</span>
-        <h2>수능 1등급을 향한 체계적인 3년 로드맵</h2>
-        <p>고등학교 국어는 수능, 내신, 논술까지 전방위 대비가 필요합니다. 삼년의 신화 고등 과정은 고1부터 고3까지 단계별 심화 학습으로 실전 국어 실력을 완성합니다.</p>
-      </div>
-      <div class="grade-grid col-3">
-        <a href="curriculum-h1.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고1</div>
-            <div class="gc-grade-label">High 1</div>
-            <div class="gc-title">수능 국어 입문반</div>
-            <div class="gc-desc">수능 국어 전체 출제 범위를 파악하고, 문학·독서·언어와 매체의 기초를 탄탄하게 다집니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 입문</span>
-            <span class="gc-chip naesin">내신 집중</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-h2.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고2</div>
-            <div class="gc-grade-label">High 2</div>
-            <div class="gc-title">수능 심화·논술 입문반</div>
-            <div class="gc-desc">EBS 연계 작품을 완전히 소화하고, 수시 논술 기초까지 함께 준비합니다. 수능과 수시를 동시에 잡습니다.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 심화</span>
-            <span class="gc-chip naesin">수시 논술</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-        <a href="curriculum-h3.html" class="grade-card">
-          <div class="gc-top">
-            <div class="gc-badge">고3</div>
-            <div class="gc-grade-label">High 3</div>
-            <div class="gc-title">수능 완성·논술 완성반</div>
-            <div class="gc-desc">실전 모의고사와 대학별 논술 기출로 수능과 수시를 최종 완성합니다. 1등급을 향한 마지막 담금질.</div>
-          </div>
-          <div class="gc-chips">
-            <span class="gc-chip regular">수능 완성</span>
-            <span class="gc-chip naesin">논술 완성</span>
-          </div>
-          <div class="gc-foot">
-            <span class="gc-cta">커리큘럼 보기</span>
-            <span class="gc-arrow"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="3,2 7,5 3,8"/></svg></span>
-          </div>
-        </a>
-      </div>
-    </div>
-
+  <!-- ══ LEVEL 1: 초등 / 중등 / 고등 ══ -->
+  <div class="cur-d1 fade-up">
+    <button class="cur-d1-btn" data-tab-group="l1" data-tab-target="l1-elem">초등</button>
+    <button class="cur-d1-btn" data-tab-group="l1" data-tab-target="l1-middle">중등</button>
+    <button class="cur-d1-btn" data-tab-group="l1" data-tab-target="l1-high">고등</button>
   </div>
+
+  <!-- ══════════════════════════════════
+       L1: 초등
+  ══════════════════════════════════ -->
+  <div id="l1-elem" data-panel-group="l1" class="cur-panel-l1">
+    <div class="cur-d2 fade-up">
+      <button class="cur-d2-btn" data-tab-group="l2-elem" data-tab-target="l2-e5">초5</button>
+      <button class="cur-d2-btn" data-tab-group="l2-elem" data-tab-target="l2-e6">초6</button>
+    </div>
+
+    <!-- 초5 -->
+    <div id="l2-e5" data-panel-group="l2-elem" class="cur-panel-l2">
+      <div class="section-intro fade-up">
+        <span class="section-tag">Elementary · 5th Grade</span>
+        <h2>독해·어휘 완성반</h2>
+        <p>5학년 교과 핵심 어휘와 독해 전략을 체계적으로 다집니다. 스스로 읽고 이해하는 힘을 키우며, 매주 독서 일기를 통해 글쓰기 습관을 형성합니다.</p>
+      </div>
+
+      <!-- 이미지 영역 (실제 이미지로 교체 시: 아래 div를 <img src="uploads/cur-e5.jpg" alt="초5 커리큘럼" class="cur-course-img"> 로 교체) -->
+      <div class="cur-img-area fade-up">
+        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+        <p class="img-label">커리큘럼 이미지</p>
+        <span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+      </div>
+
+      <div class="feature-grid fade-up">
+        <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">교과 어휘 완성</div><div class="feature-desc">교과서 핵심 어휘를 주제별로 정리하고 실전 독해에 바로 적용합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">독해 전략 습득</div><div class="feature-desc">문단의 중심 내용을 파악하고 글의 구조를 분석하는 전략을 익힙니다.</div></div>
+        <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">독서 일기 쓰기</div><div class="feature-desc">매주 1편 독서 후 감상과 생각을 글로 표현하는 습관을 기릅니다.</div></div>
+        <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">창의 글쓰기</div><div class="feature-desc">다양한 주제로 자신의 생각을 논리적으로 표현하는 글쓰기를 연습합니다.</div></div>
+      </div>
+
+      <div class="course-detail-grid fade-up">
+        <div class="course-topics">
+          <h3>주요 학습 내용</h3>
+          <ul class="topic-list">
+            <li><span class="topic-cat">어휘</span>교과서 단원별 핵심 어휘 마스터 (국어·사회·과학 통합)</li>
+            <li><span class="topic-cat">독해</span>설명문 독해 전략 — 중심 문장·뒷받침 문장 파악</li>
+            <li><span class="topic-cat">독해</span>논설문 독해 전략 — 주장과 근거 분리하기</li>
+            <li><span class="topic-cat">문학</span>시·동화·수필 읽기 및 감상 표현</li>
+            <li><span class="topic-cat">글쓰기</span>독서 일기 및 간단한 의견문 작성</li>
+          </ul>
+        </div>
+        <div class="course-schedule">
+          <div class="sched-card">
+            <h3>수업 안내</h3>
+            <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">화 · 목</span></div>
+            <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">90분</span></div>
+            <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 4~6명</span></div>
+            <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">초등 5학년</span></div>
+          </div>
+          <div class="sched-note"><strong>📌 입반 안내</strong>입반 상담 후 수준별 배치됩니다. 자세한 수업 시간은 지점별로 상이하니 상담 신청해 주세요.</div>
+        </div>
+      </div>
+    </div><!-- /l2-e5 -->
+
+    <!-- 초6 -->
+    <div id="l2-e6" data-panel-group="l2-elem" class="cur-panel-l2">
+      <div class="section-intro fade-up">
+        <span class="section-tag">Elementary · 6th Grade</span>
+        <h2>독해·논술 입문반</h2>
+        <p>심화 독해와 논리적 글쓰기 기초를 완성하며 중학교 진학을 준비합니다. 문학·비문학 전 장르를 다루며 표현력과 사고력을 함께 키웁니다.</p>
+      </div>
+
+      <div class="cur-img-area fade-up">
+        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+        <p class="img-label">커리큘럼 이미지</p>
+        <span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+      </div>
+
+      <div class="feature-grid fade-up">
+        <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">심화 독해 완성</div><div class="feature-desc">문학·비문학을 가리지 않고 글의 핵심을 빠르게 파악하는 능력을 키웁니다.</div></div>
+        <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">논술 기초 입문</div><div class="feature-desc">서론·본론·결론의 구조를 이해하고 논리적으로 글 쓰는 법을 처음 배웁니다.</div></div>
+        <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">중등 선행 어휘</div><div class="feature-desc">중학교 교과서에 등장하는 핵심 어휘를 미리 익혀 입학 후 적응력을 높입니다.</div></div>
+        <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">전 장르 독해</div><div class="feature-desc">시·소설·수필·설명문·논설문을 골고루 다루며 장르별 독해 전략을 완성합니다.</div></div>
+      </div>
+
+      <div class="course-detail-grid fade-up">
+        <div class="course-topics">
+          <h3>주요 학습 내용</h3>
+          <ul class="topic-list">
+            <li><span class="topic-cat">문학</span>현대시·현대소설·수필 작품 독해 및 감상</li>
+            <li><span class="topic-cat">비문학</span>설명문·논설문 심화 독해 (주제·요지 파악)</li>
+            <li><span class="topic-cat">논술</span>주장-근거 구조로 짧은 논술문 작성 연습</li>
+            <li><span class="topic-cat">어휘</span>중학교 교과 선행 어휘 및 한자 어휘</li>
+            <li><span class="topic-cat">글쓰기</span>생각 정리하기 → 개요 작성 → 완성 글쓰기</li>
+          </ul>
+        </div>
+        <div class="course-schedule">
+          <div class="sched-card">
+            <h3>수업 안내</h3>
+            <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 수</span></div>
+            <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">90분</span></div>
+            <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 4~6명</span></div>
+            <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">초등 6학년</span></div>
+          </div>
+          <div class="sched-note"><strong>📌 입반 안내</strong>입반 상담 후 수준별 배치됩니다. 자세한 수업 시간은 지점별로 상이하니 상담 신청해 주세요.</div>
+        </div>
+      </div>
+    </div><!-- /l2-e6 -->
+  </div><!-- /l1-elem -->
+
+
+  <!-- ══════════════════════════════════
+       L1: 중등
+  ══════════════════════════════════ -->
+  <div id="l1-middle" data-panel-group="l1" class="cur-panel-l1">
+    <div class="cur-d2 fade-up">
+      <button class="cur-d2-btn" data-tab-group="l2-middle" data-tab-target="l2-m-reg">정규 과정</button>
+      <button class="cur-d2-btn" data-tab-group="l2-middle" data-tab-target="l2-m-naesin">내신 대비</button>
+    </div>
+
+    <!-- 중등 정규 -->
+    <div id="l2-m-reg" data-panel-group="l2-middle" class="cur-panel-l2">
+      <div class="cur-d3 fade-up">
+        <button class="cur-d3-btn" data-tab-group="l3-m-reg" data-tab-target="l3-m1">중1</button>
+        <button class="cur-d3-btn" data-tab-group="l3-m-reg" data-tab-target="l3-m2">중2</button>
+        <button class="cur-d3-btn" data-tab-group="l3-m-reg" data-tab-target="l3-m3">중3</button>
+      </div>
+
+      <!-- 중1 정규 -->
+      <div id="l3-m1" data-panel-group="l3-m-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">Middle School · Grade 1 · 정규</span>
+          <h2>국어 기본반</h2>
+          <p>문학 기초부터 비문학 독해, 문법 기초까지 중학 국어의 첫 단추를 올바르게 채웁니다. 내신 1등급을 목표로 탄탄한 실력을 쌓습니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">문학 기초</div><div class="feature-desc">현대시·소설·수필의 특성을 파악하고 작품 감상 능력을 기릅니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">비문학 독해</div><div class="feature-desc">설명문·논설문의 구조를 분석하고 핵심 내용을 정확히 파악합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">문법 입문</div><div class="feature-desc">음운·단어·문장의 기초 문법을 이해하고 내신 문법 문제를 해결합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">내신 1등급</div><div class="feature-desc">학교별 교과서 기출 유형을 분석하여 내신 시험에 완벽 대비합니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">문학</span>현대시 작품 분석 (이미지·운율·주제)</li>
+              <li><span class="topic-cat">문학</span>현대 소설·수필 독해 및 인물·갈등 파악</li>
+              <li><span class="topic-cat">비문학</span>설명문·논설문 독해 전략 완성</li>
+              <li><span class="topic-cat">문법</span>중1 문법 전 범위 — 음운·품사·문장 성분</li>
+              <li><span class="topic-cat">내신</span>중간·기말 기출 유형 집중 분석 및 풀이</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 수</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">120분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 4~8명</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">중학교 1학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-m1 -->
+
+      <!-- 중2 정규 -->
+      <div id="l3-m2" data-panel-group="l3-m-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">Middle School · Grade 2 · 정규</span>
+          <h2>국어 심화반</h2>
+          <p>고전문학과 심화 독해로 실력을 한 단계 높이고, 논술 기초를 통해 고등 과정을 미리 준비합니다. 수능 유형을 처음 접하는 과정입니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">고전문학 완성</div><div class="feature-desc">향가·시조·고전소설 등 고전문학의 흐름을 이해하고 작품을 분석합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">심화 독해</div><div class="feature-desc">인문·과학·사회 분야의 심화 비문학 지문을 빠르게 독해합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">논술 기초</div><div class="feature-desc">개요 작성부터 단락 구성까지 논리적 글쓰기의 기초를 다집니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">수능 선행</div><div class="feature-desc">수능 국어 유형을 미리 접하며 고등 과정에 대한 감각을 키웁니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">고전</span>고전시가 — 향가·고려가요·시조·가사</li>
+              <li><span class="topic-cat">고전</span>고전산문 — 고전소설·한문 산문</li>
+              <li><span class="topic-cat">비문학</span>독서 심화 — 인문·과학·기술 지문 독해</li>
+              <li><span class="topic-cat">논술</span>논술 기초 — 개요 작성 및 단락 쓰기</li>
+              <li><span class="topic-cat">수능</span>수능 국어 유형 맛보기 (문학·독서)</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">화 · 목</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">120분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 4~8명</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">중학교 2학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-m2 -->
+
+      <!-- 중3 정규 -->
+      <div id="l3-m3" data-panel-group="l3-m-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">Middle School · Grade 3 · 정규</span>
+          <h2>완성·고등 선행반</h2>
+          <p>중학 국어를 완성하고 수능 국어 기초와 고입 준비까지 체계적으로 완성합니다. 고등 입학 전 가장 중요한 과정입니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">중학 완성</div><div class="feature-desc">중3 교과서 전 범위를 완전히 소화하고 취약 단원을 집중 보완합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">수능 국어 기초</div><div class="feature-desc">수능 문학·독서·언어 영역의 기본 개념과 유형을 체계적으로 학습합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">고입 대비</div><div class="feature-desc">특목고·자사고 입시를 위한 국어 실력과 자기소개서 기초를 준비합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">논술 심화</div><div class="feature-desc">완성도 있는 논술문을 쓰는 능력을 키워 고등 논술 수업에 대비합니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">교과</span>중3 교과서 전 범위 완성 (문학·문법·독서)</li>
+              <li><span class="topic-cat">수능</span>수능 문학 기초 — 현대시·소설 유형 분석</li>
+              <li><span class="topic-cat">수능</span>수능 독서 기초 — 독해 전략 및 문제 유형</li>
+              <li><span class="topic-cat">고입</span>특목고·자사고 국어 기출 및 대비 전략</li>
+              <li><span class="topic-cat">논술</span>논술 심화 — 완성도 높은 논술문 작성</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 목</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">120분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 4~8명</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">중학교 3학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-m3 -->
+    </div><!-- /l2-m-reg -->
+
+    <!-- 중등 내신 -->
+    <div id="l2-m-naesin" data-panel-group="l2-middle" class="cur-panel-l2">
+      <div class="section-intro fade-up">
+        <span class="section-tag">Middle School · 내신 대비</span>
+        <h2>내신 집중반</h2>
+        <div class="naesin-badge">📚 중1 · 중2 · 중3 공통 과정</div>
+        <p>학교별 교과서와 담당 교사의 출제 경향을 완전히 분석합니다. 정기고사 6주 전 집중 개강하여 내신 등급을 한 단계 높입니다.</p>
+      </div>
+      <div class="cur-img-area fade-up">
+        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+        <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+      </div>
+      <div class="feature-grid fade-up">
+        <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">교과서 완전 분석</div><div class="feature-desc">학교별 교과서 단원을 지문 단위로 완전히 분석하고 출제 포인트를 정리합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">서술형 집중 훈련</div><div class="feature-desc">배점이 높은 서술형·논술형 문제 유형을 집중 훈련하여 실점을 방지합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">기출 완전 정복</div><div class="feature-desc">최근 3년 기출 문제를 전수 분석하고 자주 출제되는 유형을 반복 훈련합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">학교별 맞춤 자료</div><div class="feature-desc">안산 지역 주요 중학교별 맞춤 내신 자료를 제공합니다.</div></div>
+      </div>
+      <div class="course-detail-grid fade-up">
+        <div class="course-topics">
+          <h3>주요 학습 내용</h3>
+          <ul class="topic-list">
+            <li><span class="topic-cat">분석</span>학교별 교과서 단원 완전 분석 (지문·문법·활동)</li>
+            <li><span class="topic-cat">출제</span>담당 교사 출제 경향 및 예상 문제 반영</li>
+            <li><span class="topic-cat">서술형</span>서술형·논술형 답안 작성법 집중 훈련</li>
+            <li><span class="topic-cat">기출</span>최근 3년 중간·기말 기출 전 문제 풀이</li>
+            <li><span class="topic-cat">보완</span>오답 노트 작성 및 개인별 취약점 집중 보완</li>
+          </ul>
+        </div>
+        <div class="course-schedule">
+          <div class="sched-card">
+            <h3>수업 안내</h3>
+            <div class="sched-row"><span class="sched-label">개강 시점</span><span class="sched-val">정기고사 6주 전</span></div>
+            <div class="sched-row"><span class="sched-label">수업 횟수</span><span class="sched-val">주 3~4회</span></div>
+            <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">80분</span></div>
+            <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">중1 · 중2 · 중3</span></div>
+          </div>
+          <div class="sched-note"><strong>📌 내신 일정 안내</strong>개강일은 학교 시험 일정에 따라 조정됩니다. 카카오톡 채널에서 내신 개강 공지를 확인하세요.</div>
+        </div>
+      </div>
+    </div><!-- /l2-m-naesin -->
+  </div><!-- /l1-middle -->
+
+
+  <!-- ══════════════════════════════════
+       L1: 고등
+  ══════════════════════════════════ -->
+  <div id="l1-high" data-panel-group="l1" class="cur-panel-l1">
+    <div class="cur-d2 fade-up">
+      <button class="cur-d2-btn" data-tab-group="l2-high" data-tab-target="l2-h-reg">정규 과정</button>
+      <button class="cur-d2-btn" data-tab-group="l2-high" data-tab-target="l2-h-naesin">내신 대비</button>
+    </div>
+
+    <!-- 고등 정규 -->
+    <div id="l2-h-reg" data-panel-group="l2-high" class="cur-panel-l2">
+      <div class="cur-d3 fade-up">
+        <button class="cur-d3-btn" data-tab-group="l3-h-reg" data-tab-target="l3-h1">고1</button>
+        <button class="cur-d3-btn" data-tab-group="l3-h-reg" data-tab-target="l3-h2">고2</button>
+        <button class="cur-d3-btn" data-tab-group="l3-h-reg" data-tab-target="l3-h3">고3</button>
+      </div>
+
+      <!-- 고1 정규 -->
+      <div id="l3-h1" data-panel-group="l3-h-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">High School · Grade 1 · 정규</span>
+          <h2>수능 국어 입문반</h2>
+          <p>수능 국어 전체 출제 범위를 파악하고 문학·독서·언어와 매체의 기초를 탄탄하게 다집니다. 고등 3년의 첫 단추를 올바르게 채웁니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">수능 유형 완전 파악</div><div class="feature-desc">수능 국어 전 영역 출제 구조와 문제 유형을 체계적으로 분석합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">현대문학 기초</div><div class="feature-desc">현대시·현대소설 작품을 수능 방식으로 독해하는 능력을 기릅니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">비문학 독해법</div><div class="feature-desc">인문·사회·과학·기술 지문을 정해진 시간 안에 정확히 읽는 법을 훈련합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">언어와 매체 기초</div><div class="feature-desc">문법 개념을 수능 출제 방식으로 정리하고 언어와 매체 문제에 적응합니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">수능 구조</span>수능 국어 영역별 출제 구조 완전 파악</li>
+              <li><span class="topic-cat">문학</span>현대시·현대소설 수능형 독해 및 문제 풀이</li>
+              <li><span class="topic-cat">독서</span>비문학 독해 전략 — 인문·사회·과학·기술</li>
+              <li><span class="topic-cat">화작</span>화법과 작문 유형 마스터</li>
+              <li><span class="topic-cat">문법</span>언어와 매체 기초 문법 (음운·형태·통사)</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">화 · 목</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">150분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 6~10명</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고등학교 1학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-h1 -->
+
+      <!-- 고2 정규 -->
+      <div id="l3-h2" data-panel-group="l3-h-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">High School · Grade 2 · 정규</span>
+          <h2>수능 심화·논술 입문반</h2>
+          <p>EBS 연계 작품을 완전히 소화하고 수시 논술 기초까지 함께 준비합니다. 수능과 수시를 동시에 대비하는 가장 중요한 시기입니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">EBS 연계 완성</div><div class="feature-desc">EBS 수능특강 문학·독서 전 지문을 완전히 분석하고 연계 문제에 완벽 대비합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">수시 논술 입문</div><div class="feature-desc">주요 대학 논술 유형을 분석하고 논술문 작성 기초를 체계적으로 훈련합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">고전문학 완성</div><div class="feature-desc">고전시가·고전산문 전 범위를 수능 방식으로 완성하여 문학 고득점을 노립니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">실전 모의고사</div><div class="feature-desc">월 1회 실전 모의고사 풀이 및 취약 영역 집중 보완으로 실력을 검증합니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">EBS</span>EBS 수능특강 문학·독서 전 지문 분석</li>
+              <li><span class="topic-cat">고전</span>고전시가·고전산문 전 범위 수능형 학습</li>
+              <li><span class="topic-cat">논술</span>연세대·고려대·성균관대 등 논술 유형 분석</li>
+              <li><span class="topic-cat">논술</span>논술 개요 작성 → 완성 논술문 → 첨삭</li>
+              <li><span class="topic-cat">모의</span>실전 모의고사 풀이 및 영역별 오답 분석</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 수</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">150분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 6~10명</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고등학교 2학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-h2 -->
+
+      <!-- 고3 정규 -->
+      <div id="l3-h3" data-panel-group="l3-h-reg" class="cur-panel-l3">
+        <div class="section-intro fade-up">
+          <span class="section-tag">High School · Grade 3 · 정규</span>
+          <h2>수능 완성·논술 완성반</h2>
+          <p>실전 모의고사와 대학별 논술 기출로 수능과 수시를 최종 완성합니다. 1등급을 향한 마지막 담금질을 함께합니다.</p>
+        </div>
+        <div class="cur-img-area fade-up">
+          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+        </div>
+        <div class="feature-grid fade-up">
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">실전 모의고사</div><div class="feature-desc">주 1회 실전 모의고사 풀이와 심층 해설로 실전 감각을 극대화합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">대학별 논술 완성</div><div class="feature-desc">목표 대학별 논술 기출을 완전 분석하고 실전 수준의 논술문을 완성합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">EBS 100% 대비</div><div class="feature-desc">EBS 수능완성 전 작품을 수능 직전까지 완전히 소화합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">1:1 개인 첨삭</div><div class="feature-desc">논술·서술형 답안을 개인별로 첨삭하여 실점 요인을 제거합니다.</div></div>
+        </div>
+        <div class="course-detail-grid fade-up">
+          <div class="course-topics">
+            <h3>주요 학습 내용</h3>
+            <ul class="topic-list">
+              <li><span class="topic-cat">실전</span>수능 전 영역 실전 풀이 및 심층 해설</li>
+              <li><span class="topic-cat">논술</span>연세대·고려대·성균관대·한양대 등 기출 분석</li>
+              <li><span class="topic-cat">EBS</span>EBS 수능완성 작품 전수 분석 (수능 직전)</li>
+              <li><span class="topic-cat">첨삭</span>1:1 논술·서답형 개인 첨삭 및 피드백</li>
+              <li><span class="topic-cat">파이널</span>수능 D-100 집중 파이널 과정 운영</li>
+            </ul>
+          </div>
+          <div class="course-schedule">
+            <div class="sched-card">
+              <h3>수업 안내</h3>
+              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 수 · 금</span></div>
+              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">150분</span></div>
+              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">집중 소그룹</span></div>
+              <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고등학교 3학년</span></div>
+            </div>
+            <div class="sched-note"><strong>📌 입반 안내</strong>수능 목표 등급 상담 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
+          </div>
+        </div>
+      </div><!-- /l3-h3 -->
+    </div><!-- /l2-h-reg -->
+
+    <!-- 고등 내신 -->
+    <div id="l2-h-naesin" data-panel-group="l2-high" class="cur-panel-l2">
+      <div class="section-intro fade-up">
+        <span class="section-tag">High School · 내신 대비</span>
+        <h2>내신 완성반</h2>
+        <div class="naesin-badge">📚 고1 · 고2 · 고3 공통 과정</div>
+        <p>전국 주요 고등학교 내신 자료와 정밀한 기출 분석으로 내신 1등급을 달성합니다. 정기고사 8주 전 집중 개강하여 체계적으로 준비합니다.</p>
+      </div>
+      <div class="cur-img-area fade-up">
+        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+        <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+      </div>
+      <div class="feature-grid fade-up">
+        <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">학교별 맞춤 자료</div><div class="feature-desc">안산·시흥 지역 주요 고등학교별 전용 내신 자료를 제공합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">수행평가 완전 대비</div><div class="feature-desc">독서 감상문·발표·토론 등 수행평가 유형별 맞춤 지도를 제공합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">서술형 집중 훈련</div><div class="feature-desc">배점이 높은 서술형·논술형 문항을 집중 훈련하여 실점을 완전히 방지합니다.</div></div>
+        <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">기출 완전 정복</div><div class="feature-desc">최근 3~5년 기출 전 문제를 완전히 분석하고 출제 경향을 정확히 예측합니다.</div></div>
+      </div>
+      <div class="course-detail-grid fade-up">
+        <div class="course-topics">
+          <h3>주요 학습 내용</h3>
+          <ul class="topic-list">
+            <li><span class="topic-cat">분석</span>학교별 교과서 전 범위 완전 분석 및 요약</li>
+            <li><span class="topic-cat">출제</span>담당 교사 출제 경향 완전 파악 및 반영</li>
+            <li><span class="topic-cat">수행</span>수행평가 — 독서 감상문·발표·포트폴리오</li>
+            <li><span class="topic-cat">서술형</span>서술형·논술형 답안 작성 패턴 완성</li>
+            <li><span class="topic-cat">기출</span>최근 3~5년 기출 전 문제 완전 정복</li>
+          </ul>
+        </div>
+        <div class="course-schedule">
+          <div class="sched-card">
+            <h3>수업 안내</h3>
+            <div class="sched-row"><span class="sched-label">개강 시점</span><span class="sched-val">정기고사 8주 전</span></div>
+            <div class="sched-row"><span class="sched-label">수업 횟수</span><span class="sched-val">주 3~4회</span></div>
+            <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">100분</span></div>
+            <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고1 · 고2 · 고3</span></div>
+          </div>
+          <div class="sched-note"><strong>📌 내신 일정 안내</strong>개강일은 학교 시험 일정에 따라 조정됩니다. 카카오톡 채널에서 내신 개강 공지를 확인하세요.</div>
+        </div>
+      </div>
+    </div><!-- /l2-h-naesin -->
+  </div><!-- /l1-high -->
+
+</div><!-- /container -->
 </main>
 
 <footer>
@@ -450,43 +753,55 @@
 </footer>
 
 <script>
-const hamburger = document.getElementById('hamburger');
-const fsOverlay = document.getElementById('fsOverlay');
-const fsClose   = document.getElementById('fsClose');
-function openFsMenu()  { fsOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
-function closeFsMenu() { fsOverlay.classList.remove('open'); document.body.style.overflow = ''; }
-hamburger.addEventListener('click', openFsMenu);
-fsClose.addEventListener('click', closeFsMenu);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
-window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+  /* ── NAV ── */
+  const hamburger = document.getElementById('hamburger');
+  const fsOverlay = document.getElementById('fsOverlay');
+  const fsClose   = document.getElementById('fsClose');
+  function openFsMenu()  { fsOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+  function closeFsMenu() { fsOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', openFsMenu);
+  fsClose.addEventListener('click', closeFsMenu);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
+  window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
 
-// Tab switching
-const TAB_ORDER = ['elem', 'middle', 'high'];
-function activateTab(tab) {
-  document.querySelectorAll('.cur-d1-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  document.querySelectorAll('.cur-panel').forEach(p => {
-    const isActive = p.id === 'panel-' + tab;
-    p.classList.toggle('active', isActive);
-    if (isActive) p.classList.add('visible');
+  /* ── GENERIC TAB SWITCHER ──
+     Each button: data-tab-group="groupName" data-tab-target="panelId"
+     Each panel:  data-panel-group="groupName" id="panelId"
+  */
+  function switchTab(group, targetId) {
+    document.querySelectorAll(`[data-tab-group="${group}"]`).forEach(b => b.classList.remove('active'));
+    const btn = document.querySelector(`[data-tab-group="${group}"][data-tab-target="${targetId}"]`);
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll(`[data-panel-group="${group}"]`).forEach(p => {
+      const isActive = p.id === targetId;
+      p.classList.toggle('active', isActive);
+    });
+    // Observe newly visible fade-up elements
+    document.querySelectorAll(`#${targetId} .fade-up`).forEach(el => io.observe(el));
+  }
+
+  document.querySelectorAll('[data-tab-target]').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tabGroup, btn.dataset.tabTarget));
   });
-  const url = new URL(location.href);
-  url.searchParams.set('tab', tab);
-  history.replaceState(null, '', url);
-}
 
-document.querySelectorAll('.cur-d1-btn').forEach(btn => {
-  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
-});
+  /* ── URL PARAM → main tab ── */
+  const urlTab = new URLSearchParams(location.search).get('tab');
+  const tabMap = { elem: 'l1-elem', middle: 'l1-middle', high: 'l1-high' };
+  const initL1 = tabMap[urlTab] || 'l1-elem';
 
-// Read URL param
-const urlTab = new URLSearchParams(location.search).get('tab');
-activateTab(TAB_ORDER.includes(urlTab) ? urlTab : 'elem');
+  // Initialise all default sub-tab states first (before activating l1)
+  switchTab('l2-elem',    'l2-e5');
+  switchTab('l2-middle',  'l2-m-reg');
+  switchTab('l3-m-reg',   'l3-m1');
+  switchTab('l2-high',    'l2-h-reg');
+  switchTab('l3-h-reg',   'l3-h1');
+  switchTab('l1',         initL1);
 
-// Fade-up animation
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  /* ── FADE-UP OBSERVER ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
