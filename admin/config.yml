@@ -28,23 +28,40 @@ collections:
             collapsed: true
             fields:
               - { label: 제목, name: title, widget: string }
-              - { label: "날짜 (예: 2026-06-10)", name: date, widget: string }
-              - { label: "마감일 (신청 종료일, 예: 2026-06-09)", name: deadline, widget: string }
-              - { label: 장소, name: location, widget: string }
+              - { label: "날짜 (설명회 당일, 예: 2026-06-10)", name: date, widget: string }
               - { label: "시간 (예: 오후 7:00 ~ 9:00)", name: time, widget: string, required: false }
+              - { label: 장소, name: location, widget: string }
               - { label: "대상 (예: 고등학생 학부모)", name: target, widget: string, required: false }
               - { label: "정원 (예: 선착순 50명)", name: capacity, widget: string, required: false }
-              - label: 포스터 이미지
-                name: poster
-                widget: image
-                required: false
-              - { label: 상세 내용, name: content, widget: text }
-              - { label: 일정 캘린더에 표시, name: show_in_calendar, widget: boolean, default: true }
               - label: "지점 선택"
                 name: branch
                 widget: select
                 options: [고잔점, 자이점, 하이퍼관, 전체]
                 required: false
+              - label: "신청 마감 일시 (예: 2026-06-10 17:00 → 설명회 시작 2시간 전 권장)"
+                name: deadline_datetime
+                widget: string
+                required: false
+                hint: "형식: YYYY-MM-DD HH:MM (예: 2026-06-10 17:00). 비워두면 설명회 당일까지 신청 가능."
+              - label: "상태 (비워두면 마감 일시 기준으로 자동 결정)"
+                name: status
+                widget: select
+                options: [신청 예정, 신청 중, 신청 마감, 종료]
+                required: false
+              - label: "목록 썸네일 이미지 (설명회 목록 카드에 표시되는 대표 사진)"
+                name: thumbnail
+                widget: image
+                required: false
+              - label: "히어로 배경 이미지 (상세 페이지 상단 배경)"
+                name: poster
+                widget: image
+                required: false
+              - label: "포스터 이미지 (상세 페이지 본문 안에 표시)"
+                name: poster_image
+                widget: image
+                required: false
+              - { label: 상세 내용, name: content, widget: text }
+              - { label: 일정 캘린더에 표시, name: show_in_calendar, widget: boolean, default: true }
 
   - name: notices
     label: 공지사항

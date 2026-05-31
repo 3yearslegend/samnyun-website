@@ -72,6 +72,15 @@
 
     .content-section h2 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1.5px solid var(--black); }
     .content-body { font-size: 15px; line-height: 2; color: var(--gray-dark); white-space: pre-wrap; }
+    .poster-image-wrap { margin-bottom: 28px; text-align: center; }
+    .poster-image-wrap img { max-width: 100%; border-radius: 10px; box-shadow: 0 4px 24px rgba(0,0,0,0.12); display: block; margin: 0 auto; }
+    /* ENDED state */
+    .ended-notice { background: #f5f5f5; border: 1.5px solid #ddd; border-radius: 12px; padding: 36px 28px; text-align: center; }
+    .ended-notice .ended-icon { width: 52px; height: 52px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .ended-notice h3 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: #555; margin-bottom: 10px; }
+    .ended-notice p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
+    .ended-notice a { display: inline-block; padding: 11px 24px; border: 1.5px solid #bbb; border-radius: 8px; font-size: 13px; font-weight: 600; color: #555; text-decoration: none; transition: all 0.18s; }
+    .ended-notice a:hover { border-color: var(--red); color: var(--red); }
 
     /* ===== RIGHT: STICKY FORM ===== */
     .form-sticky-wrap { position: sticky; top: calc(var(--nav-h) + 24px); }
@@ -288,6 +297,7 @@
 
       <div class="content-section fade-up">
         <h2>상세 안내</h2>
+        <div class="poster-image-wrap" id="posterImageWrap" style="display:none;"></div>
         <div class="content-body" id="contentBody"></div>
       </div>
     </div>
@@ -434,19 +444,50 @@
     const [y, m, d] = str.split('-').map(Number);
     return new Date(y, m - 1, d);
   }
+  function parseDatetime(str) {
+    if (!str) return null;
+    const s = str.trim().replace('T', ' ');
+    const [datePart, timePart] = s.split(' ');
+    const [y, m, d] = datePart.split('-').map(Number);
+    let h = 0, min = 0;
+    if (timePart) { [h, min] = timePart.split(':').map(Number); }
+    return new Date(y, m - 1, d, h || 0, min || 0, 0, 0);
+  }
   function formatDate(str) {
     if (!str) return '';
     const d = parseDate(str);
     const dow = ['일','월','화','수','목','금','토'][d.getDay()];
     return `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${dow})`;
   }
-  function getStatusLabel(open, close) {
-    const today = new Date(); today.setHours(0,0,0,0);
-    const o = parseDate(open), c = parseDate(close);
-    if (!o || !c) return '';
-    if (today < o) return '신청 예정';
-    if (today > c) return '신청 마감';
-    return '신청 접수 중';
+  function formatDatetime(str) {
+    if (!str) return '추후 공지';
+    const dt = parseDatetime(str);
+    if (!dt) return str;
+    const dow = ['일','월','화','수','목','금','토'][dt.getDay()];
+    const hh = String(dt.getHours()).padStart(2, '0');
+    const mm = String(dt.getMinutes()).padStart(2, '0');
+    return `${dt.getFullYear()}년 ${dt.getMonth()+1}월 ${dt.getDate()}일 (${dow}) ${hh}:${mm}까지`;
+  }
+
+  /* ===== STATUS 자동 계산 ===== */
+  /* 수동 status 필드가 있으면 우선 사용, 없으면 시간 기반으로 자동 계산 */
+  function getEffectiveStatus(s) {
+    if (s.status) return s.status;          // 수동 설정 우선
+    const now = new Date();
+    /* 설명회 당일 자정 이후 → 종료 */
+    if (s.date) {
+      const endOfDay = parseDate(s.date);
+      if (endOfDay) {
+        endOfDay.setHours(23, 59, 59, 999);
+        if (now > endOfDay) return '종료';
+      }
+    }
+    /* 마감 일시 이후 → 신청 마감 */
+    if (s.deadline_datetime) {
+      const dl = parseDatetime(s.deadline_datetime);
+      if (dl && now > dl) return '신청 마감';
+    }
+    return '신청 중';
   }
 
   /* ===== LOAD DATA ===== */
@@ -469,7 +510,9 @@
   }
 
   function renderPage(s) {
-    /* ── 포스터 히어로 ── */
+    const effectiveStatus = getEffectiveStatus(s);
+
+    /* ── 포스터 히어로 배경 ── */
     if (s.poster) {
       const img = document.createElement('img');
       img.src = s.poster; img.alt = s.title + ' 포스터';
@@ -483,18 +526,15 @@
     document.title = s.title + ' | 삼년의 신화 국어논술학원';
 
     /* ── 정보 그리드 ── */
-    const regStatus = getStatusLabel(s.registration_open, s.registration_close);
-    const regPeriod = s.registration_open
-      ? `${s.registration_open.replace(/-/g,'.')} ~ ${(s.registration_close||'').replace(/-/g,'.')}`
-      : '추후 공지';
+    const isOpen = (effectiveStatus === '신청 중');
     const cells = [
       { label: '일시', value: formatDate(s.date) + (s.time ? ' ' + s.time : '') },
       { label: '장소', value: s.location || '추후 공지' },
       { label: '지점', value: s.branch || '전체 지점' },
       { label: '대상', value: s.target || '관심 있는 누구나' },
       { label: '정원', value: s.capacity || '별도 안내' },
-      { label: '신청 기간', value: regPeriod, highlight: regStatus === '신청 접수 중' },
-      { label: '신청 상태', value: regStatus || '확인 중', highlight: regStatus === '신청 접수 중' },
+      { label: '신청 마감', value: formatDatetime(s.deadline_datetime), highlight: isOpen },
+      { label: '신청 상태', value: effectiveStatus, highlight: isOpen },
     ];
     document.getElementById('infoGrid').innerHTML = cells.map(c =>
       `<div class="info-cell">
@@ -503,26 +543,47 @@
       </div>`
     ).join('');
 
-    /* ── 상세 내용 ── */
+    /* ── 본문 포스터 이미지 ── */
+    if (s.poster_image) {
+      const wrap = document.getElementById('posterImageWrap');
+      wrap.innerHTML = `<img src="${s.poster_image}" alt="${s.title} 포스터" loading="lazy">`;
+      wrap.style.display = '';
+    }
+
+    /* ── 상세 내용 텍스트 ── */
     document.getElementById('contentBody').textContent = s.content || '';
 
-    /* ── 신청 폼 숨김 제목 ── */
+    /* ── 신청 폼 숨김 필드 ── */
     document.getElementById('sf-seminarTitle').value = s.title;
     currentBranch = s.branch || '';
     document.getElementById('sf-branchHidden').value = currentBranch;
 
-    /* ── 신청 기간 체크 → 폼 조건부 표시 ── */
-    const today = new Date(); today.setHours(0,0,0,0);
-    const regOpen  = parseDate(s.registration_open);
-    const regClose = parseDate(s.registration_close);
+    /* ── 상태별 폼 처리 ── */
     const formWrap = document.querySelector('.form-sticky-wrap');
+    const mobileCta = document.getElementById('mobileCta');
+    const mobileCtatBtn = document.getElementById('mobileCtatBtn');
 
-    if (regClose && today > regClose) {
+    if (effectiveStatus === '종료') {
+      /* 종료 — 신청 폼 숨기고 종료 안내 표시 */
+      formWrap.innerHTML = `
+        <div class="ended-notice">
+          <div class="ended-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3>종료된 설명회입니다</h3>
+          <p>이 설명회는 이미 종료되었습니다.<br>다음 설명회 일정을 확인해 보세요.</p>
+          <a href="news-seminar.html">설명회 목록 보기</a>
+        </div>`;
+      mobileCta.style.display = '';
+      mobileCtatBtn.textContent = '설명회 목록 보기 →';
+      mobileCtatBtn.href = 'news-seminar.html';
+
+    } else if (effectiveStatus === '신청 마감') {
       formWrap.innerHTML = `
         <div class="form-card">
           <div class="form-card-head" style="background:#555;">
             <h3>신청이 마감되었습니다</h3>
-            <p>이 설명회의 신청 기간이 종료되었습니다.</p>
+            <p>이 설명회의 신청이 종료되었습니다.</p>
           </div>
           <div class="form-card-body" style="text-align:center;padding:36px 28px;">
             <p style="color:var(--gray);font-size:15px;line-height:1.8;margin-bottom:24px;">
@@ -533,16 +594,17 @@
             </a>
           </div>
         </div>`;
-      document.getElementById('mobileCta').style.display = '';
-      document.getElementById('mobileCtatBtn').textContent = '설명회 목록 보기 →';
-      document.getElementById('mobileCtatBtn').href = 'news-seminar.html';
-    } else if (regOpen && today < regOpen) {
-      const openStr = s.registration_open.replace(/-/g, '.');
+      mobileCta.style.display = '';
+      mobileCtatBtn.textContent = '설명회 목록 보기 →';
+      mobileCtatBtn.href = 'news-seminar.html';
+
+    } else if (effectiveStatus === '신청 예정') {
+      const dlStr = s.deadline_datetime ? s.deadline_datetime.slice(0, 10).replace(/-/g, '.') : '';
       formWrap.innerHTML = `
         <div class="form-card">
           <div class="form-card-head" style="background:#E65100;">
             <h3>신청 예정</h3>
-            <p>${openStr}부터 신청 가능합니다.</p>
+            <p>${dlStr ? dlStr + '부터 신청 가능합니다.' : '곧 신청이 시작됩니다.'}</p>
           </div>
           <div class="form-card-body" style="text-align:center;padding:36px 28px;">
             <p style="color:var(--gray);font-size:15px;line-height:1.8;">
@@ -554,8 +616,10 @@
             </a>
           </div>
         </div>`;
+
     } else {
-      document.getElementById('mobileCta').style.display = '';
+      /* 신청 중 — 폼 표시 */
+      mobileCta.style.display = '';
     }
 
     /* ── 페이지 표시 ── */
@@ -565,8 +629,11 @@
 
   /* ===== MOBILE CTA SCROLL ===== */
   document.getElementById('mobileCtatBtn').addEventListener('click', e => {
+    const href = document.getElementById('mobileCtatBtn').getAttribute('href');
+    if (href && href !== '#seminarForm') return; // 목록 링크면 그냥 이동
     e.preventDefault();
-    document.getElementById('seminarForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const form = document.getElementById('seminarForm');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   /* ===== FORM LOGIC ===== */
