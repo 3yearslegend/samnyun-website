@@ -315,25 +315,25 @@
     .htl-card-title { font-size: 13px; font-weight: 700; color: #1c1c1c; line-height: 1.45; }
     .htl-card-desc { font-size: 11.5px; color: #999; margin-top: 5px; line-height: 1.4; }
 
-    /* END node — spans both grid rows */
+    /* END node — content sits in the bottom half, below the center line */
     .htl-node.htl-end { width: 260px; }
-    .htl-end-wrap {
-      grid-row: 1 / 3;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; padding: 20px 16px;
-      position: relative; z-index: 2;
+    .htl-node.htl-end .htl-top { justify-content: flex-end; /* empty top half */ }
+    .htl-node.htl-end .htl-bot {
+      justify-content: flex-start;
+      align-items: center; text-align: center;
+      padding-top: 22px;
     }
     .htl-end-ring {
-      width: 54px; height: 54px; border-radius: 50%;
+      width: 48px; height: 48px; border-radius: 50%;
       border: 2px dashed var(--red);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       animation: spinSlow 14s linear infinite;
+      flex-shrink: 0;
     }
     @keyframes spinSlow { to { transform: rotate(360deg); } }
     .htl-end-ring-dot {
-      width: 18px; height: 18px; border-radius: 50%;
+      width: 16px; height: 16px; border-radius: 50%;
       background: var(--red);
     }
     .htl-end-title {
@@ -449,8 +449,8 @@
       }
       .htl-inline .htl-card { width: 100%; max-width: 360px; border-radius: 10px; }
       .htl-node.htl-end { width: 100%; }
-      .htl-end-wrap { align-items: flex-start; text-align: left; padding: 0; }
-      .htl-end-ring { width: 44px; height: 44px; margin-bottom: 12px; }
+      .htl-node.htl-end .htl-bot { display: flex !important; align-items: flex-start; text-align: left; padding-top: 0; }
+      .htl-end-ring { width: 40px; height: 40px; margin-bottom: 10px; }
 
       .footer-top { grid-template-columns: 1fr; gap: 28px; }
       .footer-inner { padding: 0 20px; }
@@ -548,7 +548,8 @@
       <!-- End node (static, always last) -->
       <div class="htl-node htl-end" id="htlEndNode">
         <div class="htl-dot" style="background:#555; box-shadow: 0 0 0 2.5px #555;"></div>
-        <div class="htl-end-wrap">
+        <div class="htl-top"></div>
+        <div class="htl-bot">
           <div class="htl-end-ring">
             <div class="htl-end-ring-dot"></div>
           </div>
