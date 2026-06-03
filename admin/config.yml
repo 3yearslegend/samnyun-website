@@ -61,6 +61,14 @@ collections:
                 widget: image
                 required: false
               - { label: 상세 내용, name: content, widget: text }
+              - label: "메인 캐러셀에 표시 (체크하면 메인 페이지 슬라이드에 자동 노출)"
+                name: show_in_carousel
+                widget: boolean
+                default: false
+              - label: "캐러셀 배경 이미지 (비워두면 포스터 이미지 사용)"
+                name: carousel_image
+                widget: image
+                required: false
               - { label: 일정 캘린더에 표시, name: show_in_calendar, widget: boolean, default: true }
 
   - name: notices

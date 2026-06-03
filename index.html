@@ -129,6 +129,17 @@
     .slide-1 .hero-slide-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 40%, #0a0a0a 100%); }
     .slide-2 .hero-slide-bg { background: linear-gradient(135deg, #0f0808 0%, #1e0b0b 40%, #300f0f 100%); }
     .slide-3 .hero-slide-bg { background: linear-gradient(135deg, #08080f 0%, #0b0b1e 40%, #10102e 100%); }
+    .hero-slide-seminar .hero-slide-bg { background: linear-gradient(135deg, #0a0005 0%, #1a000a 40%, #0d0008 100%); }
+    .hero-seminar-bg-img {
+      position: absolute; inset: 0; z-index: 1;
+      background: center/cover no-repeat;
+      opacity: 0.28;
+    }
+    .hero-seminar-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 100%);
+    }
+    .hero-slide-seminar .hero-inner { z-index: 3; }
 
     /* Arrows */
     .hero-arrow {
@@ -1009,20 +1020,23 @@
   /* ---- Hero carousel ---- */
   const heroTrack = document.getElementById('heroTrack');
   const heroDotsEl = document.getElementById('heroDots');
-  const heroSlides = heroTrack.querySelectorAll('.hero-slide');
+  let heroSlides = Array.from(heroTrack.querySelectorAll('.hero-slide'));
   let heroIdx = 0;
   let heroTimer;
 
-  heroSlides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
-    dot.addEventListener('click', () => goHero(i));
-    heroDotsEl.appendChild(dot);
-  });
+  function buildHeroDots() {
+    heroDotsEl.innerHTML = '';
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'hero-dot' + (i === heroIdx ? ' active' : '');
+      dot.setAttribute('aria-label', `슬라이드 ${i + 1}`);
+      dot.addEventListener('click', () => goHero(i));
+      heroDotsEl.appendChild(dot);
+    });
+  }
 
   function goHero(idx) {
-    heroIdx = (idx + heroSlides.length) % heroSlides.length;
+    heroIdx = ((idx % heroSlides.length) + heroSlides.length) % heroSlides.length;
     heroTrack.style.transform = `translateX(-${heroIdx * 100}%)`;
     heroDotsEl.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIdx));
     resetHeroTimer();
@@ -1033,45 +1047,79 @@
     heroTimer = setInterval(() => goHero(heroIdx + 1), 4000);
   }
 
+  buildHeroDots();
   document.getElementById('heroPrev').addEventListener('click', () => goHero(heroIdx - 1));
   document.getElementById('heroNext').addEventListener('click', () => goHero(heroIdx + 1));
-
   heroTrack.addEventListener('mouseenter', () => clearInterval(heroTimer));
   heroTrack.addEventListener('mouseleave', resetHeroTimer);
-
   resetHeroTimer();
 
-  /* ---- Load carousel data from CMS ---- */
-  fetch('data/carousel.json')
-    .then(r => r.json())
-    .then(data => {
-      (data.slides || []).forEach((s, i) => {
-        const slide = heroSlides[i];
-        if (!slide) return;
-        const tagEl = slide.querySelector('.hero-tag');
-        const h1El = slide.querySelector('.hero-h1');
-        const h2El = slide.querySelector('.hero-h2');
-        const btns = slide.querySelector('.hero-buttons');
-        if (tagEl) tagEl.textContent = s.tag;
-        if (h1El) {
-          let html = s.title.replace(/\n/g, '<br>');
-          if (s.title_highlight) html = html.replace(s.title_highlight, `<span style="color:var(--red)">${s.title_highlight}</span>`);
-          h1El.innerHTML = html;
-        }
-        if (h2El) {
-          let html = s.subtitle.replace(/\n/g, '<br>');
-          if (s.subtitle_highlight) html = html.replace(s.subtitle_highlight, `<em>${s.subtitle_highlight}</em>`);
-          h2El.innerHTML = html;
-        }
-        if (btns) {
-          const btn1 = btns.querySelector('.btn-primary');
-          const btn2 = btns.querySelector('.btn-outline');
-          if (btn1 && s.btn1_text) { btn1.textContent = s.btn1_text; if (s.btn1_link) btn1.setAttribute('href', s.btn1_link); }
-          if (btn2 && s.btn2_text) { btn2.textContent = s.btn2_text; if (s.btn2_link) btn2.setAttribute('href', s.btn2_link); }
-        }
-      });
-    })
-    .catch(() => {});
+  /* ---- Load carousel + seminar data ---- */
+  function fmtSeminarDate(str) {
+    if (!str) return '';
+    const [y, m, d] = str.split('-');
+    return `${y}년 ${parseInt(m)}월 ${parseInt(d)}일`;
+  }
+
+  Promise.all([
+    fetch('data/carousel.json').then(r => r.json()).catch(() => ({ slides: [] })),
+    fetch('data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
+  ]).then(([carouselData, seminarData]) => {
+    /* Update existing static slides with CMS content */
+    (carouselData.slides || []).forEach((s, i) => {
+      const slide = heroSlides[i];
+      if (!slide) return;
+      const tagEl = slide.querySelector('.hero-tag');
+      const h1El  = slide.querySelector('.hero-h1');
+      const h2El  = slide.querySelector('.hero-h2');
+      const btns  = slide.querySelector('.hero-buttons');
+      if (tagEl) tagEl.textContent = s.tag;
+      if (h1El) {
+        let html = s.title.replace(/\n/g, '<br>');
+        if (s.title_highlight) html = html.replace(s.title_highlight, `<span style="color:var(--red)">${s.title_highlight}</span>`);
+        h1El.innerHTML = html;
+      }
+      if (h2El) {
+        let html = s.subtitle.replace(/\n/g, '<br>');
+        if (s.subtitle_highlight) html = html.replace(s.subtitle_highlight, `<em>${s.subtitle_highlight}</em>`);
+        h2El.innerHTML = html;
+      }
+      if (btns) {
+        const btn1 = btns.querySelector('.btn-primary');
+        const btn2 = btns.querySelector('.btn-outline');
+        if (btn1 && s.btn1_text) { btn1.textContent = s.btn1_text; if (s.btn1_link) btn1.setAttribute('href', s.btn1_link); }
+        if (btn2 && s.btn2_text) { btn2.textContent = s.btn2_text; if (s.btn2_link) btn2.setAttribute('href', s.btn2_link); }
+      }
+    });
+
+    /* Inject seminar slides */
+    const allSeminars = seminarData.seminars || [];
+    const toShow = allSeminars.filter(s => s.show_in_carousel);
+    toShow.forEach(s => {
+      const semIdx = allSeminars.indexOf(s);
+      const bgSrc = s.carousel_image || s.poster || '';
+      const el = document.createElement('div');
+      el.className = 'hero-slide hero-slide-seminar';
+      el.innerHTML =
+        `<div class="hero-slide-bg"></div>` +
+        (bgSrc ? `<div class="hero-seminar-bg-img" style="background-image:url('${bgSrc}')"></div>` : '') +
+        `<div class="hero-seminar-overlay"></div>` +
+        `<div class="hero-inner">` +
+          `<div class="hero-tag">입시 설명회</div>` +
+          `<h1 class="hero-h1">${s.title}</h1>` +
+          `<h2 class="hero-h2">${fmtSeminarDate(s.date)}${s.time ? ' &nbsp;·&nbsp; ' + s.time : ''}<br>${s.location}</h2>` +
+          `<div class="hero-buttons">` +
+            `<a href="news-seminar-detail.html?idx=${semIdx}" class="btn-primary">자세히 보기 →</a>` +
+          `</div>` +
+        `</div>`;
+      heroTrack.appendChild(el);
+      heroSlides.push(el);
+    });
+
+    if (toShow.length > 0) {
+      buildHeroDots();
+    }
+  });
 
   /* ---- Netlify Identity redirect ---- */
   if (window.netlifyIdentity) {
