@@ -250,6 +250,11 @@ collections:
               - { label: 주소, name: address, widget: string }
               - { label: 운영시간, name: hours, widget: string }
               - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: "지도 캡처 이미지 (업로드하면 지점 안내 페이지에 표시)"
+                name: mapImage
+                widget: image
+                required: false
+                hint: "네이버 지도 캡처 화면을 업로드하세요. 클릭하면 네이버 지도로 연결됩니다."
               - label: 사진 목록
                 name: photos
                 widget: list
@@ -264,6 +269,11 @@ collections:
               - { label: 주소, name: address, widget: string }
               - { label: 운영시간, name: hours, widget: string }
               - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: "지도 캡처 이미지 (업로드하면 지점 안내 페이지에 표시)"
+                name: mapImage
+                widget: image
+                required: false
+                hint: "네이버 지도 캡처 화면을 업로드하세요. 클릭하면 네이버 지도로 연결됩니다."
               - label: 사진 목록
                 name: photos
                 widget: list
@@ -278,6 +288,11 @@ collections:
               - { label: 주소, name: address, widget: string }
               - { label: 운영시간, name: hours, widget: string }
               - { label: 네이버 지도 URL, name: naverMapUrl, widget: string }
+              - label: "지도 캡처 이미지 (업로드하면 지점 안내 페이지에 표시)"
+                name: mapImage
+                widget: image
+                required: false
+                hint: "네이버 지도 캡처 화면을 업로드하세요. 클릭하면 네이버 지도로 연결됩니다."
               - label: 사진 목록
                 name: photos
                 widget: list

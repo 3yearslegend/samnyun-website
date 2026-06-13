@@ -67,10 +67,14 @@
     .branch-section-header h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 700; }
 
     /* MAP + INFO */
-    .branch-map-wrap { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--gray-light); margin-bottom: 0; }
-    .branch-map-iframe { width: 100%; height: 360px; border: none; display: block; }
-    .branch-map-fallback { display: none; width: 100%; height: 360px; background: var(--gray-light); align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: var(--gray); }
-    .branch-map-fallback span { font-size: 48px; }
+    .branch-map-img-link { display: block; position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); background: var(--gray-light); text-decoration: none; aspect-ratio: 16/9; }
+    .branch-map-img-link:hover .branch-map-img { transform: scale(1.03); }
+    .branch-map-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+    .branch-map-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 220px; gap: 10px; color: var(--gray); }
+    .branch-map-placeholder span { font-size: 44px; opacity: 0.3; }
+    .branch-map-placeholder p { font-size: 14px; color: var(--gray); }
+    .branch-map-overlay-btn { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); background: #03C75A; color: #fff; padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 3px 14px rgba(0,0,0,0.22); transition: opacity 0.2s; }
+    .branch-map-img-link:hover .branch-map-overlay-btn { opacity: 0.88; }
     .branch-body { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; margin-bottom: 40px; }
     .branch-map-col { }
     .branch-info-col { }
@@ -83,7 +87,7 @@
     .naver-map-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 20px; background: #03C75A; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: 600; transition: opacity 0.2s, transform 0.15s; }
     .naver-map-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .naver-map-btn svg { width: 16px; height: 16px; fill: currentColor; }
-    @media (max-width: 768px) { .branch-body { grid-template-columns: 1fr; } .branch-map-iframe { height: 280px; } }
+    @media (max-width: 768px) { .branch-body { grid-template-columns: 1fr; } }
 
     /* Photo slider */
     .branch-photos { }
@@ -276,11 +280,14 @@
       </div>
       <div class="branch-body">
         <div class="branch-map-col">
-          <div class="branch-map-wrap">
-            <iframe class="branch-map-iframe"
-              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130"
-              title="고잔점 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
-          </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130" target="_blank" rel="noopener" class="branch-map-img-link" id="map-link-gojan">
+            <img src="" class="branch-map-img" id="map-img-gojan" alt="고잔점 지도" style="display:none">
+            <div class="branch-map-placeholder" id="map-ph-gojan">
+              <span>🗺️</span>
+              <p>지도 이미지 준비 중</p>
+            </div>
+            <div class="branch-map-overlay-btn">🗺 네이버 지도에서 보기</div>
+          </a>
         </div>
         <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
@@ -320,11 +327,14 @@
       </div>
       <div class="branch-body">
         <div class="branch-map-col">
-          <div class="branch-map-wrap">
-            <iframe class="branch-map-iframe"
-              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026"
-              title="자이점 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
-          </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026" target="_blank" rel="noopener" class="branch-map-img-link" id="map-link-zai">
+            <img src="" class="branch-map-img" id="map-img-zai" alt="자이점 지도" style="display:none">
+            <div class="branch-map-placeholder" id="map-ph-zai">
+              <span>🗺️</span>
+              <p>지도 이미지 준비 중</p>
+            </div>
+            <div class="branch-map-overlay-btn">🗺 네이버 지도에서 보기</div>
+          </a>
         </div>
         <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
@@ -364,11 +374,14 @@
       </div>
       <div class="branch-body">
         <div class="branch-map-col">
-          <div class="branch-map-wrap">
-            <iframe class="branch-map-iframe"
-              src="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080"
-              title="하이퍼관 지도" loading="lazy" referrerpolicy="no-referrer"></iframe>
-          </div>
+          <a href="https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080" target="_blank" rel="noopener" class="branch-map-img-link" id="map-link-hyper">
+            <img src="" class="branch-map-img" id="map-img-hyper" alt="하이퍼관 지도" style="display:none">
+            <div class="branch-map-placeholder" id="map-ph-hyper">
+              <span>🗺️</span>
+              <p>지도 이미지 준비 중</p>
+            </div>
+            <div class="branch-map-overlay-btn">🗺 네이버 지도에서 보기</div>
+          </a>
         </div>
         <div class="branch-info-col">
           <h3>찾아오시는 방법</h3>
@@ -501,6 +514,15 @@
     .then(data => {
       ['gojan','zai','hyper'].forEach(id => {
         if (data[id] && data[id].photos) buildSlider('slider-' + id, data[id].photos);
+        if (data[id] && data[id].mapImage) {
+          const img = document.getElementById('map-img-' + id);
+          const ph  = document.getElementById('map-ph-' + id);
+          if (img && ph) { img.src = data[id].mapImage; img.style.display = 'block'; ph.style.display = 'none'; }
+        }
+        if (data[id] && data[id].naverMapUrl) {
+          const link = document.getElementById('map-link-' + id);
+          if (link) link.href = data[id].naverMapUrl;
+        }
       });
     })
     .catch(() => {});

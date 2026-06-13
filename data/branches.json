@@ -5,6 +5,7 @@
     "address": "경기 안산시 단원구 광덕대로 130 폴리타운 B동 6~7층",
     "hours": "월~금 14:00~20:00 / 토 10:00~15:00 / 일 휴무",
     "naverMapUrl": "https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EB%8B%A8%EC%9B%90%EA%B5%AC%20%EA%B4%91%EB%8D%95%EB%8C%80%EB%A1%9C%20130",
+    "mapImage": "",
     "photos": []
   },
   "zai": {
@@ -13,6 +14,7 @@
     "address": "경기 안산시 상록구 해양4로 26 자이센터프라자 1006호~1008호",
     "hours": "월~금 14:00~20:00 / 토 10:00~15:00 / 일 휴무",
     "naverMapUrl": "https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%ED%95%B4%EC%96%954%EB%A1%9C%2026",
+    "mapImage": "",
     "photos": []
   },
   "hyper": {
@@ -21,6 +23,7 @@
     "address": "경기 안산시 상록구 충장로 80 101호",
     "hours": "월~금 15:00~20:00 / 토 10:00~14:00 / 일 휴무",
     "naverMapUrl": "https://map.naver.com/v5/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%83%81%EB%A1%9D%EA%B5%AC%20%EC%B6%A9%EC%9E%A5%EB%A1%9C%2080",
+    "mapImage": "",
     "photos": []
   }
 }
