@@ -1,21 +1,21 @@
 {
   "admissions": [
-    {"year": "2026", "school": "경안고", "name": "조O석", "university": "국민대학교", "department": "전자공학과"},
-    {"year": "2026", "school": "경안고", "name": "조O석", "university": "한양대 에리카", "department": "전자공학과"},
-    {"year": "2026", "school": "경안고", "name": "양O온", "university": "건국대학교", "department": "자율전공학부"},
-    {"year": "2026", "school": "안산고", "name": "김O영", "university": "중앙대학교", "department": "사학과"},
-    {"year": "2026", "school": "안산고", "name": "김O영", "university": "경희대학교", "department": "사학과"},
-    {"year": "2026", "school": "안산고", "name": "김O영", "university": "동국대학교", "department": "사학과"},
-    {"year": "2026", "school": "안산고", "name": "강O아", "university": "경희대학교", "department": "미디어학과"},
-    {"year": "2026", "school": "안산고", "name": "강O아", "university": "중앙대학교", "department": "미디어커뮤니케이션학부"},
-    {"year": "2026", "school": "초지고", "name": "한O유", "university": "한양대 에리카", "department": "글로벌문화통상학부"},
-    {"year": "2026", "school": "초지고", "name": "박O은", "university": "세종대학교", "department": "패션디자인학과"},
-    {"year": "2026", "school": "초지고", "name": "박O은", "university": "성신여자대학교", "department": "창의융합학부 예체능"},
-    {"year": "2026", "school": "초지고", "name": "조O나", "university": "서강대학교", "department": "지식융합미디어학부"},
-    {"year": "2026", "school": "원곡고", "name": "박O윤", "university": "서울시립대학교", "department": "화학공학과"},
-    {"year": "2026", "school": "원곡고", "name": "박O윤", "university": "중앙대학교", "department": "자율전공학부"},
-    {"year": "2026", "school": "고잔고", "name": "서O헌", "university": "교원대학교", "department": "초등교육과"},
-    {"year": "2026", "school": "고잔고", "name": "박O진", "university": "건국대 글로컬", "department": "에너지신소재공학과"},
-    {"year": "2026", "school": "고잔고", "name": "박O진", "university": "한국공학대학교", "department": "스마트그린신소재공학과"}
+    {"year": "2026", "school": "경안고", "name": "조O석", "university": "국민대학교", "department": "전자공학과", "university_logo": ""},
+    {"year": "2026", "school": "경안고", "name": "조O석", "university": "한양대 에리카", "department": "전자공학과", "university_logo": "https://www.hanyang.ac.kr/o/hyu_homepage-theme/images/icons/logo_global.png"},
+    {"year": "2026", "school": "경안고", "name": "양O온", "university": "건국대학교", "department": "자율전공학부", "university_logo": ""},
+    {"year": "2026", "school": "안산고", "name": "김O영", "university": "중앙대학교", "department": "사학과", "university_logo": "https://www.cau.ac.kr/cau/img/about/ui1_a_2.png"},
+    {"year": "2026", "school": "안산고", "name": "김O영", "university": "경희대학교", "department": "사학과", "university_logo": "https://www.khu.ac.kr/resources/user/_common/_img/footLogo.png"},
+    {"year": "2026", "school": "안산고", "name": "김O영", "university": "동국대학교", "department": "사학과", "university_logo": "https://www.dongguk.edu/resources/images/site/common/header_logo_color.png"},
+    {"year": "2026", "school": "안산고", "name": "강O아", "university": "경희대학교", "department": "미디어학과", "university_logo": "https://www.khu.ac.kr/resources/user/_common/_img/footLogo.png"},
+    {"year": "2026", "school": "안산고", "name": "강O아", "university": "중앙대학교", "department": "미디어커뮤니케이션학부", "university_logo": "https://www.cau.ac.kr/cau/img/about/ui1_a_2.png"},
+    {"year": "2026", "school": "초지고", "name": "한O유", "university": "한양대 에리카", "department": "글로벌문화통상학부", "university_logo": "https://www.hanyang.ac.kr/o/hyu_homepage-theme/images/icons/logo_global.png"},
+    {"year": "2026", "school": "초지고", "name": "박O은", "university": "세종대학교", "department": "패션디자인학과", "university_logo": "https://www.sejong.ac.kr/_res/sejong/_share/img/sj-common/img-logo02@2x.png"},
+    {"year": "2026", "school": "초지고", "name": "박O은", "university": "성신여자대학교", "department": "창의융합학부 예체능", "university_logo": "https://www.sungshin.ac.kr/sites/main_kor/images/common/logo.jpg"},
+    {"year": "2026", "school": "초지고", "name": "조O나", "university": "서강대학교", "department": "지식융합미디어학부", "university_logo": "https://www.sogang.ac.kr/_nuxt/Layer_1.9ed5ccdb.svg"},
+    {"year": "2026", "school": "원곡고", "name": "박O윤", "university": "서울시립대학교", "department": "화학공학과", "university_logo": "https://www.uos.ac.kr/images/kor2021/main/ft_logo.png"},
+    {"year": "2026", "school": "원곡고", "name": "박O윤", "university": "중앙대학교", "department": "자율전공학부", "university_logo": "https://www.cau.ac.kr/cau/img/about/ui1_a_2.png"},
+    {"year": "2026", "school": "고잔고", "name": "서O헌", "university": "교원대학교", "department": "초등교육과", "university_logo": "https://www.knue.ac.kr/site/eng/images/contents/cts1567_logo_img01.jpg"},
+    {"year": "2026", "school": "고잔고", "name": "박O진", "university": "건국대 글로컬", "department": "에너지신소재공학과", "university_logo": ""},
+    {"year": "2026", "school": "고잔고", "name": "박O진", "university": "한국공학대학교", "department": "스마트그린신소재공학과", "university_logo": "https://www.tukorea.ac.kr/sites/tukorea/images/common/logo_c.png"}
   ]
 }
