@@ -87,6 +87,34 @@
     @media (max-width: 640px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 400px) { .results-grid { grid-template-columns: 1fr; } }
 
+    /* ── 대입 실적 아코디언 ── */
+    .adm-year-block { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 12px; }
+    .adm-year-header { display: flex; align-items: center; gap: 14px; padding: 18px 24px; background: var(--white); cursor: pointer; user-select: none; transition: background 0.18s; }
+    .adm-year-header:hover { background: var(--red-light); }
+    .adm-year-block.open > .adm-year-header { background: var(--black); }
+    .adm-year-title { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--black); flex: 1; }
+    .adm-year-block.open > .adm-year-header .adm-year-title { color: var(--white); }
+    .adm-year-count { font-size: 12px; font-weight: 600; color: var(--gray); background: var(--gray-light); padding: 3px 11px; border-radius: 100px; white-space: nowrap; }
+    .adm-year-block.open > .adm-year-header .adm-year-count { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.55); }
+    .adm-chevron { width: 20px; height: 20px; flex-shrink: 0; transition: transform 0.25s; stroke: var(--gray); fill: none; }
+    .adm-year-block.open > .adm-year-header .adm-chevron { transform: rotate(180deg); stroke: rgba(255,255,255,0.55); }
+    .adm-year-body { display: none; border-top: 1px solid var(--border); overflow: hidden; }
+    .adm-year-block.open > .adm-year-body { display: block; }
+    .adm-table { width: 100%; border-collapse: collapse; }
+    .adm-table thead tr { background: var(--gray-light); }
+    .adm-table th { padding: 11px 20px; font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: 1.2px; text-align: left; text-transform: uppercase; }
+    .adm-table td { padding: 13px 20px; font-size: 14px; border-top: 1px solid #f0efed; vertical-align: middle; }
+    .adm-table tbody tr:hover td { background: var(--red-light); }
+    .adm-td-name { font-weight: 700; color: var(--black); white-space: nowrap; }
+    .adm-td-school { color: var(--gray); font-size: 13px; white-space: nowrap; }
+    .adm-td-univ { font-weight: 600; color: var(--black); }
+    .adm-td-dept { color: var(--gray-dark); font-size: 13px; }
+    @media (max-width: 600px) {
+      .adm-table th:nth-child(2), .adm-table td:nth-child(2) { display: none; }
+      .adm-table th, .adm-table td { padding: 10px 14px; }
+      .adm-year-header { padding: 15px 18px; }
+    }
+
     /* ── 마퀴 슬라이더 ── */
     .marquee-section { background: var(--black); padding: 60px 0; margin-top: 80px; overflow: hidden; }
     .marquee-head { max-width: 1200px; margin: 0 auto; padding: 0 40px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
@@ -256,8 +284,8 @@
         <span class="section-tag">University Admissions</span>
         <h2>대입 실적</h2>
       </div>
-      <div class="results-grid fade-up" id="resultsGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:40px 0;color:var(--gray);font-size:14px;">불러오는 중…</div>
+      <div id="admissionsContainer" class="fade-up">
+        <div style="text-align:center;padding:40px 0;color:var(--gray);font-size:14px;">불러오는 중…</div>
       </div>
     </div>
   </div>
@@ -370,26 +398,45 @@
   });
 
   /* ── ② 대입 실적 ── */
-  fetch('data/results.json').then(r => r.json()).then(d => {
-    const grid = document.getElementById('resultsGrid');
-    const list = d.results || [];
-    if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray);font-size:14px;">등록된 대입 실적이 없습니다.</div>'; return; }
-    grid.innerHTML = list.map(r => {
-      const reviewLink = (r.reviewId >= 0)
-        ? `<a href="reviews-list.html#review-${r.reviewId}" class="result-link">후기 보기 →</a>`
-        : '';
-      return `<div class="result-card">
-        <div class="result-year">${r.year || ''}</div>
-        <div class="result-univ">${r.university || ''}</div>
-        <div class="result-dept">${r.department || ''}</div>
-        <div class="result-name-row">
-          <span class="result-name">${r.name || ''}</span>
-          ${reviewLink}
+  fetch('data/admissions.json').then(r => r.json()).then(d => {
+    const container = document.getElementById('admissionsContainer');
+    const list = d.admissions || [];
+    if (!list.length) {
+      container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray);font-size:14px;">등록된 대입 실적이 없습니다.</div>';
+      return;
+    }
+    const byYear = {};
+    list.forEach(r => { const y = r.year || '미분류'; (byYear[y] = byYear[y] || []).push(r); });
+    const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
+    container.innerHTML = years.map((year, i) => {
+      const rows = byYear[year];
+      const tbody = rows.map(r => `<tr>
+        <td class="adm-td-name">${r.name || ''}</td>
+        <td class="adm-td-school">${r.school || ''}</td>
+        <td class="adm-td-univ">${r.university || ''}</td>
+        <td class="adm-td-dept">${r.department || ''}</td>
+      </tr>`).join('');
+      return `<div class="adm-year-block${i === 0 ? ' open' : ''}">
+        <div class="adm-year-header">
+          <span class="adm-year-title">${year}학년도 대입 실적</span>
+          <span class="adm-year-count">${rows.length}건</span>
+          <svg class="adm-chevron" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </div>
+        <div class="adm-year-body">
+          <table class="adm-table">
+            <thead><tr><th>이름</th><th>학교</th><th>대학</th><th>학과</th></tr></thead>
+            <tbody>${tbody}</tbody>
+          </table>
         </div>
       </div>`;
     }).join('');
-    grid.querySelectorAll('.result-card').forEach(el => io.observe(el));
-  }).catch(() => {});
+    container.querySelectorAll('.adm-year-header').forEach(h => {
+      h.addEventListener('click', () => h.closest('.adm-year-block').classList.toggle('open'));
+    });
+  }).catch(() => {
+    document.getElementById('admissionsContainer').innerHTML =
+      '<div style="text-align:center;padding:40px;color:var(--gray);font-size:14px;">데이터를 불러올 수 없습니다.</div>';
+  });
 
   /* ── ③ 마퀴 슬라이더 ── */
   let semestersData = [];
