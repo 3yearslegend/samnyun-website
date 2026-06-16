@@ -132,34 +132,34 @@
     .naesin-badge { display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; color: #BF360C; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; }
 
     /* ── 고2 수업 구성 ── */
-    .h2-class-blocks { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px 16px 0 0; overflow: hidden; }
-    .h2-class-block { background: var(--black); padding: 40px 36px; }
-    .h2-class-block + .h2-class-block { border-left: 1px solid rgba(255,255,255,0.08); }
+    .h2-class-blocks { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px 16px 0 0; overflow: hidden; border: 1.5px solid var(--border); border-bottom: none; }
+    .h2-class-block { background: #FAFAF8; padding: 40px 36px; }
+    .h2-class-block + .h2-class-block { border-left: 1.5px solid var(--border); }
     .h2-block-kicker { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-    .h2-block-name { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-    .h2-block-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+    .h2-block-name { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+    .h2-block-sub { font-size: 14px; color: var(--gray); margin-bottom: 28px; }
     .h2-block-items { display: flex; flex-direction: column; gap: 10px; }
-    .h2-block-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(255,255,255,0.07); border-radius: 10px; }
-    .h2-item-label { font-size: 15px; color: rgba(255,255,255,0.8); }
-    .h2-item-time { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); white-space: nowrap; margin-left: 12px; }
-    .h2-total-row { background: var(--red); padding: 16px 36px; display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 0 0 16px 16px; margin-bottom: 48px; }
-    .h2-total-row span { font-size: 15px; font-weight: 700; color: var(--white); }
+    .h2-block-item { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; }
+    .h2-item-label { font-size: 16px; color: var(--black); font-weight: 500; }
+    .h2-item-time { font-size: 14px; font-weight: 600; color: var(--red); white-space: nowrap; margin-left: 12px; }
+    .h2-total-row { background: var(--red); padding: 16px 36px; display: flex; align-items: center; justify-content: center; gap: 12px; border-radius: 0 0 16px 16px; margin-bottom: 52px; border: 1.5px solid var(--red); }
+    .h2-total-row span { font-size: 16px; font-weight: 700; color: var(--white); }
     .h2-total-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.45); flex-shrink: 0; }
     @media (max-width: 600px) {
       .h2-class-blocks { grid-template-columns: 1fr; }
       .h2-class-block { padding: 28px 22px; }
-      .h2-class-block + .h2-class-block { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); }
+      .h2-class-block + .h2-class-block { border-left: none; border-top: 1.5px solid var(--border); }
       .h2-block-name { font-size: 22px; }
       .h2-total-row { padding: 14px 20px; flex-wrap: wrap; gap: 8px; }
     }
     /* ── 고2 2×2 핵심 카드 ── */
-    .h2-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 48px; }
+    .h2-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 52px; }
     @media (max-width: 560px) { .h2-feature-grid { grid-template-columns: 1fr; } }
-    .h2-feature-card { background: #FAFAF8; border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .h2-feature-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 32px 28px; transition: border-color 0.2s, box-shadow 0.2s; }
     .h2-feature-card:hover { border-color: var(--red); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
-    .h2-fc-icon { font-size: 26px; margin-bottom: 12px; }
-    .h2-fc-title { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--black); margin-bottom: 8px; }
-    .h2-fc-desc { font-size: 14px; color: var(--gray); line-height: 1.85; }
+    .h2-fc-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--red-light); color: var(--red); font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+    .h2-fc-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 10px; }
+    .h2-fc-desc { font-size: 15px; color: var(--gray); line-height: 1.9; }
     /* ── 이미지 슬라이더 ── */
     .img-slider-wrap { position: relative; margin-top: 28px; }
     .img-slider { overflow: hidden; border-radius: 14px; aspect-ratio: 16/9; background: var(--gray-light); border: 2px dashed #ccc; }
@@ -180,7 +180,7 @@
     .h2-content-section.last { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .h2-section-title { font-family: var(--font-serif); font-size: clamp(22px,3vw,28px); font-weight: 700; color: var(--black); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
     .h2-section-title::before { content: ''; width: 5px; height: 28px; background: var(--red); border-radius: 3px; flex-shrink: 0; }
-    .h2-content-section p { font-size: 17px; color: var(--gray-dark); line-height: 2.2; max-width: 760px; }
+    .h2-content-section p { font-size: 18px; color: var(--gray-dark); line-height: 2.2; max-width: 760px; }
     /* ── CTA 버튼 ── */
     .cta-group { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 52px; }
     .cta-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
@@ -708,24 +708,24 @@
         <!-- 2×2 핵심 카드 -->
         <div class="h2-feature-grid fade-up">
           <div class="h2-feature-card">
-            <div class="h2-fc-icon">📖</div>
-            <div class="h2-fc-title">정규 수업</div>
-            <div class="h2-fc-desc">EBS 연계작품 및 내신 빈출 문학 심화 분석</div>
+            <div class="h2-fc-num">①</div>
+            <div class="h2-fc-title">정규수업</div>
+            <div class="h2-fc-desc">EBS 연계 문학과 내신 빈출 작품을 지문 단위로 분석하고, 비문학 독해 스킬을 익혀 직접 적용합니다.</div>
           </div>
           <div class="h2-feature-card">
-            <div class="h2-fc-icon">📝</div>
+            <div class="h2-fc-num">②</div>
             <div class="h2-fc-title">모의고사</div>
-            <div class="h2-fc-desc">매주 실전 모의고사로 실전 감각 유지</div>
+            <div class="h2-fc-desc">매주 실전 모의고사로 감각을 유지하고, 해설 강의를 통해 오답 원인을 정확히 짚습니다.</div>
           </div>
           <div class="h2-feature-card">
-            <div class="h2-fc-icon">✍️</div>
-            <div class="h2-fc-title">모고 과제 및 피드백</div>
-            <div class="h2-fc-desc">분석노트 작성 + 담당 선생님 첨삭</div>
+            <div class="h2-fc-num">③</div>
+            <div class="h2-fc-title">모의고사 분석노트 &amp; 피드백</div>
+            <div class="h2-fc-desc">분석노트 과제로 틀린 문제를 스스로 정리하고, 선생님의 첨삭과 개인별 결과지를 발송합니다.</div>
           </div>
           <div class="h2-feature-card">
-            <div class="h2-fc-icon">📚</div>
-            <div class="h2-fc-title">어휘</div>
-            <div class="h2-fc-desc">고전 시가 빈출어·사자성어 이해 기반 학습</div>
+            <div class="h2-fc-num">④</div>
+            <div class="h2-fc-title">어휘 TEST</div>
+            <div class="h2-fc-desc">고전 시가 빈출어, 사자성어 등을 이해 기반으로 학습해 실전에서 바로 활용합니다.</div>
           </div>
         </div>
 
