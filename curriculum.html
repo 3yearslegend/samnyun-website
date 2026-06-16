@@ -131,6 +131,36 @@
     /* ── NAESIN COMMON BADGE ── */
     .naesin-badge { display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; color: #BF360C; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; }
 
+    /* ── 수업 구성 비주얼 ── */
+    .class-structure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+    @media (max-width: 600px) { .class-structure-grid { grid-template-columns: 1fr; } }
+    .class-block { background: var(--black); border-radius: 16px; padding: 28px 28px 24px; }
+    .class-block-title { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+    .class-block-time { font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: -1px; }
+    .class-block-rows { display: flex; flex-direction: column; gap: 8px; }
+    .class-block-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.07); border-radius: 8px; }
+    .class-block-row .cb-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .class-block-row .cb-time { font-size: 13px; font-weight: 700; color: var(--red); }
+    .class-total-banner { background: var(--red-light); border: 1.5px solid rgba(192,39,26,0.2); border-radius: 12px; padding: 16px 24px; text-align: center; font-size: 15px; font-weight: 700; color: var(--red); margin-bottom: 36px; letter-spacing: -0.3px; }
+    /* ── 이미지 갤러리 3장 ── */
+    .img-gallery-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 24px; }
+    @media (max-width: 600px) { .img-gallery-3 { grid-template-columns: 1fr; } }
+    .img-ph-sm { aspect-ratio: 4/3; background: var(--gray-light); border: 2px dashed #ccc; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #bbb; text-align: center; padding: 16px; overflow: hidden; }
+    .img-ph-sm svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .img-ph-sm .ph-label { font-size: 12px; font-weight: 600; color: #bbb; }
+    .img-ph-sm img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; display: block; }
+    /* ── 콘텐츠 섹션 (어휘/모의고사) ── */
+    .content-section { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+    .content-section-title { font-family: var(--font-serif); font-size: clamp(19px,2.5vw,23px); font-weight: 700; color: var(--black); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .content-section-title::before { content: ''; width: 4px; height: 22px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
+    .content-section p { font-size: 15px; color: var(--gray-dark); line-height: 2.1; max-width: 720px; }
+    /* ── CTA 버튼 ── */
+    .cta-group { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 52px; }
+    .cta-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+    .cta-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .cta-secondary { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--border); color: var(--black); padding: 12px 30px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; background: var(--white); transition: border-color 0.2s, transform 0.15s; }
+    .cta-secondary:hover { border-color: var(--black); transform: translateY(-2px); }
+
     /* ── FOOTER ── */
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -606,42 +636,116 @@
 
       <!-- 고2 정규 -->
       <div id="l3-h2" data-panel-group="l3-h-reg" class="cur-panel-l3">
+        <!-- 소개 -->
         <div class="section-intro fade-up">
           <span class="section-tag">High School · Grade 2 · 정규</span>
-          <h2>수능 심화·논술 입문반</h2>
-          <p>EBS 연계 작품을 완전히 소화하고 수시 논술 기초까지 함께 준비합니다. 수능과 수시를 동시에 대비하는 가장 중요한 시기입니다.</p>
+          <h2>수능 심화·EBS 연계 정규반</h2>
+          <p>수능 필수 EBS 연계작품과 내신 빈출 문학을 깊이 분석하고, 심화 독서 스킬을 배워 직접 적용합니다.</p>
         </div>
+
+        <!-- 브로슈어 이미지 플레이스홀더 -->
         <div class="cur-img-area fade-up">
           <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+          <p class="img-label">커리큘럼 브로슈어 이미지</p>
+          <span class="img-hint">2026 고등 논술 커리큘럼 브로슈어 이미지로 교체해 주세요</span>
         </div>
+
+        <!-- 수업 구성 비주얼 -->
+        <div class="class-structure-grid fade-up">
+          <div class="class-block">
+            <div class="class-block-title">정규수업</div>
+            <div class="class-block-time">3시간</div>
+            <div class="class-block-rows">
+              <div class="class-block-row"><span class="cb-label">EBS 문학</span><span class="cb-time">1시간 30분</span></div>
+              <div class="class-block-row"><span class="cb-label">EBS 독서</span><span class="cb-time">1시간 30분</span></div>
+            </div>
+          </div>
+          <div class="class-block">
+            <div class="class-block-title">모의고사</div>
+            <div class="class-block-time">3시간</div>
+            <div class="class-block-rows">
+              <div class="class-block-row"><span class="cb-label">실전 모의고사</span><span class="cb-time">풀이</span></div>
+              <div class="class-block-row"><span class="cb-label">해설 강의</span><span class="cb-time">첨삭 피드백</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="class-total-banner fade-up">📅 주 2회 수업 · 회당 3시간 · 총 주 6시간</div>
+
+        <!-- 핵심 특징 4카드 -->
         <div class="feature-grid fade-up">
           <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">EBS 연계 완성</div><div class="feature-desc">EBS 수능특강 문학·독서 전 지문을 완전히 분석하고 연계 문제에 완벽 대비합니다.</div></div>
-          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">수시 논술 입문</div><div class="feature-desc">주요 대학 논술 유형을 분석하고 논술문 작성 기초를 체계적으로 훈련합니다.</div></div>
-          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">고전문학 완성</div><div class="feature-desc">고전시가·고전산문 전 범위를 수능 방식으로 완성하여 문학 고득점을 노립니다.</div></div>
-          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">실전 모의고사</div><div class="feature-desc">월 1회 실전 모의고사 풀이 및 취약 영역 집중 보완으로 실력을 검증합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">어휘 TEST</div><div class="feature-desc">매주 어화둥둥 어휘 테스트로 고전 시가 빈출어·사자성어를 맥락 속에서 완성합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">모의고사 분석</div><div class="feature-desc">매주 실전 모의고사 풀이 + 분석노트 작성 + 담당 선생님 첨삭 피드백으로 실력을 올립니다.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">고전문학 완성</div><div class="feature-desc">고전시가·고전산문 전 범위를 수능 방식으로 완성하여 문학 고득점을 노립니다.</div></div>
         </div>
+
+        <!-- 주요 학습 내용 + 수업 안내 -->
         <div class="course-detail-grid fade-up">
           <div class="course-topics">
             <h3>주요 학습 내용</h3>
             <ul class="topic-list">
-              <li><span class="topic-cat">EBS</span>EBS 수능특강 문학·독서 전 지문 분석</li>
-              <li><span class="topic-cat">고전</span>고전시가·고전산문 전 범위 수능형 학습</li>
-              <li><span class="topic-cat">논술</span>연세대·고려대·성균관대 등 논술 유형 분석</li>
-              <li><span class="topic-cat">논술</span>논술 개요 작성 → 완성 논술문 → 첨삭</li>
-              <li><span class="topic-cat">모의</span>실전 모의고사 풀이 및 영역별 오답 분석</li>
+              <li><span class="topic-cat">EBS</span>EBS 수능특강 문학·독서 전 지문 완전 분석</li>
+              <li><span class="topic-cat">문학</span>내신 빈출 현대·고전 문학 심화 학습</li>
+              <li><span class="topic-cat">독서</span>심화 독서 스킬 — 핵심어·구조·논리 파악 훈련</li>
+              <li><span class="topic-cat">어휘</span>매주 어화둥둥 어휘 TEST (고전시가 빈출어·사자성어)</li>
+              <li><span class="topic-cat">모의</span>주 1회 실전 모의고사 + 분석노트 과제 + 결과지 발송</li>
             </ul>
           </div>
           <div class="course-schedule">
             <div class="sched-card">
               <h3>수업 안내</h3>
-              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">월 · 수</span></div>
-              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">150분</span></div>
-              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 6~10명</span></div>
+              <div class="sched-row"><span class="sched-label">수업 횟수</span><span class="sched-val">주 2회</span></div>
+              <div class="sched-row"><span class="sched-label">회당 시간</span><span class="sched-val">3시간</span></div>
+              <div class="sched-row"><span class="sched-label">주 총 수업</span><span class="sched-val">6시간</span></div>
               <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고등학교 2학년</span></div>
             </div>
-            <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
+        </div>
+
+        <!-- 어휘 TEST 섹션 -->
+        <div class="content-section fade-up">
+          <div class="content-section-title">어휘 TEST</div>
+          <p>매주 진행되는 어화둥둥 어휘 테스트로 단순 암기가 아닌 이해 기반의 어휘 학습을 진행합니다.<br>내신과 수능에 필수적인 고전 시가 빈출어, 사자성어 등을 맥락 속에서 이해하고 익혀 실전에서 바로 활용할 수 있도록 합니다.<br>시험 후 개인별 결과지를 발송하여 취약 어휘를 파악하고 관리합니다.</p>
+          <div class="img-gallery-3">
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">결과지 사진 1</span>
+            </div>
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">결과지 사진 2</span>
+            </div>
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">결과지 사진 3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 모의고사 분석노트 섹션 -->
+        <div class="content-section fade-up" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">
+          <div class="content-section-title">모의고사 분석노트 &amp; 피드백</div>
+          <p>매주 실전 모의고사를 풀고 분석노트 과제를 작성합니다.<br>단순히 문제를 푸는 것에 그치지 않고, 틀린 이유와 접근 방식을 스스로 정리하는 훈련을 통해 실전 대응력을 키웁니다.<br>담당 선생님의 꼼꼼한 첨삭 피드백과 함께 개인별 결과지를 발송하여 매주 성장 과정을 학생과 학부모 모두가 확인할 수 있습니다.</p>
+          <div class="img-gallery-3">
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">분석노트 사진</span>
+            </div>
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">피드백 사진</span>
+            </div>
+            <div class="img-ph-sm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+              <span class="ph-label">결과지 사진</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하단 CTA -->
+        <div class="cta-group fade-up">
+          <a href="consulting.html" class="cta-primary">상담 신청하기 →</a>
+          <a href="news-timetable.html" class="cta-secondary">시간표 보기 →</a>
         </div>
       </div><!-- /l3-h2 -->
 
