@@ -57,13 +57,14 @@
 
     /* ── STATS BAR ── */
     .stats-bar { background: var(--black); padding: 0; }
-    .stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(4, 1fr); }
     .stat-item { padding: 48px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); position: relative; }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: var(--font-serif); font-size: clamp(44px, 7vw, 72px); font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -2px; margin-bottom: 10px; }
     .stat-num span { color: var(--red); }
     .stat-label { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.5px; }
-    @media (max-width: 640px) { .stats-inner { grid-template-columns: 1fr; } .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 32px 20px; } .stat-item:last-child { border-bottom: none; } .stats-inner { padding: 0 20px; } }
+    @media (max-width: 768px) { .stats-inner { grid-template-columns: repeat(2,1fr); padding: 0 20px; } .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 28px 16px; } .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.07); } .stat-item:last-child { border-bottom: none; } .stat-item:nth-last-child(2) { border-bottom: none; } }
+    @media (max-width: 400px) { .stats-inner { grid-template-columns: 1fr; } .stat-item:nth-child(odd) { border-right: none; } }
 
     /* ── SECTION HEADER ── */
     .section-wrap { padding-top: 80px; }
@@ -117,23 +118,81 @@
       .adm-year-header { padding: 15px 18px; }
     }
 
-    /* ── 마퀴 슬라이더 ── */
-    .marquee-section { background: var(--black); padding: 60px 0; margin-top: 80px; overflow: hidden; }
-    .marquee-head { max-width: 1200px; margin: 0 auto; padding: 0 40px; margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    @media (max-width: 768px) { .marquee-head { padding: 0 20px; } }
-    .marquee-head h2 { font-family: var(--font-serif); font-size: clamp(20px, 3vw, 26px); font-weight: 700; color: var(--white); letter-spacing: -0.5px; }
-    .sem-tabs { display: flex; gap: 6px; }
-    .sem-btn { padding: 7px 18px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
-    .sem-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
-    .marquee-wrap { position: relative; overflow: hidden; }
-    .marquee-track { display: flex; gap: 12px; width: max-content; animation: marqueeScroll 28s linear infinite; }
-    .marquee-track:hover { animation-play-state: paused; }
-    @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    .grade-chip { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 10px 20px; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
-    .grade-chip:hover { background: rgba(192,39,26,0.3); border-color: var(--red); }
-    .grade-chip .chip-school { font-size: 12px; color: rgba(255,255,255,0.45); }
-    .grade-chip .chip-name { font-size: 14px; font-weight: 600; color: var(--white); }
-    .grade-chip .chip-trophy { font-size: 14px; }
+    /* ── 대입 축하 카드 ── */
+    .adm-cards-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    @media (max-width: 1000px) { .adm-cards-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 640px) { .adm-cards-grid { grid-template-columns: repeat(2,1fr); gap: 12px; } }
+    @media (max-width: 380px) { .adm-cards-grid { grid-template-columns: 1fr; } }
+    .adm-card { background: #fffdf5; border: 2px solid #c9a227; border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform 0.22s, box-shadow 0.22s; position: relative; }
+    .adm-card::before { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(201,162,39,0.28); border-radius: 8px; pointer-events: none; z-index: 0; }
+    .adm-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(201,162,39,0.22); }
+    .adm-card-top { padding: 14px 14px 10px; text-align: center; position: relative; z-index: 1; }
+    .adm-card-ribbon { display: inline-flex; align-items: center; gap: 5px; background: linear-gradient(135deg,#c9a227,#e8c547); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 100px; }
+    .adm-card-body { display: flex; gap: 12px; padding: 10px 14px 12px; position: relative; z-index: 1; }
+    .adm-card-logo-col { flex-shrink: 0; width: 52px; display: flex; align-items: flex-start; justify-content: center; padding-top: 2px; }
+    .adm-card-logo { width: 100%; max-height: 52px; object-fit: contain; }
+    .adm-card-logo-icon { font-size: 30px; line-height: 1; }
+    .adm-card-info { flex: 1; min-width: 0; }
+    .adm-card-year { font-size: 10px; color: #c9a227; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 3px; }
+    .adm-card-univ { font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--black); line-height: 1.3; margin-bottom: 3px; }
+    .adm-card-dept { font-size: 11px; color: var(--gray); line-height: 1.4; margin-bottom: 8px; }
+    .adm-card-person { font-size: 11px; color: var(--gray-dark); font-weight: 600; margin-bottom: 2px; }
+    .adm-card-congrats { font-size: 10px; color: #c9a227; }
+    .adm-card-footer { border-top: 1px solid rgba(201,162,39,0.2); padding: 8px 14px 12px; text-align: center; font-size: 10px; color: rgba(0,0,0,0.3); font-family: var(--font-serif); letter-spacing: 0.3px; position: relative; z-index: 1; }
+    /* ── 확대 모달 ── */
+    .adm-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .adm-modal-bg.open { opacity: 1; pointer-events: auto; }
+    .adm-modal { background: #fffdf5; border: 3px solid #c9a227; border-radius: 16px; padding: 36px 32px 28px; max-width: 400px; width: 100%; position: relative; text-align: center; }
+    .adm-modal::before { content: ''; position: absolute; inset: 7px; border: 1px solid rgba(201,162,39,0.32); border-radius: 10px; pointer-events: none; }
+    .adm-modal-close { position: absolute; top: 12px; right: 14px; background: none; border: none; font-size: 20px; color: var(--gray); cursor: pointer; z-index: 1; }
+    .adm-modal-ribbon { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg,#c9a227,#e8c547); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; padding: 6px 18px; border-radius: 100px; margin-bottom: 20px; }
+    .adm-modal-logo { height: 60px; width: auto; max-width: 150px; object-fit: contain; margin: 0 auto 14px; display: block; }
+    .adm-modal-logo-icon { font-size: 48px; margin-bottom: 14px; display: block; }
+    .adm-modal-year { font-size: 11px; color: #c9a227; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+    .adm-modal-univ { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .adm-modal-dept { font-size: 14px; color: var(--gray-dark); margin-bottom: 16px; }
+    .adm-modal-hr { border: none; border-top: 1px solid rgba(201,162,39,0.3); margin: 14px 0; }
+    .adm-modal-person { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .adm-modal-congrats { font-size: 13px; color: #c9a227; font-weight: 500; margin-bottom: 18px; }
+    .adm-modal-footer { font-size: 11px; color: rgba(0,0,0,0.3); font-family: var(--font-serif); }
+    /* ── 전교 1등 ── */
+    .top1-section { background: #f9f8f7; padding: 80px 0; }
+    .top1-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .top1-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
+    .top1-tabs { display: flex; gap: 6px; }
+    .top1-tab { padding: 7px 18px; border-radius: 100px; border: 1.5px solid var(--border); background: transparent; color: var(--gray); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .top1-tab.active { border-color: var(--red); background: var(--red); color: var(--white); }
+    .top1-viewport { overflow: hidden; }
+    .top1-track { display: flex; gap: 16px; transition: transform 0.45s ease; }
+    .top1-card { flex-shrink: 0; width: calc((100% - 48px) / 4); background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 28px 20px; text-align: center; transition: border-color 0.2s, box-shadow 0.2s; }
+    .top1-card:hover { border-color: var(--red); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .top1-card .t1-badge { display: inline-block; background: var(--black); color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
+    .top1-card .t1-name { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .top1-card .t1-school { font-size: 13px; color: var(--gray); }
+    .top1-card .t1-grade { font-size: 12px; color: var(--red); font-weight: 600; margin-top: 6px; }
+    .top1-nav { display: flex; justify-content: center; gap: 8px; margin-top: 28px; align-items: center; }
+    .top1-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; border: none; transition: background 0.2s, width 0.2s, border-radius 0.2s; padding: 0; }
+    .top1-dot.active { background: var(--red); width: 24px; border-radius: 4px; }
+    @media (max-width: 900px) { .top1-inner { padding: 0 20px; } .top1-card { width: calc((100% - 32px) / 3); } }
+    @media (max-width: 600px) { .top1-card { width: calc((100% - 16px) / 2); } .top1-section { padding: 60px 0; } }
+    @media (max-width: 360px) { .top1-card { width: 100%; } }
+    /* ── 1등급 명단 ── */
+    .grade1-section { background: #0f172a; padding: 80px 0; }
+    .grade1-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .grade1-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 16px; }
+    .grade1-tag { display: block; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+    .grade1-headline { font-family: var(--font-serif); font-size: clamp(20px,3vw,28px); font-weight: 700; color: var(--white); }
+    .grade1-tabs { display: flex; gap: 6px; padding-top: 4px; }
+    .grade1-tab { padding: 8px 20px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: var(--font-sans); }
+    .grade1-tab.active { border-color: #f59e0b; background: #f59e0b; color: #111; }
+    .grade1-panel { display: none; }
+    .grade1-panel.active { display: block; }
+    .grade1-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px,1fr)); gap: 8px; }
+    .grade1-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px 10px; text-align: center; transition: background 0.18s, border-color 0.18s; }
+    .grade1-chip:hover { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.35); }
+    .grade1-chip .g1-school { font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+    .grade1-chip .g1-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    @media (max-width: 768px) { .grade1-inner { padding: 0 20px; } .grade1-section { padding: 60px 0; } .grade1-grid { grid-template-columns: repeat(auto-fill,minmax(90px,1fr)); } }
 
     /* ── 성적 향상 사례 ── */
     .improvement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -263,16 +322,20 @@
 <div class="stats-bar" id="statsBar">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num" id="stat-naesin">—</div>
-      <div class="stat-label">내신 1등급 배출</div>
+      <div class="stat-num" id="stat-top1-s1">—</div>
+      <div class="stat-label">2025 1학기 전교 1등</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" id="stat-suneung">—</div>
-      <div class="stat-label">수능 1등급 배출</div>
+      <div class="stat-num" id="stat-top1-s2">—</div>
+      <div class="stat-label">2025 2학기 전교 1등</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" id="stat-years">—</div>
-      <div class="stat-label">국어 교육 경력</div>
+      <div class="stat-num" id="stat-grade1-s1">—</div>
+      <div class="stat-label">2025 1학기 1등급</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat-grade1-s2">—</div>
+      <div class="stat-label">2025 2학기 1등급</div>
     </div>
   </div>
 </div>
@@ -292,20 +355,40 @@
     </div>
   </div>
 
-  <!-- ③ 1등급/전교1등 마퀴 -->
-  <div class="marquee-section">
-    <div class="marquee-head">
-      <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Top Grades</div>
-        <h2>1등급 · 전교 1등 명단</h2>
+  <!-- ③ 전교 1등 -->
+  <div class="top1-section">
+    <div class="top1-inner">
+      <div class="top1-header">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:8px;">Top Students</div>
+          <h2 style="font-family:var(--font-serif);font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--black);letter-spacing:-0.5px;">전교 1등 명단</h2>
+        </div>
+        <div class="top1-tabs">
+          <button class="top1-tab active" data-top1="0">1학기</button>
+          <button class="top1-tab" data-top1="1">2학기</button>
+        </div>
       </div>
-      <div class="sem-tabs">
-        <button class="sem-btn active" data-sem="0">1학기</button>
-        <button class="sem-btn" data-sem="1">2학기</button>
+      <div class="top1-viewport">
+        <div class="top1-track" id="top1Track"></div>
       </div>
+      <div class="top1-nav" id="top1Nav"></div>
     </div>
-    <div class="marquee-wrap" id="marqueeWrap">
-      <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+
+  <!-- ④ 1등급 명단 -->
+  <div class="grade1-section">
+    <div class="grade1-inner">
+      <div class="grade1-header">
+        <div>
+          <span class="grade1-tag">Grade 1 Students</span>
+          <h2 class="grade1-headline" id="grade1Headline">1등급 명단</h2>
+        </div>
+        <div class="grade1-tabs">
+          <button class="grade1-tab active" data-g1="0">1학기</button>
+          <button class="grade1-tab" data-g1="1">2학기</button>
+        </div>
+      </div>
+      <div id="grade1Panels"></div>
     </div>
   </div>
 
@@ -327,6 +410,22 @@
   </div>
 
 </main>
+
+<div class="adm-modal-bg" id="admModalBg">
+  <div class="adm-modal">
+    <button class="adm-modal-close" id="admModalClose">✕</button>
+    <div class="adm-modal-ribbon">🏆 축 합격</div>
+    <div id="admModalLogo"></div>
+    <div class="adm-modal-year" id="admModalYear"></div>
+    <div class="adm-modal-univ" id="admModalUniv"></div>
+    <div class="adm-modal-dept" id="admModalDept"></div>
+    <hr class="adm-modal-hr">
+    <div class="adm-modal-person" id="admModalPerson"></div>
+    <div class="adm-modal-congrats">최종합격을 축하합니다</div>
+    <hr class="adm-modal-hr">
+    <div class="adm-modal-footer">삼년의 신화 국어논술학원</div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-inner">
@@ -362,12 +461,11 @@
   function closeFsMenu() { fsOverlay.classList.remove('open'); document.body.style.overflow = ''; }
   hamburger.addEventListener('click', openFsMenu);
   fsClose.addEventListener('click', closeFsMenu);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeFsMenu(); closeAdmModal(); } });
 
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: 0.08 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  /* ── 카운터 애니메이션 ── */
   function animateCount(el, target, suffix) {
     const dur = 1400, step = 16;
     let current = 0;
@@ -379,27 +477,25 @@
     }, step);
   }
 
-  /* ── ① 통계 ── */
-  fetch('data/honor-stats.json').then(r => r.json()).then(d => {
-    const nEl = document.getElementById('stat-naesin');
-    const sEl = document.getElementById('stat-suneung');
-    const yEl = document.getElementById('stat-years');
-    const obs = new IntersectionObserver(es => {
-      if (es[0].isIntersecting) {
-        animateCount(nEl, d.naesin1 || 0, '명');
-        animateCount(sEl, d.suneung1 || 0, '명');
-        animateCount(yEl, d.years || 0, '년');
-        obs.disconnect();
-      }
-    }, { threshold: 0.3 });
-    obs.observe(document.getElementById('statsBar'));
-  }).catch(() => {
-    document.getElementById('stat-naesin').textContent = '—';
-    document.getElementById('stat-suneung').textContent = '—';
-    document.getElementById('stat-years').textContent = '—';
-  });
+  /* ── 모달 ── */
+  const admModalBg = document.getElementById('admModalBg');
+  function openAdmModal(data) {
+    const logoEl = document.getElementById('admModalLogo');
+    logoEl.innerHTML = data.logo
+      ? `<img src="${data.logo}" alt="" class="adm-modal-logo" onerror="this.outerHTML='<span class=\\'adm-modal-logo-icon\\'>🎓</span>'">`
+      : `<span class="adm-modal-logo-icon">🎓</span>`;
+    document.getElementById('admModalYear').textContent = data.year + '학년도';
+    document.getElementById('admModalUniv').textContent = data.univ;
+    document.getElementById('admModalDept').textContent = data.dept;
+    document.getElementById('admModalPerson').textContent = data.school + ' ' + data.name;
+    admModalBg.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAdmModal() { admModalBg.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('admModalClose').addEventListener('click', closeAdmModal);
+  admModalBg.addEventListener('click', e => { if (e.target === admModalBg) closeAdmModal(); });
 
-  /* ── ② 대입 실적 ── */
+  /* ── ① 대입 실적 카드 ── */
   fetch('data/admissions.json').then(r => r.json()).then(d => {
     const container = document.getElementById('admissionsContainer');
     const list = d.admissions || [];
@@ -407,81 +503,172 @@
       container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--gray);font-size:14px;">등록된 대입 실적이 없습니다.</div>';
       return;
     }
-    const byYear = {};
-    list.forEach(r => { const y = r.year || '미분류'; (byYear[y] = byYear[y] || []).push(r); });
-    const years = Object.keys(byYear).sort((a, b) => b.localeCompare(a));
-    container.innerHTML = years.map((year, i) => {
-      const rows = byYear[year];
-      const tbody = rows.map(r => {
-        const logoHtml = r.university_logo
-          ? `<img src="${r.university_logo}" alt="" class="adm-univ-logo" onerror="this.style.display='none'">`
-          : '';
-        return `<tr>
-        <td class="adm-td-name">${r.name || ''}</td>
-        <td class="adm-td-school">${r.school || ''}</td>
-        <td class="adm-td-univ"><div class="adm-univ-cell">${logoHtml}<span>${r.university || ''}</span></div></td>
-        <td class="adm-td-dept">${r.department || ''}</td>
-      </tr>`;
-      }).join('');
-      return `<div class="adm-year-block${i === 0 ? ' open' : ''}">
-        <div class="adm-year-header">
-          <span class="adm-year-title">${year}학년도 대입 실적</span>
-          <span class="adm-year-count">${rows.length}건</span>
-          <svg class="adm-chevron" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"/></svg>
+    const cards = list.map((r, i) => {
+      const logoHtml = r.university_logo
+        ? `<img src="${r.university_logo}" alt="${r.university}" class="adm-card-logo" onerror="this.outerHTML='<span class=\\'adm-card-logo-icon\\'>🎓</span>'">`
+        : `<span class="adm-card-logo-icon">🎓</span>`;
+      return `<div class="adm-card" data-idx="${i}">
+        <div class="adm-card-top"><span class="adm-card-ribbon">🏆 축 합격</span></div>
+        <div class="adm-card-body">
+          <div class="adm-card-logo-col">${logoHtml}</div>
+          <div class="adm-card-info">
+            <div class="adm-card-year">${r.year}학년도</div>
+            <div class="adm-card-univ">${r.university}</div>
+            <div class="adm-card-dept">${r.department}</div>
+            <div class="adm-card-person">${r.school} ${r.name}</div>
+            <div class="adm-card-congrats">최종합격을 축하합니다</div>
+          </div>
         </div>
-        <div class="adm-year-body">
-          <table class="adm-table">
-            <thead><tr><th>이름</th><th>학교</th><th>대학</th><th>학과</th></tr></thead>
-            <tbody>${tbody}</tbody>
-          </table>
-        </div>
+        <div class="adm-card-footer">삼년의 신화 국어논술학원</div>
       </div>`;
     }).join('');
-    container.querySelectorAll('.adm-year-header').forEach(h => {
-      h.addEventListener('click', () => h.closest('.adm-year-block').classList.toggle('open'));
+    container.innerHTML = `<div class="adm-cards-grid">${cards}</div>`;
+    container.querySelectorAll('.adm-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const r = list[parseInt(card.dataset.idx)];
+        openAdmModal({ logo: r.university_logo, year: r.year, univ: r.university, dept: r.department, school: r.school, name: r.name });
+      });
     });
   }).catch(() => {
     document.getElementById('admissionsContainer').innerHTML =
       '<div style="text-align:center;padding:40px;color:var(--gray);font-size:14px;">데이터를 불러올 수 없습니다.</div>';
   });
 
-  /* ── ③ 마퀴 슬라이더 ── */
-  let semestersData = [];
-  function buildMarquee(semIdx) {
-    const sem = semestersData[semIdx];
-    if (!sem) return;
-    const grades = sem.grades || [];
-    const track = document.getElementById('marqueeTrack');
-    const chips = grades.map(g =>
-      `<div class="grade-chip"><span class="chip-trophy">🏆</span><span class="chip-school">${g.school}</span><span class="chip-name">${g.name}</span></div>`
-    ).join('');
-    // 두 세트 연결해서 무한 루프
-    track.innerHTML = chips + chips;
-    // 트랙 너비에 맞춰 애니메이션 duration 조정
-    const chipCount = grades.length;
-    track.style.animationDuration = Math.max(20, chipCount * 2) + 's';
+  /* ── ② honors.json (통계 + 전교1등 + 1등급 명단) ── */
+  let top1Data = [];
+  let top1Current = 0;
+  let top1Interval = null;
+
+  function cardsPerView() {
+    return window.innerWidth <= 360 ? 1 : window.innerWidth <= 600 ? 2 : window.innerWidth <= 900 ? 3 : 4;
   }
 
-  fetch('data/top-grades.json').then(r => r.json()).then(d => {
-    semestersData = d.semesters || [];
-    // 탭 버튼 레이블 업데이트
-    document.querySelectorAll('.sem-btn').forEach((btn, i) => {
-      if (semestersData[i]) {
-        btn.textContent = semestersData[i].semester + ' (' + (semestersData[i].year || '') + ')';
-      }
-    });
-    buildMarquee(0);
-  }).catch(() => {});
+  function buildTop1(semIdx) {
+    const sem = top1Data[semIdx];
+    if (!sem) return;
+    const students = sem.top_students || [];
+    const track = document.getElementById('top1Track');
+    track.innerHTML = students.map(s =>
+      `<div class="top1-card">
+        <span class="t1-badge">전교 1등</span>
+        <div class="t1-name">${s.name}</div>
+        <div class="t1-school">${s.school}</div>
+        <div class="t1-grade">${s.grade}학년</div>
+      </div>`
+    ).join('');
+    top1Current = 0;
+    track.style.transform = 'translateX(0)';
+    buildTop1Nav(students.length);
+    clearInterval(top1Interval);
+    if (students.length > cardsPerView()) {
+      top1Interval = setInterval(() => slideTop1(1, students.length), 3000);
+    }
+  }
 
-  document.querySelectorAll('.sem-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      buildMarquee(parseInt(btn.dataset.sem));
+  function buildTop1Nav(total) {
+    const cpv = cardsPerView();
+    const pages = Math.max(1, total - cpv + 1);
+    const nav = document.getElementById('top1Nav');
+    nav.innerHTML = Array.from({length: pages}, (_, i) =>
+      `<button class="top1-dot${i === 0 ? ' active' : ''}" data-page="${i}"></button>`
+    ).join('');
+    nav.querySelectorAll('.top1-dot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clearInterval(top1Interval);
+        top1Current = parseInt(btn.dataset.page);
+        applyTop1Slide(total);
+        top1Interval = setInterval(() => slideTop1(1, total), 3000);
+      });
+    });
+  }
+
+  function applyTop1Slide(total) {
+    const track = document.getElementById('top1Track');
+    if (!track.children.length) return;
+    const cpv = cardsPerView();
+    const maxPage = Math.max(0, total - cpv);
+    top1Current = Math.max(0, Math.min(top1Current, maxPage));
+    const cardWidth = track.children[0].getBoundingClientRect().width + 16;
+    track.style.transform = `translateX(-${top1Current * cardWidth}px)`;
+    document.querySelectorAll('.top1-dot').forEach((d, i) => d.classList.toggle('active', i === top1Current));
+  }
+
+  function slideTop1(dir, total) {
+    const cpv = cardsPerView();
+    const maxPage = Math.max(0, total - cpv);
+    top1Current = (top1Current + dir + maxPage + 1) % (maxPage + 1);
+    applyTop1Slide(total);
+  }
+
+  function buildGrade1(sems) {
+    const panels = document.getElementById('grade1Panels');
+    panels.innerHTML = sems.map((sem, i) => {
+      const students = sem.grade1_students || [];
+      const chips = students.map(s =>
+        `<div class="grade1-chip"><div class="g1-school">${s.school}</div><div class="g1-name">${s.name}</div></div>`
+      ).join('');
+      return `<div class="grade1-panel${i === 0 ? ' active' : ''}" data-panel="${i}">
+        <div class="grade1-grid">${chips}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function updateGrade1Headline(sem) {
+    const count = (sem.grade1_students || []).length;
+    document.getElementById('grade1Headline').textContent = `2025년 ${sem.label} 1등급 ${count}명 배출`;
+  }
+
+  fetch('data/honors.json').then(r => r.json()).then(d => {
+    const sems = d.semesters || [];
+    top1Data = sems;
+
+    /* 통계 카운터 */
+    const s1 = sems[0] || {}, s2 = sems[1] || {};
+    const counts = {
+      's1t': (s1.top_students || []).length,
+      's2t': (s2.top_students || []).length,
+      's1g': (s1.grade1_students || []).length,
+      's2g': (s2.grade1_students || []).length,
+    };
+    const statsObs = new IntersectionObserver(es => {
+      if (es[0].isIntersecting) {
+        animateCount(document.getElementById('stat-top1-s1'), counts.s1t, '명');
+        animateCount(document.getElementById('stat-top1-s2'), counts.s2t, '명');
+        animateCount(document.getElementById('stat-grade1-s1'), counts.s1g, '명');
+        animateCount(document.getElementById('stat-grade1-s2'), counts.s2g, '명');
+        statsObs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    statsObs.observe(document.getElementById('statsBar'));
+
+    buildTop1(0);
+    buildGrade1(sems);
+    if (sems[0]) updateGrade1Headline(sems[0]);
+
+    document.querySelectorAll('.top1-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.top1-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        buildTop1(parseInt(btn.dataset.top1));
+      });
+    });
+
+    document.querySelectorAll('.grade1-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.g1);
+        document.querySelectorAll('.grade1-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.grade1-panel').forEach(p => p.classList.toggle('active', parseInt(p.dataset.panel) === idx));
+        if (top1Data[idx]) updateGrade1Headline(top1Data[idx]);
+      });
+    });
+  }).catch(() => {
+    ['stat-top1-s1','stat-top1-s2','stat-grade1-s1','stat-grade1-s2'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.textContent = '—';
     });
   });
 
-  /* ── ④ 성적 향상 사례 ── */
+  /* ── ③ 성적 향상 사례 ── */
   fetch('data/improvement-cases.json').then(r => r.json()).then(d => {
     const grid = document.getElementById('improvementGrid');
     const list = d.cases || [];

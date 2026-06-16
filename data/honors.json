@@ -1,0 +1,1109 @@
+{
+  "year": "2025",
+  "semesters": [
+    {
+      "label": "1학기",
+      "top_students": [
+        {
+          "school": "강서고",
+          "grade": 1,
+          "name": "윤O현"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "박O민"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "정O준"
+        },
+        {
+          "school": "선부고",
+          "grade": 1,
+          "name": "임O린"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "윤O영"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O람"
+        },
+        {
+          "school": "초지고",
+          "grade": 1,
+          "name": "강O진"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "이O진"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O우"
+        },
+        {
+          "school": "양지고",
+          "grade": 3,
+          "name": "조O울"
+        }
+      ],
+      "grade1_students": [
+        {
+          "school": "강서고",
+          "grade": 1,
+          "name": "윤O현"
+        },
+        {
+          "school": "강서고",
+          "grade": 1,
+          "name": "김O윤"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "최O"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "김O재"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "유O현"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "박O민"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "정O준"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "박O은"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "송O우"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "신O진"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "안O연"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "허O윤"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "홍O용"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "이O서"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "김O훈"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "조O영"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "김O찬"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "강O원"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "이O주"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O하"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O아"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "박O진"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O우"
+        },
+        {
+          "school": "디문고",
+          "grade": 1,
+          "name": "임O영"
+        },
+        {
+          "school": "선부고",
+          "grade": 1,
+          "name": "임O린"
+        },
+        {
+          "school": "선부고",
+          "grade": 1,
+          "name": "방O주"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "윤O영"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "김O아"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "임O아"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "장O준"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "김O재"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "김O정"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "유O빈"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "정O호"
+        },
+        {
+          "school": "성포고",
+          "grade": 1,
+          "name": "김O현"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "김O홍"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "김O원"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O원"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O진"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "최O성"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "한O석"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "김O아"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O우"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "김O수"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "김O우"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "박O영"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "임O빈"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "조O훈"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "최O영"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "황O준"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "이O현"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "신O환"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "이O엽"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "유O원"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "박O선"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "김O훈"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "박O린"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "박O진"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "조O훈"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "조O진"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "김O율"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "이O율"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "한O우"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O원"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "안O희"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "남O윤"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O람"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "정O윤"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "신O서"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "안O영"
+        },
+        {
+          "school": "초지고",
+          "grade": 1,
+          "name": "강O진"
+        },
+        {
+          "school": "초지고",
+          "grade": 1,
+          "name": "심O안"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "이O진"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "이O은"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "박O우"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "송O지"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "조O연"
+        },
+        {
+          "school": "광덕고",
+          "grade": 2,
+          "name": "이O영"
+        },
+        {
+          "school": "광덕고",
+          "grade": 2,
+          "name": "조O려"
+        },
+        {
+          "school": "동산고",
+          "grade": 2,
+          "name": "고O준"
+        },
+        {
+          "school": "성안고",
+          "grade": 2,
+          "name": "방O진"
+        },
+        {
+          "school": "송호고",
+          "grade": 2,
+          "name": "김O준"
+        },
+        {
+          "school": "송호고",
+          "grade": 2,
+          "name": "문O혁"
+        },
+        {
+          "school": "송호고",
+          "grade": 2,
+          "name": "이O윤"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "안O훈"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "이O엽"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "강O유"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "김O채"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "선O은"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "정O서"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "차O지"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O민"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "김O익"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "민O경"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O우"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "정O영"
+        },
+        {
+          "school": "원곡고",
+          "grade": 2,
+          "name": "이O은"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "강O주"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "김O연"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "박O민"
+        },
+        {
+          "school": "경안고",
+          "grade": 3,
+          "name": "조O석"
+        },
+        {
+          "school": "경안고",
+          "grade": 3,
+          "name": "안O샘"
+        },
+        {
+          "school": "송호고",
+          "grade": 3,
+          "name": "김O연"
+        },
+        {
+          "school": "송호고",
+          "grade": 3,
+          "name": "송O원"
+        },
+        {
+          "school": "양지고",
+          "grade": 3,
+          "name": "조O율"
+        },
+        {
+          "school": "원곡고",
+          "grade": 3,
+          "name": "정O원"
+        }
+      ]
+    },
+    {
+      "label": "2학기",
+      "top_students": [
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "박O우"
+        },
+        {
+          "school": "성안고",
+          "grade": 2,
+          "name": "김O희"
+        },
+        {
+          "school": "성안고",
+          "grade": 2,
+          "name": "방O진"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "안O혼"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "차O지"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O우"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "강O주"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "최O"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "강O원"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "황O준"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O원"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "윤O영"
+        },
+        {
+          "school": "초지고",
+          "grade": 1,
+          "name": "강O진"
+        }
+      ],
+      "grade1_students": [
+        {
+          "school": "강서고",
+          "grade": 1,
+          "name": "김O윤"
+        },
+        {
+          "school": "강서고",
+          "grade": 1,
+          "name": "윤O현"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "강O후"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "이O연"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "정O영"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "최O"
+        },
+        {
+          "school": "경안고",
+          "grade": 1,
+          "name": "현O은"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "권O휘"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "김O서"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "김O찬"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "김O연"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "박O은"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "손O영"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "신O진"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "안O연"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "정O준"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "조O영"
+        },
+        {
+          "school": "고잔고",
+          "grade": 1,
+          "name": "허O윤"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "강O원"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O하"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O아"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "김O우"
+        },
+        {
+          "school": "광덕고",
+          "grade": 1,
+          "name": "신O종"
+        },
+        {
+          "school": "디문고",
+          "grade": 1,
+          "name": "임O영"
+        },
+        {
+          "school": "선부고",
+          "grade": 1,
+          "name": "임O린"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "김O재"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "윤O영"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "임O아"
+        },
+        {
+          "school": "성안고",
+          "grade": 1,
+          "name": "장O준"
+        },
+        {
+          "school": "성포고",
+          "grade": 1,
+          "name": "김O현"
+        },
+        {
+          "school": "성포고",
+          "grade": 1,
+          "name": "안O제"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "김O아"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "김O홍"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O진"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O원"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "이O우"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "최O성"
+        },
+        {
+          "school": "송호고",
+          "grade": 1,
+          "name": "한O석"
+        },
+        {
+          "school": "신길고",
+          "grade": 1,
+          "name": "임O연"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "김O수"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "김O엽"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "신O환"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "은O원"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "임O빈"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "조O훈"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "최O영"
+        },
+        {
+          "school": "안산고",
+          "grade": 1,
+          "name": "황O준"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "김O훈"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "박O린"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "박O진"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "배O윤"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "손O민"
+        },
+        {
+          "school": "양지고",
+          "grade": 1,
+          "name": "조O진"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "남O윤"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O원"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O현"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "박O람"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "신O서"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "안O희"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "임O연"
+        },
+        {
+          "school": "원곡고",
+          "grade": 1,
+          "name": "정O윤"
+        },
+        {
+          "school": "초지고",
+          "grade": 1,
+          "name": "강O진"
+        },
+        {
+          "school": "경안고",
+          "grade": 2,
+          "name": "안O림"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "김O빈"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "박O우"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "오O윤"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "이O은"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "조O찬"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "조O연"
+        },
+        {
+          "school": "고잔고",
+          "grade": 2,
+          "name": "최O영"
+        },
+        {
+          "school": "성안고",
+          "grade": 2,
+          "name": "김O희"
+        },
+        {
+          "school": "성안고",
+          "grade": 2,
+          "name": "방O진"
+        },
+        {
+          "school": "송호고",
+          "grade": 2,
+          "name": "문O혁"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "안O훈"
+        },
+        {
+          "school": "신길고",
+          "grade": 2,
+          "name": "이O현"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "선O은"
+        },
+        {
+          "school": "안산고",
+          "grade": 2,
+          "name": "차O지"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "김O익"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "민O경"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "박O희"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O민"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "이O우"
+        },
+        {
+          "school": "양지고",
+          "grade": 2,
+          "name": "정O영"
+        },
+        {
+          "school": "원곡고",
+          "grade": 2,
+          "name": "박O현"
+        },
+        {
+          "school": "원곡고",
+          "grade": 2,
+          "name": "이O은"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "강O주"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "양O정"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "이O민"
+        },
+        {
+          "school": "초지고",
+          "grade": 2,
+          "name": "이O우"
+        }
+      ]
+    }
+  ]
+}
