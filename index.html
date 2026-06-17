@@ -120,16 +120,19 @@
 
 
     /* ===================== HERO CAROUSEL ===================== */
-    #hero { position: relative; overflow: hidden; }
+    #hero { margin-top: var(--nav-h); background: #111; }
+    .hero-container {
+      max-width: 1440px; margin: 0 auto; padding: 0 40px;
+      position: relative; overflow: hidden;
+    }
     .hero-track { display: flex; transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
     .hero-slide {
-      min-width: 100%; height: 60vh; min-height: 450px; flex-shrink: 0;
+      min-width: 100%; aspect-ratio: 16/9; flex-shrink: 0;
       display: flex; flex-direction: column; background: #111;
     }
-    .hero-slide-spacer { height: var(--nav-h); flex-shrink: 0; }
     .cms-img-wrap {
       flex: 1; display: flex; align-items: center; justify-content: center;
-      overflow: hidden; padding: 20px 40px 8px;
+      overflow: hidden; padding: 16px 20px 8px;
     }
     .cms-img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
     .cms-btn-wrap { padding: 14px 0 18px; text-align: center; flex-shrink: 0; }
@@ -143,8 +146,8 @@
       transition: background 0.2s; backdrop-filter: blur(6px); line-height: 1;
     }
     .hero-arrow:hover { background: var(--red); }
-    .hero-arrow.prev { left: 20px; }
-    .hero-arrow.next { right: 20px; }
+    .hero-arrow.prev { left: 12px; }
+    .hero-arrow.next { right: 12px; }
 
     /* Dots */
     .hero-dots {
@@ -159,11 +162,10 @@
     .hero-dot.active { background: var(--white); width: 22px; border-radius: 3px; }
 
     @media (max-width: 768px) {
-      .hero-slide { height: 50vh; min-height: 320px; }
-      .cms-img-wrap { padding: 14px 20px 6px; }
+      .hero-container { padding: 0 16px; }
       .hero-arrow { width: 34px; height: 34px; font-size: 16px; }
-      .hero-arrow.prev { left: 8px; }
-      .hero-arrow.next { right: 8px; }
+      .hero-arrow.prev { left: 6px; }
+      .hero-arrow.next { right: 6px; }
       .hero-dots { bottom: 18px; }
     }
 
@@ -601,15 +603,13 @@
 
 <!-- ===================== HERO CAROUSEL ===================== -->
 <section id="hero">
-  <div class="hero-track" id="heroTrack">
+  <div class="hero-container">
+    <div class="hero-track" id="heroTrack">
+    </div>
+    <button class="hero-arrow prev" id="heroPrev" aria-label="이전 슬라이드">&#8249;</button>
+    <button class="hero-arrow next" id="heroNext" aria-label="다음 슬라이드">&#8250;</button>
+    <div class="hero-dots" id="heroDots"></div>
   </div>
-
-  <!-- 화살표 -->
-  <button class="hero-arrow prev" id="heroPrev" aria-label="이전 슬라이드">&#8249;</button>
-  <button class="hero-arrow next" id="heroNext" aria-label="다음 슬라이드">&#8250;</button>
-
-  <!-- 점 인디케이터 -->
-  <div class="hero-dots" id="heroDots"></div>
 </section>
 
 <!-- ===================== QUICK LINKS ===================== -->
@@ -898,7 +898,6 @@
       const el = document.createElement('div');
       el.className = 'hero-slide hero-slide-cms';
       el.innerHTML =
-        `<div class="hero-slide-spacer"></div>` +
         `<div class="cms-img-wrap">` +
           (s.image ? `<img class="cms-img" src="${s.image}" alt="">` : '') +
         `</div>` +
@@ -916,7 +915,6 @@
       const el = document.createElement('div');
       el.className = 'hero-slide hero-slide-cms';
       el.innerHTML =
-        `<div class="hero-slide-spacer"></div>` +
         `<div class="cms-img-wrap">` +
           (bgSrc ? `<img class="cms-img" src="${bgSrc}" alt="">` : '') +
         `</div>` +
