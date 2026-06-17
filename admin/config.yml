@@ -318,11 +318,7 @@ collections:
             widget: list
             collapsed: true
             fields:
-              - { label: "태그 (영문)", name: tag, widget: string }
-              - { label: 제목 (줄바꿈은 \n), name: title, widget: string }
-              - { label: "제목 강조 단어 (빨간색으로 표시)", name: title_highlight, widget: string, required: false }
-              - { label: 부제목, name: subtitle, widget: string }
-              - { label: "부제목 강조 구문 (기울임체로 표시)", name: subtitle_highlight, widget: string, required: false }
+              - { label: 이미지, name: image, widget: image, required: false }
               - { label: 버튼1 텍스트, name: btn1_text, widget: string, required: false }
               - { label: 버튼1 링크, name: btn1_link, widget: string, required: false }
               - { label: 버튼2 텍스트, name: btn2_text, widget: string, required: false }
@@ -396,6 +392,7 @@ collections:
               - { label: 후기 내용, name: content, widget: text }
               - { label: 별점 (1~5), name: rating, widget: number, min: 1, max: 5, default: 5 }
               - { label: "태그 (예: 고등 수능반)", name: tag, widget: string, required: false }
+              - { label: 메인 표시, name: show_on_main, widget: boolean, default: false }
 
   - name: admissions
     label: 대입 실적

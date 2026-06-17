@@ -129,9 +129,8 @@
     }
     .hero-slide-bg { position: absolute; inset: 0; z-index: 0; }
     .slide-1 .hero-slide-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 40%, #0a0a0a 100%); }
-    .slide-2 .hero-slide-bg { background: linear-gradient(135deg, #0f0808 0%, #1e0b0b 40%, #300f0f 100%); }
-    .slide-3 .hero-slide-bg { background: linear-gradient(135deg, #08080f 0%, #0b0b1e 40%, #10102e 100%); }
     .hero-slide-seminar .hero-slide-bg { background: linear-gradient(135deg, #0a0005 0%, #1a000a 40%, #0d0008 100%); }
+    .hero-cms-bg-img { position: absolute; inset: 0; z-index: 1; background: center/cover no-repeat; opacity: 0.35; }
     .hero-seminar-bg-img {
       position: absolute; inset: 0; z-index: 1;
       background: center/cover no-repeat;
@@ -241,8 +240,8 @@
 
     /* ===================== QUICK LINKS ===================== */
     #quicklinks {
-      background: transparent; position: relative; z-index: 10;
-      margin-top: -52px;
+      background: var(--gray-light); position: relative; z-index: 10;
+      padding: 24px 0;
     }
     .ql-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .ql-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -297,42 +296,15 @@
     }
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
 
-    /* ===================== TROPHY BOARD ===================== */
-    #trophy { background: var(--black); overflow: hidden; }
-    #trophy .section-tag { color: #e57373; }
-    #trophy .section-title { color: var(--white); }
-    .trophy-carousel-wrap { position: relative; }
-    .trophy-track-outer { overflow: hidden; }
-    .trophy-track {
-      display: flex; gap: 18px;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .trophy-card {
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 12px; padding: 28px 24px; min-width: 220px; flex-shrink: 0;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .trophy-card:hover { border-color: var(--red); background: rgba(192,39,26,0.08); }
-    .trophy-badge {
-      display: inline-block; background: var(--red); color: var(--white);
-      font-size: 11px; padding: 3px 10px; border-radius: 3px;
-      font-weight: 500; margin-bottom: 16px;
-    }
-    .trophy-score {
-      font-family: var(--font-serif); font-size: 36px; font-weight: 700;
-      color: var(--white); line-height: 1; margin-bottom: 8px;
-    }
-    .trophy-score .unit { font-size: 16px; color: var(--red); }
-    .trophy-label { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
-    .trophy-date { font-size: 11px; color: rgba(255,255,255,0.28); }
-    .carousel-controls { display: flex; gap: 10px; margin-top: 32px; justify-content: center; }
-    .carousel-btn {
-      width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);
-      background: transparent; color: var(--white); font-size: 20px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .carousel-btn:hover { background: var(--red); border-color: var(--red); }
+    /* ===================== TROPHY / HONOR STATS ===================== */
+    #trophy { background: var(--black); }
+    .trophy-stats { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trophy-stat { padding: 64px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+    .trophy-stat:last-child { border-right: none; }
+    .trophy-stat-num { font-family: var(--font-serif); font-size: clamp(44px, 7vw, 72px); font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -2px; margin-bottom: 10px; }
+    .trophy-stat-num span { color: var(--red); }
+    .trophy-stat-label { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.5px; }
+    @media (max-width: 768px) { .trophy-stats { grid-template-columns: repeat(2,1fr); padding: 0 20px; } .trophy-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 36px 16px; } .trophy-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.07); } .trophy-stat:last-child { border-bottom: none; } .trophy-stat:nth-last-child(2) { border-bottom: none; } }
 
     /* ===================== REVIEWS ===================== */
     #reviews { background: var(--white); }
@@ -475,7 +447,6 @@
       .hero-kpi-item .num { font-size: 36px; }
       .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
       .btn-primary, .btn-outline { width: 100%; max-width: 320px; justify-content: center; }
-      .trophy-card { min-width: 180px; }
       .section { padding: 52px 0; }
     }
     @media (max-width: 480px) {
@@ -709,37 +680,6 @@
       </div>
     </div>
 
-    <!-- Slide 2 -->
-    <div class="hero-slide slide-2">
-      <div class="hero-slide-bg"></div>
-      <div class="hero-bg-text">實力</div>
-      <div class="hero-accent"></div>
-      <div class="hero-inner">
-        <div class="hero-tag">Curriculum</div>
-        <h1 class="hero-h1">[슬라이드 2<br>제목을 입력하세요]</h1>
-        <h2 class="hero-h2">[슬라이드 2 부제목을 <em>입력하세요</em>]</h2>
-        <div class="hero-buttons">
-          <a href="curriculum.html" class="btn-primary">커리큘럼 보기 →</a>
-          <a href="#consult-cta" class="btn-outline">상담 신청</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slide 3 -->
-    <div class="hero-slide slide-3">
-      <div class="hero-slide-bg"></div>
-      <div class="hero-bg-text">合格</div>
-      <div class="hero-accent"></div>
-      <div class="hero-inner">
-        <div class="hero-tag">Achievement</div>
-        <h1 class="hero-h1">[슬라이드 3<br>제목을 입력하세요]</h1>
-        <h2 class="hero-h2">[슬라이드 3 부제목을 <em>입력하세요</em>]</h2>
-        <div class="hero-buttons">
-          <a href="reviews-honor.html" class="btn-primary">실적 보기 →</a>
-          <a href="#consult-cta" class="btn-outline">상담 신청</a>
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -756,23 +696,19 @@
   <div class="ql-container">
     <div class="ql-grid stagger">
       <a href="#consult-cta" class="ql-card">
-        <div class="ql-icon">📋</div>
-        <div class="ql-text"><strong>입학 상담</strong><span>맞춤 반 배정 안내</span></div>
+        <div class="ql-text"><strong>입학 상담</strong></div>
         <div class="ql-arrow">→</div>
       </a>
       <a href="curriculum.html" class="ql-card">
-        <div class="ql-icon">📚</div>
-        <div class="ql-text"><strong>커리큘럼 보기</strong><span>초·중·고 과정 안내</span></div>
+        <div class="ql-text"><strong>커리큘럼 보기</strong></div>
         <div class="ql-arrow">→</div>
       </a>
       <a href="news-timetable.html" class="ql-card">
-        <div class="ql-icon">🗓️</div>
-        <div class="ql-text"><strong>학원 시간표</strong><span>수업 일정 확인</span></div>
+        <div class="ql-text"><strong>학원 시간표</strong></div>
         <div class="ql-arrow">→</div>
       </a>
       <a href="reviews-honor.html" class="ql-card">
-        <div class="ql-icon">🏆</div>
-        <div class="ql-text"><strong>명예의 전당</strong><span>합격 실적 보기</span></div>
+        <div class="ql-text"><strong>명예의 전당</strong></div>
         <div class="ql-arrow">→</div>
       </a>
     </div>
@@ -810,65 +746,24 @@
   </div>
 </section>
 
-<!-- ===================== TROPHY BOARD ===================== -->
-<section id="trophy" class="section">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-tag">Achievement</div>
-      <h2 class="section-title" style="color:var(--white)">명예의 전당</h2>
-      <p class="section-desc" style="color:rgba(255,255,255,0.45)">삼년의 신화에서 이루어낸 빛나는 성과들입니다.</p>
+<!-- ===================== TROPHY / HONOR STATS ===================== -->
+<section id="trophy">
+  <div class="trophy-stats" id="honorStatsBar">
+    <div class="trophy-stat">
+      <div class="trophy-stat-num" id="honor-top1-s1">—</div>
+      <div class="trophy-stat-label">2025 1학기 전교 1등</div>
     </div>
-    <div class="trophy-carousel-wrap fade-up">
-      <div class="trophy-track-outer">
-        <div class="trophy-track" id="trophyTrack">
-          <div class="trophy-card">
-            <div class="trophy-badge">고3 · 수능 국어</div>
-            <div class="trophy-score">1<span class="unit">등급</span></div>
-            <div class="trophy-label">수능 국어 1등급 달성</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">중3 · 내신</div>
-            <div class="trophy-score">1.2<span class="unit">점대</span></div>
-            <div class="trophy-label">내신 국어 전교 최상위</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">고2 · 모의고사</div>
-            <div class="trophy-score">+18<span class="unit">점</span></div>
-            <div class="trophy-label">3개월 만에 18점 상승</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">특목고 입시</div>
-            <div class="trophy-score">합격<span class="unit"> ✓</span></div>
-            <div class="trophy-label">[학교명] 논술 합격</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">고3 · SKY 대입</div>
-            <div class="trophy-score">합격<span class="unit"> ✓</span></div>
-            <div class="trophy-label">[대학명] [학과] 합격</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">초6 · 독해</div>
-            <div class="trophy-score">+35<span class="unit">%</span></div>
-            <div class="trophy-label">독해력 6개월 만에 35% 향상</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-          <div class="trophy-card">
-            <div class="trophy-badge">중1 · 국어 내신</div>
-            <div class="trophy-score">100<span class="unit">점</span></div>
-            <div class="trophy-label">중간고사 국어 만점</div>
-            <div class="trophy-date">[날짜 입력]</div>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <button class="carousel-btn" id="trophyPrev" aria-label="이전">‹</button>
-        <button class="carousel-btn" id="trophyNext" aria-label="다음">›</button>
-      </div>
+    <div class="trophy-stat">
+      <div class="trophy-stat-num" id="honor-top1-s2">—</div>
+      <div class="trophy-stat-label">2025 2학기 전교 1등</div>
+    </div>
+    <div class="trophy-stat">
+      <div class="trophy-stat-num" id="honor-grade1-s1">—</div>
+      <div class="trophy-stat-label">2025 1학기 1등급</div>
+    </div>
+    <div class="trophy-stat">
+      <div class="trophy-stat-num" id="honor-grade1-s2">—</div>
+      <div class="trophy-stat-label">2025 2학기 1등급</div>
     </div>
   </div>
 </section>
@@ -1071,31 +966,21 @@
     fetch('data/carousel.json').then(r => r.json()).catch(() => ({ slides: [] })),
     fetch('data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
   ]).then(([carouselData, seminarData]) => {
-    /* Update existing static slides with CMS content */
-    (carouselData.slides || []).forEach((s, i) => {
-      const slide = heroSlides[i];
-      if (!slide) return;
-      const tagEl = slide.querySelector('.hero-tag');
-      const h1El  = slide.querySelector('.hero-h1');
-      const h2El  = slide.querySelector('.hero-h2');
-      const btns  = slide.querySelector('.hero-buttons');
-      if (tagEl) tagEl.textContent = s.tag;
-      if (h1El) {
-        let html = s.title.replace(/\n/g, '<br>');
-        if (s.title_highlight) html = html.replace(s.title_highlight, `<span style="color:var(--red)">${s.title_highlight}</span>`);
-        h1El.innerHTML = html;
-      }
-      if (h2El) {
-        let html = s.subtitle.replace(/\n/g, '<br>');
-        if (s.subtitle_highlight) html = html.replace(s.subtitle_highlight, `<em>${s.subtitle_highlight}</em>`);
-        h2El.innerHTML = html;
-      }
-      if (btns) {
-        const btn1 = btns.querySelector('.btn-primary');
-        const btn2 = btns.querySelector('.btn-outline');
-        if (btn1 && s.btn1_text) { btn1.textContent = s.btn1_text; if (s.btn1_link) btn1.setAttribute('href', s.btn1_link); }
-        if (btn2 && s.btn2_text) { btn2.textContent = s.btn2_text; if (s.btn2_link) btn2.setAttribute('href', s.btn2_link); }
-      }
+    /* Inject CMS carousel slides (image + buttons only) */
+    (carouselData.slides || []).forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'hero-slide hero-slide-cms';
+      el.innerHTML =
+        `<div class="hero-slide-bg" style="background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 40%,#0a0a0a 100%)"></div>` +
+        (s.image ? `<div class="hero-cms-bg-img" style="background-image:url('${s.image}')"></div>` : '') +
+        `<div class="hero-inner">` +
+          `<div class="hero-buttons" style="margin-bottom:0">` +
+            (s.btn1_text ? `<a href="${s.btn1_link || '#'}" class="btn-primary">${s.btn1_text}</a>` : '') +
+            (s.btn2_text ? `<a href="${s.btn2_link || '#'}" class="btn-outline">${s.btn2_text}</a>` : '') +
+          `</div>` +
+        `</div>`;
+      heroTrack.appendChild(el);
+      heroSlides.push(el);
     });
 
     /* Inject seminar slides */
@@ -1122,9 +1007,7 @@
       heroSlides.push(el);
     });
 
-    if (toShow.length > 0) {
-      buildHeroDots();
-    }
+    buildHeroDots();
   });
 
   /* ---- Netlify Identity redirect ---- */
@@ -1136,24 +1019,37 @@
     });
   }
 
-  /* ---- Trophy carousel ---- */
-  const track = document.getElementById('trophyTrack');
-  let trophyIdx = 0;
-  function getCardW() {
-    const card = track.querySelector('.trophy-card');
-    if (!card) return 238;
-    return card.offsetWidth + 18;
+  /* ---- Honor stats ---- */
+  function animateCount(el, target, suffix) {
+    const dur = 1400, step = 16;
+    let current = 0;
+    const inc = target / (dur / step);
+    const timer = setInterval(() => {
+      current = Math.min(current + inc, target);
+      el.innerHTML = Math.floor(current) + '<span>' + suffix + '</span>';
+      if (current >= target) clearInterval(timer);
+    }, step);
   }
-  function getVisible() {
-    return Math.floor(track.parentElement.offsetWidth / getCardW());
-  }
-  function updateTrophy() {
-    const maxIdx = track.children.length - getVisible();
-    trophyIdx = Math.max(0, Math.min(trophyIdx, maxIdx));
-    track.style.transform = `translateX(-${trophyIdx * getCardW()}px)`;
-  }
-  document.getElementById('trophyPrev').addEventListener('click', () => { trophyIdx--; updateTrophy(); });
-  document.getElementById('trophyNext').addEventListener('click', () => { trophyIdx++; updateTrophy(); });
+  fetch('data/honors.json').then(r => r.json()).then(d => {
+    const sems = d.semesters || [];
+    const s1 = sems[0] || {}, s2 = sems[1] || {};
+    const c = {
+      s1t: (s1.top_students || []).length,
+      s2t: (s2.top_students || []).length,
+      s1g: (s1.grade1_students || []).length,
+      s2g: (s2.grade1_students || []).length,
+    };
+    const honorObs = new IntersectionObserver(es => {
+      if (es[0].isIntersecting) {
+        animateCount(document.getElementById('honor-top1-s1'), c.s1t, '명');
+        animateCount(document.getElementById('honor-top1-s2'), c.s2t, '명');
+        animateCount(document.getElementById('honor-grade1-s1'), c.s1g, '명');
+        animateCount(document.getElementById('honor-grade1-s2'), c.s2g, '명');
+        honorObs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    honorObs.observe(document.getElementById('honorStatsBar'));
+  }).catch(() => {});
 
   /* ---- Calendar Events Data ---- */
   let CAL_EVENTS = [];
@@ -1264,7 +1160,7 @@
   fetch('data/reviews.json').then(r => r.json()).then(data => {
     const grid = document.getElementById('indexReviewsGrid');
     if (!grid) return;
-    const list = (data.reviews || []).slice(0, 3);
+    const list = (data.reviews || []).filter(rv => rv.show_on_main === true);
     if (!list.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:var(--gray);font-size:15px;">등록된 후기가 없습니다.</div>'; return; }
     grid.innerHTML = list.map(rv => `
       <div class="review-card fade-up">
