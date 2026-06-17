@@ -77,7 +77,8 @@
     .notice-row.is-pinned { background: #fffbf8; }
     .notice-row.is-pinned:hover { background: var(--red-light); }
     .nr-num { font-size: 13px; color: var(--gray); text-align: center; padding: 17px 0; }
-    .nr-pin { display: inline-block; font-size: 10px; font-weight: 800; color: var(--red); letter-spacing: 0.5px; text-align: center; padding: 17px 0; }
+    .nr-pin { display: flex; align-items: center; justify-content: center; padding: 17px 4px; }
+    .nr-pin-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 3px; background: var(--red); color: var(--white); white-space: nowrap; }
     .nr-badge { padding: 17px 0 17px 4px; }
     .notice-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 3px; white-space: nowrap; }
     .nb-공지 { background: var(--red-light); color: var(--red); }
@@ -360,6 +361,7 @@
       board.innerHTML = '<div class="notice-empty">등록된 공지사항이 없습니다.</div>';
       return;
     }
+    let noticeSeqNum = 0;
     board.innerHTML = list.map((n) => {
       const bc = 'nb-' + (n.category || '공지');
       const imgIcon = n.image ? '<span class="img-icon">📷</span>' : '';
@@ -371,9 +373,12 @@
       } else {
         href = `news-notice-detail.html?id=${n._noticeOrigIdx}`;
         views = getViews(n._noticeOrigIdx);
-        numCell = n.pinned
-          ? `<div class="nr-pin">고정</div>`
-          : `<div class="nr-num">${noticeOnlyCount - n._noticeOrigIdx}</div>`;
+        if (n.pinned) {
+          numCell = `<div class="nr-pin"><span class="nr-pin-badge">공지</span></div>`;
+        } else {
+          noticeSeqNum++;
+          numCell = `<div class="nr-num">${noticeSeqNum}</div>`;
+        }
       }
       return `<div class="notice-row${n.pinned ? ' is-pinned' : ''}">
         ${numCell}
