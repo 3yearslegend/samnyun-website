@@ -10,28 +10,6 @@
       "btn1_link": "#consult-cta",
       "btn2_text": "시간표 보기",
       "btn2_link": "news-timetable.html"
-    },
-    {
-      "tag": "Curriculum",
-      "title": "슬라이드 2\n제목을 입력하세요",
-      "title_highlight": "",
-      "subtitle": "슬라이드 2 부제목을 입력하세요",
-      "subtitle_highlight": "",
-      "btn1_text": "커리큘럼 보기",
-      "btn1_link": "curriculum-elem-middle.html",
-      "btn2_text": "강사 소개",
-      "btn2_link": "teachers-gojan.html"
-    },
-    {
-      "tag": "Achievement",
-      "title": "슬라이드 3\n제목을 입력하세요",
-      "title_highlight": "",
-      "subtitle": "슬라이드 3 부제목을 입력하세요",
-      "subtitle_highlight": "",
-      "btn1_text": "합격 실적 보기",
-      "btn1_link": "about-results.html",
-      "btn2_text": "수강 후기",
-      "btn2_link": "reviews-list.html"
     }
   ]
 }
