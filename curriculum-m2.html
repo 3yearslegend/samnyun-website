@@ -96,6 +96,22 @@
     .cta-box p { font-size: 14px; color: rgba(255,255,255,0.7); }
     .cta-btn { background: var(--white); color: var(--red); padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform 0.2s; }
     .cta-btn:hover { transform: translateY(-2px); }
+    .module-num { width: 36px; height: 36px; border-radius: 50%; background: var(--red-light); color: var(--red); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; letter-spacing: 0.5px; }
+    .img-slider { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; background: var(--gray-light); }
+    .slider-track { display: flex; transition: transform 0.4s ease; height: 100%; }
+    .slide { flex: 0 0 100%; height: 100%; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slider-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--gray); font-size: 13px; border: 2px dashed var(--border); border-radius: 16px; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; line-height: 1; z-index: 2; color: var(--black); transition: background 0.2s; }
+    .slider-btn:hover { background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .slider-prev { left: 10px; } .slider-next { right: 10px; }
+    .slider-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+    .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
+    .slider-dot.active { background: var(--red); }
+    .cta-btns { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+    .cta-btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.65); }
+    .cta-btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+    @media (max-width: 640px) { .cta-btns { width: 100%; justify-content: center; } }
     @media (max-width: 640px) { .cta-box { flex-direction: column; padding: 32px 24px; text-align: center; } }
     footer { background: #111; padding: 64px 0 36px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
@@ -266,69 +282,14 @@
       <button class="course-tab active regular" data-panel="regular">정규 과정</button>
       <button class="course-tab naesin" data-panel="naesin">내신 과정</button>
     </div>
-
-    <div class="course-panel active" id="panel-regular">
-      <div class="course-header">
-        <div class="ch-left">
-          <span class="ch-badge regular">정규 과정</span>
-          <h2 class="ch-title">중등 국어 심화반</h2>
-          <p class="ch-desc">고전문학과 심화 독해로 실력을 업그레이드하고, 논술 기초를 통해 고등 과정을 미리 준비합니다. 복합 지문 분석 능력을 키워 고등 국어 입문을 앞당깁니다.</p>
-        </div>
-        <div class="ch-right">
-          <div class="course-img-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div>
-        </div>
-      </div>
-      <p class="section-title">핵심 학습 영역</p>
-      <div class="module-grid">
-        <div class="module-card"><div class="module-icon">🏛️</div><div class="module-name">고전문학 입문</div><div class="module-sub">고전시가·소설</div></div>
-        <div class="module-card"><div class="module-icon">📊</div><div class="module-name">비문학 심화</div><div class="module-sub">복합 지문 분석</div></div>
-        <div class="module-card"><div class="module-icon">✏️</div><div class="module-name">논술 기초</div><div class="module-sub">주장·근거 쓰기</div></div>
-      </div>
-      <p class="section-title">주요 학습 포인트</p>
-      <div class="points-section">
-        <ul class="points-list regular">
-          <li>고전시가·고전소설 기초 작품 30선 분석 — 수능 고전문학의 토대를 미리 쌓습니다</li>
-          <li>복합 지문(2개 이상) 독해 전략 및 연결 훈련 — 고난도 문제에 흔들리지 않는 실력</li>
-          <li>논리적 글쓰기 기초 — 주장·근거·예시 구조 완성으로 논술 실력을 시작합니다</li>
-        </ul>
-      </div>
-      <div class="cta-box"><div><h3>중2 정규 과정 상담 신청</h3><p>맞춤 수준 진단 후 최적의 반을 배정해드립니다.</p></div><a href="consulting.html" class="cta-btn">상담 신청하기</a></div>
-    </div>
-
-    <div class="course-panel" id="panel-naesin">
-      <div class="course-header">
-        <div class="ch-left">
-          <span class="ch-badge naesin">내신 과정</span>
-          <h2 class="ch-title">중2 내신 완성반</h2>
-          <p class="ch-desc">중2 내신의 핵심인 서술형·논술형 대비와 함께 학교별 맞춤 출제 경향을 집중 분석합니다. 시험 2주 전 집중 특강으로 마무리까지 완벽하게 대비합니다.</p>
-        </div>
-        <div class="ch-right">
-          <div class="course-img-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div>
-        </div>
-      </div>
-      <p class="section-title">핵심 학습 영역</p>
-      <div class="module-grid">
-        <div class="module-card"><div class="module-icon">🎯</div><div class="module-name">출제 예측</div><div class="module-sub">학교별 기출 분석</div></div>
-        <div class="module-card"><div class="module-icon">✍️</div><div class="module-name">논술형 대비</div><div class="module-sub">600~800자 글쓰기</div></div>
-        <div class="module-card"><div class="module-icon">🔄</div><div class="module-name">반복 훈련</div><div class="module-sub">오답 재풀이 시스템</div></div>
-      </div>
-      <p class="section-title">주요 학습 포인트</p>
-      <div class="points-section">
-        <ul class="points-list naesin">
-          <li>중2 교과서 지문 전체 심층 분석 — 출제 가능한 모든 포인트를 커버합니다</li>
-          <li>논술형 답안 완성 훈련 — 구조 잡기부터 퇴고까지 전 과정을 연습합니다</li>
-          <li>시험 2주 전 집중 특강 별도 운영 — 마지막까지 놓치지 않습니다</li>
-        </ul>
-      </div>
-      <div class="cta-box"><div><h3>중2 내신 과정 상담 신청</h3><p>시험 일정에 맞춘 집중 대비 계획을 안내해드립니다.</p></div><a href="consulting.html" class="cta-btn">상담 신청하기</a></div>
-    </div>
+    <div class="course-panel active" id="panel-regular"></div>
+    <div class="course-panel" id="panel-naesin"></div>
   </div>
 </main>
 
 <footer><div class="footer-inner"><div class="footer-top"><div><div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div><p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p><div class="footer-contact"><span>📞 <strong>고잔점</strong> 031-480-3500</span><span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span><span>📞 <strong>자이점</strong> 031-8042-3543</span><span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span><span>📞 <strong>하이퍼관</strong> 031-8042-3565</span><span>📍 경기 안산시 상록구 충장로 80 101호</span></div></div><div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="reviews-honor.html">명예의 전당</a></li></ul></div><div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="consulting.html">온라인 상담 신청</a></li><li><a href="http://pf.kakao.com/_icyxgn" target="_blank" rel="noopener">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p><p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p></div></div></footer>
 
 <script>
-const hamburger = document.getElementById('hamburger');
 const hamburger = document.getElementById('hamburger');
 const fsOverlay = document.getElementById('fsOverlay');
 const fsClose   = document.getElementById('fsClose');
@@ -346,6 +307,40 @@ document.querySelectorAll('.course-tab').forEach(tab => {
     document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
   });
 });
+function renderSlider(images) {
+  if (!images || !images.length) return '<div class="img-slider"><div class="slider-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div></div>';
+  const slides = images.map(img => '<div class="slide"><img src="' + (typeof img === 'string' ? img : (img.image || '')) + '" alt="커리큘럼 이미지"></div>').join('');
+  const btns = images.length > 1 ? '<button class="slider-btn slider-prev">&#8249;</button><button class="slider-btn slider-next">&#8250;</button>' : '';
+  return '<div class="img-slider">' + btns + '<div class="slider-track">' + slides + '</div><div class="slider-dots"></div></div>';
+}
+function initSlider(el) {
+  const track = el.querySelector('.slider-track');
+  const slides = el.querySelectorAll('.slide');
+  if (!track || !slides.length) return;
+  const dotsEl = el.querySelector('.slider-dots');
+  let cur = 0; const dots = [];
+  slides.forEach((_, i) => {
+    const d = document.createElement('button'); d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i)); dotsEl.appendChild(d); dots.push(d);
+  });
+  function go(idx) { cur = ((idx % slides.length) + slides.length) % slides.length; track.style.transform = 'translateX(-' + (cur * 100) + '%)'; dots.forEach((d, i) => d.classList.toggle('active', i === cur)); }
+  el.querySelector('.slider-prev')?.addEventListener('click', () => go(cur - 1));
+  el.querySelector('.slider-next')?.addEventListener('click', () => go(cur + 1));
+  if (slides.length <= 1 && dotsEl) dotsEl.style.display = 'none';
+}
+function renderPanel(type, d) {
+  if (!d) return;
+  const panel = document.getElementById('panel-' + type);
+  if (!panel) return;
+  const mods = (d.modules || []).map((m, i) => '<div class="module-card"><div class="module-num">' + String(i + 1).padStart(2, '0') + '</div><div class="module-name">' + m.name + '</div><div class="module-sub">' + (m.sub || '') + '</div></div>').join('');
+  const pts = (d.points || []).map(p => '<li>' + (typeof p === 'string' ? p : (p.item || p.text || '')) + '</li>').join('');
+  panel.innerHTML = '<div class="course-header"><div class="ch-left"><span class="ch-badge ' + type + '">' + (type === 'regular' ? '정규 과정' : '내신 과정') + '</span><h2 class="ch-title">' + (d.title || '') + '</h2><p class="ch-desc">' + (d.desc || '') + '</p></div><div class="ch-right">' + renderSlider(d.images) + '</div></div><p class="section-title">핵심 학습 영역</p><div class="module-grid">' + mods + '</div><p class="section-title">주요 학습 포인트</p><div class="points-section"><ul class="points-list ' + type + '">' + pts + '</ul></div><div class="cta-box"><div><h3>' + (d.cta_title || '') + '</h3><p>' + (d.cta_desc || '') + '</p></div><div class="cta-btns"><a href="consulting.html" class="cta-btn">상담 신청하기</a><a href="news-timetable.html" class="cta-btn cta-btn-outline">시간표 보기</a></div></div>';
+  panel.querySelectorAll('.img-slider').forEach(s => initSlider(s));
+}
+fetch('data/curriculum-m2.json').then(r => r.json()).then(data => {
+  renderPanel('regular', data.regular);
+  renderPanel('naesin', data.naesin);
+}).catch(console.error);
 </script>
 </body>
 </html>

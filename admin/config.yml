@@ -476,3 +476,430 @@ collections:
                 name: founding
                 widget: boolean
                 default: false
+  - name: curricula
+    label: 커리큘럼 페이지
+    files:
+      - name: curriculum_h1
+        label: 고1 커리큘럼
+        file: data/curriculum-h1.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_h2
+        label: 고2 커리큘럼
+        file: data/curriculum-h2.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_h3
+        label: 고3 커리큘럼
+        file: data/curriculum-h3.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_m1
+        label: 중1 커리큘럼
+        file: data/curriculum-m1.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_m2
+        label: 중2 커리큘럼
+        file: data/curriculum-m2.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_m3
+        label: 중3 커리큘럼
+        file: data/curriculum-m3.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_e5
+        label: 초5 커리큘럼
+        file: data/curriculum-e5.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_e6
+        label: 초6 커리큘럼
+        file: data/curriculum-e6.json
+        format: json
+        fields:
+          - name: regular
+            label: 정규 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
+          - name: naesin
+            label: 내신 과정
+            widget: object
+            fields:
+              - { label: 과정명, name: title, widget: string }
+              - { label: 소개 멘트, name: desc, widget: text }
+              - label: 수업 구성
+                name: modules
+                widget: list
+                collapsed: true
+                fields:
+                  - { label: 모듈명, name: name, widget: string }
+                  - { label: 부제, name: sub, widget: string, required: false }
+              - label: 주요 학습 포인트
+                name: points
+                widget: list
+                collapsed: true
+              - label: 이미지
+                name: images
+                widget: list
+                collapsed: true
+                field: { label: 이미지, name: image, widget: image }
+              - { label: CTA 제목, name: cta_title, widget: string }
+              - { label: CTA 설명, name: cta_desc, widget: string }
