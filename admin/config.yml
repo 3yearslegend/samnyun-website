@@ -323,10 +323,8 @@ collections:
             collapsed: true
             fields:
               - { label: 이미지, name: image, widget: image, required: false }
-              - { label: 버튼1 텍스트, name: btn1_text, widget: string, required: false }
-              - { label: 버튼1 링크, name: btn1_link, widget: string, required: false }
-              - { label: 버튼2 텍스트, name: btn2_text, widget: string, required: false }
-              - { label: 버튼2 링크, name: btn2_link, widget: string, required: false }
+              - { label: "버튼 텍스트 (없으면 버튼 미표시)", name: btn_text, widget: string, required: false }
+              - { label: 버튼 링크, name: btn_link, widget: string, required: false }
 
   - name: teachers
     label: 강사 소개
@@ -426,6 +424,7 @@ collections:
         file: data/honors.json
         format: json
         fields:
+          - { label: "메인 멘트 (메인 페이지 명예의 전당 섹션 상단 문구)", name: main_desc, widget: text, required: false }
           - { label: "연도 (예: 2025)", name: year, widget: string }
           - label: 학기별 명단
             name: semesters

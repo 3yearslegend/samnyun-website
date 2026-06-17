@@ -127,20 +127,9 @@
       position: relative; display: flex; align-items: center;
       padding-top: var(--nav-h); overflow: hidden;
     }
-    .hero-slide-bg { position: absolute; inset: 0; z-index: 0; }
-    .slide-1 .hero-slide-bg { background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 40%, #0a0a0a 100%); }
-    .hero-slide-seminar .hero-slide-bg { background: linear-gradient(135deg, #0a0005 0%, #1a000a 40%, #0d0008 100%); }
-    .hero-cms-bg-img { position: absolute; inset: 0; z-index: 1; background: center/cover no-repeat; opacity: 0.35; }
-    .hero-seminar-bg-img {
-      position: absolute; inset: 0; z-index: 1;
-      background: center/cover no-repeat;
-      opacity: 0.28;
-    }
-    .hero-seminar-overlay {
-      position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.28) 100%);
-    }
-    .hero-slide-seminar .hero-inner { z-index: 3; }
+    .hero-slide-cms { background: #111; }
+    .hero-slide-cms .cms-bg { position: absolute; inset: 0; background: center/cover no-repeat; z-index: 0; }
+    .hero-slide-cms .cms-btn-wrap { position: absolute; bottom: 80px; left: 0; right: 0; text-align: center; z-index: 1; }
 
     /* Arrows */
     .hero-arrow {
@@ -173,43 +162,6 @@
       .hero-dots { bottom: 20px; }
     }
 
-    .hero-bg-img {
-      position: absolute; inset: 0;
-      background: url('') center/cover no-repeat;
-      opacity: 0.35;
-    }
-    .hero-bg-text {
-      position: absolute; right: -30px; bottom: -20px;
-      font-family: var(--font-serif); font-size: clamp(160px, 25vw, 320px);
-      font-weight: 700; color: rgba(255,255,255,0.022); line-height: 1;
-      user-select: none; pointer-events: none;
-    }
-    .hero-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--red); z-index: 1; }
-    .hero-inner {
-      position: relative; z-index: 2;
-      max-width: 1440px; margin: 0 auto; padding: 80px 40px;
-      width: 100%; text-align: center;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--red); color: var(--white);
-      font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
-      padding: 6px 14px; border-radius: 2px; margin-bottom: 28px;
-      text-transform: uppercase;
-    }
-    .hero-h1 {
-      font-family: var(--font-serif); font-size: clamp(42px, 7vw, 88px);
-      font-weight: 700; color: var(--white); line-height: 1.1;
-      letter-spacing: -2.5px; margin-bottom: 10px;
-    }
-    .hero-h2 {
-      font-family: var(--font-serif); font-size: clamp(20px, 3.5vw, 40px);
-      font-weight: 400; color: rgba(255,255,255,0.45);
-      letter-spacing: -1px; margin-bottom: 40px; line-height: 1.4;
-    }
-    .hero-h2 em { color: var(--red); font-style: normal; font-weight: 600; }
-    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 72px; justify-content: center; }
     .btn-primary {
       background: var(--red); color: var(--white); padding: 16px 32px;
       border-radius: 4px; text-decoration: none; font-size: 16px; font-weight: 500;
@@ -224,19 +176,6 @@
       display: inline-flex; align-items: center; gap: 8px;
     }
     .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
-
-    .hero-kpi {
-      display: flex; gap: 56px; flex-wrap: wrap; justify-content: center;
-      padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
-      width: 100%;
-    }
-    .hero-kpi-item .num {
-      font-family: var(--font-serif); font-size: 46px; font-weight: 700;
-      color: var(--red); line-height: 1; margin-bottom: 6px;
-    }
-    .hero-kpi-item .num small { font-size: 22px; }
-    .hero-kpi-item .lbl { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
-    @media (max-width: 768px) { .hero-inner { padding: 56px 20px; } .hero-kpi { gap: 32px; } }
 
     /* ===================== QUICK LINKS ===================== */
     #quicklinks {
@@ -297,14 +236,19 @@
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
 
     /* ===================== TROPHY / HONOR STATS ===================== */
-    #trophy { background: var(--black); }
+    #trophy { background: var(--black); padding-top: 64px; padding-bottom: 64px; }
+    .trophy-header { text-align: center; padding: 0 40px 52px; }
+    .trophy-desc { font-family: var(--font-serif); font-size: clamp(18px, 2.5vw, 26px); color: rgba(255,255,255,0.75); font-weight: 400; letter-spacing: -0.5px; line-height: 1.6; }
     .trophy-stats { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(4, 1fr); }
-    .trophy-stat { padding: 64px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+    .trophy-stat { padding: 48px 40px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
     .trophy-stat:last-child { border-right: none; }
     .trophy-stat-num { font-family: var(--font-serif); font-size: clamp(44px, 7vw, 72px); font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -2px; margin-bottom: 10px; }
     .trophy-stat-num span { color: var(--red); }
     .trophy-stat-label { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 0.5px; }
-    @media (max-width: 768px) { .trophy-stats { grid-template-columns: repeat(2,1fr); padding: 0 20px; } .trophy-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 36px 16px; } .trophy-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.07); } .trophy-stat:last-child { border-bottom: none; } .trophy-stat:nth-last-child(2) { border-bottom: none; } }
+    .trophy-footer { text-align: center; padding-top: 52px; }
+    .trophy-cta { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); padding: 14px 36px; border-radius: 6px; font-size: 15px; font-weight: 500; text-decoration: none; transition: border-color 0.2s, background 0.2s; }
+    .trophy-cta:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+    @media (max-width: 768px) { #trophy { padding-top: 48px; padding-bottom: 48px; } .trophy-header { padding-bottom: 36px; } .trophy-stats { grid-template-columns: repeat(2,1fr); padding: 0 20px; } .trophy-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 28px 16px; } .trophy-stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.07); } .trophy-stat:last-child { border-bottom: none; } .trophy-stat:nth-last-child(2) { border-bottom: none; } .trophy-footer { padding-top: 36px; } }
 
     /* ===================== REVIEWS ===================== */
     #reviews { background: var(--white); }
@@ -443,14 +387,10 @@
 
     /* ===================== 추가 반응형 ===================== */
     @media (max-width: 768px) {
-      .hero-kpi { gap: 20px; }
-      .hero-kpi-item .num { font-size: 36px; }
-      .hero-buttons { flex-direction: column; align-items: center; gap: 10px; }
       .btn-primary, .btn-outline { width: 100%; max-width: 320px; justify-content: center; }
       .section { padding: 52px 0; }
     }
     @media (max-width: 480px) {
-      .hero-inner { padding: 40px 16px; }
       .ql-card { padding: 18px 14px; gap: 10px; }
       .why-card { padding: 24px 18px; }
       .review-card { padding: 22px 16px; }
@@ -657,30 +597,6 @@
 <!-- ===================== HERO CAROUSEL ===================== -->
 <section id="hero">
   <div class="hero-track" id="heroTrack">
-
-    <!-- Slide 1 -->
-    <div class="hero-slide slide-1">
-      <div class="hero-slide-bg"></div>
-      <div class="hero-bg-img"></div>
-      <div class="hero-bg-text">神話</div>
-      <div class="hero-accent"></div>
-      <div class="hero-inner">
-        <div class="hero-tag">Legend of Three Years</div>
-        <h1 class="hero-h1">3년이 만드는<br>국어의 <span style="color:var(--red)">신화</span></h1>
-        <h2 class="hero-h2">체계적인 독해와 논술 교육으로<br><em>스스로 생각하고 쓰는 힘</em>을 키웁니다</h2>
-        <div class="hero-buttons">
-          <a href="#consult-cta" class="btn-primary">상담 신청하기 →</a>
-          <a href="news-timetable.html" class="btn-outline">시간표 보기</a>
-        </div>
-        <div class="hero-kpi">
-          <div class="hero-kpi-item"><div class="num">[N]<small>년</small></div><div class="lbl">교육 경력</div></div>
-          <div class="hero-kpi-item"><div class="num">[N]<small>+</small></div><div class="lbl">누적 수강생</div></div>
-          <div class="hero-kpi-item"><div class="num">[N]<small>%</small></div><div class="lbl">상위권 배출률</div></div>
-        </div>
-      </div>
-    </div>
-
-
   </div>
 
   <!-- 화살표 -->
@@ -748,6 +664,9 @@
 
 <!-- ===================== TROPHY / HONOR STATS ===================== -->
 <section id="trophy">
+  <div class="trophy-header" id="honorHeader" style="display:none">
+    <p class="trophy-desc" id="honorDesc"></p>
+  </div>
   <div class="trophy-stats" id="honorStatsBar">
     <div class="trophy-stat">
       <div class="trophy-stat-num" id="honor-top1-s1">—</div>
@@ -765,6 +684,9 @@
       <div class="trophy-stat-num" id="honor-grade1-s2">—</div>
       <div class="trophy-stat-label">2025 2학기 1등급</div>
     </div>
+  </div>
+  <div class="trophy-footer">
+    <a href="reviews-honor.html" class="trophy-cta">명예의 전당 보러가기 →</a>
   </div>
 </section>
 
@@ -966,43 +888,28 @@
     fetch('data/carousel.json').then(r => r.json()).catch(() => ({ slides: [] })),
     fetch('data/seminars.json').then(r => r.json()).catch(() => ({ seminars: [] }))
   ]).then(([carouselData, seminarData]) => {
-    /* Inject CMS carousel slides (image + buttons only) */
+    /* Inject CMS carousel slides (image fullsize + optional single button) */
     (carouselData.slides || []).forEach(s => {
       const el = document.createElement('div');
       el.className = 'hero-slide hero-slide-cms';
       el.innerHTML =
-        `<div class="hero-slide-bg" style="background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 40%,#0a0a0a 100%)"></div>` +
-        (s.image ? `<div class="hero-cms-bg-img" style="background-image:url('${s.image}')"></div>` : '') +
-        `<div class="hero-inner">` +
-          `<div class="hero-buttons" style="margin-bottom:0">` +
-            (s.btn1_text ? `<a href="${s.btn1_link || '#'}" class="btn-primary">${s.btn1_text}</a>` : '') +
-            (s.btn2_text ? `<a href="${s.btn2_link || '#'}" class="btn-outline">${s.btn2_text}</a>` : '') +
-          `</div>` +
-        `</div>`;
+        (s.image ? `<div class="cms-bg" style="background-image:url('${s.image}')"></div>` : '') +
+        (s.btn_text ? `<div class="cms-btn-wrap"><a href="${s.btn_link || '#'}" class="btn-primary">${s.btn_text}</a></div>` : '');
       heroTrack.appendChild(el);
       heroSlides.push(el);
     });
 
-    /* Inject seminar slides */
+    /* Inject seminar slides (image fullsize + detail button) */
     const allSeminars = seminarData.seminars || [];
     const toShow = allSeminars.filter(s => s.show_in_carousel);
     toShow.forEach(s => {
       const semIdx = allSeminars.indexOf(s);
-      const bgSrc = s.carousel_image || s.poster || '';
+      const bgSrc = s.carousel_image || s.poster || s.thumbnail || '';
       const el = document.createElement('div');
-      el.className = 'hero-slide hero-slide-seminar';
+      el.className = 'hero-slide hero-slide-cms';
       el.innerHTML =
-        `<div class="hero-slide-bg"></div>` +
-        (bgSrc ? `<div class="hero-seminar-bg-img" style="background-image:url('${bgSrc}')"></div>` : '') +
-        `<div class="hero-seminar-overlay"></div>` +
-        `<div class="hero-inner">` +
-          `<div class="hero-tag">입시 설명회</div>` +
-          `<h1 class="hero-h1">${s.title}</h1>` +
-          `<h2 class="hero-h2">${fmtSeminarDate(s.date)}${s.time ? ' &nbsp;·&nbsp; ' + s.time : ''}<br>${s.location}</h2>` +
-          `<div class="hero-buttons">` +
-            `<a href="news-seminar-detail.html?idx=${semIdx}" class="btn-primary">자세히 보기 →</a>` +
-          `</div>` +
-        `</div>`;
+        (bgSrc ? `<div class="cms-bg" style="background-image:url('${bgSrc}')"></div>` : '') +
+        `<div class="cms-btn-wrap"><a href="news-seminar-detail.html?idx=${semIdx}" class="btn-primary">자세히 보기 →</a></div>`;
       heroTrack.appendChild(el);
       heroSlides.push(el);
     });
@@ -1031,6 +938,10 @@
     }, step);
   }
   fetch('data/honors.json').then(r => r.json()).then(d => {
+    if (d.main_desc) {
+      document.getElementById('honorDesc').textContent = d.main_desc;
+      document.getElementById('honorHeader').style.display = '';
+    }
     const sems = d.semesters || [];
     const s1 = sems[0] || {}, s2 = sems[1] || {};
     const c = {
