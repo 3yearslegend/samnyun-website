@@ -107,6 +107,9 @@
     .sf-btn { flex: 1; min-width: 0; height: 44px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; white-space: nowrap; }
     .sf-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
     .sf-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+    .sf-branch-dt { margin-top: 10px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; }
+    .sf-branch-dt-lbl { font-size: 11px; font-weight: 700; color: #166534; margin-bottom: 3px; letter-spacing: 0.3px; }
+    .sf-branch-dt-val { font-size: 14px; font-weight: 600; color: #15803d; }
     .sf-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .sf-submit { width: 100%; height: 56px; background: var(--red); color: var(--white); border: none; border-radius: 10px; font-size: 16px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 22px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
     .sf-submit:hover:not(:disabled) { background: var(--red-dark); transform: translateY(-2px); }
@@ -324,6 +327,20 @@
             <input type="hidden" id="sf-statusHidden" name="재원여부" value="">
             <input type="hidden" id="sf-branchHidden" name="희망지점" value="">
 
+            <div class="sf-group" id="sf-branchGroup" style="display:none;">
+              <label class="sf-label">희망 지점 <span class="req">*</span></label>
+              <div class="sf-btn-group" id="sf-branchBtnGroup">
+                <button type="button" class="sf-btn" data-branch="고잔점">고잔점</button>
+                <button type="button" class="sf-btn" data-branch="자이점">자이점</button>
+                <button type="button" class="sf-btn" data-branch="하이퍼관">하이퍼관</button>
+              </div>
+              <div class="sf-branch-dt" id="sf-branchDt" style="display:none;">
+                <div class="sf-branch-dt-lbl">선택하신 지점 일정</div>
+                <div class="sf-branch-dt-val" id="sf-branchDtVal"></div>
+              </div>
+              <span class="sf-err" id="sf-branchErr">희망 지점을 선택해 주세요.</span>
+            </div>
+
             <div class="sf-row2">
               <div class="sf-group">
                 <label class="sf-label" for="sf-name">학생 이름 <span class="req">*</span></label>
@@ -533,10 +550,17 @@
 
     /* ── 정보 그리드 ── */
     const isOpen = (effectiveStatus === '신청 중');
+    const hasBranchSchedule = !!(s.gojan_date || s.zai_date || s.hyper_date);
+    currentSeminar = s;
+
+    const dtValue = hasBranchSchedule
+      ? '<span style="color:var(--gray);font-size:14px;">지점 선택 후 확인</span>'
+      : (formatDate(s.date) + (s.time ? ' ' + s.time : ''));
+
     const cells = [
-      { label: '일시', value: formatDate(s.date) + (s.time ? ' ' + s.time : '') },
+      { label: '일시', value: dtValue, html: true, id: 'infoDtValue' },
       { label: '장소', value: s.location || '추후 공지' },
-      { label: '지점', value: s.branch || '전체 지점' },
+      { label: '지점', value: hasBranchSchedule ? '고잔점 / 자이점 / 하이퍼관' : (s.branch || '전체 지점') },
       { label: '대상', value: s.target || '관심 있는 누구나' },
       { label: '정원', value: s.capacity || '별도 안내' },
       { label: '신청 마감', value: formatDatetime(s.deadline_datetime), highlight: isOpen },
@@ -545,7 +569,7 @@
     document.getElementById('infoGrid').innerHTML = cells.map(c =>
       `<div class="info-cell">
         <div class="info-label">${c.label}</div>
-        <div class="info-value${c.highlight ? ' highlight' : ''}">${c.value}</div>
+        <div class="info-value${c.highlight ? ' highlight' : ''}" ${c.id ? `id="${c.id}"` : ''}>${c.value}</div>
       </div>`
     ).join('');
 
@@ -561,8 +585,14 @@
 
     /* ── 신청 폼 숨김 필드 ── */
     document.getElementById('sf-seminarTitle').value = s.title;
-    currentBranch = s.branch || '';
-    document.getElementById('sf-branchHidden').value = currentBranch;
+    if (hasBranchSchedule) {
+      document.getElementById('sf-branchGroup').style.display = '';
+      currentBranch = '';
+      document.getElementById('sf-branchHidden').value = '';
+    } else {
+      currentBranch = s.branch || '';
+      document.getElementById('sf-branchHidden').value = currentBranch;
+    }
 
     /* ── 상태별 폼 처리 ── */
     const formWrap = document.querySelector('.form-sticky-wrap');
@@ -648,7 +678,8 @@
     '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
     '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
   };
-  let sfLevel = '', sfStatus = '', currentBranch = '';
+  const BRANCH_KEYS = { '고잔점': 'gojan', '자이점': 'zai', '하이퍼관': 'hyper' };
+  let sfLevel = '', sfStatus = '', currentBranch = '', currentSeminar = null;
 
   document.getElementById('sf-phone').addEventListener('input', function() {
     let v = this.value.replace(/\D/g, '');
@@ -702,6 +733,35 @@
     });
   });
 
+  document.querySelectorAll('#sf-branchBtnGroup .sf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#sf-branchBtnGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      currentBranch = btn.dataset.branch;
+      document.getElementById('sf-branchHidden').value = currentBranch;
+      document.getElementById('sf-branchErr').classList.remove('show');
+
+      const key = BRANCH_KEYS[currentBranch];
+      if (currentSeminar && key) {
+        const bDate = currentSeminar[key + '_date'];
+        const bTime = currentSeminar[key + '_time'];
+        const dtEl   = document.getElementById('sf-branchDt');
+        const dtValEl = document.getElementById('sf-branchDtVal');
+        if (bDate || bTime) {
+          const dtStr = (bDate ? formatDate(bDate) : '') + (bTime ? ' ' + bTime : '');
+          dtValEl.textContent = dtStr;
+          dtEl.style.display = '';
+          const infoDt = document.getElementById('infoDtValue');
+          if (infoDt) infoDt.textContent = dtStr;
+        } else {
+          dtEl.style.display = 'none';
+          const infoDt = document.getElementById('infoDtValue');
+          if (infoDt) infoDt.innerHTML = '<span style="color:var(--gray);font-size:14px;">해당 지점 일정 미정</span>';
+        }
+      }
+    });
+  });
+
   document.getElementById('seminarForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const nameEl  = document.getElementById('sf-name');
@@ -719,6 +779,9 @@
     else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
     if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
     else { document.getElementById('sf-statusErr').classList.remove('show'); }
+    const needBranch = currentSeminar && !!(currentSeminar.gojan_date || currentSeminar.zai_date || currentSeminar.hyper_date);
+    if (needBranch && !currentBranch) { document.getElementById('sf-branchErr').classList.add('show'); ok = false; }
+    else { const be = document.getElementById('sf-branchErr'); if (be) be.classList.remove('show'); }
     if (!ok) return;
 
     btn.disabled = true; btn.classList.add('submitting');

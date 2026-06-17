@@ -38,6 +38,12 @@ collections:
                 widget: select
                 options: [고잔점, 자이점, 하이퍼관, 전체]
                 required: false
+              - { label: "고잔점 날짜 (예: 2026-06-10)", name: gojan_date, widget: string, required: false }
+              - { label: "고잔점 시간 (예: 오후 7:00 ~ 9:00)", name: gojan_time, widget: string, required: false }
+              - { label: "자이점 날짜 (예: 2026-06-11)", name: zai_date, widget: string, required: false }
+              - { label: "자이점 시간 (예: 오후 7:00 ~ 9:00)", name: zai_time, widget: string, required: false }
+              - { label: "하이퍼관 날짜 (예: 2026-06-12)", name: hyper_date, widget: string, required: false }
+              - { label: "하이퍼관 시간 (예: 오후 7:00 ~ 9:00)", name: hyper_time, widget: string, required: false }
               - label: "신청 마감 일시 (예: 2026-06-10 17:00 → 설명회 시작 2시간 전 권장)"
                 name: deadline_datetime
                 widget: string
