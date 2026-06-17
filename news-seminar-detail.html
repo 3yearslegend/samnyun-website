@@ -44,15 +44,12 @@
     .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
 
     /* ===== POSTER HERO ===== */
-    .poster-hero { margin-top: var(--nav-h); position: relative; background: linear-gradient(135deg, #1C1C1C 0%, #2d1412 50%, #C0271A 100%); min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; }
-    .poster-hero img.poster-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
-    .poster-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 60%, transparent 100%); }
-    .poster-hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 40px 48px; width: 100%; }
-    .poster-hero-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 100px; background: var(--red); color: var(--white); margin-bottom: 14px; letter-spacing: 1px; }
-    .poster-hero-title { font-family: var(--font-serif); font-size: clamp(24px, 4vw, 42px); font-weight: 700; color: var(--white); line-height: 1.3; letter-spacing: -1px; margin-bottom: 10px; }
-    .poster-hero-sub { font-size: 15px; color: rgba(255,255,255,0.6); }
-    .poster-placeholder-icon { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; opacity: 0.15; }
-    @media (max-width: 768px) { .poster-hero { min-height: 280px; } .poster-hero-content { padding: 0 20px 36px; } }
+    .poster-hero { margin-top: var(--nav-h); background: var(--white); text-align: center; }
+    .poster-hero img.poster-img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+    .poster-hero-apply { background: var(--white); padding: 20px 20px 28px; text-align: center; }
+    .apply-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); padding: 14px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; text-decoration: none; transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
+    .apply-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+    @media (max-width: 768px) { .apply-btn { padding: 12px 28px; font-size: 15px; } }
 
     /* ===== MAIN LAYOUT ===== */
     .page-content { padding: 0 0 120px; }
@@ -105,8 +102,9 @@
     .sf-sel-wrap::after { content: ''; position: absolute; right: 15px; top: 50%; transform: translateY(-50%); border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 6px solid var(--gray); pointer-events: none; }
     .sf-btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
     .sf-btn { flex: 1; min-width: 0; height: 44px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; font-family: var(--font-sans); color: var(--gray-dark); background: var(--white); cursor: pointer; transition: all 0.18s; white-space: nowrap; }
-    .sf-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+    .sf-btn:hover:not(:disabled) { border-color: var(--red); color: var(--red); background: var(--red-light); }
     .sf-btn.selected { border-color: var(--red); color: var(--red); background: var(--red-light); font-weight: 700; }
+    .sf-btn:disabled { color: #aaa; border-color: #ddd; cursor: not-allowed; background: #f5f5f5; opacity: 0.65; }
     .sf-branch-dt { margin-top: 10px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; }
     .sf-branch-dt-lbl { font-size: 11px; font-weight: 700; color: #166534; margin-bottom: 3px; letter-spacing: 0.3px; }
     .sf-branch-dt-val { font-size: 14px; font-weight: 600; color: #15803d; }
@@ -280,16 +278,9 @@
 
 
 <!-- 포스터 히어로 (JS로 채워짐) -->
-<div class="poster-hero" id="posterHero">
-  <div class="poster-placeholder-icon">
-    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
-  </div>
-  <div class="poster-hero-overlay"></div>
-  <div class="poster-hero-content">
-    <div class="poster-hero-badge" id="heroBadge" style="display:none;">설명회</div>
-    <div class="poster-hero-title" id="heroTitle"></div>
-    <div class="poster-hero-sub" id="heroSub"></div>
-  </div>
+<div class="poster-hero" id="posterHero"></div>
+<div class="poster-hero-apply" id="posterHeroApply" style="display:none;">
+  <a href="#" class="apply-btn" id="heroApplyBtn">신청하기</a>
 </div>
 
 <main class="page-content" id="pageContent" style="display:none;">
@@ -492,24 +483,46 @@
     return `${dt.getFullYear()}년 ${dt.getMonth()+1}월 ${dt.getDate()}일 (${dow}) ${hh}:${mm}까지`;
   }
 
-  /* ===== STATUS 자동 계산 ===== */
-  /* 수동 status 필드가 있으면 우선 사용, 없으면 시간 기반으로 자동 계산 */
-  function getEffectiveStatus(s) {
-    if (s.status) return s.status;          // 수동 설정 우선
+  /* ===== BRANCH HELPERS ===== */
+  const BRANCH_KEYS_MAP = { '고잔점': 'gojan', '자이점': 'zai', '하이퍼관': 'hyper' };
+
+  function getActiveBranches(s) {
+    if (Array.isArray(s.branches) && s.branches.length > 0) return s.branches;
+    if (s.branch && s.branch !== '전체') return [s.branch];
+    const auto = [];
+    if (s.gojan_date) auto.push('고잔점');
+    if (s.zai_date) auto.push('자이점');
+    if (s.hyper_date) auto.push('하이퍼관');
+    return auto;
+  }
+
+  function isBranchExpired(s, key) {
     const now = new Date();
-    /* 설명회 당일 자정 이후 → 종료 */
-    if (s.date) {
-      const endOfDay = parseDate(s.date);
-      if (endOfDay) {
-        endOfDay.setHours(23, 59, 59, 999);
-        if (now > endOfDay) return '종료';
+    const dlStr = s[key + '_deadline'];
+    if (dlStr) { const dl = parseDatetime(dlStr); return dl ? now > dl : false; }
+    const dateStr = s[key + '_date'];
+    if (dateStr) { const d = parseDate(dateStr); if (d) { d.setHours(23, 59, 59, 999); return now > d; } }
+    return false;
+  }
+
+  /* ===== STATUS 자동 계산 ===== */
+  function getEffectiveStatus(s) {
+    if (s.status) return s.status;
+    const now = new Date();
+    const hasBranchDates = !!(s.gojan_date || s.zai_date || s.hyper_date);
+    if (hasBranchDates) {
+      let latest = null;
+      for (const k of ['gojan', 'zai', 'hyper']) {
+        if (!s[k + '_date']) continue;
+        const dl = s[k + '_deadline'] ? parseDatetime(s[k + '_deadline']) : parseDate(s[k + '_date']);
+        if (dl) { if (!s[k + '_deadline']) dl.setHours(23, 59, 59, 999); if (!latest || dl > latest) latest = dl; }
       }
+      if (latest && now > latest) return '종료';
+      if (s.deadline_datetime) { const dl = parseDatetime(s.deadline_datetime); if (dl && now > dl) return '신청 마감'; }
+      return '신청 중';
     }
-    /* 마감 일시 이후 → 신청 마감 */
-    if (s.deadline_datetime) {
-      const dl = parseDatetime(s.deadline_datetime);
-      if (dl && now > dl) return '신청 마감';
-    }
+    if (s.date) { const d = parseDate(s.date); if (d) { d.setHours(23,59,59,999); if (now > d) return '종료'; } }
+    if (s.deadline_datetime) { const dl = parseDatetime(s.deadline_datetime); if (dl && now > dl) return '신청 마감'; }
     return '신청 중';
   }
 
@@ -535,32 +548,39 @@
   function renderPage(s) {
     const effectiveStatus = getEffectiveStatus(s);
 
-    /* ── 포스터 히어로 배경 ── */
-    if (s.poster) {
+    /* ── 포스터 히어로: 이미지만 표시 ── */
+    const posterSrc = s.poster || s.thumbnail;
+    if (posterSrc) {
       const img = document.createElement('img');
-      img.src = s.poster; img.alt = s.title + ' 포스터';
-      img.className = 'poster-img';
-      document.getElementById('posterHero').prepend(img);
+      img.src = posterSrc; img.alt = s.title + ' 포스터'; img.className = 'poster-img';
+      document.getElementById('posterHero').appendChild(img);
+      if (effectiveStatus === '신청 중') document.getElementById('posterHeroApply').style.display = '';
     }
-    document.getElementById('heroBadge').style.display = '';
-    document.getElementById('heroTitle').textContent = s.title;
-    const sub = [s.branch, formatDate(s.date), s.time, s.location].filter(Boolean).join(' · ');
-    document.getElementById('heroSub').textContent = sub;
     document.title = s.title + ' | 삼년의 신화 국어논술학원';
 
     /* ── 정보 그리드 ── */
     const isOpen = (effectiveStatus === '신청 중');
-    const hasBranchSchedule = !!(s.gojan_date || s.zai_date || s.hyper_date);
+    const activeBranches = getActiveBranches(s);
+    const hasBranchSchedule = activeBranches.length > 1;
     currentSeminar = s;
 
-    const dtValue = hasBranchSchedule
-      ? '<span style="color:var(--gray);font-size:14px;">지점 선택 후 확인</span>'
-      : (formatDate(s.date) + (s.time ? ' ' + s.time : ''));
+    let dtValue;
+    if (hasBranchSchedule) {
+      dtValue = '<span style="color:var(--gray);font-size:14px;">지점 선택 후 확인</span>';
+    } else if (activeBranches.length === 1) {
+      const k = BRANCH_KEYS_MAP[activeBranches[0]] || '';
+      const bDate = k ? s[k + '_date'] : s.date;
+      const bTime = k ? s[k + '_time'] : s.time;
+      dtValue = (bDate ? formatDate(bDate) : formatDate(s.date)) + (bTime || s.time ? ' ' + (bTime || s.time) : '');
+    } else {
+      dtValue = formatDate(s.date) + (s.time ? ' ' + s.time : '');
+    }
+    const branchLabel = hasBranchSchedule ? activeBranches.join(' / ') : (activeBranches[0] || s.branch || '추후 공지');
 
     const cells = [
       { label: '일시', value: dtValue, html: true, id: 'infoDtValue' },
       { label: '장소', value: s.location || '추후 공지' },
-      { label: '지점', value: hasBranchSchedule ? '고잔점 / 자이점 / 하이퍼관' : (s.branch || '전체 지점') },
+      { label: '지점', value: branchLabel },
       { label: '대상', value: s.target || '관심 있는 누구나' },
       { label: '정원', value: s.capacity || '별도 안내' },
       { label: '신청 마감', value: formatDatetime(s.deadline_datetime), highlight: isOpen },
@@ -583,15 +603,26 @@
     /* ── 상세 내용 텍스트 ── */
     document.getElementById('contentBody').textContent = s.content || '';
 
-    /* ── 신청 폼 숨김 필드 ── */
+    /* ── 신청 폼: 지점 버튼 동적 생성 ── */
     document.getElementById('sf-seminarTitle').value = s.title;
     if (hasBranchSchedule) {
+      const btnGroup = document.getElementById('sf-branchBtnGroup');
+      btnGroup.innerHTML = '';
+      activeBranches.forEach(branch => {
+        const key = BRANCH_KEYS_MAP[branch] || '';
+        const expired = key ? isBranchExpired(s, key) : false;
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'sf-btn'; btn.dataset.branch = branch;
+        btn.textContent = branch + (expired ? ' (마감)' : '');
+        if (expired) btn.disabled = true;
+        btnGroup.appendChild(btn);
+      });
       document.getElementById('sf-branchGroup').style.display = '';
-      currentBranch = '';
-      document.getElementById('sf-branchHidden').value = '';
+      currentBranch = ''; document.getElementById('sf-branchHidden').value = '';
+    } else if (activeBranches.length === 1) {
+      currentBranch = activeBranches[0]; document.getElementById('sf-branchHidden').value = currentBranch;
     } else {
-      currentBranch = s.branch || '';
-      document.getElementById('sf-branchHidden').value = currentBranch;
+      currentBranch = s.branch || ''; document.getElementById('sf-branchHidden').value = currentBranch;
     }
 
     /* ── 상태별 폼 처리 ── */
@@ -672,13 +703,19 @@
     if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  /* ===== HERO APPLY BUTTON ===== */
+  document.getElementById('heroApplyBtn').addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById('seminarForm') || document.querySelector('.form-sticky-wrap');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   /* ===== FORM LOGIC ===== */
   const sfGradeMap = {
     '초등': [['초1','1학년'],['초2','2학년'],['초3','3학년'],['초4','4학년'],['초5','5학년'],['초6','6학년']],
     '중등': [['중1','1학년'],['중2','2학년'],['중3','3학년']],
     '고등': [['고1','1학년'],['고2','2학년'],['고3','3학년']],
   };
-  const BRANCH_KEYS = { '고잔점': 'gojan', '자이점': 'zai', '하이퍼관': 'hyper' };
   let sfLevel = '', sfStatus = '', currentBranch = '', currentSeminar = null;
 
   document.getElementById('sf-phone').addEventListener('input', function() {
@@ -733,33 +770,33 @@
     });
   });
 
-  document.querySelectorAll('#sf-branchBtnGroup .sf-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#sf-branchBtnGroup .sf-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      currentBranch = btn.dataset.branch;
-      document.getElementById('sf-branchHidden').value = currentBranch;
-      document.getElementById('sf-branchErr').classList.remove('show');
+  document.getElementById('sf-branchBtnGroup').addEventListener('click', e => {
+    const btn = e.target.closest('.sf-btn');
+    if (!btn || btn.disabled) return;
+    document.querySelectorAll('#sf-branchBtnGroup .sf-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    currentBranch = btn.dataset.branch;
+    document.getElementById('sf-branchHidden').value = currentBranch;
+    document.getElementById('sf-branchErr').classList.remove('show');
 
-      const key = BRANCH_KEYS[currentBranch];
-      if (currentSeminar && key) {
-        const bDate = currentSeminar[key + '_date'];
-        const bTime = currentSeminar[key + '_time'];
-        const dtEl   = document.getElementById('sf-branchDt');
-        const dtValEl = document.getElementById('sf-branchDtVal');
-        if (bDate || bTime) {
-          const dtStr = (bDate ? formatDate(bDate) : '') + (bTime ? ' ' + bTime : '');
-          dtValEl.textContent = dtStr;
-          dtEl.style.display = '';
-          const infoDt = document.getElementById('infoDtValue');
-          if (infoDt) infoDt.textContent = dtStr;
-        } else {
-          dtEl.style.display = 'none';
-          const infoDt = document.getElementById('infoDtValue');
-          if (infoDt) infoDt.innerHTML = '<span style="color:var(--gray);font-size:14px;">해당 지점 일정 미정</span>';
-        }
+    const key = BRANCH_KEYS_MAP[currentBranch] || '';
+    if (currentSeminar && key) {
+      const bDate = currentSeminar[key + '_date'];
+      const bTime = currentSeminar[key + '_time'];
+      const dtEl   = document.getElementById('sf-branchDt');
+      const dtValEl = document.getElementById('sf-branchDtVal');
+      if (bDate || bTime) {
+        const dtStr = (bDate ? formatDate(bDate) : '') + (bTime ? ' ' + bTime : '');
+        dtValEl.textContent = dtStr;
+        dtEl.style.display = '';
+        const infoDt = document.getElementById('infoDtValue');
+        if (infoDt) infoDt.textContent = dtStr;
+      } else {
+        dtEl.style.display = 'none';
+        const infoDt = document.getElementById('infoDtValue');
+        if (infoDt) infoDt.innerHTML = '<span style="color:var(--gray);font-size:14px;">해당 지점 일정 미정</span>';
       }
-    });
+    }
   });
 
   document.getElementById('seminarForm').addEventListener('submit', function(e) {
@@ -779,7 +816,7 @@
     else { gradeEl.classList.remove('error'); document.getElementById('sf-gradeErr').classList.remove('show'); }
     if (!sfStatus) { document.getElementById('sf-statusErr').classList.add('show'); ok = false; }
     else { document.getElementById('sf-statusErr').classList.remove('show'); }
-    const needBranch = currentSeminar && !!(currentSeminar.gojan_date || currentSeminar.zai_date || currentSeminar.hyper_date);
+    const needBranch = currentSeminar && getActiveBranches(currentSeminar).length > 1;
     if (needBranch && !currentBranch) { document.getElementById('sf-branchErr').classList.add('show'); ok = false; }
     else { const be = document.getElementById('sf-branchErr'); if (be) be.classList.remove('show'); }
     if (!ok) return;

@@ -33,17 +33,21 @@ collections:
               - { label: 장소, name: location, widget: string }
               - { label: "대상 (예: 고등학생 학부모)", name: target, widget: string, required: false }
               - { label: "정원 (예: 선착순 50명)", name: capacity, widget: string, required: false }
-              - label: "지점 선택"
-                name: branch
+              - label: "지점 선택 (복수 선택 가능)"
+                name: branches
                 widget: select
-                options: [고잔점, 자이점, 하이퍼관, 전체]
+                multiple: true
+                options: [고잔점, 자이점, 하이퍼관]
                 required: false
               - { label: "고잔점 날짜 (예: 2026-06-10)", name: gojan_date, widget: string, required: false }
               - { label: "고잔점 시간 (예: 오후 7:00 ~ 9:00)", name: gojan_time, widget: string, required: false }
+              - { label: "고잔점 신청 마감 일시 (예: 2026-06-24 19:00)", name: gojan_deadline, widget: string, required: false }
               - { label: "자이점 날짜 (예: 2026-06-11)", name: zai_date, widget: string, required: false }
               - { label: "자이점 시간 (예: 오후 7:00 ~ 9:00)", name: zai_time, widget: string, required: false }
+              - { label: "자이점 신청 마감 일시 (예: 2026-06-27 19:00)", name: zai_deadline, widget: string, required: false }
               - { label: "하이퍼관 날짜 (예: 2026-06-12)", name: hyper_date, widget: string, required: false }
               - { label: "하이퍼관 시간 (예: 오후 7:00 ~ 9:00)", name: hyper_time, widget: string, required: false }
+              - { label: "하이퍼관 신청 마감 일시 (예: 2026-06-28 19:00)", name: hyper_deadline, widget: string, required: false }
               - label: "신청 마감 일시 (예: 2026-06-10 17:00 → 설명회 시작 2시간 전 권장)"
                 name: deadline_datetime
                 widget: string
