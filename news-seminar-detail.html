@@ -44,12 +44,24 @@
     .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
 
     /* ===== POSTER HERO ===== */
-    .poster-hero { margin-top: var(--nav-h); background: var(--white); text-align: center; }
-    .poster-hero img.poster-img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+    .poster-hero {
+      margin-top: var(--nav-h); background: #111;
+      display: flex; align-items: center; justify-content: center;
+      height: 66vh; min-height: 320px;
+      overflow: hidden; padding: 24px;
+    }
+    .poster-hero img.poster-img {
+      max-width: 100%; max-height: 100%;
+      width: auto; height: auto;
+      object-fit: contain; display: block;
+    }
     .poster-hero-apply { background: var(--white); padding: 20px 20px 28px; text-align: center; }
     .apply-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--red); color: var(--white); padding: 14px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; text-decoration: none; transition: background 0.2s, transform 0.15s; box-shadow: 0 4px 16px rgba(192,39,26,0.3); }
     .apply-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
-    @media (max-width: 768px) { .apply-btn { padding: 12px 28px; font-size: 15px; } }
+    @media (max-width: 768px) {
+      .poster-hero { height: 52vh; min-height: 260px; padding: 16px; }
+      .apply-btn { padding: 12px 28px; font-size: 15px; }
+    }
 
     /* ===== MAIN LAYOUT ===== */
     .page-content { padding: 0 0 120px; }
