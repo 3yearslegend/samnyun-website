@@ -484,6 +484,19 @@ collections:
         file: data/curriculum-h1.json
         format: json
         fields:
+          - name: images
+            label: 커리큘럼 섹션 이미지
+            widget: object
+            summary: 교재·PT·과제·학부모 피드백 섹션 이미지 (8장)
+            fields:
+              - { label: "교재 — 문학 교재 목차 이미지", name: textbook_literature, widget: image, required: false, hint: "교재 섹션 오른쪽 상단에 표시됩니다" }
+              - { label: "교재 — 문법 교재 목차 이미지", name: textbook_grammar, widget: image, required: false, hint: "교재 섹션 오른쪽 하단에 표시됩니다" }
+              - { label: "PT — 분석노트 손필기 사진", name: pt_analysis_note, widget: image, required: false, hint: "PT 섹션 상단 큰 이미지로 표시됩니다" }
+              - { label: "PT — 학생-강사 카톡 피드백 캡처", name: pt_kakao_feedback, widget: image, required: false, hint: "PT 섹션 하단 좌측 이미지입니다" }
+              - { label: "PT — 수강생 예쁜후기 이미지", name: pt_review, widget: image, required: false, hint: "PT 섹션 하단 우측 이미지입니다" }
+              - { label: "과제 — 모의고사 과제 관련 이미지", name: homework_mock, widget: image, required: false, hint: "과제 섹션(검정 배경) 우측 이미지입니다" }
+              - { label: "학부모 피드백 — 체크리스트 양식 사진", name: parent_checklist, widget: image, required: false, hint: "학부모 피드백 섹션 좌측 이미지입니다" }
+              - { label: "학부모 피드백 — 노션 화면 캡처", name: parent_notion, widget: image, required: false, hint: "학부모 피드백 섹션 우측 이미지입니다" }
           - name: regular
             label: 정규 과정
             widget: object
@@ -638,6 +651,36 @@ collections:
                 field: { label: 이미지, name: image, widget: image }
               - { label: CTA 제목, name: cta_title, widget: string }
               - { label: CTA 설명, name: cta_desc, widget: string }
+      - name: curriculum_naesin_images
+        label: 내신 관리 시스템 이미지
+        file: data/curriculum-naesin-images.json
+        format: json
+        fields:
+          - label: "01. 꼼꼼한 기출 분석 이미지"
+            name: naesin_kichul
+            widget: image
+            required: false
+            hint: "학교별 기출 시험 경향 분석 자료 — 커리큘럼 페이지 내신 탭 01번 섹션에 표시"
+          - label: "02. 실전 TEST 이미지"
+            name: naesin_test
+            widget: image
+            required: false
+            hint: "자체 제작 실전 TEST지 + 실제 학교 시험지 — 커리큘럼 페이지 내신 탭 02번 섹션에 표시"
+          - label: "03. 1:1 맞춤 피드백 이미지"
+            name: naesin_feedback
+            widget: image
+            required: false
+            hint: "학생-강사 카톡 피드백 캡처 — 커리큘럼 페이지 내신 탭 03번 섹션에 표시"
+          - label: "04. 다양한 학습 콘텐츠 이미지"
+            name: naesin_content
+            widget: image
+            required: false
+            hint: "국어공방 학습 자료 + 실전 TEST지 — 커리큘럼 페이지 내신 탭 04번 섹션에 표시"
+          - label: "05. 완벽 직전 대비 이미지"
+            name: naesin_final
+            widget: image
+            required: false
+            hint: "완벽 직전 대비 손필기 분석노트 + 학습활동 자료 — 커리큘럼 페이지 내신 탭 05번 섹션에 표시"
       - name: curriculum_m1
         label: 중1 커리큘럼
         file: data/curriculum-m1.json

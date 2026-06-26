@@ -3,13 +3,22 @@
 <head>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>고1 커리큘럼 | 삼년의 신화 국어논술학원</title>
+  <title>고1 커리큘럼 | 삼년의 신화 국어전문학원</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA; --black: #1C1C1C; --gray-dark: #333333; --gray: #666666; --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0; --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif; --nav-h: 80px; }
-    html { scroll-behavior: smooth; } body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+    :root {
+      --red: #C0271A; --red-dark: #8B1A11; --red-light: #FDECEA;
+      --black: #1C1C1C; --gray-dark: #333333; --gray: #666666;
+      --gray-light: #F4F4F2; --white: #FFFFFF; --border: #E0E0E0;
+      --font-serif: 'Noto Serif KR', serif; --font-sans: 'Noto Sans KR', sans-serif;
+      --nav-h: 80px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); color: var(--black); background: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+    /* ── NAV ── */
     #nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); transition: border-bottom 0.3s, box-shadow 0.3s; }
     #nav.scrolled { border-bottom: 1px solid var(--border); box-shadow: 0 2px 24px rgba(0,0,0,0.08); }
     .nav-container { max-width: 1440px; margin: 0 auto; padding: 0 40px; height: var(--nav-h); display: flex; align-items: center; }
@@ -24,67 +33,165 @@
     .dropdown a .dd-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; opacity: 0; flex-shrink: 0; transition: opacity 0.15s; } .dropdown a:hover .dd-dot { opacity: 1; }
     .nav-right { flex-shrink: 0; display: flex; align-items: center; gap: 12px; margin-left: 28px; }
     .nav-cta { background: var(--red); color: var(--white); padding: 10px 22px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, transform 0.15s; } .nav-cta:hover { background: var(--red-dark); transform: translateY(-1px); }
-    .nav-cta-outline { border: 2px solid var(--red); color: var(--red); padding: 8px 20px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, color 0.2s, transform 0.15s; background: transparent; }
-    .nav-cta-outline:hover { background: var(--red-light); transform: translateY(-1px); }
+    .nav-cta-outline { border: 2px solid var(--red); color: var(--red); padding: 8px 20px; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s, color 0.2s, transform 0.15s; background: transparent; } .nav-cta-outline:hover { background: var(--red-light); transform: translateY(-1px); }
     .nav-sns { display: flex; align-items: center; gap: 6px; }
     .sns-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 13px; font-weight: 700; color: var(--white); transition: transform 0.18s, box-shadow 0.18s; flex-shrink: 0; } .sns-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .sns-kakao { background: #FEE500; color: #3A1D1D; } .sns-insta { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); } .sns-youtube { background: #FF0000; } .sns-blog { background: #03C75A; }
-    .mobile-sub a::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.15s; } .mobile-sub a:hover { color: var(--red); background: var(--red-light); padding-left: 36px; } .mobile-sub a:hover::before { background: var(--red); }
-    .mobile-sns { display: flex; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border); margin-top: 8px; }
+    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
+
+    /* ── FULLSCREEN OVERLAY ── */
+    .fs-overlay { position: fixed; inset: 0; background: #0f0f0f; z-index: 10001; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.28s ease; overflow-y: auto; }
+    .fs-overlay.open { opacity: 1; pointer-events: auto; }
+    .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .fs-logo { text-decoration: none; display: flex; align-items: center; } .fs-logo img { height: 48px; width: 48px; object-fit: cover; border-radius: 50%; }
+    .fs-close { background: none; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; width: 40px; height: 40px; color: #fff; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; } .fs-close:hover { background: rgba(255,255,255,0.1); }
+    .fs-body { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); padding: 56px 40px 40px; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .fs-col { padding: 0 28px; border-right: 1px solid rgba(255,255,255,0.06); } .fs-col:first-child { padding-left: 0; } .fs-col:last-child { border-right: none; padding-right: 0; }
+    .fs-cat { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .fs-links { display: flex; flex-direction: column; gap: 2px; }
+    .fs-links a { font-size: 16px; color: rgba(255,255,255,0.65); text-decoration: none; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.18s, padding-left 0.18s; } .fs-links a:last-child { border-bottom: none; } .fs-links a:hover { color: #fff; padding-left: 8px; }
+    .fs-footer { padding: 24px 40px 40px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .fs-footer-sns { display: flex; gap: 10px; }
+    .fs-cta { background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; } .fs-cta:hover { background: var(--red-dark); }
+    .fs-cta-outline { border: 2px solid rgba(255,255,255,0.55); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s, border-color 0.2s; white-space: nowrap; background: transparent; } .fs-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── PAGE HEADER ── */
     .page-header { background: linear-gradient(135deg, #1C1C1C 0%, #2a2a2a 100%); padding: calc(var(--nav-h) + 60px) 0 60px; }
     .ph-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .ph-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 20px; flex-wrap: wrap; }
     .ph-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; } .ph-breadcrumb a:hover { color: rgba(255,255,255,0.8); } .ph-breadcrumb .current { color: rgba(255,255,255,0.75); }
     .ph-inner h1 { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 48px); font-weight: 700; color: var(--white); line-height: 1.2; letter-spacing: -1.5px; margin-bottom: 10px; }
-    .ph-inner p { font-size: 15px; color: rgba(255,255,255,0.48); max-width: 500px; } @media (max-width: 768px) { .ph-inner { padding: 0 20px; } }
-    .page-content { padding: 0 0 120px; } .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-    @media (max-width: 768px) { .page-content { padding: 0 0 80px; } .container { padding: 0 20px; } }
+    .ph-inner p { font-size: 15px; color: rgba(255,255,255,0.48); max-width: 500px; }
+
+    /* ── GRADE NAV ── */
     .grade-nav-bar { background: var(--gray-light); border-bottom: 1px solid var(--border); position: sticky; top: var(--nav-h); z-index: 100; }
     .gnb-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; }
     .gnb-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: 1px; margin-right: 20px; white-space: nowrap; padding: 16px 20px 16px 0; border-right: 1px solid var(--border); }
     .gnb-grades { display: flex; gap: 4px; padding: 10px 0; }
     .gnb-grade { display: inline-flex; align-items: center; justify-content: center; padding: 6px 16px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--gray); background: var(--white); border: 1.5px solid var(--border); transition: all 0.2s; white-space: nowrap; } .gnb-grade:hover { color: var(--red); border-color: var(--red); } .gnb-grade.active { color: var(--white); background: var(--red); border-color: var(--red); }
     .gnb-back { margin-left: auto; font-size: 13px; color: var(--gray); text-decoration: none; display: flex; align-items: center; gap: 6px; padding: 10px 0; white-space: nowrap; transition: color 0.2s; } .gnb-back:hover { color: var(--red); }
-    @media (max-width: 768px) { .gnb-inner { padding: 0 20px; overflow-x: auto; } .gnb-back { display: none; } .gnb-label { display: none; } }
-    .course-tabs { display: flex; border-bottom: 2px solid var(--border); margin: 52px 0; }
-    .course-tab { padding: 14px 32px; border: none; background: none; font-family: var(--font-sans); font-size: 16px; font-weight: 600; color: var(--gray); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; }
-    .course-tab.active.regular { color: var(--red); border-bottom-color: var(--red); } .course-tab.active.naesin { color: var(--black); border-bottom-color: var(--black); }
-    @media (max-width: 480px) { .course-tab { padding: 12px 20px; font-size: 15px; } }
-    .course-panel { display: none; } .course-panel.active { display: block; }
-    .course-header { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; margin-bottom: 48px; } @media (max-width: 860px) { .course-header { grid-template-columns: 1fr; gap: 28px; } }
-    .ch-badge { display: inline-block; padding: 4px 14px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-bottom: 16px; } .ch-badge.regular { background: var(--red-light); color: var(--red); } .ch-badge.naesin { background: #f0f0ee; color: var(--black); }
-    .ch-title { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.35; }
-    .ch-desc { font-size: 15px; color: var(--gray); line-height: 1.9; }
-    .course-img-placeholder { width: 100%; background: var(--gray-light); border: 2px dashed var(--border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--gray); font-size: 13px; min-height: 240px; } .course-img-placeholder svg { opacity: 0.4; }
-    .section-title { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
-    .module-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; } @media (max-width: 640px) { .module-grid { grid-template-columns: repeat(2, 1fr); } }
-    .module-card { padding: 20px 16px; background: var(--white); border: 1px solid var(--border); border-radius: 12px; text-align: center; transition: border-color 0.2s, transform 0.2s; } .module-card:hover { border-color: var(--red); transform: translateY(-2px); }
-    .module-icon { font-size: 28px; margin-bottom: 10px; } .module-name { font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; } .module-sub { font-size: 12px; color: var(--gray); }
-    .points-section { background: var(--gray-light); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; }
-    .points-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .points-list li { font-size: 14px; color: var(--gray-dark); display: flex; align-items: flex-start; gap: 10px; line-height: 1.65; }
-    .points-list li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; } .points-list.regular li::before { color: var(--red); } .points-list.naesin li::before { color: var(--black); }
-    .cta-box { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); border-radius: 20px; padding: 44px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 64px; }
-    .cta-box h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 6px; } .cta-box p { font-size: 14px; color: rgba(255,255,255,0.7); }
-    .cta-btn { background: var(--white); color: var(--red); padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform 0.2s; } .cta-btn:hover { transform: translateY(-2px); }
-    @media (max-width: 640px) { .cta-box { flex-direction: column; padding: 32px 24px; text-align: center; } }
-    .module-num { width: 36px; height: 36px; border-radius: 50%; background: var(--red-light); color: var(--red); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; letter-spacing: 0.5px; }
-    .img-slider { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; background: var(--gray-light); }
-    .slider-track { display: flex; transition: transform 0.4s ease; height: 100%; }
-    .slide { flex: 0 0 100%; height: 100%; }
-    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .slider-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--gray); font-size: 13px; border: 2px dashed var(--border); border-radius: 16px; }
-    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; line-height: 1; z-index: 2; color: var(--black); transition: background 0.2s; }
-    .slider-btn:hover { background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
-    .slider-prev { left: 10px; } .slider-next { right: 10px; }
-    .slider-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
-    .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
-    .slider-dot.active { background: var(--red); }
+
+    /* ── LAYOUT ── */
+    .page-content { padding-bottom: 120px; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--gray-light); }
+    .section-dark { background: var(--black); color: var(--white); }
+
+    /* ── SECTION LABELS ── */
+    .sec-label { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; }
+    .sec-label.red { color: var(--red); }
+    .sec-label.light { color: rgba(255,255,255,0.45); }
+    .sec-title { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); line-height: 1.35; letter-spacing: -0.5px; margin-bottom: 14px; }
+    .sec-title.light { color: var(--white); }
+    .sec-desc { font-size: 15px; color: var(--gray); line-height: 1.9; }
+    .sec-desc.light { color: rgba(255,255,255,0.55); }
+
+    /* ── IMAGE PLACEHOLDER ── */
+    .img-ph { background: var(--gray-light); border: 2px dashed var(--border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 32px 20px; text-align: center; min-height: 200px; }
+    .img-ph svg { opacity: 0.4; }
+    .img-ph-text { font-size: 13px; color: var(--gray); }
+    .img-ph-sub { font-size: 11px; color: var(--border); }
+    .img-ph.dark { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+    .img-ph.dark .img-ph-text { color: rgba(255,255,255,0.35); }
+    .img-ph.dark .img-ph-sub { color: rgba(255,255,255,0.2); }
+    /* 이미지가 로드된 후 */
+    .img-ph.loaded { padding: 0; border: none; background: transparent; border-radius: 16px; overflow: hidden; }
+    .img-ph.loaded img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── 수업 구성 ── */
+    .intro-banner { background: var(--black); border-radius: 16px; padding: 28px 36px; margin-bottom: 48px; display: flex; align-items: center; gap: 20px; }
+    .intro-banner-bar { width: 4px; min-height: 48px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
+    .intro-banner-label { font-size: 11px; font-weight: 700; color: rgba(192,39,26,0.85); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .intro-banner-text { font-family: var(--font-serif); font-size: clamp(14px, 1.8vw, 17px); font-weight: 600; color: var(--white); line-height: 1.6; }
+    .intro-banner-text em { color: var(--red); font-style: normal; }
+
+    .period-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .period-card { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 32px 26px 28px; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .period-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+    .period-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+    .period-seq { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-bottom: 16px; }
+    .period-time-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--red-light); color: var(--red); border-radius: 100px; padding: 4px 14px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+    .period-name { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 4px; letter-spacing: -0.3px; }
+    .period-en { font-size: 12px; color: var(--gray); margin-bottom: 16px; }
+    .period-detail { font-size: 13px; font-weight: 600; color: var(--gray-dark); padding: 10px 14px; background: var(--gray-light); border-radius: 8px; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+    .period-detail::before { content: ''; width: 3px; height: 14px; background: var(--red); border-radius: 2px; flex-shrink: 0; }
+    .period-feature { background: var(--gray-light); border-radius: 10px; padding: 14px 16px; font-size: 13px; color: var(--gray-dark); line-height: 1.7; border-left: 3px solid var(--red); }
+
+    /* ── 교재 ── */
+    .textbook-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .textbook-items { display: flex; flex-direction: column; gap: 28px; }
+    .tb-item { display: flex; gap: 18px; align-items: flex-start; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+    .tb-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .tb-icon-wrap { width: 48px; height: 48px; border-radius: 12px; background: var(--red-light); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .tb-body { flex: 1; }
+    .tb-badges { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+    .tb-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+    .tb-badge-main { background: var(--red); color: white; }
+    .tb-badge-custom { border: 1px solid var(--red); color: var(--red); background: transparent; }
+    .tb-title { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--black); margin-bottom: 5px; }
+    .tb-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
+    .img-side-label { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .textbook-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── PT 프로그램 ── */
+    .pt-intro-block { text-align: center; margin-bottom: 56px; }
+    .pt-big-quote { font-family: var(--font-serif); font-size: clamp(18px, 2.5vw, 26px); font-weight: 700; color: var(--black); line-height: 1.45; margin-bottom: 14px; }
+    .pt-big-quote em { color: var(--red); font-style: normal; }
+    .pt-sub { font-size: 15px; color: var(--gray); }
+    .pt-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .pt-steps { display: flex; flex-direction: column; }
+    .pt-step { display: flex; gap: 20px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid var(--border); }
+    .pt-step:first-child { padding-top: 0; }
+    .pt-step:last-child { border-bottom: none; }
+    .pt-num { width: 44px; height: 44px; border-radius: 50%; background: var(--red); color: white; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-serif); }
+    .pt-body { flex: 1; }
+    .pt-step-title { font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 6px; line-height: 1.4; }
+    .pt-step-desc { font-size: 13px; color: var(--gray); line-height: 1.75; margin-bottom: 10px; }
+    .pt-tag { display: inline-block; background: var(--red-light); color: var(--red); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+    .pt-img-stack { display: flex; flex-direction: column; gap: 14px; }
+    .pt-img-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* ── 과제 ── */
+    .hw-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
+    .hw-tag { display: inline-block; background: var(--red); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.5px; }
+    .hw-features { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+    .hw-feature { display: flex; align-items: flex-start; gap: 16px; }
+    .hw-feat-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(192,39,26,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .hw-feat-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+    .hw-feat-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+    /* ── 학부모 피드백 ── */
+    .parent-hero { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); border-radius: 20px; padding: 44px 48px; margin-bottom: 56px; color: white; }
+    .parent-hero-tag { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 14px; }
+    .parent-hero-title { font-family: var(--font-serif); font-size: clamp(20px, 3vw, 28px); font-weight: 700; line-height: 1.35; margin-bottom: 14px; }
+    .parent-hero-desc { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.85; max-width: 560px; }
+    .trinity-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: rgba(255,255,255,0.15); border-radius: 100px; padding: 8px 20px; font-size: 13px; font-weight: 700; color: white; }
+    .trinity-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.6); border-radius: 50%; }
+    .parent-body { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: start; }
+    .parent-items-title { font-size: 13px; font-weight: 700; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .parent-check-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pc-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: var(--gray-light); border-radius: 12px; }
+    .pc-check { width: 22px; height: 22px; border-radius: 6px; background: var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pc-check svg { width: 12px; height: 12px; stroke: white; stroke-width: 2.5; fill: none; }
+    .pc-label { font-size: 14px; font-weight: 600; color: var(--black); }
+    .notion-chip { display: flex; align-items: center; gap: 12px; background: #F8F8F8; border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+    .notion-n { background: #111; color: white; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; letter-spacing: 0.5px; }
+    .notion-text { font-size: 13px; color: var(--gray-dark); line-height: 1.55; }
+    .parent-img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── CTA ── */
+    .cta-box { background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%); border-radius: 20px; padding: 44px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 80px; }
+    .cta-box h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .cta-box p { font-size: 14px; color: rgba(255,255,255,0.7); }
     .cta-btns { display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
-    .cta-btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.65); }
-    .cta-btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
-    @media (max-width: 640px) { .cta-btns { width: 100%; justify-content: center; } }
-    footer { background: #111; padding: 64px 0 36px; } .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .cta-btn { background: var(--white); color: var(--red); padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: transform 0.2s; } .cta-btn:hover { transform: translateY(-2px); }
+    .cta-btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.65); color: white; padding: 12px 26px; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background 0.2s; } .cta-btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: #111; padding: 64px 0 36px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 48px; }
     .footer-logo { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 14px; } .footer-logo span { color: var(--red); }
     .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
@@ -92,55 +199,48 @@
     .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; } .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
     .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; } .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.2); }
-    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; } }
-    /* Hamburger – always visible */
-    .nav-hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; margin-right: 12px; z-index: 10002; flex-shrink: 0; }
-    .nav-hamburger span { width: 24px; height: 2px; background: var(--black); border-radius: 2px; transition: 0.3s; display: block; }
 
-    /* Fullscreen overlay */
-    .fs-overlay { position: fixed; inset: 0; background: #0f0f0f; z-index: 10001; display: flex; flex-direction: column; opacity: 0; pointer-events: none; transition: opacity 0.28s ease; overflow-y: auto; }
-    .fs-overlay.open { opacity: 1; pointer-events: auto; }
-    .fs-nav-bar { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: var(--nav-h); flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .fs-logo { text-decoration: none; display: flex; align-items: center; }
-    .fs-logo img { height: 48px; width: 48px; object-fit: cover; border-radius: 50%; }
-    .fs-close { background: none; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; width: 40px; height: 40px; color: #fff; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
-    .fs-close:hover { background: rgba(255,255,255,0.1); }
-    .fs-body { flex: 1; display: grid; grid-template-columns: repeat(5, 1fr); padding: 56px 40px 40px; max-width: 1200px; margin: 0 auto; width: 100%; }
-    .fs-col { padding: 0 28px; border-right: 1px solid rgba(255,255,255,0.06); }
-    .fs-col:first-child { padding-left: 0; }
-    .fs-col:last-child { border-right: none; padding-right: 0; }
-    .fs-cat { font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .fs-links { display: flex; flex-direction: column; gap: 2px; }
-    .fs-links a { font-size: 16px; color: rgba(255,255,255,0.65); text-decoration: none; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.18s, padding-left 0.18s; }
-    .fs-links a:last-child { border-bottom: none; }
-    .fs-links a:hover { color: #fff; padding-left: 8px; }
-    .fs-footer { padding: 24px 40px 40px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1200px; margin: 0 auto; width: 100%; }
-    .fs-footer-sns { display: flex; gap: 10px; }
-    .fs-cta { background: var(--red); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
-    .fs-cta:hover { background: var(--red-dark); }
-    .fs-cta-outline { border: 2px solid rgba(255,255,255,0.55); color: #fff; padding: 12px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s, border-color 0.2s; white-space: nowrap; background: transparent; }
-    .fs-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
-
+    /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
-      .nav-menus { display: none; }
-      .nav-sns { display: none; }
-      .nav-right { margin-left: auto; }
-      .nav-container { padding: 0 20px; }
+      .nav-menus { display: none; } .nav-sns { display: none; } .nav-right { margin-left: auto; } .nav-container { padding: 0 20px; }
       .fs-body { grid-template-columns: 1fr 1fr; padding: 32px 24px 24px; }
-      .fs-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; }
-      .fs-col:last-child { border-bottom: none; }
-      .fs-nav-bar { padding: 0 20px; }
-      .fs-footer { padding: 20px 24px 32px; }
+      .fs-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; } .fs-col:last-child { border-bottom: none; }
+      .fs-nav-bar { padding: 0 20px; } .fs-footer { padding: 20px 24px 32px; }
     }
-    @media (max-width: 600px) { .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; } }
+    @media (max-width: 900px) {
+      .period-grid { grid-template-columns: 1fr 1fr; }
+      .textbook-wrap { grid-template-columns: 1fr; gap: 36px; }
+      .pt-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .hw-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .parent-body { grid-template-columns: 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      .ph-inner { padding: 0 20px; } .container { padding: 0 20px; }
+      .section { padding: 60px 0; }
+      .gnb-inner { padding: 0 20px; overflow-x: auto; } .gnb-back { display: none; } .gnb-label { display: none; }
+      .intro-banner { padding: 20px 22px; gap: 14px; }
+      .cta-box { flex-direction: column; padding: 32px 24px; text-align: center; }
+      .cta-btns { width: 100%; justify-content: center; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; } .footer-inner { padding: 0 20px; }
+      .parent-hero { padding: 30px 26px; }
+    }
+    @media (max-width: 560px) {
+      .period-grid { grid-template-columns: 1fr; }
+      .textbook-img-grid { grid-template-columns: 1fr; }
+      .pt-img-pair { grid-template-columns: 1fr; }
+      .parent-img-grid { grid-template-columns: 1fr; }
+      .fs-body { grid-template-columns: 1fr; } .fs-links a { font-size: 15px; }
+    }
     @media (max-width: 480px) { .nav-logo img { height: 40px; } .nav-cta { padding: 8px 14px; font-size: 13px; } }
     @media (max-width: 380px) { .nav-cta { display: none; } .nav-cta-outline { display: none; } }
   </style>
 </head>
 <body>
+
+<!-- ===== NAV ===== -->
 <nav id="nav">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어논술학원"></a>
+    <a href="index.html" class="nav-logo"><img src="삼신로고2.png" alt="삼년의 신화 국어전문학원"></a>
     <button class="nav-hamburger" id="hamburger" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
     <ul class="nav-menus">
       <li class="menu-item"><a class="menu-link">학원 소개<svg class="chevron" viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></a><div class="dropdown"><a href="about-greeting.html"><span class="dd-dot"></span>인사말</a><a href="about-features.html"><span class="dd-dot"></span>학원 특징</a><a href="about-history.html"><span class="dd-dot"></span>연혁</a><a href="about-branches.html"><span class="dd-dot"></span>지점 안내 및 오시는 길</a></div></li>
@@ -161,53 +261,19 @@
     </div>
   </div>
 </nav>
+
+<!-- ===== FULLSCREEN MENU ===== -->
 <div class="fs-overlay" id="fsOverlay">
   <div class="fs-nav-bar">
-    <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어논술학원"></a>
+    <a href="index.html" class="fs-logo"><img src="삼신로고_1.png" alt="삼년의 신화 국어전문학원"></a>
     <button class="fs-close" id="fsClose" aria-label="메뉴 닫기">&#x2715;</button>
   </div>
   <div class="fs-body">
-    <div class="fs-col">
-      <div class="fs-cat">학원 소개</div>
-      <div class="fs-links">
-        <a href="about-greeting.html">인사말</a>
-        <a href="about-features.html">학원 특징</a>
-        <a href="about-history.html">연혁</a>
-        <a href="about-branches.html">지점 안내 및 오시는 길</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">강사 소개</div>
-      <div class="fs-links">
-        <a href="teachers-gojan.html">고잔점</a>
-        <a href="teachers-zai.html">자이점</a>
-        <a href="teachers-hyper.html">하이퍼관</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">커리큘럼</div>
-      <div class="fs-links">
-        <a href="curriculum.html#elem">초등 과정</a>
-        <a href="curriculum.html#middle">중등 과정</a>
-        <a href="curriculum.html#high">고등 과정</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">학원 소식</div>
-      <div class="fs-links">
-        <a href="news-notice.html">공지사항</a>
-        <a href="news-seminar.html">설명회 신청</a>
-        <a href="news-schedule.html">학원 일정</a>
-        <a href="news-timetable.html">학원 시간표</a>
-      </div>
-    </div>
-    <div class="fs-col">
-      <div class="fs-cat">생생 후기</div>
-      <div class="fs-links">
-        <a href="reviews-honor.html">명예의 전당</a>
-        <a href="reviews-list.html">수강 후기</a>
-      </div>
-    </div>
+    <div class="fs-col"><div class="fs-cat">학원 소개</div><div class="fs-links"><a href="about-greeting.html">인사말</a><a href="about-features.html">학원 특징</a><a href="about-history.html">연혁</a><a href="about-branches.html">지점 안내 및 오시는 길</a></div></div>
+    <div class="fs-col"><div class="fs-cat">강사 소개</div><div class="fs-links"><a href="teachers-gojan.html">고잔점</a><a href="teachers-zai.html">자이점</a><a href="teachers-hyper.html">하이퍼관</a></div></div>
+    <div class="fs-col"><div class="fs-cat">커리큘럼</div><div class="fs-links"><a href="curriculum.html#elem">초등 과정</a><a href="curriculum.html#middle">중등 과정</a><a href="curriculum.html#high">고등 과정</a></div></div>
+    <div class="fs-col"><div class="fs-cat">학원 소식</div><div class="fs-links"><a href="news-notice.html">공지사항</a><a href="news-seminar.html">설명회 신청</a><a href="news-schedule.html">학원 일정</a><a href="news-timetable.html">학원 시간표</a></div></div>
+    <div class="fs-col"><div class="fs-cat">생생 후기</div><div class="fs-links"><a href="reviews-honor.html">명예의 전당</a><a href="reviews-list.html">수강 후기</a></div></div>
   </div>
   <div class="fs-footer">
     <div class="fs-footer-sns">
@@ -221,15 +287,21 @@
   </div>
 </div>
 
-
+<!-- ===== PAGE HEADER ===== -->
 <section class="page-header">
   <div class="ph-inner">
-    <div class="ph-breadcrumb"><a href="index.html">홈</a><span>›</span><a href="curriculum.html?tab=high">커리큘럼</a><span>›</span><a href="curriculum.html?tab=high">고등</a><span>›</span><span class="current">고1</span></div>
+    <div class="ph-breadcrumb">
+      <a href="index.html">홈</a><span>›</span>
+      <a href="curriculum.html?tab=high">커리큘럼</a><span>›</span>
+      <a href="curriculum.html?tab=high">고등</a><span>›</span>
+      <span class="current">고1</span>
+    </div>
     <h1>고1 커리큘럼</h1>
-    <p>수능 국어의 전체 판을 파악하고 3년 로드맵의 첫 단추를 완성합니다.</p>
+    <p>수능 국어의 기초를 탄탄히 세우고, 3년 로드맵의 첫 단추를 완성합니다.</p>
   </div>
 </section>
 
+<!-- ===== GRADE NAV ===== -->
 <div class="grade-nav-bar">
   <div class="gnb-inner">
     <span class="gnb-label">고등 과정</span>
@@ -242,71 +314,359 @@
   </div>
 </div>
 
+<!-- ===== MAIN CONTENT ===== -->
 <main class="page-content">
-  <div class="container">
-    <div class="course-tabs">
-      <button class="course-tab active regular" data-panel="regular">정규 과정</button>
-      <button class="course-tab naesin" data-panel="naesin">내신 과정</button>
+
+  <!-- ══ 1. 수업 구성 ══ -->
+  <section class="section">
+    <div class="container">
+      <p class="sec-label">수업 구성</p>
+      <div class="intro-banner">
+        <div class="intro-banner-bar"></div>
+        <div>
+          <div class="intro-banner-label">삼년의신화 고1 수업 철학</div>
+          <div class="intro-banner-text">
+            강의만으로 정리되는 수업 <em>✕</em>&nbsp;&nbsp;/&nbsp;&nbsp;학생 스스로 점검하고 이해할 수 있는 수업 <em>○</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="period-grid">
+
+        <div class="period-card">
+          <div class="period-seq">1교시</div>
+          <div class="period-time-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            90분
+          </div>
+          <div class="period-name">수능 기초</div>
+          <div class="period-en">CSAT Foundation</div>
+          <div class="period-detail">문학 60분 · 독서 30분</div>
+          <div class="period-feature">
+            수동적인 수용이 아닌 <strong>능동적인 활용 전략 수업</strong><br>
+            고등 필수 문학 개념과 갈래별 독해 전략을 총집합하여, 기본 문항부터 킬러 문항까지 책임지는 필수 강의
+          </div>
+        </div>
+
+        <div class="period-card">
+          <div class="period-seq">2교시</div>
+          <div class="period-time-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            90분
+          </div>
+          <div class="period-name">현대 문법</div>
+          <div class="period-en">Modern Grammar</div>
+          <div class="period-detail">이론 60분 · 적용 30분</div>
+          <div class="period-feature">
+            내신부터 수능까지 <strong>문법 필수 내용 All-in-one</strong><br>
+            실제 기출 문제를 통한 적용 훈련까지 — 이론과 실전을 동시에 완성합니다
+          </div>
+        </div>
+
+        <div class="period-card">
+          <div class="period-seq">PT</div>
+          <div class="period-time-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            60분
+          </div>
+          <div class="period-name">Personal Training</div>
+          <div class="period-en">문학 수업 연계</div>
+          <div class="period-detail">1:1 맞춤 트레이닝</div>
+          <div class="period-feature">
+            <strong>자기관리역량</strong>을 신장시키는 자기 주도 학습 및 분석<br>
+            1교시 문학 수업과 연계되어 당일 배운 내용을 즉시 점검·내재화합니다
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="course-panel active" id="panel-regular"></div>
-    <div class="course-panel" id="panel-naesin"></div>
-  </div>
+  </section>
+
+  <!-- ══ 2. 교재 ══ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="sec-label">교재</p>
+      <h2 style="font-family:var(--font-serif);font-size:clamp(20px,2.8vw,28px);font-weight:700;letter-spacing:-0.5px;margin-bottom:48px;">100% 자체 제작 교재로 완성하는 체계</h2>
+
+      <div class="textbook-wrap">
+        <div class="textbook-items">
+          <div class="tb-item">
+            <div class="tb-icon-wrap">📚</div>
+            <div class="tb-body">
+              <div class="tb-badges"><span class="tb-badge tb-badge-main">문학</span><span class="tb-badge tb-badge-custom">자체 제작</span></div>
+              <div class="tb-title">고등 문학 교재</div>
+              <div class="tb-desc">고등 필수 문학 개념과 갈래별(시·소설·수필·희곡) 독해 전략을 총집합.<br>수동적인 수용이 아닌 <strong>능동적인 활용 전략</strong>으로 학습합니다.</div>
+            </div>
+          </div>
+          <div class="tb-item">
+            <div class="tb-icon-wrap">📖</div>
+            <div class="tb-body">
+              <div class="tb-badges"><span class="tb-badge tb-badge-main">독서</span><span class="tb-badge tb-badge-custom">자체 제작</span></div>
+              <div class="tb-title">고등 독서 교재</div>
+              <div class="tb-desc">독해 전략을 통한 초석 다지기.<br>기본 문항부터 킬러 문항까지 책임지는 비문학 독해 필수 강의를 담았습니다.</div>
+            </div>
+          </div>
+          <div class="tb-item">
+            <div class="tb-icon-wrap">✏️</div>
+            <div class="tb-body">
+              <div class="tb-badges"><span class="tb-badge tb-badge-main">문법</span><span class="tb-badge tb-badge-custom">자체 제작</span></div>
+              <div class="tb-title">현대 문법 교재</div>
+              <div class="tb-desc">내신부터 수능까지 문법 필수 내용 <strong>All-in-one</strong>.<br>실제 기출 문제를 통한 적용 훈련까지 한 권으로 완성합니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="img-side-label">교재 미리보기</div>
+          <div class="textbook-img-grid">
+            <div class="img-ph" data-img-key="textbook_literature" style="min-height:280px;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 문학 교재 목차 이미지</span>
+              <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+            </div>
+            <div class="img-ph" data-img-key="textbook_grammar" style="min-height:280px;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 문법 교재 목차 이미지</span>
+              <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. PT 프로그램 ══ -->
+  <section class="section">
+    <div class="container">
+      <div class="pt-intro-block">
+        <p class="sec-label red" style="text-align:center;">PT 프로그램</p>
+        <div class="pt-big-quote">오개념 방지를 위한<br><em>1:1 맞춤 피드백 시스템</em></div>
+        <div class="pt-sub">언제든 모르는 내용은 해결될 수 있도록, 학생 개개인의 상황에 맞춘 피드백을 제공합니다</div>
+      </div>
+
+      <div class="pt-wrap">
+        <div class="pt-steps">
+          <div class="pt-step">
+            <div class="pt-num">01</div>
+            <div class="pt-body">
+              <div class="pt-step-title">고등 필수 어휘 및 고전시가·개념어 테스트</div>
+              <div class="pt-step-desc">매 수업 어휘·고전시가·개념어 테스트를 진행합니다. 기준 점수 미달 시 재시험 및 반복 학습으로 완전 학습을 보장합니다.</div>
+              <span class="pt-tag">자기관리역량 신장 · 자기 주도 학습</span>
+            </div>
+          </div>
+          <div class="pt-step">
+            <div class="pt-num">02</div>
+            <div class="pt-body">
+              <div class="pt-step-title">1:1 Personal Training 및 분석 내용 피드백</div>
+              <div class="pt-step-desc">학생 개인별 분석 노트를 작성하고, 강사가 1:1로 오개념을 점검합니다. 맞춤 피드백으로 혼자서는 고치기 어려운 독해 습관을 바로잡습니다.</div>
+              <span class="pt-tag">오개념 방지 맞춤 피드백</span>
+            </div>
+          </div>
+          <div class="pt-step">
+            <div class="pt-num">03</div>
+            <div class="pt-body">
+              <div class="pt-step-title">당일 학습 마무리 진단 평가 및 첨삭 지도</div>
+              <div class="pt-step-desc">선별한 문제로 당일 수업을 마무리하는 완전 학습 시스템. 학생의 궁금증을 충족하는 <strong>양방향 맞춤 코칭</strong>으로 진행합니다.</div>
+              <span class="pt-tag">양방향 맞춤 코칭 · 완전 학습</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-img-stack">
+          <div class="img-ph" data-img-key="pt_analysis_note" style="min-height:220px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+            <span class="img-ph-text">📷 PT 분석노트 손필기 사진</span>
+            <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+          <div class="pt-img-pair">
+            <div class="img-ph" data-img-key="pt_kakao_feedback" style="min-height:160px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 학생-강사 카톡 피드백</span>
+              <span class="img-ph-sub">관리자에서 등록</span>
+            </div>
+            <div class="img-ph" data-img-key="pt_review" style="min-height:160px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 수강생 예쁜후기</span>
+              <span class="img-ph-sub">관리자에서 등록</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. 과제 ══ -->
+  <section class="section section-dark">
+    <div class="container">
+      <p class="sec-label light">과제</p>
+      <h2 style="font-family:var(--font-serif);font-size:clamp(20px,2.8vw,28px);font-weight:700;letter-spacing:-0.5px;color:var(--white);margin-bottom:0;">모의고사 과제</h2>
+
+      <div class="hw-wrap" style="margin-top:48px;">
+        <div>
+          <div class="hw-tag">예비고1 필수 특강</div>
+          <p style="font-size:15px;color:rgba(255,255,255,0.55);line-height:1.9;">
+            선별한 문제로 마무리하는 <strong style="color:var(--red);">완전 학습 시스템</strong>.<br>
+            수업에서 쌓은 독해 전략을 실전 모의고사에 직접 적용합니다.
+          </p>
+          <div class="hw-features">
+            <div class="hw-feature">
+              <div class="hw-feat-icon">📋</div>
+              <div>
+                <div class="hw-feat-title">전국연합학력평가 기출문제 80분 진행</div>
+                <div class="hw-feat-desc">실제 시험 환경과 동일한 조건으로 기출 모의고사를 풀며 실전 감각을 키웁니다.</div>
+              </div>
+            </div>
+            <div class="hw-feature">
+              <div class="hw-feat-icon">🎯</div>
+              <div>
+                <div class="hw-feat-title">영역별 필수·고난도 문제 해법 풀이</div>
+                <div class="hw-feat-desc">문학·독서·문법 영역별 필수 문항과 고난도 문항의 해법을 체계적으로 학습합니다.</div>
+              </div>
+            </div>
+            <div class="hw-feature">
+              <div class="hw-feat-icon">✍️</div>
+              <div>
+                <div class="hw-feat-title">1:1 PT 및 분석 노트 피드백</div>
+                <div class="hw-feat-desc">과제 결과를 바탕으로 1:1 분석 노트 피드백을 진행, 오답 원인을 정확히 파악합니다.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="img-ph dark" data-img-key="homework_mock" style="min-height:360px;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.3"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+          <span class="img-ph-text">📷 모의고사 과제 관련 이미지</span>
+          <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5. 학부모 피드백 ══ -->
+  <section class="section">
+    <div class="container">
+      <p class="sec-label">학부모 피드백</p>
+
+      <div class="parent-hero">
+        <div class="parent-hero-tag">삼위일체 학습 관리</div>
+        <div class="parent-hero-title">수업만 하면 끝?<br>삼년의신화는 그렇지 않습니다.</div>
+        <div class="parent-hero-desc">
+          강의실 안에서 끝나는 학습이 아닙니다.<br>
+          학부모·학생·선생님이 함께 만들어 가는 삼위일체 학습 관리 시스템으로<br>
+          언제든 모르는 내용은 해결될 수 있도록, 학생 개개인의 상황에 맞춘 피드백을 제공합니다.
+        </div>
+        <div class="trinity-badge">
+          <span>학부모</span><div class="trinity-dot"></div>
+          <span>학생</span><div class="trinity-dot"></div>
+          <span>선생님</span><div class="trinity-dot"></div>
+          <span>삼위일체 학습 관리</span>
+        </div>
+      </div>
+
+      <div class="parent-body">
+        <div>
+          <div class="parent-items-title">피드백 항목 (노션 기반 관리)</div>
+          <div class="parent-check-list">
+            <div class="pc-item"><div class="pc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div><div class="pc-label">출결</div></div>
+            <div class="pc-item"><div class="pc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div><div class="pc-label">수업 태도</div></div>
+            <div class="pc-item"><div class="pc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div><div class="pc-label">PT 태도</div></div>
+            <div class="pc-item"><div class="pc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div><div class="pc-label">어휘 결과</div></div>
+            <div class="pc-item"><div class="pc-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div><div class="pc-label">과제 주차 및 결과</div></div>
+          </div>
+          <div class="notion-chip">
+            <div class="notion-n">Notion</div>
+            <div class="notion-text">체크리스트 노션 내 작성 및 확인 가능<br><span style="color:var(--gray);font-size:12px;">학부모님이 언제든 온라인으로 확인하실 수 있습니다</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="img-side-label">피드백 화면</div>
+          <div class="parent-img-grid">
+            <div class="img-ph" data-img-key="parent_checklist" style="min-height:300px;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 체크리스트 양식 사진</span>
+              <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+            </div>
+            <div class="img-ph" data-img-key="parent_notion" style="min-height:300px;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+              <span class="img-ph-text">📷 노션 피드백 화면 캡처</span>
+              <span class="img-ph-sub">관리자에서 이미지를 등록해 주세요</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <div>
+          <h3>고1 커리큘럼 상담 신청</h3>
+          <p>수능까지 이어지는 3년 로드맵을 함께 설계해드립니다.</p>
+        </div>
+        <div class="cta-btns">
+          <a href="consulting.html" class="cta-btn">상담 신청하기</a>
+          <a href="news-timetable.html" class="cta-btn-outline">시간표 보기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer><div class="footer-inner"><div class="footer-top"><div><div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div><p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p><div class="footer-contact"><span>📞 <strong>고잔점</strong> 031-480-3500</span><span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span><span>📞 <strong>자이점</strong> 031-8042-3543</span><span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span><span>📞 <strong>하이퍼관</strong> 031-8042-3565</span><span>📍 경기 안산시 상록구 충장로 80 101호</span></div></div><div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="reviews-honor.html">명예의 전당</a></li></ul></div><div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="consulting.html">온라인 상담 신청</a></li><li><a href="http://pf.kakao.com/_icyxgn" target="_blank" rel="noopener">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 삼년의 신화 국어논술학원. All rights reserved.</p><p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p></div></div></footer>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><span>삼년의 신화</span> 국어전문학원</div>
+        <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
+        <div class="footer-contact">
+          <span>📞 <strong>고잔점</strong> 031-480-3500</span><span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span>
+          <span>📞 <strong>자이점</strong> 031-8042-3543</span><span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span>
+          <span>📞 <strong>하이퍼관</strong> 031-8042-3565</span><span>📍 경기 안산시 상록구 충장로 80 101호</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="reviews-honor.html">명예의 전당</a></li></ul></div>
+      <div class="footer-col"><h4>채널 · 문의</h4><ul><li><a href="consulting.html">온라인 상담 신청</a></li><li><a href="http://pf.kakao.com/_icyxgn" target="_blank" rel="noopener">카카오톡 채널</a></li><li><a href="#">네이버 블로그</a></li><li><a href="#">인스타그램</a></li><li><a href="#">유튜브</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 삼년의 신화 국어전문학원. All rights reserved.</p>
+      <p>사업자등록번호 : [입력] &nbsp;|&nbsp; 대표 : [입력]</p>
+    </div>
+  </div>
+</footer>
 
 <script>
-const hamburger = document.getElementById('hamburger');
-const fsOverlay = document.getElementById('fsOverlay');
-const fsClose   = document.getElementById('fsClose');
-function openFsMenu()  { fsOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
-function closeFsMenu() { fsOverlay.classList.remove('open'); document.body.style.overflow = ''; }
-hamburger.addEventListener('click', openFsMenu);
-fsClose.addEventListener('click', closeFsMenu);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
-window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
-document.querySelectorAll('.course-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.course-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+  /* ── nav ── */
+  const hamburger = document.getElementById('hamburger');
+  const fsOverlay = document.getElementById('fsOverlay');
+  const fsClose   = document.getElementById('fsClose');
+  function openFsMenu()  { fsOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+  function closeFsMenu() { fsOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', openFsMenu);
+  fsClose.addEventListener('click', closeFsMenu);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFsMenu(); });
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
   });
-});
-function renderSlider(images) {
-  if (!images || !images.length) return '<div class="img-slider"><div class="slider-placeholder"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg><span>커리큘럼 이미지를 삽입하세요</span></div></div>';
-  const slides = images.map(img => '<div class="slide"><img src="' + (typeof img === 'string' ? img : (img.image || '')) + '" alt="커리큘럼 이미지"></div>').join('');
-  const btns = images.length > 1 ? '<button class="slider-btn slider-prev">&#8249;</button><button class="slider-btn slider-next">&#8250;</button>' : '';
-  return '<div class="img-slider">' + btns + '<div class="slider-track">' + slides + '</div><div class="slider-dots"></div></div>';
-}
-function initSlider(el) {
-  const track = el.querySelector('.slider-track');
-  const slides = el.querySelectorAll('.slide');
-  if (!track || !slides.length) return;
-  const dotsEl = el.querySelector('.slider-dots');
-  let cur = 0; const dots = [];
-  slides.forEach((_, i) => {
-    const d = document.createElement('button'); d.className = 'slider-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => go(i)); dotsEl.appendChild(d); dots.push(d);
-  });
-  function go(idx) { cur = ((idx % slides.length) + slides.length) % slides.length; track.style.transform = 'translateX(-' + (cur * 100) + '%)'; dots.forEach((d, i) => d.classList.toggle('active', i === cur)); }
-  el.querySelector('.slider-prev')?.addEventListener('click', () => go(cur - 1));
-  el.querySelector('.slider-next')?.addEventListener('click', () => go(cur + 1));
-  if (slides.length <= 1 && dotsEl) dotsEl.style.display = 'none';
-}
-function renderPanel(type, d) {
-  if (!d) return;
-  const panel = document.getElementById('panel-' + type);
-  if (!panel) return;
-  const mods = (d.modules || []).map((m, i) => '<div class="module-card"><div class="module-num">' + String(i + 1).padStart(2, '0') + '</div><div class="module-name">' + m.name + '</div><div class="module-sub">' + (m.sub || '') + '</div></div>').join('');
-  const pts = (d.points || []).map(p => '<li>' + (typeof p === 'string' ? p : (p.item || p.text || '')) + '</li>').join('');
-  panel.innerHTML = '<div class="course-header"><div class="ch-left"><span class="ch-badge ' + type + '">' + (type === 'regular' ? '정규 과정' : '내신 과정') + '</span><h2 class="ch-title">' + (d.title || '') + '</h2><p class="ch-desc">' + (d.desc || '') + '</p></div><div class="ch-right">' + renderSlider(d.images) + '</div></div><p class="section-title">핵심 학습 영역</p><div class="module-grid">' + mods + '</div><p class="section-title">주요 학습 포인트</p><div class="points-section"><ul class="points-list ' + type + '">' + pts + '</ul></div><div class="cta-box"><div><h3>' + (d.cta_title || '') + '</h3><p>' + (d.cta_desc || '') + '</p></div><div class="cta-btns"><a href="consulting.html" class="cta-btn">상담 신청하기</a><a href="news-timetable.html" class="cta-btn cta-btn-outline">시간표 보기</a></div></div>';
-  panel.querySelectorAll('.img-slider').forEach(s => initSlider(s));
-}
-fetch('data/curriculum-h1.json').then(r => r.json()).then(data => {
-  renderPanel('regular', data.regular);
-  renderPanel('naesin', data.naesin);
-}).catch(console.error);
+
+  /* ── 이미지 로더: data/curriculum-h1.json의 images 필드를 읽어 플레이스홀더를 교체 ── */
+  fetch('data/curriculum-h1.json')
+    .then(r => r.json())
+    .then(data => {
+      const imgs = data.images || {};
+      document.querySelectorAll('[data-img-key]').forEach(ph => {
+        const key = ph.getAttribute('data-img-key');
+        const src = imgs[key];
+        if (!src) return;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = (ph.querySelector('.img-ph-text') || {}).textContent || '';
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+        ph.innerHTML = '';
+        ph.appendChild(img);
+        ph.classList.add('loaded');
+      });
+    })
+    .catch(() => {});
 </script>
 </body>
 </html>

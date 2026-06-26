@@ -131,6 +131,37 @@
     /* ── NAESIN COMMON BADGE ── */
     .naesin-badge { display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; color: #BF360C; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; }
 
+    /* ── 내신 관리 시스템 ── */
+    .nm-hero { background: var(--black); border-radius: 16px; padding: 36px 44px; margin-bottom: 48px; }
+    .nm-hero-sub { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: rgba(192,39,26,0.85); text-transform: uppercase; margin-bottom: 12px; }
+    .nm-hero-title { font-family: var(--font-serif); font-size: clamp(20px,2.8vw,28px); font-weight: 700; color: var(--white); line-height: 1.35; margin-bottom: 14px; }
+    .nm-hero-desc { font-size: 14px; color: rgba(255,255,255,0.5); display: flex; gap: 20px; flex-wrap: wrap; }
+    .nm-x { color: #ff7c7c; font-weight: 700; }
+    .nm-o { color: #69db7c; font-weight: 700; }
+    .nm-systems { display: flex; flex-direction: column; margin-bottom: 56px; }
+    .nm-system { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 52px 0; border-bottom: 1px solid var(--border); }
+    .nm-system:first-child { padding-top: 0; }
+    .nm-system:last-child { border-bottom: none; padding-bottom: 0; }
+    .nm-system.reverse > *:first-child { order: 2; }
+    .nm-system.reverse > *:last-child { order: 1; }
+    .nm-sys-num { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
+    .nm-sys-title { font-family: var(--font-serif); font-size: clamp(18px,2vw,23px); font-weight: 700; color: var(--black); margin-bottom: 18px; }
+    .nm-sys-bullets { display: flex; flex-direction: column; gap: 10px; }
+    .nm-sys-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray-dark); line-height: 1.75; }
+    .nm-sys-bullet::before { content: ''; width: 5px; height: 5px; background: var(--red); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+    .nm-img-ph { background: var(--gray-light); border: 2px dashed var(--border); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 32px 24px; text-align: center; min-height: 240px; transition: border-color 0.2s; }
+    .nm-img-ph.loaded { padding: 0; border: none; background: transparent; border-radius: 14px; overflow: hidden; min-height: 240px; }
+    .nm-img-ph.loaded img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nm-img-label { font-size: 13px; color: var(--gray); font-weight: 500; }
+    .nm-img-sub { font-size: 11px; color: #bbb; }
+    @media (max-width: 720px) {
+      .nm-hero { padding: 24px 22px; }
+      .nm-hero-desc { flex-direction: column; gap: 6px; }
+      .nm-system { grid-template-columns: 1fr; gap: 20px; }
+      .nm-system.reverse > *:first-child { order: 0; }
+      .nm-system.reverse > *:last-child { order: 0; }
+    }
+
     /* ── 고2 수업 구성 ── */
     .h2-class-blocks { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px 16px 0 0; overflow: hidden; border: 1.5px solid var(--border); border-bottom: none; }
     .h2-class-block { background: #FAFAF8; padding: 40px 36px; }
@@ -824,6 +855,105 @@
 
     <!-- 고등 내신 -->
     <div id="l2-h-naesin" data-panel-group="l2-high" class="cur-panel-l2">
+
+      <!-- ── 헤드 배너 ── -->
+      <div class="nm-hero fade-up">
+        <div class="nm-hero-sub">내신 관리 시스템</div>
+        <div class="nm-hero-title">수업만 하면 끝?<br>삼년의신화는 그렇지 않습니다</div>
+        <div class="nm-hero-desc">
+          <span>강의만으로 정리되는 수업 <span class="nm-x">✕</span></span>
+          <span>학생 스스로 점검하고 이해할 수 있는 수업 <span class="nm-o">○</span></span>
+        </div>
+      </div>
+
+      <!-- ── 5가지 관리 시스템 ── -->
+      <div class="nm-systems fade-up">
+
+        <!-- 01. 꼼꼼한 기출 분석 -->
+        <div class="nm-system">
+          <div>
+            <div class="nm-sys-num">01 · 꼼꼼한 기출 분석</div>
+            <div class="nm-sys-title">꼼꼼한 기출 분석</div>
+            <div class="nm-sys-bullets">
+              <div class="nm-sys-bullet">안산 지역 모든 고등학교 기출 시험지 보유</div>
+              <div class="nm-sys-bullet">기출 분석을 통한 학교 경향 파악</div>
+            </div>
+          </div>
+          <div class="nm-img-ph" data-nm-key="naesin_kichul">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span class="nm-img-label">📷 학교별 기출 시험 경향 분석 자료</span>
+            <span class="nm-img-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+        </div>
+
+        <!-- 02. 실전 TEST -->
+        <div class="nm-system reverse">
+          <div>
+            <div class="nm-sys-num">02 · 실전 TEST</div>
+            <div class="nm-sys-title">실전 TEST</div>
+            <div class="nm-sys-bullets">
+              <div class="nm-sys-bullet">강의만으로 정리되는 수업 <span class="nm-x">✕</span></div>
+              <div class="nm-sys-bullet">학생 스스로 점검하고 이해할 수 있는 수업 <span class="nm-o">○</span></div>
+            </div>
+          </div>
+          <div class="nm-img-ph" data-nm-key="naesin_test">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span class="nm-img-label">📷 자체 제작 실전 TEST지 + 실제 학교 시험지</span>
+            <span class="nm-img-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+        </div>
+
+        <!-- 03. 1:1 맞춤 피드백 -->
+        <div class="nm-system">
+          <div>
+            <div class="nm-sys-num">03 · 1:1 맞춤 피드백</div>
+            <div class="nm-sys-title">1:1 맞춤 피드백</div>
+            <div class="nm-sys-bullets">
+              <div class="nm-sys-bullet">언제든 모르는 내용은 해결될 수 있도록</div>
+              <div class="nm-sys-bullet">학생 개개인의 상황에 맞춘 피드백 제공</div>
+            </div>
+          </div>
+          <div class="nm-img-ph" data-nm-key="naesin_feedback">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span class="nm-img-label">📷 학생-강사 카톡 피드백 캡처</span>
+            <span class="nm-img-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+        </div>
+
+        <!-- 04. 다양한 학습 콘텐츠 -->
+        <div class="nm-system reverse">
+          <div>
+            <div class="nm-sys-num">04 · 다양한 학습 콘텐츠 제공</div>
+            <div class="nm-sys-title">다양한 학습 콘텐츠 제공</div>
+            <div class="nm-sys-bullets">
+              <div class="nm-sys-bullet">국어 학습 전용 AI 국어공방 — <strong>안산 유일 MOU 체결</strong></div>
+            </div>
+          </div>
+          <div class="nm-img-ph" data-nm-key="naesin_content">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span class="nm-img-label">📷 국어공방 학습 자료 + 실전 TEST지</span>
+            <span class="nm-img-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+        </div>
+
+        <!-- 05. 완벽 직전 대비 -->
+        <div class="nm-system">
+          <div>
+            <div class="nm-sys-num">05 · 완벽 직전 대비</div>
+            <div class="nm-sys-title">완벽 직전 대비</div>
+            <div class="nm-sys-bullets">
+              <div class="nm-sys-bullet">학생 스스로 점검하고 이해할 수 있는 완벽 직전 대비</div>
+            </div>
+          </div>
+          <div class="nm-img-ph" data-nm-key="naesin_final">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+            <span class="nm-img-label">📷 완벽 직전 대비 손필기 분석노트 + 학습활동 자료</span>
+            <span class="nm-img-sub">관리자에서 이미지를 등록해 주세요</span>
+          </div>
+        </div>
+
+      </div><!-- /nm-systems -->
+
       <div class="section-intro fade-up">
         <span class="section-tag">High School · 내신 대비</span>
         <h2>내신 완성반</h2>
@@ -961,6 +1091,22 @@
     dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
   }
   document.querySelectorAll('[data-slider]').forEach(initSlider);
+
+  /* ── 내신 관리 시스템 이미지 로더 ── */
+  fetch('data/curriculum-naesin-images.json')
+    .then(r => r.json())
+    .then(data => {
+      document.querySelectorAll('[data-nm-key]').forEach(ph => {
+        const src = data[ph.getAttribute('data-nm-key')];
+        if (!src) return;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = (ph.querySelector('.nm-img-label') || {}).textContent || '';
+        ph.innerHTML = '';
+        ph.appendChild(img);
+        ph.classList.add('loaded');
+      });
+    }).catch(() => {});
 
 </script>
 </body>

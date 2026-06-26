@@ -1,4 +1,14 @@
 {
+  "images": {
+    "textbook_literature": "",
+    "textbook_grammar": "",
+    "pt_analysis_note": "",
+    "pt_kakao_feedback": "",
+    "pt_review": "",
+    "homework_mock": "",
+    "parent_checklist": "",
+    "parent_notion": ""
+  },
   "regular": {
     "title": "수능 국어 입문반",
     "desc": "수능 국어 전체 출제 범위를 파악하고, 문학·독서·언어와 매체의 기초를 탄탄하게 다집니다. 개인별 취약 영역 진단으로 고1부터 3년 로드맵을 전략적으로 설계합니다.",
