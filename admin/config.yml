@@ -681,6 +681,71 @@ collections:
             widget: image
             required: false
             hint: "완벽 직전 대비 손필기 분석노트 + 학습활동 자료 — 커리큘럼 페이지 내신 탭 05번 섹션에 표시"
+      - name: curriculum_feat_images
+        label: 고등 정규 특징 이미지 (고1/고2/고3)
+        file: data/curriculum-feat-images.json
+        format: json
+        fields:
+          - label: "고1 01. 자체 제작 교재 이미지"
+            name: h1_feat1
+            widget: image
+            required: false
+            hint: "커리큘럼 고1 탭 01번 특징 — 자체 제작 교재 사진"
+          - label: "고1 02. PT 프로그램 이미지"
+            name: h1_feat2
+            widget: image
+            required: false
+            hint: "커리큘럼 고1 탭 02번 특징 — PT 프로그램 사진"
+          - label: "고1 03. 모의고사 과제 이미지"
+            name: h1_feat3
+            widget: image
+            required: false
+            hint: "커리큘럼 고1 탭 03번 특징 — 모의고사 과제 사진"
+          - label: "고1 04. 삼위일체 관리 이미지"
+            name: h1_feat4
+            widget: image
+            required: false
+            hint: "커리큘럼 고1 탭 04번 특징 — 삼위일체 관리 사진"
+          - label: "고2 01. 정규수업 이미지"
+            name: h2_feat1
+            widget: image
+            required: false
+            hint: "커리큘럼 고2 탭 01번 특징 — 정규수업 사진"
+          - label: "고2 02. 모의고사 이미지"
+            name: h2_feat2
+            widget: image
+            required: false
+            hint: "커리큘럼 고2 탭 02번 특징 — 모의고사 사진"
+          - label: "고2 03. 분석노트·피드백 이미지"
+            name: h2_feat3
+            widget: image
+            required: false
+            hint: "커리큘럼 고2 탭 03번 특징 — 분석노트 및 피드백 사진"
+          - label: "고2 04. 어휘 TEST 이미지"
+            name: h2_feat4
+            widget: image
+            required: false
+            hint: "커리큘럼 고2 탭 04번 특징 — 어휘 TEST 사진"
+          - label: "고3 01. 실전 모의고사 이미지"
+            name: h3_feat1
+            widget: image
+            required: false
+            hint: "커리큘럼 고3 탭 01번 특징 — 실전 모의고사 사진"
+          - label: "고3 02. 대학별 논술 이미지"
+            name: h3_feat2
+            widget: image
+            required: false
+            hint: "커리큘럼 고3 탭 02번 특징 — 대학별 논술 사진"
+          - label: "고3 03. EBS 대비 이미지"
+            name: h3_feat3
+            widget: image
+            required: false
+            hint: "커리큘럼 고3 탭 03번 특징 — EBS 대비 사진"
+          - label: "고3 04. 1:1 개인 첨삭 이미지"
+            name: h3_feat4
+            widget: image
+            required: false
+            hint: "커리큘럼 고3 탭 04번 특징 — 1:1 개인 첨삭 사진"
       - name: curriculum_m1
         label: 중1 커리큘럼
         file: data/curriculum-m1.json
