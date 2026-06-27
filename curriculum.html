@@ -131,6 +131,16 @@
     /* ── NAESIN COMMON BADGE ── */
     .naesin-badge { display: inline-flex; align-items: center; gap: 8px; background: #FFF3E0; color: #BF360C; font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 100px; margin-bottom: 28px; }
 
+    /* ── 고1 수업 구성 3교시 ── */
+    .h1-period-blocks { display: grid; grid-template-columns: repeat(3, 1fr); border-radius: 16px 16px 0 0; overflow: hidden; border: 1.5px solid var(--border); border-bottom: none; margin-bottom: 0; }
+    .h1-period-block { background: #FAFAF8; padding: 32px 28px; }
+    .h1-period-block + .h1-period-block { border-left: 1.5px solid var(--border); }
+    @media (max-width: 720px) {
+      .h1-period-blocks { grid-template-columns: 1fr; }
+      .h1-period-block + .h1-period-block { border-left: none; border-top: 1.5px solid var(--border); }
+      .h1-period-block { padding: 24px 20px; }
+    }
+
     /* ── 내신 관리 시스템 ── */
     .nm-hero { background: var(--black); border-radius: 16px; padding: 36px 44px; margin-bottom: 48px; }
     .nm-hero-sub { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: rgba(192,39,26,0.85); text-transform: uppercase; margin-bottom: 12px; }
@@ -656,39 +666,81 @@
         <div class="section-intro fade-up">
           <span class="section-tag">High School · Grade 1 · 정규</span>
           <h2>수능 국어 입문반</h2>
-          <p>수능 국어 전체 출제 범위를 파악하고 문학·독서·언어와 매체의 기초를 탄탄하게 다집니다. 고등 3년의 첫 단추를 올바르게 채웁니다.</p>
+          <p>강의만으로 정리되는 수업 ✕ &nbsp;·&nbsp; 학생 스스로 점검하고 이해할 수 있는 수업 ○<br>수능 국어 전체 출제 범위를 파악하고 문학·독서·문법의 기초를 탄탄하게 다집니다.</p>
         </div>
-        <div class="cur-img-area fade-up">
-          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
+
+        <!-- 수업 구성 3교시 -->
+        <div class="fade-up" style="margin-bottom:52px;">
+          <div class="h1-period-blocks">
+            <div class="h1-period-block">
+              <div class="h2-block-kicker">1교시 · 90분</div>
+              <div class="h2-block-name">수능 기초</div>
+              <div class="h2-block-sub">문학 60분 · 독서 30분</div>
+              <div class="h2-block-items">
+                <div class="h2-block-item"><span class="h2-item-label">수능 문학</span><span class="h2-item-time">60분</span></div>
+                <div class="h2-block-item"><span class="h2-item-label">수능 독서</span><span class="h2-item-time">30분</span></div>
+              </div>
+            </div>
+            <div class="h1-period-block">
+              <div class="h2-block-kicker">2교시 · 90분</div>
+              <div class="h2-block-name">현대 문법</div>
+              <div class="h2-block-sub">이론 60분 · 적용 30분</div>
+              <div class="h2-block-items">
+                <div class="h2-block-item"><span class="h2-item-label">이론 강의</span><span class="h2-item-time">60분</span></div>
+                <div class="h2-block-item"><span class="h2-item-label">기출 적용</span><span class="h2-item-time">30분</span></div>
+              </div>
+            </div>
+            <div class="h1-period-block">
+              <div class="h2-block-kicker">PT · 60분</div>
+              <div class="h2-block-name">Personal Training</div>
+              <div class="h2-block-sub">1:1 맞춤 트레이닝</div>
+              <div class="h2-block-items">
+                <div class="h2-block-item"><span class="h2-item-label">어휘 테스트</span><span class="h2-item-time">점검</span></div>
+                <div class="h2-block-item"><span class="h2-item-label">1:1 피드백</span><span class="h2-item-time">맞춤 코칭</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="h2-total-row">
+            <span>100% 자체 제작 교재</span><div class="h2-total-sep"></div>
+            <span>PT 1:1 맞춤 피드백</span><div class="h2-total-sep"></div>
+            <span>삼위일체 학부모 관리</span>
+          </div>
         </div>
+
+        <!-- 4가지 핵심 특징 -->
         <div class="feature-grid fade-up">
-          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">수능 유형 완전 파악</div><div class="feature-desc">수능 국어 전 영역 출제 구조와 문제 유형을 체계적으로 분석합니다.</div></div>
-          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">현대문학 기초</div><div class="feature-desc">현대시·현대소설 작품을 수능 방식으로 독해하는 능력을 기릅니다.</div></div>
-          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">비문학 독해법</div><div class="feature-desc">인문·사회·과학·기술 지문을 정해진 시간 안에 정확히 읽는 법을 훈련합니다.</div></div>
-          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">언어와 매체 기초</div><div class="feature-desc">문법 개념을 수능 출제 방식으로 정리하고 언어와 매체 문제에 적응합니다.</div></div>
+          <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">자체 제작 교재</div><div class="feature-desc">문학·독서·문법 100% 자체 제작 교재. 기본 문항부터 킬러 문항까지 책임집니다.</div></div>
+          <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">PT 프로그램</div><div class="feature-desc">어휘 테스트 → 1:1 분석 피드백 → 당일 진단 평가, 3단계 완전 학습 시스템.</div></div>
+          <div class="feature-card"><div class="feature-num">③</div><div class="feature-title">모의고사 과제</div><div class="feature-desc">전국연합학력평가 기출 80분 실전 풀이 + 영역별 해법 + 1:1 분석 노트 피드백.</div></div>
+          <div class="feature-card"><div class="feature-num">④</div><div class="feature-title">삼위일체 관리</div><div class="feature-desc">출결·수업태도·PT·어휘·과제 결과를 노션으로 학부모와 공유하는 3자 관리.</div></div>
         </div>
+
         <div class="course-detail-grid fade-up">
           <div class="course-topics">
             <h3>주요 학습 내용</h3>
             <ul class="topic-list">
-              <li><span class="topic-cat">수능 구조</span>수능 국어 영역별 출제 구조 완전 파악</li>
-              <li><span class="topic-cat">문학</span>현대시·현대소설 수능형 독해 및 문제 풀이</li>
-              <li><span class="topic-cat">독서</span>비문학 독해 전략 — 인문·사회·과학·기술</li>
-              <li><span class="topic-cat">화작</span>화법과 작문 유형 마스터</li>
-              <li><span class="topic-cat">문법</span>언어와 매체 기초 문법 (음운·형태·통사)</li>
+              <li><span class="topic-cat">문학</span>고등 필수 문학 개념 및 갈래별(시·소설·수필·희곡) 독해 전략</li>
+              <li><span class="topic-cat">독서</span>비문학 독해 전략 — 수능 유형별 초석 다지기</li>
+              <li><span class="topic-cat">문법</span>현대 문법 All-in-one — 내신부터 수능까지</li>
+              <li><span class="topic-cat">PT</span>어휘·고전시가·개념어 테스트 및 1:1 분석 피드백</li>
+              <li><span class="topic-cat">과제</span>전국연합학력평가 기출 모의고사 풀이 및 분석</li>
             </ul>
           </div>
           <div class="course-schedule">
             <div class="sched-card">
               <h3>수업 안내</h3>
-              <div class="sched-row"><span class="sched-label">수업 요일</span><span class="sched-val">화 · 목</span></div>
-              <div class="sched-row"><span class="sched-label">수업 시간</span><span class="sched-val">150분</span></div>
-              <div class="sched-row"><span class="sched-label">정원</span><span class="sched-val">소그룹 6~10명</span></div>
+              <div class="sched-row"><span class="sched-label">1교시 (수능기초)</span><span class="sched-val">90분</span></div>
+              <div class="sched-row"><span class="sched-label">2교시 (현대문법)</span><span class="sched-val">90분</span></div>
+              <div class="sched-row"><span class="sched-label">PT (1:1 트레이닝)</span><span class="sched-val">60분</span></div>
               <div class="sched-row"><span class="sched-label">대상</span><span class="sched-val">고등학교 1학년</span></div>
             </div>
             <div class="sched-note"><strong>📌 입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
+        </div>
+
+        <div class="cta-group fade-up">
+          <a href="curriculum-h1.html" class="cta-primary">고1 커리큘럼 자세히 보기 →</a>
+          <a href="consulting.html" class="cta-secondary">상담 신청하기 →</a>
         </div>
       </div><!-- /l3-h1 -->
 
