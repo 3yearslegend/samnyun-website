@@ -29,6 +29,36 @@
       "carousel_image": "",
       "show_in_calendar": true,
       "branch": "고잔점"
+    },
+    {
+      "title": "2026 6월 학부모 입시 인사이트",
+      "date": "2026-06-24 / 06-27",
+      "time": "오후 8:00~10:00 /",
+      "location": "고잔점 및 자이점",
+      "target": "",
+      "capacity": "",
+      "branches": [
+        "고잔점",
+        "자이점"
+      ],
+      "gojan_date": "2026-06-24",
+      "gojan_time": "오후 8:00~10:00",
+      "gojan_deadline": "2026-06-24 18:00",
+      "zai_date": "2026-06-27",
+      "zai_time": "오후 8:00~10:00",
+      "zai_deadline": "2026-06-27 18:00",
+      "hyper_date": "",
+      "hyper_time": "",
+      "hyper_deadline": "",
+      "deadline_datetime": "",
+      "status": "",
+      "thumbnail": "/samnyun-website/uploads/6월 (1).jpg",
+      "poster": "/samnyun-website/uploads/6월 (1).jpg",
+      "poster_image": "/samnyun-website/uploads/6월 (1).jpg",
+      "content": "6월 설명회 진행",
+      "show_in_carousel": true,
+      "carousel_image": "/samnyun-website/uploads/6월 (1).jpg",
+      "show_in_calendar": true
     }
   ]
 }
