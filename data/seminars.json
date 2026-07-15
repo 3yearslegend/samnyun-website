@@ -1,21 +1,22 @@
 {
   "seminars": [
     {
-      "title": "예비고1 설명회 (고잔점 신청 링크)",
-      "date": "2026-07-17",
+      "title": "예비고1 설명회",
+      "date": "2026-07-17 / 2026-07-19",
       "time": "오후 7:00",
-      "location": "고잔점",
+      "location": "고잔점/자이점",
       "target": "예비고 1 학부모",
       "capacity": "",
       "branches": [
-        "고잔점"
+        "고잔점",
+        "자이점"
       ],
       "gojan_date": "2026-07-17",
       "gojan_time": "오후 7시",
       "gojan_deadline": "2026-07-17 18:00",
-      "zai_date": "",
-      "zai_time": "",
-      "zai_deadline": "",
+      "zai_date": "2026-07-19",
+      "zai_time": "오후 7시",
+      "zai_deadline": "2026-07-19 18:00",
       "hyper_date": "",
       "hyper_time": "",
       "hyper_deadline": "",
