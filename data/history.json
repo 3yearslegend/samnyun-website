@@ -5,20 +5,20 @@
       "year": "2012.12",
       "title": "삼년의 신화 국어논술학원 개원",
       "desc": "",
-      "image": "/samnyun-website/uploads/12 (1).jpeg",
+      "image": "/uploads/12 (1).jpeg",
       "founding": true
     },
     {
       "year": "2018.08",
       "title": "고잔점 확장 이전",
       "desc": "현 고잔점으로 이전 및 확장",
-      "image": "/samnyun-website/uploads/image (4).png"
+      "image": "/uploads/image (4).png"
     },
     {
       "year": "2021.01",
       "title": "삼년의 신화 2관 오픈",
       "desc": "",
-      "image": "/samnyun-website/uploads/image (1).png"
+      "image": "/uploads/image (1).png"
     },
     {
       "year": "2024.08",
@@ -30,20 +30,20 @@
       "year": "2024.04",
       "title": "삼년의 신화 자이점 오픈",
       "desc": "",
-      "image": "/samnyun-website/uploads/image (3).png"
+      "image": "/uploads/image (3).png"
     },
     {
       "year": "2025.08",
       "title": "고잔점 4관(프리미엄관) 오픈",
       "desc": "",
-      "image": "/samnyun-website/uploads/삼신 (1).jpg",
+      "image": "/uploads/삼신 (1).jpg",
       "founding": false
     },
     {
       "year": "2025.11",
       "title": "동산고 전문 하이퍼관 오픈",
       "desc": "",
-      "image": "/samnyun-website/uploads/image.png"
+      "image": "/uploads/image.png"
     }
   ]
 }
