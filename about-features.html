@@ -62,8 +62,7 @@
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .feature-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 36px 28px; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
     .feature-card:hover { border-color: var(--red); box-shadow: 0 12px 40px rgba(192,39,26,0.09); transform: translateY(-5px); }
-    .feature-num { font-family: var(--font-serif); font-size: 54px; font-weight: 700; color: var(--red); opacity: 0.1; line-height: 1; margin-bottom: -8px; }
-    .feature-icon { width: 54px; height: 54px; border-radius: 12px; background: var(--red-light); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+    .feature-num { font-family: var(--font-serif); font-size: 68px; font-weight: 700; color: var(--red); line-height: 1; margin-bottom: 20px; letter-spacing: 6px; }
     .feature-card h3 { font-family: var(--font-serif); font-size: 19px; font-weight: 700; margin-bottom: 12px; color: var(--black); }
     .feature-card p { font-size: 14px; color: var(--gray); line-height: 1.9; }
     @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -76,7 +75,7 @@
     .footer-logo span { color: var(--red); }
     .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
     .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
-    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); } .footer-contact strong { color: rgba(255,255,255,0.92); font-weight: 700; margin-right: 6px; } .footer-contact span:nth-of-type(odd) { margin-top: 10px; } .footer-contact span:first-of-type { margin-top: 0; }
     .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; } .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
@@ -242,37 +241,31 @@
     <div class="features-grid stagger">
       <div class="feature-card">
         <div class="feature-num">01</div>
-        <div class="feature-icon">📖</div>
         <h3>체계적 독해력 완성</h3>
         <p>문학·비문학의 핵심 원리를 단계별로 익혀 어떤 지문도 흔들리지 않는 독해력을 키웁니다. 매 수업 실전 지문 분석을 통해 빠르게 성장합니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">02</div>
-        <div class="feature-icon">✍️</div>
         <h3>논리적 글쓰기 훈련</h3>
         <p>생각을 글로 표현하는 논술 훈련을 통해 내신과 입시 모두를 완벽하게 대비합니다. 매주 첨삭으로 글쓰기 실력을 빠르게 향상시킵니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">03</div>
-        <div class="feature-icon">🎯</div>
         <h3>맞춤형 1:1 피드백</h3>
         <p>학생 개개인의 수준과 목표에 맞는 세밀한 첨삭으로 실력을 빠르게 향상시킵니다. 모든 학생의 성장을 개별적으로 관리합니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">04</div>
-        <div class="feature-icon">📊</div>
         <h3>데이터 기반 학습 관리</h3>
         <p>매월 정기 평가와 성취도 분석을 통해 학생의 강약점을 파악하고, 데이터에 근거한 맞춤 학습 계획을 수립합니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">05</div>
-        <div class="feature-icon">🏆</div>
         <h3>검증된 합격 실적</h3>
         <p>수능 국어 1등급, SKY 논술 합격, 특목고 입시 합격 등 삼년의 신화에서 만들어낸 빛나는 실적이 우리의 교육을 증명합니다.</p>
       </div>
       <div class="feature-card">
         <div class="feature-num">06</div>
-        <div class="feature-icon">👨‍👩‍👧</div>
         <h3>학부모 소통 강화</h3>
         <p>정기적인 학부모 상담과 학습 보고서를 통해 자녀의 성장을 함께 확인하고, 가정과 학원이 하나의 팀이 됩니다.</p>
       </div>
@@ -287,12 +280,12 @@
         <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
         <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
         <div class="footer-contact">
-          <span>📞 <strong>고잔점</strong> 031-480-3500</span>
-          <span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span>
-          <span>📞 <strong>자이점</strong> 031-8042-3543</span>
-          <span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span>
-          <span>📞 <strong>하이퍼관</strong> 031-8042-3565</span>
-          <span>📍 경기 안산시 상록구 충장로 80 101호</span>
+          <span><strong>고잔점</strong> 031-480-3500</span>
+          <span>경기 안산시 단원구 광덕대로 130 폴리타운</span>
+          <span><strong>자이점</strong> 031-8042-3543</span>
+          <span>경기 안산시 상록구 해양4로 26 자이센터프라자</span>
+          <span><strong>하이퍼관</strong> 031-8042-3565</span>
+          <span>경기 안산시 상록구 충장로 80 101호</span>
         </div>
       </div>
       <div class="footer-col"><h4>학원소개</h4><ul><li><a href="about-greeting.html">인사말</a></li><li><a href="about-features.html">학원 특징</a></li><li><a href="about-history.html">연혁</a></li><li><a href="about-branches.html">지점 안내 및 오시는 길</a></li><li><a href="reviews-honor.html">명예의 전당</a></li></ul></div>

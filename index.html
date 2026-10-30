@@ -230,16 +230,12 @@
       border: 1px solid var(--border); transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
     .why-card:hover { border-color: var(--red); box-shadow: 0 10px 36px rgba(192,39,26,0.09); transform: translateY(-4px); }
-    .why-icon {
-      width: 54px; height: 54px; border-radius: 12px; background: var(--red-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; margin-bottom: 20px;
-    }
     .why-card h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 700; margin-bottom: 12px; }
     .why-card p { font-size: 14px; color: var(--gray); line-height: 1.9; }
     .why-card .why-num {
-      font-family: var(--font-serif); font-size: 52px; font-weight: 700;
-      color: var(--red); opacity: 0.1; line-height: 1; margin-bottom: -8px;
+      font-family: var(--font-serif); font-size: 68px; font-weight: 700;
+      color: var(--red); line-height: 1; margin-bottom: 20px;
+      letter-spacing: 6px;
     }
     @media (max-width: 768px) { .why-grid { grid-template-columns: 1fr; } }
 
@@ -325,7 +321,7 @@
     .cal-modal-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 20px; line-height: 1.4; letter-spacing: -0.3px; }
     .cal-modal-meta { display: flex; flex-direction: column; gap: 11px; padding: 18px; background: var(--gray-light); border-radius: 10px; margin-bottom: 20px; }
     .cal-modal-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray-dark); line-height: 1.5; }
-    .cal-modal-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+    .cal-modal-label { font-size: 11px; color: var(--gray); flex-shrink: 0; min-width: 54px; letter-spacing: 1px; margin-top: 3px; text-transform: uppercase; }
     .cal-modal-desc { font-size: 14px; color: var(--gray); line-height: 1.9; }
     .cal-modal-link { display: block; margin-top: 20px; text-align: center; padding: 12px; background: var(--red); color: var(--white); border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
     .cal-modal-link:hover { background: var(--red-dark); }
@@ -375,7 +371,7 @@
     .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.33); line-height: 1.9; max-width: 280px; }
     .footer-contact { margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
     .footer-contact span { font-size: 13px; color: rgba(255,255,255,0.42); }
-    .footer-contact strong { color: rgba(255,255,255,0.72); font-weight: 400; }
+    .footer-contact strong { color: rgba(255,255,255,0.92); font-weight: 700; margin-right: 6px; } .footer-contact span:nth-of-type(odd) { margin-top: 10px; } .footer-contact span:first-of-type { margin-top: 0; }
     .footer-col h4 { font-size: 12px; font-weight: 500; color: var(--white); margin-bottom: 16px; letter-spacing: 1.5px; text-transform: uppercase; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.36); text-decoration: none; transition: color 0.2s; }
@@ -649,19 +645,16 @@
     <div class="why-grid stagger">
       <div class="why-card">
         <div class="why-num">01</div>
-        <div class="why-icon">📖</div>
         <h3>체계적 독해력 완성</h3>
         <p>문학·비문학의 핵심 원리를 단계별로 익혀 어떤 지문도 흔들리지 않는 독해력을 키웁니다. 매 수업 실전 지문 분석을 통해 빠르게 성장합니다.</p>
       </div>
       <div class="why-card">
         <div class="why-num">02</div>
-        <div class="why-icon">✍️</div>
         <h3>논리적 글쓰기 훈련</h3>
         <p>생각을 글로 표현하는 논술 훈련을 통해 내신과 입시 모두를 완벽하게 대비합니다. 매주 첨삭으로 글쓰기 실력을 빠르게 향상시킵니다.</p>
       </div>
       <div class="why-card">
         <div class="why-num">03</div>
-        <div class="why-icon">🎯</div>
         <h3>맞춤형 1:1 피드백</h3>
         <p>학생 개개인의 수준과 목표에 맞는 세밀한 첨삭으로 실력을 빠르게 향상시킵니다. 모든 학생의 성장을 개별적으로 관리합니다.</p>
       </div>
@@ -779,12 +772,12 @@
         <div class="footer-logo"><span>삼년의 신화</span> 국어논술학원</div>
         <p class="footer-tagline">3년이 만드는 국어의 기적.<br>체계적인 독해와 논술 교육으로<br>스스로 생각하고 쓰는 힘을 키웁니다.</p>
         <div class="footer-contact">
-          <span>📞 <strong>고잔점</strong> 031-480-3500</span>
-          <span>📍 경기 안산시 단원구 광덕대로 130 폴리타운</span>
-          <span>📞 <strong>자이점</strong> 031-8042-3543</span>
-          <span>📍 경기 안산시 상록구 해양4로 26 자이센터프라자</span>
-          <span>📞 <strong>하이퍼관</strong> 031-8042-3565</span>
-          <span>📍 경기 안산시 상록구 충장로 80 101호</span>
+          <span><strong>고잔점</strong> 031-480-3500</span>
+          <span>경기 안산시 단원구 광덕대로 130 폴리타운</span>
+          <span><strong>자이점</strong> 031-8042-3543</span>
+          <span>경기 안산시 상록구 해양4로 26 자이센터프라자</span>
+          <span><strong>하이퍼관</strong> 031-8042-3565</span>
+          <span>경기 안산시 상록구 충장로 80 101호</span>
         </div>
       </div>
       <div class="footer-col">
@@ -822,9 +815,9 @@
     <div class="cal-modal-badge" id="calModalBadge">일정</div>
     <h3 class="cal-modal-title" id="calModalTitle"></h3>
     <div class="cal-modal-meta">
-      <div class="cal-modal-row"><span class="cal-modal-icon">📅</span><span id="calModalDate"></span></div>
-      <div class="cal-modal-row" id="calModalPeriodRow"><span class="cal-modal-icon">🕐</span><span id="calModalPeriod"></span></div>
-      <div class="cal-modal-row" id="calModalLocationRow"><span class="cal-modal-icon">📍</span><span id="calModalLocation"></span></div>
+      <div class="cal-modal-row"><span class="cal-modal-label">일자</span><span id="calModalDate"></span></div>
+      <div class="cal-modal-row" id="calModalPeriodRow"><span class="cal-modal-label">시간</span><span id="calModalPeriod"></span></div>
+      <div class="cal-modal-row" id="calModalLocationRow"><span class="cal-modal-label">장소</span><span id="calModalLocation"></span></div>
     </div>
     <a href="news-schedule.html" class="cal-modal-link" id="calModalLink">전체 일정 보기 →</a>
   </div>
@@ -1077,7 +1070,9 @@
 
   /* ---- Data fetch: Reviews ---- */
   function stars(n) {
-    return '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
+    const v = Number(n);
+    const score = Number.isFinite(v) ? v : 5;
+    return '평점 ' + score.toFixed(1) + ' / 5';
   }
   fetch('data/reviews.json').then(r => r.json()).then(data => {
     const grid = document.getElementById('indexReviewsGrid');

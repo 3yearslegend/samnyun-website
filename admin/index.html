@@ -35,7 +35,7 @@
           var cat     = entry.getIn(['data', 'category'])|| '공지';
           var pinned  = entry.getIn(['data', 'pinned'])  || false;
           return window.h('div', { className: 'preview-wrap' },
-            window.h('div', { className: 'preview-tag' }, cat + (pinned ? ' · 📌 상단 고정' : '')),
+            window.h('div', { className: 'preview-tag' }, cat + (pinned ? ' · 상단 고정' : '')),
             window.h('div', { className: 'preview-title' }, title),
             window.h('div', { className: 'preview-meta' }, date),
             window.h('div', { className: 'preview-content' }, content)
