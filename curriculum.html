@@ -91,12 +91,9 @@
     .section-intro p { font-size: 15px; color: var(--gray); line-height: 1.9; max-width: 680px; }
 
     /* ── IMAGE AREA ── */
-    .cur-img-area { width: 100%; aspect-ratio: 16/7; background: var(--gray-light); border: 2px dashed #ccc; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; color: #aaa; text-align: center; padding: 40px; }
-    .cur-img-area .img-icon { width: 52px; height: 52px; border-radius: 12px; background: #e8e8e6; display: flex; align-items: center; justify-content: center; }
-    .cur-img-area .img-label { font-size: 15px; font-weight: 600; color: #999; }
-    .cur-img-area .img-hint { font-size: 12px; color: #bbb; }
-    .cur-img-area img.cur-course-img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
-    @media (max-width: 600px) { .cur-img-area { aspect-ratio: 4/3; } }
+    .cur-grade-img-slot { display: none; }
+    .cur-grade-img-slot.loaded { display: block; margin: 36px auto 0; max-width: 1000px; }
+    .cur-grade-img-slot img { width: 100%; height: auto; display: block; border-radius: 14px; }
 
     /* ── FEATURE GRID ── */
     .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
@@ -375,13 +372,6 @@
         <p>5학년 교과 핵심 어휘와 독해 전략을 체계적으로 다집니다. 스스로 읽고 이해하는 힘을 키우며, 매주 독서 일기를 통해 글쓰기 습관을 형성합니다.</p>
       </div>
 
-      <!-- 이미지 영역 (실제 이미지로 교체 시: 아래 div를 <img src="uploads/cur-e5.jpg" alt="초5 커리큘럼" class="cur-course-img"> 로 교체) -->
-      <div class="cur-img-area fade-up">
-        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-        <p class="img-label">커리큘럼 이미지</p>
-        <span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
-      </div>
-
       <div class="feature-grid fade-up">
         <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">교과 어휘 완성</div><div class="feature-desc">교과서 핵심 어휘를 주제별로 정리하고 실전 독해에 바로 적용합니다.</div></div>
         <div class="feature-card"><div class="feature-num">②</div><div class="feature-title">독해 전략 습득</div><div class="feature-desc">문단의 중심 내용을 파악하고 글의 구조를 분석하는 전략을 익힙니다.</div></div>
@@ -411,6 +401,7 @@
           <div class="sched-note"><strong>입반 안내</strong>입반 상담 후 수준별 배치됩니다. 자세한 수업 시간은 지점별로 상이하니 상담 신청해 주세요.</div>
         </div>
       </div>
+      <div class="cur-grade-img-slot fade-up" data-grade="e5"></div>
     </div><!-- /l2-e5 -->
 
     <!-- 초6 -->
@@ -419,12 +410,6 @@
         <span class="section-tag">Elementary · 6th Grade</span>
         <h2>독해·논술 입문반</h2>
         <p>심화 독해와 논리적 글쓰기 기초를 완성하며 중학교 진학을 준비합니다. 문학·비문학 전 장르를 다루며 표현력과 사고력을 함께 키웁니다.</p>
-      </div>
-
-      <div class="cur-img-area fade-up">
-        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-        <p class="img-label">커리큘럼 이미지</p>
-        <span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
       </div>
 
       <div class="feature-grid fade-up">
@@ -456,6 +441,7 @@
           <div class="sched-note"><strong>입반 안내</strong>입반 상담 후 수준별 배치됩니다. 자세한 수업 시간은 지점별로 상이하니 상담 신청해 주세요.</div>
         </div>
       </div>
+      <div class="cur-grade-img-slot fade-up" data-grade="e6"></div>
     </div><!-- /l2-e6 -->
   </div><!-- /l1-elem -->
 
@@ -483,10 +469,6 @@
           <span class="section-tag">Middle School · Grade 1 · 정규</span>
           <h2>국어 기본반</h2>
           <p>문학 기초부터 비문학 독해, 문법 기초까지 중학 국어의 첫 단추를 올바르게 채웁니다. 내신 1등급을 목표로 탄탄한 실력을 쌓습니다.</p>
-        </div>
-        <div class="cur-img-area fade-up">
-          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
         </div>
         <div class="feature-grid fade-up">
           <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">문학 기초</div><div class="feature-desc">현대시·소설·수필의 특성을 파악하고 작품 감상 능력을 기릅니다.</div></div>
@@ -516,6 +498,7 @@
             <div class="sched-note"><strong>입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="m1"></div>
       </div><!-- /l3-m1 -->
 
       <!-- 중2 정규 -->
@@ -524,10 +507,6 @@
           <span class="section-tag">Middle School · Grade 2 · 정규</span>
           <h2>국어 심화반</h2>
           <p>고전문학과 심화 독해로 실력을 한 단계 높이고, 논술 기초를 통해 고등 과정을 미리 준비합니다. 수능 유형을 처음 접하는 과정입니다.</p>
-        </div>
-        <div class="cur-img-area fade-up">
-          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
         </div>
         <div class="feature-grid fade-up">
           <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">고전문학 완성</div><div class="feature-desc">향가·시조·고전소설 등 고전문학의 흐름을 이해하고 작품을 분석합니다.</div></div>
@@ -557,6 +536,7 @@
             <div class="sched-note"><strong>입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="m2"></div>
       </div><!-- /l3-m2 -->
 
       <!-- 중3 정규 -->
@@ -565,10 +545,6 @@
           <span class="section-tag">Middle School · Grade 3 · 정규</span>
           <h2>완성·고등 선행반</h2>
           <p>중학 국어를 완성하고 수능 국어 기초와 고입 준비까지 체계적으로 완성합니다. 고등 입학 전 가장 중요한 과정입니다.</p>
-        </div>
-        <div class="cur-img-area fade-up">
-          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
         </div>
         <div class="feature-grid fade-up">
           <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">중학 완성</div><div class="feature-desc">중3 교과서 전 범위를 완전히 소화하고 취약 단원을 집중 보완합니다.</div></div>
@@ -598,6 +574,7 @@
             <div class="sched-note"><strong>입반 안내</strong>입반 레벨 테스트 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="m3"></div>
       </div><!-- /l3-m3 -->
     </div><!-- /l2-m-reg -->
 
@@ -608,10 +585,6 @@
         <h2>내신 집중반</h2>
         <div class="naesin-badge">중1 · 중2 · 중3 공통 과정</div>
         <p>학교별 교과서와 담당 교사의 출제 경향을 완전히 분석합니다. 정기고사 6주 전 집중 개강하여 내신 등급을 한 단계 높입니다.</p>
-      </div>
-      <div class="cur-img-area fade-up">
-        <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-        <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
       </div>
       <div class="feature-grid fade-up">
         <div class="feature-card"><div class="feature-num">①</div><div class="feature-title">교과서 완전 분석</div><div class="feature-desc">학교별 교과서 단원을 지문 단위로 완전히 분석하고 출제 포인트를 정리합니다.</div></div>
@@ -790,9 +763,9 @@
         </div>
 
         <div class="cta-group fade-up">
-          <a href="curriculum-h1.html" class="cta-primary">고1 커리큘럼 자세히 보기 →</a>
-          <a href="consulting.html" class="cta-secondary">상담 신청하기 →</a>
+          <a href="consulting.html" class="cta-primary">상담 신청하기 →</a>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="h1"></div>
       </div><!-- /l3-h1 -->
 
       <!-- 고2 정규 -->
@@ -941,6 +914,7 @@
           <a href="consulting.html" class="cta-primary">상담 신청하기 →</a>
           <a href="news-timetable.html" class="cta-secondary">시간표 보기 →</a>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="h2"></div>
       </div><!-- /l3-h2 -->
 
       <!-- 고3 정규 -->
@@ -949,10 +923,6 @@
           <span class="section-tag">High School · Grade 3 · 정규</span>
           <h2>수능 완성·논술 완성반</h2>
           <p>실전 모의고사와 대학별 논술 기출로 수능과 수시를 최종 완성합니다. 1등급을 향한 마지막 담금질을 함께합니다.</p>
-        </div>
-        <div class="cur-img-area fade-up">
-          <div class="img-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
-          <p class="img-label">커리큘럼 이미지</p><span class="img-hint">실제 커리큘럼 이미지로 교체해 주세요</span>
         </div>
         <div class="nm-systems fade-up">
           <div class="nm-system">
@@ -1034,6 +1004,7 @@
             <div class="sched-note"><strong>입반 안내</strong>수능 목표 등급 상담 후 배치됩니다. 지점별 시간 상이 — 상담 신청 후 확인하세요.</div>
           </div>
         </div>
+        <div class="cur-grade-img-slot fade-up" data-grade="h3"></div>
       </div><!-- /l3-h3 -->
     </div><!-- /l2-h-reg -->
 
@@ -1266,6 +1237,24 @@
         ph.innerHTML = '';
         ph.appendChild(img);
         ph.classList.add('loaded');
+      });
+    }).catch(() => {});
+
+  /* ── 학년별 커리큘럼 이미지 로더 ── */
+  const gradeLabels = { e5:'초5', e6:'초6', m1:'중1', m2:'중2', m3:'중3', h1:'고1', h2:'고2', h3:'고3' };
+  fetch('data/curriculum-images.json')
+    .then(r => r.json())
+    .then(data => {
+      document.querySelectorAll('.cur-grade-img-slot').forEach(slot => {
+        const code = slot.dataset.grade;
+        const src = data[code];
+        if (!src) return;
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = (gradeLabels[code] || '') + ' 커리큘럼';
+        img.loading = 'lazy';
+        slot.appendChild(img);
+        slot.classList.add('loaded');
       });
     }).catch(() => {});
 

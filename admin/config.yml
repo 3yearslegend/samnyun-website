@@ -476,6 +476,23 @@ collections:
                 name: founding
                 widget: boolean
                 default: false
+  - name: curriculum_images
+    label: 커리큘럼
+    files:
+      - name: curriculum_images_data
+        label: 학년별 커리큘럼 이미지
+        file: data/curriculum-images.json
+        format: json
+        fields:
+          - { label: "초5 커리큘럼 이미지", name: e5, widget: image, required: false }
+          - { label: "초6 커리큘럼 이미지", name: e6, widget: image, required: false }
+          - { label: "중1 커리큘럼 이미지", name: m1, widget: image, required: false }
+          - { label: "중2 커리큘럼 이미지", name: m2, widget: image, required: false }
+          - { label: "중3 커리큘럼 이미지", name: m3, widget: image, required: false }
+          - { label: "고1 커리큘럼 이미지", name: h1, widget: image, required: false }
+          - { label: "고2 커리큘럼 이미지", name: h2, widget: image, required: false }
+          - { label: "고3 커리큘럼 이미지", name: h3, widget: image, required: false }
+
   - name: curricula
     label: 커리큘럼 페이지
     files:
