@@ -131,7 +131,6 @@
     .submit-btn.submitting .btn-text { opacity: 0.75; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .form-notice { font-size: 12px; color: var(--gray); text-align: center; margin-top: 14px; line-height: 1.8; }
-
     /* Info Panel */
     .info-panel { display: flex; flex-direction: column; gap: 20px; }
     .info-card { background: var(--gray-light); border-radius: 14px; padding: 28px; }
@@ -142,10 +141,6 @@
     .step-num { width: 26px; height: 26px; background: var(--red); color: white; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .step-text strong { font-size: 13px; font-weight: 700; color: var(--black); display: block; margin-bottom: 3px; }
     .step-text span { font-size: 12px; color: var(--gray); }
-    .kakao-card { background: #FEF9C3; border-radius: 14px; padding: 24px 28px; display: flex; gap: 14px; align-items: flex-start; }
-    .kakao-icon { font-size: 28px; flex-shrink: 0; }
-    .kakao-text strong { font-size: 13px; font-weight: 700; color: #3A1D1D; display: block; margin-bottom: 4px; }
-    .kakao-text span { font-size: 12px; color: #6B5B1E; line-height: 1.7; }
     .branch-contact { display: flex; flex-direction: column; gap: 10px; }
     .branch-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
     .branch-row:last-child { border-bottom: none; }
@@ -434,7 +429,8 @@
             <div class="spinner"></div>
             <span class="btn-text">상담 신청하기</span>
           </button>
-          <p class="form-notice">신청 즉시 입력하신 연락처로 카카오톡 알림톡이 발송됩니다.<br>상담 확정 후 오시는 길 안내 문자를 추가로 받으실 수 있습니다.</p>
+          <p class="form-notice">신청해 주시면 학원에서 확인 후 전화 또는 문자로 상담 일정을 확정해 드립니다.</p>
+          <p id="submitError" style="display:none; font-size:13px; color:var(--red); text-align:center; margin-top:12px; line-height:1.7;">전송에 실패했습니다. 잠시 후 다시 시도하시거나 아래 지점 연락처로 직접 문의해 주세요.</p>
         </form>
         </div><!-- /consultFormWrap -->
         <div id="consultSuccess" style="display:none; text-align:center; padding:64px 0;">
@@ -454,36 +450,22 @@
             <div class="step-num">1</div>
             <div class="step-text">
               <strong>온라인 신청</strong>
-              <span>폼 제출 즉시 신청 접수 알림톡 발송</span>
+              <span>희망 지점과 일정을 선택해 신청합니다</span>
             </div>
           </div>
           <div class="info-step">
             <div class="step-num">2</div>
             <div class="step-text">
               <strong>일정 확정</strong>
-              <span>담당 선생님 확인 후 확정 알림톡 발송</span>
+              <span>학원에서 전화 또는 문자로 상담 일정을 확정합니다</span>
             </div>
           </div>
           <div class="info-step">
             <div class="step-num">3</div>
             <div class="step-text">
-              <strong>리마인드 알림</strong>
-              <span>상담 전날 자동 안내 문자 발송</span>
-            </div>
-          </div>
-          <div class="info-step">
-            <div class="step-num">4</div>
-            <div class="step-text">
               <strong>1:1 맞춤 상담</strong>
               <span>학습 수준 진단 및 반 배정 안내</span>
             </div>
-          </div>
-        </div>
-
-        <div class="kakao-card">
-          <div class="kakao-text">
-            <strong>카카오 알림톡 자동 발송</strong>
-            <span>신청 즉시 접수 확인 문자가 발송됩니다. 일정 확정 시 안내 문자와 함께 오시는 길이 함께 전달됩니다.</span>
           </div>
         </div>
 
@@ -817,7 +799,7 @@
   }
 
   // 폼 제출 핸들러
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzP4KjXV4f5k6YH73m1Ek_MJqd0dtH6_9WH0RqZjapykOKseqXlulOTghwWlCVdzL54/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbyukHu62tyXI7YUiWOduPSEKsHMm5ygJVrzEQeP-yTMUPM9w2Dh_ZCGQKVC0p-6L09f/exec';
 
   document.getElementById('consultingForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -841,6 +823,7 @@
     if (!selectedTime) { v7 = false; document.getElementById('consultTimeErr').style.display = 'block'; }
     if (!(v1 && v2 && v3a && v3b && v4 && v5 && v6 && v7)) return;
 
+    document.getElementById('submitError').style.display = 'none';
     btn.disabled = true;
     btn.classList.add('submitting');
     btn.querySelector('.btn-text').textContent = '제출 중...';
@@ -867,8 +850,10 @@
         document.getElementById('consultSuccess').style.display = '';
       })
       .catch(() => {
-        document.getElementById('consultFormWrap').style.display = 'none';
-        document.getElementById('consultSuccess').style.display = '';
+        document.getElementById('submitError').style.display = '';
+        btn.disabled = false;
+        btn.classList.remove('submitting');
+        btn.querySelector('.btn-text').textContent = '상담 신청하기';
       });
   });
 </script>
