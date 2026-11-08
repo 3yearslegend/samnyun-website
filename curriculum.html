@@ -87,7 +87,7 @@
     /* ── SECTION INTRO ── */
     .section-intro { margin-bottom: 40px; padding-bottom: 36px; border-bottom: 1px solid var(--border); }
     .section-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-    .section-intro h2 { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--black); letter-spacing: -0.5px; margin-bottom: 10px; }
+    .section-intro h2 { font-family: var(--font-sans); font-size: clamp(22px, 3vw, 28px); font-weight: 700; color: var(--black); letter-spacing: -0.02em; margin-bottom: 10px; }
     .section-intro p { font-size: 15px; color: var(--gray); line-height: 1.9; max-width: 680px; }
 
     /* ── IMAGE AREA ── */
@@ -141,6 +141,8 @@
     .nm-system:last-child { border-bottom: none; padding-bottom: 0; }
     .nm-system.reverse > *:first-child { order: 2; }
     .nm-system.reverse > *:last-child { order: 1; }
+    .nm-img-ph:not(.loaded) { display: none; }
+    .nm-system:has(.nm-img-ph:not(.loaded)) { grid-template-columns: 1fr; }
     .nm-sys-num { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; color: var(--red); text-transform: uppercase; margin-bottom: 10px; }
     .nm-sys-title { font-family: var(--font-serif); font-size: clamp(18px,2vw,23px); font-weight: 700; color: var(--black); margin-bottom: 18px; }
     .nm-sys-bullets { display: flex; flex-direction: column; gap: 10px; }
@@ -308,7 +310,7 @@
     <!-- 초5 -->
     <div id="l2-e5" data-panel-group="l2-elem" class="cur-panel-l2">
       <div class="section-intro fade-up">
-        <h2>독해·어휘 완성반</h2>
+        <h2>초5 커리큘럼</h2>
       </div>
       <div class="cur-grade-img-slot fade-up" data-grade="e5"></div>
       <div class="cta-group fade-up">
@@ -320,7 +322,7 @@
     <!-- 초6 -->
     <div id="l2-e6" data-panel-group="l2-elem" class="cur-panel-l2">
       <div class="section-intro fade-up">
-        <h2>독해·논술 입문반</h2>
+        <h2>초6 커리큘럼</h2>
       </div>
       <div class="cur-grade-img-slot fade-up" data-grade="e6"></div>
       <div class="cta-group fade-up">
@@ -351,7 +353,7 @@
       <!-- 중1 정규 -->
       <div id="l3-m1" data-panel-group="l3-m-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>국어 기본반</h2>
+          <h2>중1 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="m1"></div>
         <div class="cta-group fade-up">
@@ -363,7 +365,7 @@
       <!-- 중2 정규 -->
       <div id="l3-m2" data-panel-group="l3-m-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>국어 심화반</h2>
+          <h2>중2 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="m2"></div>
         <div class="cta-group fade-up">
@@ -375,7 +377,7 @@
       <!-- 중3 정규 -->
       <div id="l3-m3" data-panel-group="l3-m-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>완성·고등 선행반</h2>
+          <h2>중3 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="m3"></div>
         <div class="cta-group fade-up">
@@ -445,7 +447,7 @@
       <!-- 고1 정규 -->
       <div id="l3-h1" data-panel-group="l3-h-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>수능 국어 입문반</h2>
+          <h2>고1 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="h1"></div>
         <div class="cta-group fade-up">
@@ -457,7 +459,7 @@
       <!-- 고2 정규 -->
       <div id="l3-h2" data-panel-group="l3-h-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>수능 심화·EBS 연계 정규반</h2>
+          <h2>고2 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="h2"></div>
         <div class="cta-group fade-up">
@@ -469,7 +471,7 @@
       <!-- 고3 정규 -->
       <div id="l3-h3" data-panel-group="l3-h-reg" class="cur-panel-l3">
         <div class="section-intro fade-up">
-          <h2>수능 완성·논술 완성반</h2>
+          <h2>고3 커리큘럼</h2>
         </div>
         <div class="cur-grade-img-slot fade-up" data-grade="h3"></div>
         <div class="cta-group fade-up">
